@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>About Me — Base Habits Coaching</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+:root{
+  --page:#f6f5f4; --card:#ffffff; --hairline:#e6e6e6;
+  --ink:#000000; --ink-2:#31302e; --muted:#615d59;
+  --primary:#0075de; --primary-active:#005bab; --indigo:#213183;
+  --teal:#2a9d99; --orange:#dd5b00; --orange-deep:#793400;
+  --purple:#391c57; --green:#1aae39; --sky:#62aef0; --brown:#523410; --pink:#ff64c8;
+  --shadow-1:rgba(0,0,0,0.01) 0 0.175px 1.041px,rgba(0,0,0,0.02) 0 0.8px 2.925px,rgba(0,0,0,0.027) 0 2.025px 7.847px,rgba(0,0,0,0.04) 0 4px 18px;
+}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--page);color:var(--ink);font-family:'Inter',system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased}
+.bh a{color:var(--primary);text-decoration:none}
+.bh a:hover{color:var(--primary-active)}
+.bh p,.bh h1,.bh h2,.bh h3{margin:0}
+.bh *,.bh *::before,.bh *::after{box-sizing:border-box}
+.bh-wrap{max-width:720px;margin:0 auto;padding-left:22px;padding-right:22px}
+.bh-h2{font-size:clamp(23px,5.2vw,28px);font-weight:700;line-height:1.2;letter-spacing:-0.6px;text-wrap:pretty}
+.bh-lede{font-size:19px;font-weight:500;line-height:1.45;letter-spacing:-0.2px;max-width:30em;text-wrap:pretty}
+.bh-body{font-size:17px;line-height:1.7;color:var(--muted);max-width:34em;text-wrap:pretty}
+.bh-body b{color:var(--ink-2);font-weight:500}
+.bh-btn{display:inline-flex;align-items:center;justify-content:center;padding:9px 20px;min-height:40px;border-radius:9999px;background:var(--primary);color:#fff !important;font-size:15px;font-weight:500;border:none;cursor:pointer;transition:background 120ms ease,transform 120ms ease}
+.bh-btn:active{background:var(--primary-active);transform:scale(0.96)}
+.bh-btn.sm{min-height:32px;padding:6px 16px;font-size:14px}
+.bh-beat{display:flex;gap:20px}
+.bh-rail{display:flex;flex-direction:column;align-items:center;flex:none;width:12px;padding-top:9px}
+.bh-node{width:12px;height:12px;border-radius:50%;flex:none}
+.bh-line{width:1px;flex:1;min-height:24px;background:var(--hairline);margin-top:10px}
+.bh-beat-body{display:flex;flex-direction:column;gap:14px;padding-bottom:44px}
+.bh-beat:last-child .bh-beat-body{padding-bottom:0}
+#bh-prog{position:fixed;left:0;top:0;bottom:0;width:3px;background:var(--hairline);z-index:40}
+#bh-prog-fill{width:3px;height:0;background:var(--primary)}
+</style>
+</head>
+<body>
+<div class="bh" style="min-height:100vh;background:var(--page);position:relative">
+
+  <div id="bh-prog"><div id="bh-prog-fill"></div></div>
+
+  <header style="position:sticky;top:0;z-index:30;background:rgba(246,245,244,0.92);backdrop-filter:saturate(180%) blur(8px);border-bottom:1px solid var(--hairline)">
+    <div class="bh-wrap" style="padding-top:12px;padding-bottom:12px;display:flex;align-items:center;justify-content:space-between;gap:16px">
+      <a href="index.html" style="font-size:16px;font-weight:700;letter-spacing:-0.3px;color:var(--ink) !important">Base Habits Coaching</a>
+      <div style="display:flex;align-items:center;gap:14px">
+        <a href="index.html" style="font-size:15px;font-weight:500;color:var(--muted)">Home</a>
+        <a href="index.html#contact" style="font-size:15px;font-weight:500;color:var(--muted)">Contact me</a>
+        <a class="bh-btn sm" href="index.html#next">Get started</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="bh-wrap" style="padding-top:64px;padding-bottom:52px;display:flex;flex-direction:column;gap:24px">
+    <div style="display:flex;gap:6px">
+      <span style="width:26px;height:6px;border-radius:3px;background:var(--teal)"></span>
+      <span style="width:26px;height:6px;border-radius:3px;background:var(--orange)"></span>
+      <span style="width:26px;height:6px;border-radius:3px;background:var(--purple)"></span>
+      <span style="width:26px;height:6px;border-radius:3px;background:var(--green)"></span>
+    </div>
+    <h1 style="font-size:clamp(38px,9vw,54px);font-weight:700;line-height:1.04;letter-spacing:-1.6px;color:var(--ink)">About Me</h1>
+    <div style="display:flex;align-items:center;gap:16px">
+      <img src="headshot.jpg" alt="Austyn Rupert" style="width:88px;height:88px;flex:none;border-radius:50%;object-fit:cover;background:#e6e6e6;border:1px solid var(--hairline)">
+      <span style="font-size:16px;font-weight:600;color:var(--ink)">Austyn Rupert</span>
+    </div>
+  </div>
+
+  <main class="bh-wrap" style="padding-bottom:8px">
+
+    <div class="bh-beat">
+      <div class="bh-rail"><span class="bh-node" style="background:var(--teal)"></span><span class="bh-line"></span></div>
+      <div class="bh-beat-body">
+        <h2 class="bh-h2" style="color:var(--teal)">Where I Started</h2>
+        <p class="bh-lede" style="color:#487d7c">Most of my life I was relatively thin, without much muscle.</p>
+        <p class="bh-body"><b>For most of my life I stayed under 175 pounds.</b> Around the time I turned 30, I went through a divorce, and over the next year or two the weight slowly accumulated. I also felt like I could eat like I used to when I was younger and more active. I figured it was just age, my metabolism slowing down like everyone says.</p>
+        <p class="bh-body"><b>My work uniforms told the story before I wanted to admit it.</b> I moved the buttons on my work pants to buy myself more room, then outgrew that too and had to go up two full sizes. Eventually I got up to 200 pounds. That is when I decided I needed to make a lifestyle change. Not just a quick fix, but something that would give me lasting results and never let me get up to 200 pounds again.</p>
+      </div>
+    </div>
+
+    <div class="bh-beat">
+      <div class="bh-rail"><span class="bh-node" style="background:var(--indigo)"></span><span class="bh-line"></span></div>
+      <div class="bh-beat-body">
+        <h2 class="bh-h2" style="color:var(--indigo)">Looking For Answers</h2>
+        <p class="bh-lede" style="color:#454e78">I started with the usual advice: hit the gym, eat healthier.</p>
+        <p class="bh-body"><b>I felt great starting to go to the gym.</b> The first two weeks I was sore a lot, but that faded the more I worked out. I figured out how to lift weights and I was getting stronger. But "eating healthier" left me with more questions than answers. How much of the healthy food was I supposed to eat? How much protein should I eat? Should I stay away from carbs? These questions sent me down the right path.</p>
+      </div>
+    </div>
+
+    <div class="bh-beat">
+      <div class="bh-rail"><span class="bh-node" style="background:var(--orange)"></span><span class="bh-line"></span></div>
+      <div class="bh-beat-body">
+        <h2 class="bh-h2" style="color:var(--orange)">The Rabbit Hole</h2>
+        <p class="bh-lede" style="color:#a05c2d">Tracking calories and macros is what actually moved the needle.</p>
+        <p class="bh-body"><b>I started tracking my calories and macros.</b> I made a daily step goal and hit it every day no matter the circumstances. The weight started coming off, and I got better and more efficient at the whole process over time. At first I would bring a food scale with me to work and weigh my food before I ate it, then I figured out if I prep all my food and only bring prepped food with me, I could not overeat. I got so consistent with meal prep that I felt lost on days I didn't have meals ready. That was the habit doing its job.</p>
+        <p class="bh-body"><b>These are what I call the Base Habits.</b> They were essential to my success. And it is why it drives me crazy hearing people online talk about all these different diets and foods that are really healthy, because any diet with a name or any "healthy food" does not tell you how much to eat, only what you can and can't eat. Learning how simple it can be to see success in weight loss made me want to help people with it.</p>
+        <p class="bh-body"><b>Tracking my food also showed me something I had not admitted to myself.</b> I have always been the type who cannot get enough food, finishing my kids' plates, going back for more, never turning down a donut. Once I got strict with myself and started being honest about what I was eating, I realized I had been binge eating. My wife noticed before I fully admitted it. She pointed out that I was not going back for more, was not finishing the kids' food anymore, and was saying no to a donut or a brownie. That was not normal for me, but it was the behavioral change I needed to see consistent results.</p>
+      </div>
+    </div>
+
+    <div class="bh-beat">
+      <div class="bh-rail"><span class="bh-node" style="background:var(--brown)"></span><span class="bh-line"></span></div>
+      <div class="bh-beat-body">
+        <h2 class="bh-h2" style="color:var(--brown)">A Setback</h2>
+        <p class="bh-lede" style="color:#5a4832">Four months in, I had hernia surgery.</p>
+        <p class="bh-body"><b>Four months into losing weight, I got a hernia.</b> I felt like this was going to be a major setback and kill my progress. One whole month resting and not able to lift weights or walk as much as I had been, at first I thought of it as a death sentence to my progress and habits I had built. But I had already built the habit of being more honest with myself and that led me into thinking how I can use this time and not waste it.</p>
+        <p class="bh-body"><b>I had surgery in the beginning of May 2025.</b> This was the month of school for my kids, as many parents know, this is a busy time. I got to be more involved with my kids, read books, and prepare myself for getting back on the path of weight loss. After my recovery was over, I eased myself back into training and my full diet program. I saw even better results over the next four months.</p>
+      </div>
+    </div>
+
+    <div class="bh-beat">
+      <div class="bh-rail"><span class="bh-node" style="background:var(--green)"></span><span class="bh-line"></span></div>
+      <div class="bh-beat-body">
+        <h2 class="bh-h2" style="color:#118026">The Result</h2>
+        <p class="bh-lede" style="color:#2f7a3c">I lost about 40 pounds in 9 months.</p>
+        <p class="bh-body"><b>From January 10, 2025 to October 6, 2025, about 9 months, I went from 200 pounds down to 158 pounds.</b> That's 42 pounds.</p>
+        <p class="bh-body">I loved the way I looked and felt each week, watching the consistency do the work.</p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:4px;max-width:34em">
+          <figure style="margin:0;display:flex;flex-direction:column;gap:8px">
+            <img src="before-200lbs.png" alt="January 2025, 200 pounds" style="width:100%;aspect-ratio:3/4;object-fit:cover;object-position:50% 20%;border-radius:12px;border:1px solid var(--hairline);background:var(--card);display:block">
+            <figcaption style="font-size:15px;font-weight:600;color:var(--ink)">200 lbs <span style="font-weight:400;color:var(--muted)">· Jan 10, 2025</span></figcaption>
+          </figure>
+          <figure style="margin:0;display:flex;flex-direction:column;gap:8px">
+            <img src="after-158lbs.png" alt="October 2025, 158 pounds" style="width:100%;aspect-ratio:3/4;object-fit:cover;object-position:50% 20%;border-radius:12px;border:1px solid var(--hairline);background:var(--card);display:block">
+            <figcaption style="font-size:15px;font-weight:600;color:var(--ink)">158 lbs <span style="font-weight:400;color:var(--muted)">· Oct 6, 2025</span></figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+
+    <div class="bh-beat">
+      <div class="bh-rail"><span class="bh-node" style="background:var(--purple)"></span><span class="bh-line"></span></div>
+      <div class="bh-beat-body">
+        <h2 class="bh-h2" style="color:var(--purple)">Where I Am Now</h2>
+        <p class="bh-lede" style="color:#4a3d5b">These days, I cycle through bulking and cutting, and I have learned to love the process.</p>
+        <p class="bh-body"><b>I run a push pull legs split, three days on with one day off, and track my training and food with apps such as MacroFactor, MacroFactor Workouts, and my custom spreadsheet.</b> I review my weight trends weekly and make changes based on what my data shows. I have been doing this cycle of building muscle then cutting fat over and over while documenting how my body responds. This hands-on experience is exactly what I bring to coaching. I am not just teaching theory, I am teaching what I have lived.</p>
+        <p class="bh-body"><b>My first cut lasted nine months, and I could not wait for it to end so I could start building muscle.</b> When I finally did, I got uncomfortable with how much fat came with it and rushed into a cut earlier than I planned. I did my second cut, got leaner than before, then went on a couple vacations and put a little fat back on. Within this time I was more focused on gaining muscle. I kept going for a few months with a slight calorie surplus, because I knew at any moment I could flip the switch and go through a fat loss period. When I got uncomfortable again, I cut back down. And the process repeats.</p>
+        <p class="bh-body"><b>That impatience, the rushing, the frustration when it did not go perfectly, taught me the same thing that got me started in the first place.</b> Real change is a lifestyle, not a single event you finish and move on from.</p>
+      </div>
+    </div>
+
+    <div class="bh-beat">
+      <div class="bh-rail"><span class="bh-node" style="background:var(--orange-deep)"></span><span class="bh-line"></span></div>
+      <div class="bh-beat-body">
+        <h2 class="bh-h2" style="color:var(--orange-deep)">Why I Coach This Way</h2>
+        <p class="bh-lede" style="color:#6b492c">This is the same system I now teach.</p>
+        <p class="bh-body"><b>Track your intake. Get your steps in. Build habits you can repeat.</b> It works for me, and it can be adapted to nearly anyone. It is what I teach.</p>
+      </div>
+    </div>
+
+    <div class="bh-beat">
+      <div class="bh-rail"><span class="bh-node" style="background:var(--sky)"></span></div>
+      <div class="bh-beat-body">
+        <h2 class="bh-h2" style="color:#2f7ec2">Outside The Gym</h2>
+        <p class="bh-lede" style="color:#3d6d96">I am based in Howell, Michigan.</p>
+        <p class="bh-body"><b>I am 32 years old.</b> I work full time as an overhead crane technician, working 40 to 70 hours a week. My work can be very physical at times, as well as mentally exhausting. Some days I don't know how to fit it all in. I really try to balance work and family time the best I can.</p>
+        <p class="bh-body"><b>I have two kids from a previous marriage.</b> I try to stay involved at their school, helping out where I can and attending PTO meetings. I work on homework and reading with my kids after school, usually while I cook dinner. We love going camping, giving the kids lots of time with their grandparents where we can all be together, bike rides, taking the dogs to go run and get their energy out, and planning our next big adventure.</p>
+        <p class="bh-body"><b>I got remarried in October 2025 to my wife Jessie.</b> We have two dogs, Tucker and Lyra. Making the decision to be more active has made an effect on my whole family. My kids get to actually be kids more, there is less screen time because we just go outside for a bike ride or to a park. My dogs get to be more active and have a more fulfilling life, and trust me, Lyra needs it. And my wife sees the benefit in all of this and is extremely supportive.</p>
+      </div>
+    </div>
+  </main>
+
+  <div class="bh-wrap" style="padding-top:44px;padding-bottom:8px">
+    <a class="bh-btn" href="index.html#next">See how coaching works</a>
+  </div>
+
+  <footer style="margin-top:64px;border-top:1px solid var(--hairline);background:var(--card)">
+    <div class="bh-wrap" style="padding-top:28px;padding-bottom:28px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px">
+      <div style="display:flex;flex-wrap:wrap;align-items:center;gap:10px"><span style="font-size:15px;color:var(--muted)">Coaching by Austyn Rupert</span><span style="color:var(--hairline)">/</span><a href="https://instagram.com/base_habits_coaching" target="_blank" rel="noopener" style="font-size:15px;font-weight:500">@base_habits_coaching</a></div>
+      <a href="index.html" style="font-size:15px;font-weight:600;color:var(--ink) !important">Base Habits Coaching</a>
+    </div>
+  </footer>
+</div>
+
+<script>
+(function(){
+  var fill=document.getElementById('bh-prog-fill');
+  if(!fill)return;
+  function update(){
+    var d=document.documentElement;
+    var max=d.scrollHeight-d.clientHeight;
+    var p=max>0?Math.min(1,Math.max(0,(window.pageYOffset||d.scrollTop)/max)):0;
+    fill.style.height=(p*100).toFixed(1)+'%';
+  }
+  window.addEventListener('scroll',update,{passive:true});
+  window.addEventListener('resize',update);
+  update();
+})();
+</script>
+</body>
+</html>
