@@ -48,22 +48,6 @@ body{margin:0;background:var(--page);color:var(--ink);font-family:'Inter',system
 .bh-step p{font-size:17px;line-height:1.55;color:var(--ink-2);text-wrap:pretty}
 #bh-rail{position:fixed;left:0;top:0;bottom:0;width:3px;background:var(--hairline);z-index:40}
 #bh-rail-fill{width:3px;height:0;background:var(--primary)}
-.bh-head-row{max-width:none;padding-left:max(22px,calc((100% - 720px)/2 + 22px));padding-right:22px}
-#bh-client-access{display:inline-flex;align-items:center;gap:7px;padding:6px 12px;min-height:32px;border-radius:8px;background:rgba(255,255,255,0.7);border:1px solid #dbe1f0;color:var(--muted) !important;font-family:'Inter',system-ui,sans-serif;font-size:13px;font-weight:500;letter-spacing:-0.1px;white-space:nowrap;text-decoration:none;cursor:pointer;transition:background 120ms ease,transform 120ms ease}
-#bh-client-access:hover{background:#fff;color:var(--ink-2) !important}
-#bh-client-access:active{transform:scale(0.96)}
-#bh-client-access .bh-ca-dot{width:6px;height:6px;border-radius:50%;background:var(--teal);flex:none}
-@media (max-width:600px){#bh-client-access .bh-ca-label{display:none}#bh-client-access::after{content:'Client access'}}
-#bh-ca-overlay{position:fixed;inset:0;z-index:60;display:none;align-items:center;justify-content:center;padding:22px;background:rgba(0,0,0,0.32)}
-#bh-ca-overlay.open{display:flex}
-#bh-ca-modal{width:100%;max-width:360px;background:var(--card);border-radius:16px;border:1px solid var(--hairline);box-shadow:rgba(0,0,0,0.01) 0 0.175px 1.041px,rgba(0,0,0,0.02) 0 0.8px 2.925px,rgba(0,0,0,0.027) 0 2.025px 7.847px,rgba(0,0,0,0.04) 0 4px 18px,rgba(0,0,0,0.05) 0 23px 52px;padding:24px}
-#bh-ca-modal label{display:block;font-size:15px;font-weight:500;color:var(--ink-2);margin-bottom:8px}
-#bh-ca-input{width:100%;padding:6px 10px;min-height:40px;border:1px solid #dddddd;border-radius:4px;background:#fff;font-family:'Inter',system-ui,sans-serif;font-size:15px;color:var(--ink);outline:none}
-#bh-ca-input:focus{box-shadow:var(--shadow-1)}
-#bh-ca-close{width:28px;height:28px;border-radius:50%;border:none;background:rgba(0,0,0,0.05);color:var(--ink-2);font-size:15px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform 120ms ease}
-#bh-ca-close:active{transform:scale(0.9)}
-#bh-ca-error{display:none;font-size:14px;line-height:1.45;color:var(--orange-deep)}
-#bh-ca-error.show{display:block}
 </style>
 </head>
 <body>
@@ -71,31 +55,13 @@ body{margin:0;background:var(--page);color:var(--ink);font-family:'Inter',system
 
   <div id="bh-rail"><div id="bh-rail-fill"></div></div>
 
-  <div id="bh-ca-overlay" role="dialog" aria-modal="true" aria-labelledby="bh-ca-title">
-    <form id="bh-ca-modal" novalidate>
-      <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:16px">
-        <span id="bh-ca-title" style="font-size:18px;font-weight:700;letter-spacing:-0.3px;color:var(--ink)">Client access</span>
-        <button type="button" id="bh-ca-close" aria-label="Close">&#10005;</button>
-      </div>
-      <div style="display:flex;flex-direction:column;gap:12px">
-        <div>
-          <label for="bh-ca-input">Enter client password</label>
-          <input id="bh-ca-input" name="password" type="password" autocomplete="current-password" aria-describedby="bh-ca-error">
-        </div>
-        <p id="bh-ca-error" role="alert">That password doesn&rsquo;t match. Try again.</p>
-        <button type="submit" class="bh-btn" style="align-self:flex-start">Continue</button>
-      </div>
-    </form>
-  </div>
-
   <header style="position:sticky;top:0;z-index:30;background:#e9edf7;border-bottom:1px solid #dbe1f0">
-    <div class="bh-wrap bh-head-row" style="padding-top:12px;padding-bottom:12px;display:flex;align-items:center;justify-content:space-between;gap:16px">
+    <div class="bh-wrap" style="padding-top:12px;padding-bottom:12px;display:flex;align-items:center;justify-content:space-between;gap:16px">
       <span style="font-size:16px;font-weight:700;letter-spacing:-0.3px;color:var(--ink)">Base Habits Coaching</span>
       <div style="display:flex;align-items:center;gap:14px">
         <a href="about-me.html" style="font-size:15px;font-weight:500;color:var(--muted)">About me</a>
         <a href="#contact" style="font-size:15px;font-weight:500;color:var(--muted)">Contact me</a>
         <a class="bh-btn sm" href="#next">Get started</a>
-        <button type="button" id="bh-client-access" aria-haspopup="dialog"><span class="bh-ca-dot"></span><span class="bh-ca-label">Current Client Access</span></button>
       </div>
     </div>
   </header>
@@ -112,8 +78,8 @@ body{margin:0;background:var(--page);color:var(--ink);font-family:'Inter',system
     <p style="font-size:clamp(20px,4.6vw,26px);font-weight:700;line-height:1.28;letter-spacing:-0.6px;color:var(--indigo);text-wrap:pretty;max-width:19em">You cannot outwork a bad diet, and every diet with a name is over-hyped.</p>
     <div style="margin-top:8px;display:flex;align-items:center;gap:16px">
       <!-- Replace src with your headshot -->
-      <img src="headshot.jpg" alt="Austyn Rupert" style="width:112px;height:112px;flex:none;border-radius:50%;object-fit:cover;background:#e6e6e6;border:1px solid var(--hairline)">
-      <span style="font-size:19px;font-weight:600;color:var(--ink)">Austyn Rupert</span>
+      <img src="headshot.jpg" alt="Austyn Rupert" style="width:88px;height:88px;flex:none;border-radius:50%;object-fit:cover;background:#e6e6e6;border:1px solid var(--hairline)">
+      <span style="font-size:16px;font-weight:600;color:var(--ink)">Austyn Rupert</span>
     </div>
   </div>
   </div>
@@ -297,85 +263,6 @@ body{margin:0;background:var(--page);color:var(--ink);font-family:'Inter',system
   window.addEventListener('scroll',update,{passive:true});
   window.addEventListener('resize',update);
   update();
-})();
-
-(function(){
-  /* ── CLIENT ACCESS CONFIG ───────────────────────────────────────────────
-     Both values come from the StatiCrypt setup. To change the password:
-       1. Re-encrypt the client pages with the SAME salt:
-            npx staticrypt clients/index.html
-              clients/phase-1/base-habits/index.html
-              clients/phase-1/calories/index.html
-              --salt 01c8cfd2929a928a2e2c895f2d8b3fd2 -p <new password> -r 30 -d dist
-       2. Open tools/client-password.html, type the new password,
-          and paste the VERIFIER line it gives you below.
-     Nothing else on the site needs to change.
-  ─────────────────────────────────────────────────────────────────────── */
-  var SALT     = '01c8cfd2929a928a2e2c895f2d8b3fd2';
-  var VERIFIER = '30dbd17bf83988a35a627e2c91b65354aa14cca536ba561aebc043f7296bf5e7';
-  var REMEMBER_DAYS = 30;
-  var DESTINATION = '/clients/';
-
-  var open=document.getElementById('bh-client-access'),
-      overlay=document.getElementById('bh-ca-overlay'),
-      form=document.getElementById('bh-ca-modal'),
-      input=document.getElementById('bh-ca-input'),
-      err=document.getElementById('bh-ca-error'),
-      close=document.getElementById('bh-ca-close'),
-      submit=form.querySelector('button[type="submit"]'),
-      busy=false,
-      last=null;
-  function show(){
-    last=document.activeElement;
-    overlay.classList.add('open');
-    err.classList.remove('show');
-    input.value='';
-    input.focus();
-  }
-  function hide(){
-    overlay.classList.remove('open');
-    if(last&&last.focus)last.focus();
-  }
-  open.addEventListener('click',show);
-  close.addEventListener('click',hide);
-  overlay.addEventListener('mousedown',function(e){if(e.target===overlay)hide();});
-  document.addEventListener('keydown',function(e){
-    if(e.key==='Escape'&&overlay.classList.contains('open'))hide();
-  });
-  function hex(buf){var a=new Uint8Array(buf),s='';for(var i=0;i<a.length;i++)s+=a[i].toString(16).padStart(2,'0');return s;}
-  function pbkdf2(pw,it,alg){
-    return crypto.subtle.importKey('raw',new TextEncoder().encode(pw),'PBKDF2',false,['deriveBits'])
-      .then(function(k){return crypto.subtle.deriveBits({name:'PBKDF2',hash:alg,iterations:it,salt:new TextEncoder().encode(SALT)},k,256);})
-      .then(hex);
-  }
-  /* Same three-round hash StatiCrypt uses, so the result unlocks its pages. */
-  function hashPassword(pw){
-    return pbkdf2(pw,1000,'SHA-1')
-      .then(function(h){return pbkdf2(h,14000,'SHA-256');})
-      .then(function(h){return pbkdf2(h,585000,'SHA-256');});
-  }
-  form.addEventListener('submit',function(e){
-    e.preventDefault();
-    if(busy)return;
-    var pw=input.value;
-    if(!pw){err.classList.add('show');input.focus();return;}
-    busy=true;err.classList.remove('show');
-    submit.disabled=true;submit.style.opacity='0.6';submit.textContent='Checking\u2026';
-    hashPassword(pw).then(function(hashed){
-      return crypto.subtle.digest('SHA-256',new TextEncoder().encode(hashed)).then(function(d){
-        if(hex(d)!==VERIFIER)throw new Error('bad');
-        try{
-          localStorage.setItem('staticrypt_passphrase',hashed);
-          localStorage.setItem('staticrypt_expiration',String(Date.now()+REMEMBER_DAYS*24*60*60*1000));
-        }catch(_){}
-        window.location.href=DESTINATION;
-      });
-    }).catch(function(){
-      busy=false;submit.disabled=false;submit.style.opacity='';submit.textContent='Continue';
-      err.classList.add('show');input.select();input.focus();
-    });
-  });
-  input.addEventListener('input',function(){err.classList.remove('show');});
 })();
 </script>
 </body>
