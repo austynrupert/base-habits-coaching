@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Two Week Rule — Base Habits Coaching</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --page:#f6f5f4; --card:#ffffff; --hairline:#e6e6e6;
+  --ink:#000000; --ink-2:#31302e; --muted:#615d59; --faint:#a39e98;
+  --primary:#0075de; --primary-active:#005bab; --indigo:#213183;
+  --teal:#2a9d99; --orange:#dd5b00; --purple:#391c57; --green:#1aae39;
+  --shadow-1:rgba(0,0,0,0.01) 0 0.175px 1.041px,rgba(0,0,0,0.02) 0 0.8px 2.925px,rgba(0,0,0,0.027) 0 2.025px 7.847px,rgba(0,0,0,0.04) 0 4px 18px;
+  --shadow-2:rgba(0,0,0,0.01) 0 0.175px 1.041px,rgba(0,0,0,0.02) 0 0.8px 2.925px,rgba(0,0,0,0.027) 0 2.025px 7.847px,rgba(0,0,0,0.04) 0 4px 18px,rgba(0,0,0,0.05) 0 23px 52px;
+}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--page);color:var(--ink);font-family:'Inter',system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased}
+p,h1,h2,h3,ul{margin:0}
+ul{padding:0;list-style:none}
+a{color:var(--primary);text-decoration:none}
+a:hover{color:var(--primary-active)}
+.wrap{max-width:720px;margin:0 auto;padding-left:22px;padding-right:22px}
+.head-row{max-width:none;padding-left:max(76px,calc((100% - 720px)/2 + 22px));padding-right:22px;padding-top:12px;padding-bottom:12px;display:flex;align-items:center;gap:14px}
+
+header{position:sticky;top:0;z-index:30;background:#e9edf7;border-bottom:1px solid #dbe1f0}
+#burger{position:absolute;left:22px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;justify-content:center;gap:4px;width:40px;height:40px;padding:0 9px;border:1px solid #dbe1f0;border-radius:8px;background:rgba(255,255,255,0.7);cursor:pointer;transition:background 120ms ease,transform 120ms ease}
+#burger:hover{background:#fff}
+#burger:active{transform:translateY(-50%) scale(0.96)}
+#burger span{display:block;height:2px;border-radius:2px;background:var(--ink-2)}
+.brand{font-size:16px;font-weight:700;letter-spacing:-0.3px;color:var(--ink)}
+.contact-btn{margin-left:auto;display:inline-flex;align-items:center;justify-content:center;min-height:36px;padding:7px 16px;border-radius:9999px;background:var(--primary);color:#fff !important;font-size:14px;font-weight:500;transition:background 120ms ease,transform 120ms ease}
+.contact-btn:active{background:var(--primary-active);transform:scale(0.96)}
+
+#scrim{position:fixed;inset:0;z-index:50;background:rgba(0,0,0,0.32);opacity:0;pointer-events:none;transition:opacity 160ms ease}
+#scrim.open{opacity:1;pointer-events:auto}
+#drawer{position:fixed;top:0;left:0;bottom:0;z-index:60;width:min(320px,86vw);background:var(--card);border-right:1px solid var(--hairline);box-shadow:var(--shadow-2);transform:translateX(-100%);transition:transform 200ms ease;display:flex;flex-direction:column;overflow-y:auto}
+#drawer.open{transform:translateX(0)}
+.drawer-top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 16px 12px}
+#drawer-close{width:32px;height:32px;border-radius:50%;border:none;background:rgba(0,0,0,0.05);color:var(--ink-2);font-size:15px;line-height:1;cursor:pointer;transition:transform 120ms ease}
+#drawer-close:active{transform:scale(0.9)}
+.nav-group{padding:12px 16px 4px}
+.nav-label{display:flex;align-items:center;gap:9px;font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.nav-label .dot{width:7px;height:7px;border-radius:50%;flex:none}
+.nav-list{display:flex;flex-direction:column;gap:2px}
+.nav-item{display:block;padding:9px 10px;border-radius:5px;font-size:15px;font-weight:500;color:var(--ink-2);transition:background 120ms ease}
+.nav-item:hover{background:rgba(0,0,0,0.035);color:var(--ink-2)}
+.nav-item.current{background:rgba(0,117,222,0.08);color:var(--primary)}
+.nav-item.soon{color:var(--faint);cursor:default;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.nav-item.soon:hover{background:none}
+.soon-tag{font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--faint)}
+.drawer-foot{margin-top:auto;border-top:1px solid var(--hairline);padding:14px 16px 18px}
+.drawer-foot a{font-size:15px;font-weight:500}
+
+/* page */
+.title-band{background:linear-gradient(180deg,#dfe5f5 0%,#e9ecf6 46%,var(--page) 100%);padding:38px 0 34px}
+h1{font-size:clamp(32px,8.2vw,46px);font-weight:700;line-height:1.06;letter-spacing:-1.4px;text-wrap:pretty}
+.crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:14px;font-size:13px;font-weight:500;color:var(--muted)}
+.crumbs .sep{color:var(--faint)}
+.bars{display:flex;gap:6px;margin-bottom:20px}
+.bars span{width:26px;height:6px;border-radius:3px}
+
+main{padding-bottom:24px}
+.sections{display:flex;flex-direction:column}
+section.chapter{padding:34px 0}
+section.chapter + section.chapter{border-top:1px solid var(--hairline)}
+.eyebrow{display:flex;align-items:center;gap:9px;font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+.eyebrow .dot{width:7px;height:7px;border-radius:50%;flex:none}
+h2{font-size:clamp(24px,5.6vw,30px);font-weight:700;line-height:1.16;letter-spacing:-0.8px;color:var(--ink);text-wrap:pretty}
+h3{font-size:19px;font-weight:600;line-height:1.3;letter-spacing:-0.4px;color:var(--ink);text-wrap:pretty}
+.lede{font-size:19px;font-weight:500;line-height:1.45;letter-spacing:-0.2px;color:var(--indigo);max-width:26em;text-wrap:pretty}
+.body{font-size:17px;line-height:1.7;color:var(--muted);max-width:34em;text-wrap:pretty}
+.body strong{font-weight:600;color:var(--ink-2)}
+.body .caps{font-weight:600;color:var(--ink-2);letter-spacing:0.02em}
+.stack{display:flex;flex-direction:column;gap:16px;margin-top:4px}
+.sub{display:flex;flex-direction:column;gap:12px;padding:22px 0}
+.sub + .sub{border-top:1px solid var(--hairline)}
+.sub-head{display:flex;align-items:baseline;gap:12px}
+.num{flex:none;font-size:13px;font-weight:700;color:var(--faint);letter-spacing:0.04em;min-width:18px}
+
+ul.list{display:flex;flex-direction:column;gap:10px}
+ul.list li{display:flex;align-items:baseline;gap:12px;font-size:17px;line-height:1.5;color:var(--ink-2);font-weight:500}
+ul.list li::before{content:"";flex:none;width:7px;height:7px;border-radius:50%;background:var(--teal);transform:translateY(-2px)}
+ul.list.buy li::before{background:var(--orange)}
+
+.quote{background:var(--card);border:1px solid var(--hairline);border-radius:12px;padding:22px 24px;font-size:19px;line-height:1.5;font-weight:400;letter-spacing:-0.2px;color:var(--ink-2);text-wrap:pretty}
+.hero{background:var(--indigo);border-radius:16px;padding:32px 28px;box-shadow:var(--shadow-2)}
+.hero p{color:#fff;font-size:clamp(21px,4.9vw,26px);font-weight:600;line-height:1.34;letter-spacing:-0.6px;text-wrap:pretty}
+.hero .rule{display:flex;gap:6px;margin-bottom:18px}
+.hero .rule span{width:24px;height:5px;border-radius:3px}
+
+#contact{border-top:1px solid #1a2668;background:var(--indigo);padding:44px 0 56px;color:#fff}
+#contact h2{color:#fff}
+#contact .body{color:#c3cae8}
+.contact-rows{display:flex;flex-direction:column;gap:12px;margin-top:18px}
+.contact-row{display:flex;align-items:center;gap:14px;padding:16px 18px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.16);border-radius:12px}
+.contact-row .dot{width:9px;height:9px;border-radius:50%;flex:none}
+.contact-row .k{font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#a9b3dd}
+.contact-row .v{font-size:17px;font-weight:500;color:#fff}
+.contact-row .v:hover{color:#dfe5f5}
+
+/* chart + tables */
+.figure{background:var(--card);border:1px solid var(--hairline);border-radius:12px;padding:22px 18px 20px;box-shadow:var(--shadow-1)}
+.fig-title{font-size:17px;font-weight:600;letter-spacing:-0.3px;color:var(--ink);line-height:1.35;text-wrap:pretty}
+.axis-label{margin-top:14px;font-size:12px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--faint)}
+.plot{display:flex;gap:14px;margin-top:10px}
+.yaxis{flex:none;width:34px;height:280px;position:relative}
+.yaxis span{position:absolute;right:0;transform:translateY(-50%);font-size:11px;font-weight:500;color:var(--faint)}
+.bars-area{flex:1;position:relative;height:280px;border-bottom:1px solid var(--hairline)}
+.grid{position:absolute;inset:0}
+.grid i{position:absolute;left:0;right:0;height:1px;background:var(--hairline);opacity:0.7}
+.bar-row{position:absolute;inset:0;display:flex;align-items:flex-end;justify-content:space-around;gap:16px}
+.bar-col{flex:1;max-width:104px;display:flex;flex-direction:column;align-items:center}
+.bar-total{font-size:13px;font-weight:700;color:var(--ink);margin-bottom:6px}
+.bar{width:100%;display:flex;flex-direction:column-reverse;border-radius:4px;overflow:hidden}
+.bar b{display:block;font-size:0}
+.xaxis{display:flex;justify-content:space-around;gap:16px;margin-left:48px;margin-top:8px}
+.xaxis span{flex:1;max-width:104px;text-align:center;font-size:13px;font-weight:500;color:var(--ink-2)}
+.legend{display:flex;flex-wrap:wrap;gap:10px 18px;margin-top:16px;padding-top:14px;border-top:1px solid var(--hairline)}
+.legend div{display:flex;align-items:center;gap:7px;font-size:13px;font-weight:500;color:var(--muted)}
+.legend i{width:10px;height:10px;border-radius:3px;flex:none}
+.caption{margin-top:14px;font-size:14px;line-height:1.6;color:var(--muted);text-wrap:pretty}
+
+.table-wrap{background:var(--card);border:1px solid var(--hairline);border-radius:12px;overflow-x:auto;-webkit-overflow-scrolling:touch}
+table{width:100%;border-collapse:collapse}
+th{text-align:left;padding:11px 14px;font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);background:#fbfaf9;border-bottom:1px solid var(--hairline)}
+td{padding:12px 14px;font-size:15px;line-height:1.45;color:var(--muted);border-bottom:1px solid var(--hairline);vertical-align:top}
+tr:last-child td{border-bottom:none}
+td:first-child{font-weight:600;color:var(--ink-2)}
+@media(min-width:600px){td:first-child{white-space:nowrap}}
+@media(max-width:599px){th,td{padding-left:11px;padding-right:11px}td,th{font-size:14px}}
+td:last-child,th:last-child{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+td:last-child{font-weight:600;color:var(--ink-2)}
+.calc td{font-size:15px;font-family:'Inter',monospace;font-variant-numeric:tabular-nums}
+.calc td:first-child{white-space:normal;font-weight:500;color:var(--muted)}
+.calc td:last-child{white-space:normal;text-align:right}
+.formulas{display:flex;flex-direction:column;gap:10px}
+.formula{background:var(--card);border:1px solid var(--hairline);border-radius:8px;padding:13px 15px;font-size:15px;line-height:1.5;color:var(--ink-2);font-variant-numeric:tabular-nums;text-wrap:pretty}
+.formula b{font-weight:600}
+.slot{background:var(--card);border:1px dashed #d5d2ce;border-radius:12px;padding:26px 22px;display:flex;flex-direction:column;gap:8px}
+.slot .k{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--faint)}
+.slot .k i{width:7px;height:7px;border-radius:50%;background:var(--faint);flex:none}
+.slot p{font-size:15px;line-height:1.6;color:var(--muted);text-wrap:pretty}
+.sheet-wrap{border-radius:8px;overflow-x:auto;overflow-y:hidden;margin-top:14px}
+table.sheet{border-collapse:collapse;background:#fff;font-variant-numeric:tabular-nums}
+table.sheet th,table.sheet td{border:1px solid #d5d7db;padding:5px 9px;font-size:13px;line-height:1.35;color:#202124;text-align:right;white-space:nowrap;font-weight:400}
+table.sheet tr.hd th{background:#f1f3f4;font-weight:600;color:#3c4043;text-align:right}
+table.sheet tr.hd th:first-child{text-align:left}
+table.sheet tr.dow th{text-align:center}
+table.sheet th.sumh{background:#e8eaed}
+table.sheet td.rl{text-align:left;font-weight:600;background:#f8f9fa;color:#3c4043}
+table.sheet td.sl{text-align:left;color:#5f6368;background:#f8f9fa}
+table.sheet td.sv{font-weight:600}
+table.sheet tr.gap td{border:none;height:12px;padding:0}
+
+@media (max-width:600px){
+  #burger{left:12px;width:36px;height:36px;padding:0 8px}
+  .head-row{padding-left:56px;padding-right:12px;gap:10px}
+  .brand{font-size:15px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .contact-btn{flex:none;padding:7px 13px;font-size:13px}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap head-row" style="position:relative">
+    <button type="button" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="drawer">
+      <span></span><span></span><span></span>
+    </button>
+    <span class="brand">Base Habits Coaching</span>
+    <a class="contact-btn" href="#contact">Contact me</a>
+  </div>
+</header>
+
+<div id="scrim"></div>
+
+<nav id="drawer" aria-label="Client pages" aria-hidden="true">
+  <div class="drawer-top">
+    <span style="font-size:15px;font-weight:600;color:var(--ink)">Client pages</span>
+    <button type="button" id="drawer-close" aria-label="Close menu">&#10005;</button>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-list">
+      <a class="nav-item" href="../../index.html">&lsaquo; Client home</a>
+    </div>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-label"><span class="dot" style="background:var(--teal)"></span>Phase 1</div>
+    <div class="nav-list">
+      <a class="nav-item" href="../base-habits/index.html">Base Habits</a>
+      <a class="nav-item current" href="index.html" aria-current="page">Two Week Rule</a>
+      <a class="nav-item" href="../debunking/index.html">Debunking</a>
+      <a class="nav-item" href="../calories/index.html">Calories</a>
+      <a class="nav-item" href="../macros/index.html">Macros</a>
+      <a class="nav-item" href="../protein/index.html" style="margin-left:14px">Protein</a>
+      <a class="nav-item" href="../carbs/index.html" style="margin-left:14px">Carbs</a>
+      <a class="nav-item" href="../fats/index.html" style="margin-left:14px">Fats</a>
+    </div>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-label"><span class="dot" style="background:var(--orange)"></span>Phase 2</div>
+    <div class="nav-list">
+      <span class="nav-item soon" aria-disabled="true">Placeholder page one<span class="soon-tag">Coming soon</span></span>
+      <span class="nav-item soon" aria-disabled="true">Placeholder page two<span class="soon-tag">Coming soon</span></span>
+    </div>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-label"><span class="dot" style="background:var(--purple)"></span>Phase 3</div>
+    <div class="nav-list">
+      <span class="nav-item soon" aria-disabled="true">Placeholder page one<span class="soon-tag">Coming soon</span></span>
+      <span class="nav-item soon" aria-disabled="true">Placeholder page two<span class="soon-tag">Coming soon</span></span>
+    </div>
+  </div>
+
+  <div class="drawer-foot">
+    <a href="../../../base-habits-coaching.html">Back to basehabitscoaching.com</a>
+  </div>
+</nav>
+
+<div class="title-band">
+  <div class="wrap">
+    <div class="bars"><span style="background:var(--teal)"></span><span style="background:var(--orange)"></span><span style="background:var(--purple)"></span><span style="background:var(--green)"></span></div>
+    <h1>Two Week Rule</h1>
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <a href="../../index.html">Client Home</a>
+      <span class="sep">&rsaquo;</span>
+      <a href="../base-habits/index.html">Base Habits</a>
+      <span class="sep">&rsaquo;</span>
+      <span>Two Week Rule</span>
+      <span class="sep">&rsaquo;</span>
+      <a href="../debunking/index.html">Debunking</a>
+      <span class="sep">&rsaquo;</span>
+      <a href="../calories/index.html">Calories</a>
+      <span class="sep">&rsaquo;</span>
+      <a href="../macros/index.html">Macros</a>
+    </nav>
+  </div>
+</div>
+
+<main>
+  <div class="wrap sections">
+
+    <section class="chapter">
+      <div class="eyebrow"><span class="dot" style="background:var(--teal)"></span>Opening</div>
+      <h2>Where This Picks Up</h2>
+      <div class="stack">
+        <p class="body"><a href="../base-habits/index.html">Base Habits</a> covers the three habits you're building: weigh in daily, hit your calorie target, walk your steps. This page covers how you actually execute them for the next two weeks.</p>
+        <p class="body">Two weeks is the window. Nothing gets adjusted, nothing gets changed, until it's done. This page walks you through what to set up first, how to plan your food, and how to log it so you make it through both weeks with real data instead of a guess.</p>
+        <p class="body">Expect most of our communication to happen during this phase. You're going to have questions, plenty of them, and that's normal. Ask them as they come up instead of sitting on them until your next check-in.</p>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <div class="eyebrow"><span class="dot" style="background:var(--orange)"></span>Section 1</div>
+      <h2>Why Two Weeks</h2>
+      <div class="stack">
+        <p class="lede">We don't touch your numbers again until two full weeks have passed since the last change.</p>
+        <p class="body">It takes two solid weeks of consistency to see what a change actually does to your weight.</p>
+        <p class="body">If we change your calories, your steps, and your food all on the same day, and the scale moves a week later, we have no idea which one of those did it. Stack enough changes on top of each other and you lose the ability to tell what's working and what isn't.</p>
+        <p class="body">So the rule is simple. After any change, you give it two full weeks before we touch it again. That's true on day one, and it's true for every adjustment after.</p>
+        <div class="hero">
+          <div class="rule"><span style="background:#5ecfc9"></span><span style="background:#ff9a4d"></span><span style="background:#8f7bd6"></span></div>
+          <p>One change. Two weeks. Then we look at the data.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <div class="eyebrow"><span class="dot" style="background:var(--purple)"></span>Section 2</div>
+      <h2>Set Up Your Tools</h2>
+      <div class="stack">
+        <p class="lede">Before anything else, get your tracking spreadsheet and your app set up.</p>
+        <p class="body">You'll get a shared spreadsheet from me. Log four things every day:</p>
+        <ul class="list">
+          <li>Weight</li>
+          <li>Calories</li>
+          <li>Workout</li>
+          <li>Steps</li>
+        </ul>
+        <p class="body">It's organized week by week, Monday through Sunday. At the end of each week, it calculates:</p>
+        <ul class="list buy">
+          <li>Weekly average weight</li>
+          <li>Weekly change from the week before</li>
+          <li>Average calories</li>
+          <li>Average Steps</li>
+          <li>Total Steps</li>
+        </ul>
+        <p class="body">You don't do any of that math yourself.</p>
+        <p class="body">It also has graphs built in. One plots your weight across the whole month with a trend line, so you can see which direction you're actually headed instead of reading into a single day. Each week also gets its own smaller chart with its own trend line, so you can watch that week specifically as it happens.</p>
+        <figure class="figure" style="margin:0;padding:14px">
+          <img src="tracker.png" alt="Weight Trend Tracker spreadsheet: five weeks of daily weight, calories, lift and steps with weekly averages, and weight trend charts." style="display:block;width:100%;height:auto;border-radius:6px">
+          <figcaption class="caption">A real month out of my own tracker. You fill in weight, calories, lift, and steps each day. Every average, weekly change, and chart calculates itself.</figcaption>
+        </figure>
+        <p class="body">I can show you how to add the spreadsheet to your homescreen of your phone so it is easily accessible.</p>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <div class="eyebrow"><span class="dot" style="background:var(--green)"></span>Section 3</div>
+      <h2>Pick a Tracking App</h2>
+      <div class="stack">
+        <p class="lede">You need an app that tracks calories and macros, has a real food database, and scans barcodes.</p>
+        <p class="body">I use MacroFactor. This is not the only option, and you don't have to use it. It's what I personally use and what I recommend if you want the best experience. I have no affiliation with MacroFactor, but I love their product and trust the people responsible for creating it.</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Plan</th><th>Price</th></tr></thead>
+            <tbody>
+              <tr><td>MacroFactor, monthly</td><td>$11.99/mo</td></tr>
+              <tr><td>MacroFactor, yearly</td><td>$71.99/year ($5.99/mo)</td></tr>
+              <tr><td>MacroFactor + MacroFactor Workouts bundle, yearly</td><td>$89.99/year</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="body">MacroFactor has an AI feature built in. You don't need to rely on it. Learning to read labels and log on your own beats leaning on it. In general, I would say not to trust AI food tracking. You could literally hide a candy bar between two slices of bread and it would not know. The only situation I use the AI feature for is when I am at a restaurant, I open a burger up showing everything in it, take a picture and add a description as accurately as I can about what is on the burger. But for 99% of cases, weighing your food by the gram is the ideal tracking method.</p>
+        <p class="body">If you'd rather not pay for a tracking app, Cronometer is a solid free option. The free version tracks calories and macros, scans barcodes, and pulls from a large, accurate food database. No subscription required for the basics you need here.</p>
+        <div class="slot">
+          <span class="k"><i></i>Video to add</span>
+          <p>Walkthrough of setting up and using MacroFactor, screen recording.</p>
+        </div>
+        <p class="body">Whichever app you pick, it needs to do three things: track calories and macros, have a food database you can trust, and scan barcodes. Anything that does those three will work.</p>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <div class="eyebrow"><span class="dot" style="background:var(--teal)"></span>Section 4</div>
+      <h2>Plan Your Food and Build Your Grocery List</h2>
+      <div class="stack">
+        <p class="lede">Know what you're eating before you're standing in the kitchen hungry.</p>
+        <p class="body"><a href="../base-habits/index.html">Base Habits</a> already covers the grocery basics. For these two weeks, go a step further. Plan your meals out, then build your list around them.</p>
+        <p class="body">Meal prep works best. Cook a batch of protein, chicken is the easiest, portion it into containers with your carb source measured out. Add a low calorie sauce you actually like so you don't get bored of it by day three. Personally, I always have three meal prep containers ready for each day. They contain 120g of chicken breast, 130-160g of jasmine rice, and 40g of sugar free barbecue sauce. This is what I call my base meal. I eat one for breakfast, first lunch, and second lunch. For dinner I usually eat 5 whole eggs with some rice. The remaining carbs for the day go before my workout in the form of fast digesting carb sources. This is what works for me, it does not have to be what you do. But I highly suggest building your base meal so that the majority of your meals are portioned to cover 80-100% of your protein and 80% of your carbs.</p>
+        <p class="body">If you want help figuring out exact portions for your containers, ask me and I'll walk you through it.</p>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <div class="eyebrow"><span class="dot" style="background:var(--orange)"></span>Section 5</div>
+      <h2>Hit Your Steps</h2>
+      <div class="stack">
+        <p class="lede">10,000 steps a day is the gold standard. Log your actual daily total every day in your spreadsheet.</p>
+        <p class="body"><a href="../base-habits/index.html">Base Habits</a> already covers why steps matter. For these two weeks, the number is 10,000, every day, logged. That being said, 10,000 does not work for everyone. Some people need more and some people need less. If you have no injuries or issues that would prevent you from reaching 10,000 each day, shoot for 10,000. Just try it for two solid weeks. I do have a client that averages 2000 to 4000 steps daily and she is making great progress. Personally, I need 12,000-18,000 with my current calorie intake to really see the scale move. So there is some nuance to this, but higher step count leaves room for more food with little increased physical demand.</p>
+        <p class="body">Most people burn 30 to 60 calories per 1000 steps. This may seem like small numbers, but at the end of the week that can account for 2100-4200 calories burned just through steps alone.</p>
+        <p class="body">For the busy people out there, how can you get more steps?</p>
+        <p class="body">Well most people can walk 1000 steps in ten minutes. Parking further away from work or a store helps, going on walks any chance you get, always walking when taking a phone call, or just doing extra chores around the house. There are countless ways you can squeeze in more steps. Find what fits your schedule and plan your day around getting more steps. This needs to be a priority for you, but it does not need to dominate your schedule. I prefer to knock out as many steps as I can before noon, this way I have no excuse for not getting my steps in.</p>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <div class="eyebrow"><span class="dot" style="background:var(--purple)"></span>Section 6</div>
+      <h2>How to Log It</h2>
+      <div class="stack">
+        <p class="lede">There are two ways to get through a day. Both start with logging.</p>
+        <div class="quote"><strong style="font-weight:600">The best approach.</strong> Meal prep in bulk. Get a few days of meals ready at once, log those days ahead of time since you already know exactly what's in each container, and eat only what's prepped. This is the most consistent way to hit your numbers, because the decision is already made before you're hungry.</div>
+        <div class="quote"><strong style="font-weight:600">The realistic approach.</strong> Some days won't go that way. Keep quick options on hand: canned tuna, canned chicken, protein shakes, something you can grab and log in under a minute. Log it as you go, check your remaining calories and remaining macros for the day, and make your next choice based on what's left. It won't be as clean as a prepped day. Get as close to your numbers as you can, then get back to prepping for the next few days. The key here is to prioritize protein, stay away from fat dense foods, and look for carb sources that are filling.</div>
+        <p class="body">Both approaches require the same thing. You log it. A day you don't log is a day we have no data on.</p>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <div class="eyebrow"><span class="dot" style="background:var(--green)"></span>Section 7</div>
+      <h2>Disclaimer</h2>
+      <div class="stack">
+        <p class="lede">I am not a doctor, so if something does not feel right I will always point you towards an expert</p>
+        <div class="quote">If it feels wrong or if something hurts please consult your doctor. I have a lot of experience dieting and tuning a program for myself. But I have had my share of injuries, setbacks, and concerns that required a doctor's input. I highly recommend at the very least, you let your doctor know you are starting this process. I would be glad to provide you with a plan summary to give your doctor. This way, we are all on the same page.</div>
+        <div class="quote">Nothing beats a doctor's opinion. At the start of the process, it is a good idea to get a blood test done. This will provide you with scientific grounding in what your body needs through this process, especially with vitamin deficiencies or unknown issues. I also do not recommend many supplements, because even taking a vitamin that some influencer says will help burn fat may be completely useless unless you are actually deficient in it.</div>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <div class="eyebrow"><span class="dot" style="background:var(--teal)"></span>Closing</div>
+      <h2>What Comes Next</h2>
+      <div class="stack">
+        <p class="body">Two weeks of consistent logging gives us real numbers to work with. It also puts you up against a lot of noise: diets with rules, influencers with a program, people telling you it should be faster than this. <a href="../debunking/index.html">Debunking</a> covers why most of that noise is built to sell you something, not to help you.</p>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<section id="contact">
+  <div class="wrap">
+    <h2 style="letter-spacing:-0.7px">Contact me</h2>
+    <p class="body" style="margin-top:10px">Two ways to reach me. Questions about a lesson are welcome any time.</p>
+    <div class="contact-rows">
+      <div class="contact-row">
+        <span class="dot" style="background:#5ecfc9"></span>
+        <div style="display:flex;flex-direction:column;gap:2px">
+          <span class="k">Call or text</span>
+          <a class="v" href="tel:+15176189607">517-618-9607</a>
+        </div>
+      </div>
+      <div class="contact-row">
+        <span class="dot" style="background:#ff9a4d"></span>
+        <div style="display:flex;flex-direction:column;gap:2px">
+          <span class="k">Instagram</span>
+          <a class="v" href="https://instagram.com/base_habits_coaching" target="_blank" rel="noopener">@base_habits_coaching</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+(function(){
+  var burger=document.getElementById('burger'),
+      drawer=document.getElementById('drawer'),
+      scrim=document.getElementById('scrim'),
+      close=document.getElementById('drawer-close');
+  function open(){
+    drawer.classList.add('open');scrim.classList.add('open');
+    drawer.setAttribute('aria-hidden','false');burger.setAttribute('aria-expanded','true');
+    document.body.style.overflow='hidden';
+    close.focus();
+  }
+  function shut(){
+    drawer.classList.remove('open');scrim.classList.remove('open');
+    drawer.setAttribute('aria-hidden','true');burger.setAttribute('aria-expanded','false');
+    document.body.style.overflow='';
+    burger.focus();
+  }
+  burger.addEventListener('click',open);
+  close.addEventListener('click',shut);
+  scrim.addEventListener('click',shut);
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape'&&drawer.classList.contains('open'))shut();
+  });
+})();
+</script>
+</body>
+</html>

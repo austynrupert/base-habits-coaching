@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Macros — Base Habits Coaching</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --page:#f6f5f4; --card:#ffffff; --hairline:#e6e6e6;
+  --ink:#000000; --ink-2:#31302e; --muted:#615d59; --faint:#a39e98;
+  --primary:#0075de; --primary-active:#005bab; --indigo:#213183;
+  --teal:#2a9d99; --orange:#dd5b00; --purple:#391c57; --green:#1aae39;
+  --shadow-1:rgba(0,0,0,0.01) 0 0.175px 1.041px,rgba(0,0,0,0.02) 0 0.8px 2.925px,rgba(0,0,0,0.027) 0 2.025px 7.847px,rgba(0,0,0,0.04) 0 4px 18px;
+  --shadow-2:rgba(0,0,0,0.01) 0 0.175px 1.041px,rgba(0,0,0,0.02) 0 0.8px 2.925px,rgba(0,0,0,0.027) 0 2.025px 7.847px,rgba(0,0,0,0.04) 0 4px 18px,rgba(0,0,0,0.05) 0 23px 52px;
+}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--page);color:var(--ink);font-family:'Inter',system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased}
+p,h1,h2,h3,ul{margin:0}
+ul{padding:0;list-style:none}
+a{color:var(--primary);text-decoration:none}
+a:hover{color:var(--primary-active)}
+.wrap{max-width:720px;margin:0 auto;padding-left:22px;padding-right:22px}
+.head-row{max-width:none;padding-left:max(76px,calc((100% - 720px)/2 + 22px));padding-right:22px;padding-top:12px;padding-bottom:12px;display:flex;align-items:center;gap:14px}
+
+header{position:sticky;top:0;z-index:30;background:#e9edf7;border-bottom:1px solid #dbe1f0}
+#burger{position:absolute;left:22px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;justify-content:center;gap:4px;width:40px;height:40px;padding:0 9px;border:1px solid #dbe1f0;border-radius:8px;background:rgba(255,255,255,0.7);cursor:pointer;transition:background 120ms ease,transform 120ms ease}
+#burger:hover{background:#fff}
+#burger:active{transform:translateY(-50%) scale(0.96)}
+#burger span{display:block;height:2px;border-radius:2px;background:var(--ink-2)}
+.brand{font-size:16px;font-weight:700;letter-spacing:-0.3px;color:var(--ink)}
+.contact-btn{margin-left:auto;display:inline-flex;align-items:center;justify-content:center;min-height:36px;padding:7px 16px;border-radius:9999px;background:var(--primary);color:#fff !important;font-size:14px;font-weight:500;transition:background 120ms ease,transform 120ms ease}
+.contact-btn:active{background:var(--primary-active);transform:scale(0.96)}
+
+#scrim{position:fixed;inset:0;z-index:50;background:rgba(0,0,0,0.32);opacity:0;pointer-events:none;transition:opacity 160ms ease}
+#scrim.open{opacity:1;pointer-events:auto}
+#drawer{position:fixed;top:0;left:0;bottom:0;z-index:60;width:min(320px,86vw);background:var(--card);border-right:1px solid var(--hairline);box-shadow:var(--shadow-2);transform:translateX(-100%);transition:transform 200ms ease;display:flex;flex-direction:column;overflow-y:auto}
+#drawer.open{transform:translateX(0)}
+.drawer-top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 16px 12px}
+#drawer-close{width:32px;height:32px;border-radius:50%;border:none;background:rgba(0,0,0,0.05);color:var(--ink-2);font-size:15px;line-height:1;cursor:pointer;transition:transform 120ms ease}
+#drawer-close:active{transform:scale(0.9)}
+.nav-group{padding:12px 16px 4px}
+.nav-label{display:flex;align-items:center;gap:9px;font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.nav-label .dot{width:7px;height:7px;border-radius:50%;flex:none}
+.nav-list{display:flex;flex-direction:column;gap:2px}
+.nav-item{display:block;padding:9px 10px;border-radius:5px;font-size:15px;font-weight:500;color:var(--ink-2);transition:background 120ms ease}
+.nav-item:hover{background:rgba(0,0,0,0.035);color:var(--ink-2)}
+.nav-item.current{background:rgba(0,117,222,0.08);color:var(--primary)}
+.nav-item.soon{color:var(--faint);cursor:default;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.nav-item.soon:hover{background:none}
+.soon-tag{font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--faint)}
+.drawer-foot{margin-top:auto;border-top:1px solid var(--hairline);padding:14px 16px 18px}
+.drawer-foot a{font-size:15px;font-weight:500}
+
+/* page */
+.title-band{background:linear-gradient(180deg,#dfe5f5 0%,#e9ecf6 46%,var(--page) 100%);padding:38px 0 34px}
+h1{font-size:clamp(32px,8.2vw,46px);font-weight:700;line-height:1.06;letter-spacing:-1.4px;text-wrap:pretty}
+.crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:14px;font-size:13px;font-weight:500;color:var(--muted)}
+.crumbs .sep{color:var(--faint)}
+.bars{display:flex;gap:6px;margin-bottom:20px}
+.bars span{width:26px;height:6px;border-radius:3px}
+
+main{padding-bottom:24px}
+.sections{display:flex;flex-direction:column}
+section.chapter{padding:34px 0}
+section.chapter + section.chapter{border-top:1px solid var(--hairline)}
+.eyebrow{display:flex;align-items:center;gap:9px;font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+.eyebrow .dot{width:7px;height:7px;border-radius:50%;flex:none}
+h2{font-size:clamp(24px,5.6vw,30px);font-weight:700;line-height:1.16;letter-spacing:-0.8px;color:var(--ink);text-wrap:pretty}
+h3{font-size:19px;font-weight:600;line-height:1.3;letter-spacing:-0.4px;color:var(--ink);text-wrap:pretty}
+.lede{font-size:19px;font-weight:500;line-height:1.45;letter-spacing:-0.2px;color:var(--indigo);max-width:26em;text-wrap:pretty}
+.body{font-size:17px;line-height:1.7;color:var(--muted);max-width:34em;text-wrap:pretty}
+.body strong{font-weight:600;color:var(--ink-2)}
+.body .caps{font-weight:600;color:var(--ink-2);letter-spacing:0.02em}
+.stack{display:flex;flex-direction:column;gap:16px;margin-top:4px}
+.sub{display:flex;flex-direction:column;gap:12px;padding:22px 0}
+.sub + .sub{border-top:1px solid var(--hairline)}
+.sub-head{display:flex;align-items:baseline;gap:12px}
+.num{flex:none;font-size:13px;font-weight:700;color:var(--faint);letter-spacing:0.04em;min-width:18px}
+
+ul.list{display:flex;flex-direction:column;gap:10px}
+ul.list li{display:flex;align-items:baseline;gap:12px;font-size:17px;line-height:1.5;color:var(--ink-2);font-weight:500}
+ul.list li::before{content:"";flex:none;width:7px;height:7px;border-radius:50%;background:var(--teal);transform:translateY(-2px)}
+ul.list.buy li::before{background:var(--orange)}
+
+.quote{background:var(--card);border:1px solid var(--hairline);border-radius:12px;padding:22px 24px;font-size:19px;line-height:1.5;font-weight:400;letter-spacing:-0.2px;color:var(--ink-2);text-wrap:pretty}
+.hero{background:var(--indigo);border-radius:16px;padding:32px 28px;box-shadow:var(--shadow-2)}
+.hero p{color:#fff;font-size:clamp(21px,4.9vw,26px);font-weight:600;line-height:1.34;letter-spacing:-0.6px;text-wrap:pretty}
+.hero .rule{display:flex;gap:6px;margin-bottom:18px}
+.hero .rule span{width:24px;height:5px;border-radius:3px}
+
+#contact{border-top:1px solid #1a2668;background:var(--indigo);padding:44px 0 56px;color:#fff}
+#contact h2{color:#fff}
+#contact .body{color:#c3cae8}
+.contact-rows{display:flex;flex-direction:column;gap:12px;margin-top:18px}
+.contact-row{display:flex;align-items:center;gap:14px;padding:16px 18px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.16);border-radius:12px}
+.contact-row .dot{width:9px;height:9px;border-radius:50%;flex:none}
+.contact-row .k{font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#a9b3dd}
+.contact-row .v{font-size:17px;font-weight:500;color:#fff}
+.contact-row .v:hover{color:#dfe5f5}
+
+/* chart + tables */
+.figure{background:var(--card);border:1px solid var(--hairline);border-radius:12px;padding:22px 18px 20px;box-shadow:var(--shadow-1)}
+.fig-title{font-size:17px;font-weight:600;letter-spacing:-0.3px;color:var(--ink);line-height:1.35;text-wrap:pretty}
+.axis-label{margin-top:14px;font-size:12px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--faint)}
+.plot{display:flex;gap:14px;margin-top:10px}
+.yaxis{flex:none;width:34px;height:280px;position:relative}
+.yaxis span{position:absolute;right:0;transform:translateY(-50%);font-size:11px;font-weight:500;color:var(--faint)}
+.bars-area{flex:1;position:relative;height:280px;border-bottom:1px solid var(--hairline)}
+.grid{position:absolute;inset:0}
+.grid i{position:absolute;left:0;right:0;height:1px;background:var(--hairline);opacity:0.7}
+.bar-row{position:absolute;inset:0;display:flex;align-items:flex-end;justify-content:space-around;gap:16px}
+.bar-col{flex:1;max-width:104px;display:flex;flex-direction:column;align-items:center}
+.bar-total{font-size:13px;font-weight:700;color:var(--ink);margin-bottom:6px}
+.bar{width:100%;display:flex;flex-direction:column-reverse;border-radius:4px;overflow:hidden}
+.bar b{display:block;font-size:0}
+.xaxis{display:flex;justify-content:space-around;gap:16px;margin-left:48px;margin-top:8px}
+.xaxis span{flex:1;max-width:104px;text-align:center;font-size:13px;font-weight:500;color:var(--ink-2)}
+.legend{display:flex;flex-wrap:wrap;gap:10px 18px;margin-top:16px;padding-top:14px;border-top:1px solid var(--hairline)}
+.legend div{display:flex;align-items:center;gap:7px;font-size:13px;font-weight:500;color:var(--muted)}
+.legend i{width:10px;height:10px;border-radius:3px;flex:none}
+.caption{margin-top:14px;font-size:14px;line-height:1.6;color:var(--muted);text-wrap:pretty}
+
+.table-wrap{background:var(--card);border:1px solid var(--hairline);border-radius:12px;overflow-x:auto;-webkit-overflow-scrolling:touch}
+table{width:100%;border-collapse:collapse}
+th{text-align:left;padding:11px 14px;font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);background:#fbfaf9;border-bottom:1px solid var(--hairline)}
+td{padding:12px 14px;font-size:15px;line-height:1.45;color:var(--muted);border-bottom:1px solid var(--hairline);vertical-align:top}
+tr:last-child td{border-bottom:none}
+td:first-child{font-weight:600;color:var(--ink-2)}
+@media(min-width:600px){td:first-child{white-space:nowrap}}
+@media(max-width:599px){th,td{padding-left:11px;padding-right:11px}td,th{font-size:14px}}
+td:last-child,th:last-child{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+td:last-child{font-weight:600;color:var(--ink-2)}
+.calc td{font-size:15px;font-family:'Inter',monospace;font-variant-numeric:tabular-nums}
+.calc td:first-child{white-space:normal;font-weight:500;color:var(--muted)}
+.calc td:last-child{white-space:normal;text-align:right}
+.formulas{display:flex;flex-direction:column;gap:10px}
+.formula{background:var(--card);border:1px solid var(--hairline);border-radius:8px;padding:13px 15px;font-size:15px;line-height:1.5;color:var(--ink-2);font-variant-numeric:tabular-nums;text-wrap:pretty}
+.formula b{font-weight:600}
+
+@media (max-width:600px){
+  #burger{left:12px;width:36px;height:36px;padding:0 8px}
+  .head-row{padding-left:56px;padding-right:12px;gap:10px}
+  .brand{font-size:15px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .contact-btn{flex:none;padding:7px 13px;font-size:13px}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap head-row" style="position:relative">
+    <button type="button" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="drawer">
+      <span></span><span></span><span></span>
+    </button>
+    <span class="brand">Base Habits Coaching</span>
+    <a class="contact-btn" href="#contact">Contact me</a>
+  </div>
+</header>
+
+<div id="scrim"></div>
+
+<nav id="drawer" aria-label="Client pages" aria-hidden="true">
+  <div class="drawer-top">
+    <span style="font-size:15px;font-weight:600;color:var(--ink)">Client pages</span>
+    <button type="button" id="drawer-close" aria-label="Close menu">&#10005;</button>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-list">
+      <a class="nav-item" href="../../index.html">&lsaquo; Client home</a>
+    </div>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-label"><span class="dot" style="background:var(--teal)"></span>Phase 1</div>
+    <div class="nav-list">
+      <a class="nav-item" href="../base-habits/index.html">Base Habits</a>
+      <a class="nav-item" href="../two-week-rule/index.html">Two Week Rule</a>
+      <a class="nav-item" href="../debunking/index.html">Debunking</a>
+      <a class="nav-item" href="../calories/index.html">Calories</a>
+      <a class="nav-item current" href="index.html" aria-current="page">Macros</a>
+      <a class="nav-item" href="../protein/index.html" style="margin-left:14px">Protein</a>
+      <a class="nav-item" href="../carbs/index.html" style="margin-left:14px">Carbs</a>
+      <a class="nav-item" href="../fats/index.html" style="margin-left:14px">Fats</a>
+    </div>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-label"><span class="dot" style="background:var(--orange)"></span>Phase 2</div>
+    <div class="nav-list">
+      <span class="nav-item soon" aria-disabled="true">Placeholder page one<span class="soon-tag">Coming soon</span></span>
+      <span class="nav-item soon" aria-disabled="true">Placeholder page two<span class="soon-tag">Coming soon</span></span>
+    </div>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-label"><span class="dot" style="background:var(--purple)"></span>Phase 3</div>
+    <div class="nav-list">
+      <span class="nav-item soon" aria-disabled="true">Placeholder page one<span class="soon-tag">Coming soon</span></span>
+      <span class="nav-item soon" aria-disabled="true">Placeholder page two<span class="soon-tag">Coming soon</span></span>
+    </div>
+  </div>
+
+  <div class="drawer-foot">
+    <a href="../../../base-habits-coaching.html">Back to basehabitscoaching.com</a>
+  </div>
+</nav>
+
+<div class="title-band">
+  <div class="wrap">
+    <div class="bars"><span style="background:var(--teal)"></span><span style="background:var(--orange)"></span><span style="background:var(--purple)"></span><span style="background:var(--green)"></span></div>
+    <h1>Macros</h1>
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <a href="../../index.html">Client Home</a>
+      <span class="sep">&rsaquo;</span>
+      <a href="../base-habits/index.html">Base Habits</a>
+      <span class="sep">&rsaquo;</span>
+      <a href="../two-week-rule/index.html">Two Week Rule</a>
+      <span class="sep">&rsaquo;</span>
+      <a href="../debunking/index.html">Debunking</a>
+      <span class="sep">&rsaquo;</span>
+      <a href="../calories/index.html">Calories</a>
+      <span class="sep">&rsaquo;</span>
+      <span>Macros</span>
+    </nav>
+  </div>
+</div>
+
+<main>
+  <div class="wrap sections">
+
+    <section class="chapter">
+      <div class="eyebrow"><span class="dot" style="background:var(--teal)"></span>Opening</div>
+      <h2>What Macros Are</h2>
+      <div class="stack">
+        <p class="body">Macros is short for macronutrients. All food has a certain amount of each macro. The four macros are protein, carbs, fat, and alcohol.</p>
+        <p class="body">Each macro has a certain amount of calories assigned to it. Calories tell you how much energy you are getting from your food. Macros tell you what that energy is coming from and what that energy will be doing for your body.</p>
+        <p class="body">Two people can eat the exact same number of calories in a day and end up in very different places. This is why.</p>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <div class="eyebrow"><span class="dot" style="background:var(--orange)"></span>Section 1</div>
+      <h2>Calories Per Gram</h2>
+      <div class="stack">
+        <p class="lede">Not all macros have the same calorie count per gram.</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Macro</th><th>Calories per gram</th></tr></thead>
+            <tbody>
+              <tr><td>Protein</td><td>4</td></tr>
+              <tr><td>Carbs</td><td>4</td></tr>
+              <tr><td>Alcohol</td><td>7</td></tr>
+              <tr><td>Fat</td><td>9</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="body">Fat has more than double the calories of protein and carbs for the same weight of food. Alcohol is closer to fat than it is to carbs, which catches most people off guard.</p>
+        <p class="body">Neither of those is a reason to be afraid of a food. It is a reason to know what you are eating. Two tablespoons of oil in the pan and a full chicken breast have about the same calories, and only one of them shows up on your plate.</p>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <div class="eyebrow"><span class="dot" style="background:var(--purple)"></span>Section 2</div>
+      <h2>Where to Put Your Attention</h2>
+      <div class="stack">
+        <p class="lede">Protein and carbs are worth real attention. Fat and alcohol only need a number you stay under.</p>
+      </div>
+
+      <div class="sub">
+        <div class="sub-head"><span class="num">01</span><h3>Protein</h3></div>
+        <p class="body">You set a target and you meet it every day. <span class="caps">HIT YOUR PROTEIN.</span> Everything else gets easier once that is handled.</p>
+      </div>
+
+      <div class="sub">
+        <div class="sub-head"><span class="num">02</span><h3>Carbs</h3></div>
+        <p class="body">Your working energy. They fuel your steps, your training, and your brain. Most people either fear them or eat far too many of them. Carbs are the best lever to pull to improve training quality, especially when timed around workouts.</p>
+      </div>
+
+      <div class="sub">
+        <div class="sub-head"><span class="num">03</span><h3>Fat</h3></div>
+        <p class="body">Necessary, and you are not cutting it out. You are keeping it modest, because it has more calories per gram than anything else you eat. You just need enough to keep your hormones and vitamin absorption working.</p>
+      </div>
+
+      <div class="sub">
+        <div class="sub-head"><span class="num">04</span><h3>Alcohol</h3></div>
+        <p class="body">Empty calories. Seven calories per gram, no protein, no fiber, nothing that helps you feel full. It uses up your calories and gives you nothing in return. <strong>If you are serious about losing fat, cut it out entirely.</strong> Your body treats alcohol as a priority and pushes everything else to the back of the line, so fat burning slows down until the alcohol is cleared.</p>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <div class="eyebrow"><span class="dot" style="background:var(--green)"></span>Section 3</div>
+      <h2>Protein</h2>
+      <div class="stack">
+        <p class="lede">Protein is the macro you hit on purpose every day.</p>
+      </div>
+
+      <div class="sub">
+        <div class="sub-head"><span class="num">01</span><h3>Muscle repair and growth</h3></div>
+        <p class="body">Training breaks muscle down. Protein is what your body uses to rebuild it. In a deficit this matters even more, because the goal is to lose fat while keeping the muscle you already have.</p>
+      </div>
+
+      <div class="sub">
+        <div class="sub-head"><span class="num">02</span><h3>Fullness</h3></div>
+        <p class="body">Protein keeps you full longer than anything else you can eat. When you have fewer calories to work with, getting more out of every one of them is the difference between a deficit you can hold and one you quit. Your body also works harder to break protein down, which burns more calories through digestion.</p>
+      </div>
+
+      <div class="sub">
+        <div class="sub-head"><span class="num">03</span><h3>Bone density</h3></div>
+        <p class="body">Protein and resistance training are both linked to better bone density over time. This matters for everyone and it matters more for women, where bone density loss is a known long term concern.</p>
+      </div>
+
+      <div class="stack" style="margin-top:18px">
+        <p class="body">Most beginner advice only talks about muscle repair. Fullness and bone density are why protein stays high whether you are cutting, maintaining, or building.</p>
+        <div class="quote">Your gram target gets set for you. Do not guess at it.</div>
+        <p class="body"><a href="../protein/index.html">Protein</a></p>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <div class="eyebrow"><span class="dot" style="background:var(--teal)"></span>Section 4</div>
+      <h2>Carbs</h2>
+      <div class="stack">
+        <p class="lede">Carbs are the energy you actually run on day to day.</p>
+        <p class="body">Your body prefers carbs for fuel. Steps, training, work, thinking. Cut them too low and you feel drained, usually before the scale ever reflects anything good.</p>
+        <p class="body">Not all carbs behave the same. Some digest fast and give you quick energy that fades. Some digest slow, keep you steady, and keep you full much longer. That difference is mostly fiber, and fiber is the reason a plate of potatoes and a candy bar can have the same calories and feel completely different.</p>
+        <p class="body">Carbs are also where timing starts to matter, specifically around training. Worth understanding, not worth worrying about until the basics are handled.</p>
+        <p class="body"><a href="../carbs/index.html">Carbs</a></p>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <div class="eyebrow"><span class="dot" style="background:var(--orange)"></span>Section 5</div>
+      <h2>Fats</h2>
+      <div class="stack">
+        <p class="lede">You need fat. You are keeping it modest because it has the most calories per gram of any macro.</p>
+        <p class="body">Fat is not optional. Your body uses it to build hormones, absorb vitamins A, D, E, and K, and keep your cells working. Cut it too low and you get low energy, worse recovery, worse sleep, and for women, problems with your cycle.</p>
+        <div class="quote">Fat is not bad for you. It is just dense. The only reason we keep it low is the calorie count, not because there is anything wrong with it.</div>
+        <p class="body">At nine calories per gram it is the fastest way to blow past your target without noticing. It hides in cooking oil, dressings, sauces, and cheese. Set your minimum and stay close to it. Every calorie you put toward fat is a calorie you cannot put toward protein or carbs.</p>
+        <p class="body"><a href="../fats/index.html">Fats</a></p>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <div class="eyebrow"><span class="dot" style="background:var(--purple)"></span>Section 6</div>
+      <h2>Alcohol</h2>
+      <div class="stack">
+        <p class="lede">Alcohol gives you nothing back.</p>
+        <p class="body">Alcohol is not technically a macronutrient. Your body has no use for it and cannot build anything out of it. It gets counted here because it has calories, seven per gram, and those calories still land in your day.</p>
+        <p class="body">None of it does anything for you. No muscle repair, no fuel worth using, no fullness.</p>
+        <p class="body">The drinks are only part of it. Alcohol makes it much harder to hold your food choices for the rest of the night, and it wrecks your sleep, which leaves you hungrier and more tired the next day.</p>
+        <p class="body">You do not have to quit drinking forever. You do need to know that a few drinks can wipe out most of a day's deficit. If you drink anyway, do it knowing what it costs you.</p>
+        <p class="body"><a href="../alcohol/index.html">Alcohol</a></p>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <div class="eyebrow"><span class="dot" style="background:var(--green)"></span>Section 7</div>
+      <h2>How Your Numbers Actually Work</h2>
+      <div class="stack">
+        <p class="lede">Protein and fat are locked. Carbs are what we change.</p>
+        <p class="body">Your protein and fat targets get set once and they stay put. Carbs are the number we move when your calories need to go up or down.</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Macro</th><th>How it is set</th><th>Does it change?</th></tr></thead>
+            <tbody>
+              <tr><td>Protein</td><td>Based on your body weight, high enough to hold onto muscle</td><td>No</td></tr>
+              <tr><td>Fat</td><td>Set at a minimum your body needs to keep hormones and vitamin absorption working</td><td>No</td></tr>
+              <tr><td>Carbs</td><td>Whatever calories are left after protein and fat are covered</td><td>Yes, this is the one we adjust</td></tr>
+              <tr><td>Alcohol</td><td>Not part of your targets</td><td>Stay away from it</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="body">When we change your calories at a check-in, we are almost always changing your carbs or your steps. Protein stays put because you need it to hold onto muscle. Fat stays put because you need a minimum to keep your hormones and vitamin absorption working. Carbs are the only one with room to move.</p>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <div class="eyebrow"><span class="dot" style="background:var(--teal)"></span>Closing</div>
+      <h2>What to Do With This</h2>
+      <div class="stack">
+        <p class="body">Hit your protein target every day. Fill most of the rest with carbs. Keep fat modest and alcohol occasional.</p>
+        <p class="body">The ratio matters less than the total. No macro split with a name on it beats hitting your protein and staying under your calorie target. What works is doing the same thing every day, including the days you do not feel like it. You will thank yourself for having meals prepped on those days.</p>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<section id="contact">
+  <div class="wrap">
+    <h2 style="letter-spacing:-0.7px">Contact me</h2>
+    <p class="body" style="margin-top:10px">Two ways to reach me. Questions about a lesson are welcome any time.</p>
+    <div class="contact-rows">
+      <div class="contact-row">
+        <span class="dot" style="background:#5ecfc9"></span>
+        <div style="display:flex;flex-direction:column;gap:2px">
+          <span class="k">Call or text</span>
+          <a class="v" href="tel:+15176189607">517-618-9607</a>
+        </div>
+      </div>
+      <div class="contact-row">
+        <span class="dot" style="background:#ff9a4d"></span>
+        <div style="display:flex;flex-direction:column;gap:2px">
+          <span class="k">Instagram</span>
+          <a class="v" href="https://instagram.com/base_habits_coaching" target="_blank" rel="noopener">@base_habits_coaching</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+(function(){
+  var burger=document.getElementById('burger'),
+      drawer=document.getElementById('drawer'),
+      scrim=document.getElementById('scrim'),
+      close=document.getElementById('drawer-close');
+  function open(){
+    drawer.classList.add('open');scrim.classList.add('open');
+    drawer.setAttribute('aria-hidden','false');burger.setAttribute('aria-expanded','true');
+    document.body.style.overflow='hidden';
+    close.focus();
+  }
+  function shut(){
+    drawer.classList.remove('open');scrim.classList.remove('open');
+    drawer.setAttribute('aria-hidden','true');burger.setAttribute('aria-expanded','false');
+    document.body.style.overflow='';
+    burger.focus();
+  }
+  burger.addEventListener('click',open);
+  close.addEventListener('click',shut);
+  scrim.addEventListener('click',shut);
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape'&&drawer.classList.contains('open'))shut();
+  });
+})();
+</script>
+</body>
+</html>

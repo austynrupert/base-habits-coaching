@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Base Habits — Base Habits Coaching</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --page:#f6f5f4; --card:#ffffff; --hairline:#e6e6e6;
+  --ink:#000000; --ink-2:#31302e; --muted:#615d59; --faint:#a39e98;
+  --primary:#0075de; --primary-active:#005bab; --indigo:#213183;
+  --teal:#2a9d99; --orange:#dd5b00; --purple:#391c57; --green:#1aae39;
+  --shadow-1:rgba(0,0,0,0.01) 0 0.175px 1.041px,rgba(0,0,0,0.02) 0 0.8px 2.925px,rgba(0,0,0,0.027) 0 2.025px 7.847px,rgba(0,0,0,0.04) 0 4px 18px;
+  --shadow-2:rgba(0,0,0,0.01) 0 0.175px 1.041px,rgba(0,0,0,0.02) 0 0.8px 2.925px,rgba(0,0,0,0.027) 0 2.025px 7.847px,rgba(0,0,0,0.04) 0 4px 18px,rgba(0,0,0,0.05) 0 23px 52px;
+}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--page);color:var(--ink);font-family:'Inter',system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased}
+p,h1,h2,h3,ul{margin:0}
+ul{padding:0;list-style:none}
+a{color:var(--primary);text-decoration:none}
+a:hover{color:var(--primary-active)}
+.wrap{max-width:720px;margin:0 auto;padding-left:22px;padding-right:22px}
+.head-row{max-width:none;padding-left:max(76px,calc((100% - 720px)/2 + 22px));padding-right:22px;padding-top:12px;padding-bottom:12px;display:flex;align-items:center;gap:14px}
+
+header{position:sticky;top:0;z-index:30;background:#e9edf7;border-bottom:1px solid #dbe1f0}
+#burger{position:absolute;left:22px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;justify-content:center;gap:4px;width:40px;height:40px;padding:0 9px;border:1px solid #dbe1f0;border-radius:8px;background:rgba(255,255,255,0.7);cursor:pointer;transition:background 120ms ease,transform 120ms ease}
+#burger:hover{background:#fff}
+#burger:active{transform:translateY(-50%) scale(0.96)}
+#burger span{display:block;height:2px;border-radius:2px;background:var(--ink-2)}
+.brand{font-size:16px;font-weight:700;letter-spacing:-0.3px;color:var(--ink)}
+.contact-btn{margin-left:auto;display:inline-flex;align-items:center;justify-content:center;min-height:36px;padding:7px 16px;border-radius:9999px;background:var(--primary);color:#fff !important;font-size:14px;font-weight:500;transition:background 120ms ease,transform 120ms ease}
+.contact-btn:active{background:var(--primary-active);transform:scale(0.96)}
+
+#scrim{position:fixed;inset:0;z-index:50;background:rgba(0,0,0,0.32);opacity:0;pointer-events:none;transition:opacity 160ms ease}
+#scrim.open{opacity:1;pointer-events:auto}
+#drawer{position:fixed;top:0;left:0;bottom:0;z-index:60;width:min(320px,86vw);background:var(--card);border-right:1px solid var(--hairline);box-shadow:var(--shadow-2);transform:translateX(-100%);transition:transform 200ms ease;display:flex;flex-direction:column;overflow-y:auto}
+#drawer.open{transform:translateX(0)}
+.drawer-top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 16px 12px}
+#drawer-close{width:32px;height:32px;border-radius:50%;border:none;background:rgba(0,0,0,0.05);color:var(--ink-2);font-size:15px;line-height:1;cursor:pointer;transition:transform 120ms ease}
+#drawer-close:active{transform:scale(0.9)}
+.nav-group{padding:12px 16px 4px}
+.nav-label{display:flex;align-items:center;gap:9px;font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.nav-label .dot{width:7px;height:7px;border-radius:50%;flex:none}
+.nav-list{display:flex;flex-direction:column;gap:2px}
+.nav-item{display:block;padding:9px 10px;border-radius:5px;font-size:15px;font-weight:500;color:var(--ink-2);transition:background 120ms ease}
+.nav-item:hover{background:rgba(0,0,0,0.035);color:var(--ink-2)}
+.nav-item.current{background:rgba(0,117,222,0.08);color:var(--primary)}
+.nav-item.soon{color:var(--faint);cursor:default;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.nav-item.soon:hover{background:none}
+.soon-tag{font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--faint)}
+.drawer-foot{margin-top:auto;border-top:1px solid var(--hairline);padding:14px 16px 18px}
+.drawer-foot a{font-size:15px;font-weight:500}
+
+/* page */
+.title-band{background:linear-gradient(180deg,#dfe5f5 0%,#e9ecf6 46%,var(--page) 100%);padding:38px 0 34px}
+h1{font-size:clamp(32px,8.2vw,46px);font-weight:700;line-height:1.06;letter-spacing:-1.4px;text-wrap:pretty}
+.crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:14px;font-size:13px;font-weight:500;color:var(--muted)}
+.crumbs .sep{color:var(--faint)}
+.bars{display:flex;gap:6px;margin-bottom:20px}
+.bars span{width:26px;height:6px;border-radius:3px}
+
+main{padding-bottom:24px}
+.sections{display:flex;flex-direction:column}
+section.chapter{padding:34px 0}
+section.chapter + section.chapter{border-top:1px solid var(--hairline)}
+.eyebrow{display:flex;align-items:center;gap:9px;font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+.eyebrow .dot{width:7px;height:7px;border-radius:50%;flex:none}
+h2{font-size:clamp(24px,5.6vw,30px);font-weight:700;line-height:1.16;letter-spacing:-0.8px;color:var(--ink);text-wrap:pretty}
+h3{font-size:19px;font-weight:600;line-height:1.3;letter-spacing:-0.4px;color:var(--ink);text-wrap:pretty}
+.lede{font-size:19px;font-weight:500;line-height:1.45;letter-spacing:-0.2px;color:var(--indigo);max-width:26em;text-wrap:pretty}
+.body{font-size:17px;line-height:1.7;color:var(--muted);max-width:34em;text-wrap:pretty}
+.body strong{font-weight:600;color:var(--ink-2)}
+.body .caps{font-weight:600;color:var(--ink-2);letter-spacing:0.02em}
+.stack{display:flex;flex-direction:column;gap:16px;margin-top:4px}
+.sub{display:flex;flex-direction:column;gap:12px;padding:22px 0}
+.sub + .sub{border-top:1px solid var(--hairline)}
+.sub-head{display:flex;align-items:baseline;gap:12px}
+.num{flex:none;font-size:13px;font-weight:700;color:var(--faint);letter-spacing:0.04em;min-width:18px}
+
+ul.list{display:flex;flex-direction:column;gap:10px}
+ul.list li{display:flex;align-items:baseline;gap:12px;font-size:17px;line-height:1.5;color:var(--ink-2);font-weight:500}
+ul.list li::before{content:"";flex:none;width:7px;height:7px;border-radius:50%;background:var(--teal);transform:translateY(-2px)}
+ul.list.buy li::before{background:var(--orange)}
+
+.quote{background:var(--card);border:1px solid var(--hairline);border-radius:12px;padding:22px 24px;font-size:19px;line-height:1.5;font-weight:400;letter-spacing:-0.2px;color:var(--ink-2);text-wrap:pretty}
+.hero{background:var(--indigo);border-radius:16px;padding:32px 28px;box-shadow:var(--shadow-2)}
+.hero p{color:#fff;font-size:clamp(21px,4.9vw,26px);font-weight:600;line-height:1.34;letter-spacing:-0.6px;text-wrap:pretty}
+.hero .rule{display:flex;gap:6px;margin-bottom:18px}
+.hero .rule span{width:24px;height:5px;border-radius:3px}
+
+#contact{border-top:1px solid #1a2668;background:var(--indigo);padding:44px 0 56px;color:#fff}
+#contact h2{color:#fff}
+#contact .body{color:#c3cae8}
+.contact-rows{display:flex;flex-direction:column;gap:12px;margin-top:18px}
+.contact-row{display:flex;align-items:center;gap:14px;padding:16px 18px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.16);border-radius:12px}
+.contact-row .dot{width:9px;height:9px;border-radius:50%;flex:none}
+.contact-row .k{font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#a9b3dd}
+.contact-row .v{font-size:17px;font-weight:500;color:#fff}
+.contact-row .v:hover{color:#dfe5f5}
+
+@media (max-width:600px){
+  #burger{left:12px;width:36px;height:36px;padding:0 8px}
+  .head-row{padding-left:56px;padding-right:12px;gap:10px}
+  .brand{font-size:15px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .contact-btn{flex:none;padding:7px 13px;font-size:13px}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap head-row" style="position:relative">
+    <button type="button" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="drawer">
+      <span></span><span></span><span></span>
+    </button>
+    <span class="brand">Base Habits Coaching</span>
+    <a class="contact-btn" href="#contact">Contact me</a>
+  </div>
+</header>
+
+<div id="scrim"></div>
+
+<nav id="drawer" aria-label="Client pages" aria-hidden="true">
+  <div class="drawer-top">
+    <span style="font-size:15px;font-weight:600;color:var(--ink)">Client pages</span>
+    <button type="button" id="drawer-close" aria-label="Close menu">&#10005;</button>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-list">
+      <a class="nav-item" href="../../index.html">&lsaquo; Client home</a>
+    </div>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-label"><span class="dot" style="background:var(--teal)"></span>Phase 1</div>
+    <div class="nav-list">
+      <a class="nav-item current" href="index.html" aria-current="page">Base Habits</a>
+      <a class="nav-item" href="../two-week-rule/index.html">Two Week Rule</a>
+      <a class="nav-item" href="../debunking/index.html">Debunking</a>
+      <a class="nav-item" href="../calories/index.html">Calories</a>
+      <a class="nav-item" href="../macros/index.html">Macros</a>
+      <a class="nav-item" href="../protein/index.html" style="margin-left:14px">Protein</a>
+      <a class="nav-item" href="../carbs/index.html" style="margin-left:14px">Carbs</a>
+      <a class="nav-item" href="../fats/index.html" style="margin-left:14px">Fats</a>
+    </div>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-label"><span class="dot" style="background:var(--orange)"></span>Phase 2</div>
+    <div class="nav-list">
+      <span class="nav-item soon" aria-disabled="true">Placeholder page one<span class="soon-tag">Coming soon</span></span>
+      <span class="nav-item soon" aria-disabled="true">Placeholder page two<span class="soon-tag">Coming soon</span></span>
+    </div>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-label"><span class="dot" style="background:var(--purple)"></span>Phase 3</div>
+    <div class="nav-list">
+      <span class="nav-item soon" aria-disabled="true">Placeholder page one<span class="soon-tag">Coming soon</span></span>
+      <span class="nav-item soon" aria-disabled="true">Placeholder page two<span class="soon-tag">Coming soon</span></span>
+    </div>
+  </div>
+
+  <div class="drawer-foot">
+    <a href="../../../base-habits-coaching.html">Back to basehabitscoaching.com</a>
+  </div>
+</nav>
+
+<div class="title-band">
+  <div class="wrap">
+    <div class="bars"><span style="background:var(--teal)"></span><span style="background:var(--orange)"></span><span style="background:var(--purple)"></span><span style="background:var(--green)"></span></div>
+    <h1>Base Habits</h1>
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <a href="../../index.html">Client Home</a>
+      <span class="sep">&rsaquo;</span>
+      <span>Base Habits</span>
+    </nav>
+  </div>
+</div>
+
+<main>
+  <div class="wrap sections">
+
+    <section class="chapter">
+      <div class="eyebrow"><span class="dot" style="background:var(--teal)"></span>Opening</div>
+      <div class="stack">
+        <p class="body">I find it most beneficial to start with what I call the Base Habits and the Two Week Rule. Together they make up Phase One of my plan.</p>
+        <p class="body">The Base Habits are three things you do every day. They stay part of your routine for your whole weight loss journey. The Two Week Rule is your first two weeks, where you do those three things and nothing else. No gym yet. <a href="../two-week-rule/index.html">Two Week Rule</a></p>
+        <p class="body">These habits make sure you see progress before you start training. They also mean that if you can't get to the gym, you are still on the path to weight loss.</p>
+        <p class="body">Three things, every day:</p>
+        <ul class="list">
+          <li>Weigh yourself</li>
+          <li>Log everything you eat</li>
+          <li>Walk 10,000 steps</li>
+        </ul>
+        <div class="quote">Consistency is key.</div>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <div class="eyebrow"><span class="dot" style="background:var(--teal)"></span>Section 1</div>
+      <h2>Why We Start Here</h2>
+      <div class="stack">
+        <p class="lede">You can't outwork a bad diet.</p>
+        <p class="body">An hour of hard training burns a few hundred calories. Ninety seconds of eating puts them back. 3,500 calories = 1 pound of fat.</p>
+        <div class="hero">
+          <div class="rule"><span style="background:#5ecfc9"></span><span style="background:#ff9a4d"></span><span style="background:#8f7bd6"></span></div>
+          <p>The gym is one hour. What you do with the other twenty-three is what actually changes your body: what you eat, and how much you move.</p>
+        </div>
+        <p class="body">The reason steps matter so much is because ten thousand a day burns more than the workout does, it doesn't wreck you, and it doesn't leave you starving afterward. It just adds up, every day, whether you notice or not.</p>
+        <p class="body">So we start with <strong>food</strong> and <strong>steps</strong>. We need to see the scale start to move before adding the gym. The Base Habits are where the bulk of the work is.</p>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <div class="eyebrow"><span class="dot" style="background:var(--orange)"></span>Section 2</div>
+      <h2>The Three Habits</h2>
+
+      <div class="sub">
+        <div class="sub-head"><span class="num">01</span><h3>Weigh yourself every morning</h3></div>
+        <p class="body">Same time, after using the bathroom, before you eat or drink anything. Record it in the spreadsheet I gave you at our kickoff call.</p>
+        <p class="body">Your weight will go up some days. That's normal and it doesn't mean anything on its own. What we care about is the weekly average, not any single number. <a href="../weight/index.html">Weight</a></p>
+      </div>
+
+      <div class="sub">
+        <div class="sub-head"><span class="num">02</span><h3>Hit your calorie target</h3></div>
+        <p class="body">You already have your number from our kickoff call. It's based on your height, weight, age, and activity level, and it puts you in a light deficit, about 300 to 500 calories under your maintenance.</p>
+        <p class="body">Light on purpose. When we add the gym in a couple weeks, the deficit grows on its own without you eating less. I'll explain this further on the Calories page and during our first meeting. <a href="../calories/index.html">Calories</a></p>
+      </div>
+
+      <div class="sub">
+        <div class="sub-head"><span class="num">03</span><h3>Walk 10,000 steps</h3></div>
+        <p class="body">Every day. This is your baseline goal. You can go over, but do your best to not go below 10,000 steps in a day. Do not get in the mindset of "I will make up those missed steps tomorrow." This creates inconsistency.</p>
+        <p class="body">Ten minutes of walking is roughly 1,000 steps. Break it up however you want. Walk at lunch, park further away, laps around the house at 9pm if that's what it takes. It all counts the same.</p>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <div class="eyebrow"><span class="dot" style="background:var(--purple)"></span>Section 3</div>
+      <h2>Diets With a Name Are Marketing</h2>
+      <div class="stack">
+        <p class="body">Keto, paleo, carnivore, intermittent fasting, whatever's next. These diets work by creating restrictions. They tell you <span class="caps">WHAT</span> to eat and what <span class="caps">NOT</span> to eat, which usually causes people to eat less than they were before. Eating fewer calories than you burn is called a calorie deficit, and that's the mechanism behind weight loss.</p>
+        <p class="body">Where these diets fall short is that they never tell you <span class="caps">HOW MUCH</span> to eat. That number is different for everyone, and it depends on your body and your activity, not on a set of food rules.</p>
+        <p class="body">The same goes for protein, carbs, and fat. You need a certain amount of each, and no diet name will tell you whether you're getting it.</p>
+        <p class="body">You don't need a diet with a name. You need to know how much you're eating and what it does to your weight over time. That's what we're building.</p>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <div class="eyebrow"><span class="dot" style="background:var(--green)"></span>Section 4</div>
+      <h2>What You Need to Buy</h2>
+      <div class="stack">
+        <p class="lede">There are only five items you need to get started.</p>
+        <ul class="list buy">
+          <li>Digital food scale</li>
+          <li>Bathroom scale</li>
+          <li>Step tracker</li>
+          <li>Calorie tracking app</li>
+          <li>Tracking spreadsheet</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <div class="eyebrow"><span class="dot" style="background:var(--teal)"></span>Section 5</div>
+      <h2>What Day One Actually Looks Like</h2>
+      <div class="stack">
+        <p class="lede">The moment you decide to start, you go to the grocery store.</p>
+        <p class="body">Build the list around what fits your targets. Chicken, rice, potatoes, eggs, lean beef, vegetables, fruit. Boring is fine. Boring is repeatable. Consistency is what makes tracking trends easier.</p>
+        <p class="body">Don't buy junk food. Don't think "I will just have a little bit and track it." Just take the temptations out of your house as much as possible. The best decision you make all week is the one you make in the store, when you're not hungry and standing in your kitchen at 9pm.</p>
+        <p class="body">Prep and stock the fridge. Every prepped meal is a decision you don't have to make later. Make the right choice the easy choice.</p>
+        <p class="body">Supplements: mostly no. A few are worth it. Most are not. Don't spend money here until we talk. <a href="../supplements/index.html">Supplements</a></p>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <div class="eyebrow"><span class="dot" style="background:var(--orange)"></span>Section 6</div>
+      <h2>You Are Not Going to Do This Perfectly</h2>
+      <div class="stack">
+        <p class="lede">The two weeks are for building the habits, not executing them flawlessly from day one.</p>
+        <p class="body">You'll weigh peanut butter and realize your spoonful was two hundred calories. You'll find out the chicken breast you called eight ounces was twelve.</p>
+        <p class="body">That's the point. None of that is failure, it's you finding out what you've actually been eating this whole time. You can't fix a number you've never seen.</p>
+        <div class="quote">Week two should be better than week one. We are building consistency, not perfection.</div>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <div class="eyebrow"><span class="dot" style="background:var(--purple)"></span>Section 7</div>
+      <h2>Saying No to Food</h2>
+      <div class="stack">
+        <p class="lede">At some point in these two weeks, someone will offer you something that doesn't fit your new diet plan.</p>
+        <p class="body">You can say no. You can also bring your own food to a family dinner. People will comment on it. It's fine. To accomplish the goal of weight loss, you need to get comfortable being uncomfortable. And if you space out your meals well enough and eat filling foods that are not calorie dense, you will not be that uncomfortable or hungry.</p>
+        <p class="body">You might just need to start saying no to things you used to say yes to.</p>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <div class="eyebrow"><span class="dot" style="background:var(--green)"></span>Section 8</div>
+      <h2>What the Gym Is For (Later)</h2>
+      <div class="stack">
+        <p class="lede">You lift to keep the muscle you already have while you lose fat.</p>
+        <p class="body">You don't need to kill yourself in the gym, and you don't need to do endless cardio. The only reason to do cardio at the gym is if it's an easy way to get your steps in.</p>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <div class="eyebrow"><span class="dot" style="background:var(--teal)"></span>Section 9</div>
+      <h2>What Happens After Two Weeks</h2>
+      <div class="stack">
+        <p class="body">We look at your data together: average weight change, average calories, step consistency. Then we adjust your numbers based on what your data shows.</p>
+        <p class="body">I'll send you the training material a few days before week two ends, so you have it ready to go.</p>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <div class="eyebrow"><span class="dot" style="background:var(--orange)"></span>Closing</div>
+      <div class="stack">
+        <p class="body">The Two Week Rule page picks up from here. It covers your first two weeks in detail: what to expect as you go, where your calorie number comes from, and how the check-in works once week two ends. <a href="../two-week-rule/index.html">Two Week Rule</a></p>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<section id="contact">
+  <div class="wrap">
+    <h2 style="letter-spacing:-0.7px">Contact me</h2>
+    <p class="body" style="margin-top:10px">Two ways to reach me. Questions about a lesson are welcome any time.</p>
+    <div class="contact-rows">
+      <div class="contact-row">
+        <span class="dot" style="background:#5ecfc9"></span>
+        <div style="display:flex;flex-direction:column;gap:2px">
+          <span class="k">Call or text</span>
+          <a class="v" href="tel:+15176189607">517-618-9607</a>
+        </div>
+      </div>
+      <div class="contact-row">
+        <span class="dot" style="background:#ff9a4d"></span>
+        <div style="display:flex;flex-direction:column;gap:2px">
+          <span class="k">Instagram</span>
+          <a class="v" href="https://instagram.com/base_habits_coaching" target="_blank" rel="noopener">@base_habits_coaching</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+(function(){
+  var burger=document.getElementById('burger'),
+      drawer=document.getElementById('drawer'),
+      scrim=document.getElementById('scrim'),
+      close=document.getElementById('drawer-close');
+  function open(){
+    drawer.classList.add('open');scrim.classList.add('open');
+    drawer.setAttribute('aria-hidden','false');burger.setAttribute('aria-expanded','true');
+    document.body.style.overflow='hidden';
+    close.focus();
+  }
+  function shut(){
+    drawer.classList.remove('open');scrim.classList.remove('open');
+    drawer.setAttribute('aria-hidden','true');burger.setAttribute('aria-expanded','false');
+    document.body.style.overflow='';
+    burger.focus();
+  }
+  burger.addEventListener('click',open);
+  close.addEventListener('click',shut);
+  scrim.addEventListener('click',shut);
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape'&&drawer.classList.contains('open'))shut();
+  });
+})();
+</script>
+</body>
+</html>
