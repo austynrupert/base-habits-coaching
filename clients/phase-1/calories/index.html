@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Calories — Base Habits Coaching</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --page:#f6f5f4; --card:#ffffff; --hairline:#e6e6e6;
+  --ink:#000000; --ink-2:#31302e; --muted:#615d59; --faint:#a39e98;
+  --primary:#0075de; --primary-active:#005bab; --indigo:#213183;
+  --teal:#2a9d99; --orange:#dd5b00; --purple:#391c57; --green:#1aae39;
+  --shadow-1:rgba(0,0,0,0.01) 0 0.175px 1.041px,rgba(0,0,0,0.02) 0 0.8px 2.925px,rgba(0,0,0,0.027) 0 2.025px 7.847px,rgba(0,0,0,0.04) 0 4px 18px;
+  --shadow-2:rgba(0,0,0,0.01) 0 0.175px 1.041px,rgba(0,0,0,0.02) 0 0.8px 2.925px,rgba(0,0,0,0.027) 0 2.025px 7.847px,rgba(0,0,0,0.04) 0 4px 18px,rgba(0,0,0,0.05) 0 23px 52px;
+}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--page);color:var(--ink);font-family:'Inter',system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased}
+p,h1,h2,h3,ul{margin:0}
+ul{padding:0;list-style:none}
+a{color:var(--primary);text-decoration:none}
+a:hover{color:var(--primary-active)}
+.wrap{max-width:720px;margin:0 auto;padding-left:22px;padding-right:22px}
+.head-row{max-width:none;padding-left:max(76px,calc((100% - 720px)/2 + 22px));padding-right:22px;padding-top:12px;padding-bottom:12px;display:flex;align-items:center;gap:14px}
+
+header{position:sticky;top:0;z-index:30;background:#e9edf7;border-bottom:1px solid #dbe1f0}
+#burger{position:absolute;left:22px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;justify-content:center;gap:4px;width:40px;height:40px;padding:0 9px;border:1px solid #dbe1f0;border-radius:8px;background:rgba(255,255,255,0.7);cursor:pointer;transition:background 120ms ease,transform 120ms ease}
+#burger:hover{background:#fff}
+#burger:active{transform:translateY(-50%) scale(0.96)}
+#burger span{display:block;height:2px;border-radius:2px;background:var(--ink-2)}
+.brand{font-size:16px;font-weight:700;letter-spacing:-0.3px;color:var(--ink)}
+.contact-btn{margin-left:auto;display:inline-flex;align-items:center;justify-content:center;min-height:36px;padding:7px 16px;border-radius:9999px;background:var(--primary);color:#fff !important;font-size:14px;font-weight:500;transition:background 120ms ease,transform 120ms ease}
+.contact-btn:active{background:var(--primary-active);transform:scale(0.96)}
+
+#scrim{position:fixed;inset:0;z-index:50;background:rgba(0,0,0,0.32);opacity:0;pointer-events:none;transition:opacity 160ms ease}
+#scrim.open{opacity:1;pointer-events:auto}
+#drawer{position:fixed;top:0;left:0;bottom:0;z-index:60;width:min(320px,86vw);background:var(--card);border-right:1px solid var(--hairline);box-shadow:var(--shadow-2);transform:translateX(-100%);transition:transform 200ms ease;display:flex;flex-direction:column;overflow-y:auto}
+#drawer.open{transform:translateX(0)}
+.drawer-top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 16px 12px}
+#drawer-close{width:32px;height:32px;border-radius:50%;border:none;background:rgba(0,0,0,0.05);color:var(--ink-2);font-size:15px;line-height:1;cursor:pointer;transition:transform 120ms ease}
+#drawer-close:active{transform:scale(0.9)}
+.nav-group{padding:12px 16px 4px}
+.nav-label{display:flex;align-items:center;gap:9px;font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.nav-label .dot{width:7px;height:7px;border-radius:50%;flex:none}
+.nav-list{display:flex;flex-direction:column;gap:2px}
+.nav-item{display:block;padding:9px 10px;border-radius:5px;font-size:15px;font-weight:500;color:var(--ink-2);transition:background 120ms ease}
+.nav-item:hover{background:rgba(0,0,0,0.035);color:var(--ink-2)}
+.nav-item.current{background:rgba(0,117,222,0.08);color:var(--primary)}
+.nav-item.soon{color:var(--faint);cursor:default;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.nav-item.soon:hover{background:none}
+.soon-tag{font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--faint)}
+.drawer-foot{margin-top:auto;border-top:1px solid var(--hairline);padding:14px 16px 18px}
+.drawer-foot a{font-size:15px;font-weight:500}
+
+/* page */
+.title-band{background:linear-gradient(180deg,#dfe5f5 0%,#e9ecf6 46%,var(--page) 100%);padding:38px 0 34px}
+h1{font-size:clamp(32px,8.2vw,46px);font-weight:700;line-height:1.06;letter-spacing:-1.4px;text-wrap:pretty}
+.crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:14px;font-size:13px;font-weight:500;color:var(--muted)}
+.crumbs .sep{color:var(--faint)}
+.bars{display:flex;gap:6px;margin-bottom:20px}
+.bars span{width:26px;height:6px;border-radius:3px}
+
+main{padding-bottom:24px}
+.sections{display:flex;flex-direction:column}
+section.chapter{padding:34px 0}
+section.chapter + section.chapter{border-top:1px solid var(--hairline)}
+.eyebrow{display:flex;align-items:center;gap:9px;font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+.eyebrow .dot{width:7px;height:7px;border-radius:50%;flex:none}
+h2{font-size:clamp(24px,5.6vw,30px);font-weight:700;line-height:1.16;letter-spacing:-0.8px;color:var(--ink);text-wrap:pretty}
+h3{font-size:19px;font-weight:600;line-height:1.3;letter-spacing:-0.4px;color:var(--ink);text-wrap:pretty}
+.lede{font-size:19px;font-weight:500;line-height:1.45;letter-spacing:-0.2px;color:var(--indigo);max-width:26em;text-wrap:pretty}
+.body{font-size:17px;line-height:1.7;color:var(--muted);max-width:34em;text-wrap:pretty}
+.body strong{font-weight:600;color:var(--ink-2)}
+.body .caps{font-weight:600;color:var(--ink-2);letter-spacing:0.02em}
+.stack{display:flex;flex-direction:column;gap:16px;margin-top:4px}
+.sub{display:flex;flex-direction:column;gap:12px;padding:22px 0}
+.sub + .sub{border-top:1px solid var(--hairline)}
+.sub-head{display:flex;align-items:baseline;gap:12px}
+.num{flex:none;font-size:13px;font-weight:700;color:var(--faint);letter-spacing:0.04em;min-width:18px}
+
+ul.list{display:flex;flex-direction:column;gap:10px}
+ul.list li{display:flex;align-items:baseline;gap:12px;font-size:17px;line-height:1.5;color:var(--ink-2);font-weight:500}
+ul.list li::before{content:"";flex:none;width:7px;height:7px;border-radius:50%;background:var(--teal);transform:translateY(-2px)}
+ul.list.buy li::before{background:var(--orange)}
+
+.quote{background:var(--card);border:1px solid var(--hairline);border-radius:12px;padding:22px 24px;font-size:19px;line-height:1.5;font-weight:400;letter-spacing:-0.2px;color:var(--ink-2);text-wrap:pretty}
+.hero{background:var(--indigo);border-radius:16px;padding:32px 28px;box-shadow:var(--shadow-2)}
+.hero p{color:#fff;font-size:clamp(21px,4.9vw,26px);font-weight:600;line-height:1.34;letter-spacing:-0.6px;text-wrap:pretty}
+.hero .rule{display:flex;gap:6px;margin-bottom:18px}
+.hero .rule span{width:24px;height:5px;border-radius:3px}
+
+#contact{border-top:1px solid #1a2668;background:var(--indigo);padding:44px 0 56px;color:#fff}
+#contact h2{color:#fff}
+#contact .body{color:#c3cae8}
+.contact-rows{display:flex;flex-direction:column;gap:12px;margin-top:18px}
+.contact-row{display:flex;align-items:center;gap:14px;padding:16px 18px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.16);border-radius:12px}
+.contact-row .dot{width:9px;height:9px;border-radius:50%;flex:none}
+.contact-row .k{font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#a9b3dd}
+.contact-row .v{font-size:17px;font-weight:500;color:#fff}
+.contact-row .v:hover{color:#dfe5f5}
+
+/* chart + tables */
+.figure{background:var(--card);border:1px solid var(--hairline);border-radius:12px;padding:22px 18px 20px;box-shadow:var(--shadow-1)}
+.fig-title{font-size:17px;font-weight:600;letter-spacing:-0.3px;color:var(--ink);line-height:1.35;text-wrap:pretty}
+.axis-label{margin-top:14px;font-size:12px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--faint)}
+.plot{display:flex;gap:14px;margin-top:10px}
+.yaxis{flex:none;width:34px;height:280px;position:relative}
+.yaxis span{position:absolute;right:0;transform:translateY(-50%);font-size:11px;font-weight:500;color:var(--faint)}
+.bars-area{flex:1;position:relative;height:280px;border-bottom:1px solid var(--hairline)}
+.grid{position:absolute;inset:0}
+.grid i{position:absolute;left:0;right:0;height:1px;background:var(--hairline);opacity:0.7}
+.bar-row{position:absolute;inset:0;display:flex;align-items:flex-end;justify-content:space-around;gap:16px}
+.bar-col{flex:1;max-width:104px;display:flex;flex-direction:column;align-items:center}
+.bar-total{font-size:13px;font-weight:700;color:var(--ink);margin-bottom:6px}
+.bar{width:100%;display:flex;flex-direction:column-reverse;border-radius:4px;overflow:hidden}
+.bar b{display:block;font-size:0}
+.xaxis{display:flex;justify-content:space-around;gap:16px;margin-left:48px;margin-top:8px}
+.xaxis span{flex:1;max-width:104px;text-align:center;font-size:13px;font-weight:500;color:var(--ink-2)}
+.legend{display:flex;flex-wrap:wrap;gap:10px 18px;margin-top:16px;padding-top:14px;border-top:1px solid var(--hairline)}
+.legend div{display:flex;align-items:center;gap:7px;font-size:13px;font-weight:500;color:var(--muted)}
+.legend i{width:10px;height:10px;border-radius:3px;flex:none}
+.caption{margin-top:14px;font-size:14px;line-height:1.6;color:var(--muted);text-wrap:pretty}
+
+.table-wrap{background:var(--card);border:1px solid var(--hairline);border-radius:12px;overflow-x:auto;-webkit-overflow-scrolling:touch}
+table{width:100%;border-collapse:collapse}
+th{text-align:left;padding:11px 14px;font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);background:#fbfaf9;border-bottom:1px solid var(--hairline)}
+td{padding:12px 14px;font-size:15px;line-height:1.45;color:var(--muted);border-bottom:1px solid var(--hairline);vertical-align:top}
+tr:last-child td{border-bottom:none}
+td:first-child{font-weight:600;color:var(--ink-2)}
+@media(min-width:600px){td:first-child{white-space:nowrap}}
+@media(max-width:599px){th,td{padding-left:11px;padding-right:11px}td,th{font-size:14px}}
+td:last-child,th:last-child{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+td:last-child{font-weight:600;color:var(--ink-2)}
+.calc td{font-size:15px;font-family:'Inter',monospace;font-variant-numeric:tabular-nums}
+.calc td:first-child{white-space:normal;font-weight:500;color:var(--muted)}
+.calc td:last-child{white-space:normal;text-align:right}
+.formulas{display:flex;flex-direction:column;gap:10px}
+.formula{background:var(--card);border:1px solid var(--hairline);border-radius:8px;padding:13px 15px;font-size:15px;line-height:1.5;color:var(--ink-2);font-variant-numeric:tabular-nums;text-wrap:pretty}
+.formula b{font-weight:600}
+
+@media (max-width:600px){
+  #burger{left:12px;width:36px;height:36px;padding:0 8px}
+  .head-row{padding-left:56px;padding-right:12px;gap:10px}
+  .brand{font-size:15px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .contact-btn{flex:none;padding:7px 13px;font-size:13px}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap head-row" style="position:relative">
+    <button type="button" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="drawer">
+      <span></span><span></span><span></span>
+    </button>
+    <span class="brand">Base Habits Coaching</span>
+    <a class="contact-btn" href="#contact">Contact me</a>
+  </div>
+</header>
+
+<div id="scrim"></div>
+
+<nav id="drawer" aria-label="Client pages" aria-hidden="true">
+  <div class="drawer-top">
+    <span style="font-size:15px;font-weight:600;color:var(--ink)">Client pages</span>
+    <button type="button" id="drawer-close" aria-label="Close menu">&#10005;</button>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-list">
+      <a class="nav-item" href="../../index.html">&lsaquo; Client home</a>
+    </div>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-label"><span class="dot" style="background:var(--teal)"></span>Phase 1</div>
+    <div class="nav-list">
+      <a class="nav-item" href="../base-habits/index.html">Base Habits</a>
+      <a class="nav-item" href="../two-week-rule/index.html">Two Week Rule</a>
+      <a class="nav-item" href="../debunking/index.html">Debunking</a>
+      <a class="nav-item current" href="index.html" aria-current="page">Calories</a>
+      <a class="nav-item" href="../macros/index.html">Macros</a>
+      <a class="nav-item" href="../protein/index.html" style="margin-left:14px">Protein</a>
+      <a class="nav-item" href="../carbs/index.html" style="margin-left:14px">Carbs</a>
+      <a class="nav-item" href="../fats/index.html" style="margin-left:14px">Fats</a>
+    </div>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-label"><span class="dot" style="background:var(--orange)"></span>Phase 2</div>
+    <div class="nav-list">
+      <span class="nav-item soon" aria-disabled="true">Placeholder page one<span class="soon-tag">Coming soon</span></span>
+      <span class="nav-item soon" aria-disabled="true">Placeholder page two<span class="soon-tag">Coming soon</span></span>
+    </div>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-label"><span class="dot" style="background:var(--purple)"></span>Phase 3</div>
+    <div class="nav-list">
+      <span class="nav-item soon" aria-disabled="true">Placeholder page one<span class="soon-tag">Coming soon</span></span>
+      <span class="nav-item soon" aria-disabled="true">Placeholder page two<span class="soon-tag">Coming soon</span></span>
+    </div>
+  </div>
+
+  <div class="drawer-foot">
+    <a href="../../../base-habits-coaching.html">Back to basehabitscoaching.com</a>
+  </div>
+</nav>
+
+<div class="title-band">
+  <div class="wrap">
+    <div class="bars"><span style="background:var(--teal)"></span><span style="background:var(--orange)"></span><span style="background:var(--purple)"></span><span style="background:var(--green)"></span></div>
+    <h1>Calories</h1>
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <a href="../../index.html">Client Home</a>
+      <span class="sep">&rsaquo;</span>
+      <a href="../base-habits/index.html">Base Habits</a>
+      <span class="sep">&rsaquo;</span>
+      <a href="../two-week-rule/index.html">Two Week Rule</a>
+      <span class="sep">&rsaquo;</span>
+      <a href="../debunking/index.html">Debunking</a>
+      <span class="sep">&rsaquo;</span>
+      <span>Calories</span>
+    </nav>
+  </div>
+</div>
+
+<main>
+  <div class="wrap sections">
+
+    <section class="chapter">
+      <div class="eyebrow"><span class="dot" style="background:var(--teal)"></span>Section 1</div>
+      <h2>What a Calorie Is</h2>
+      <div class="stack">
+        <p class="lede">A calorie is a unit of energy, and how many you take in versus burn decides whether you gain, lose, or hold steady.</p>
+        <p class="body">Eat less than you burn, you lose. Eat more than you burn, you gain. Stored calories are body fat. That's the whole rule, plain and simple.</p>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <div class="eyebrow"><span class="dot" style="background:var(--orange)"></span>Section 2</div>
+      <h2>Where Your Calories Go</h2>
+      <div class="stack">
+        <p class="lede">Your TDEE breaks into four parts, and only one of them is really up to you.</p>
+        <p class="body">TDEE stands for Total Daily Energy Expenditure. It's the total number of calories you burn in a day. You'll also hear it called your maintenance calories, because eating that number is what holds your weight steady. Same thing, two names.</p>
+
+        <figure class="figure" style="margin:0">
+          <div class="fig-title">Same person, different daily steps, different TDEE</div>
+          <div class="axis-label">Calories per day</div>
+          <div class="plot">
+            <div class="yaxis">
+              <span style="top:280px">0</span>
+              <span style="top:210px">600</span>
+              <span style="top:140px">1,200</span>
+              <span style="top:70px">1,800</span>
+              <span style="top:0px">2,400</span>
+            </div>
+            <div class="bars-area">
+              <div class="grid">
+                <i style="bottom:70px"></i><i style="bottom:140px"></i><i style="bottom:210px"></i><i style="bottom:279px"></i>
+              </div>
+              <div class="bar-row">
+        <div class="bar-col">
+          <span class="bar-total">2,050</span>
+          <div class="bar"><b style="height:175.0px;background:#213183"></b><b style="height:17.5px;background:#5b6bbf"></b><b style="height:11.7px;background:#a39e98"></b><b style="height:35.0px;background:#dd5b00"></b></div>
+        </div>
+        <div class="bar-col">
+          <span class="bar-total">2,300</span>
+          <div class="bar"><b style="height:175.0px;background:#213183"></b><b style="height:17.5px;background:#5b6bbf"></b><b style="height:11.7px;background:#a39e98"></b><b style="height:64.2px;background:#dd5b00"></b></div>
+        </div></div>
+            </div>
+          </div>
+          <div class="xaxis"><span>5,000 steps/day</span><span>10,000 steps/day</span></div>
+          <div class="legend">
+            <div><i style="background:#213183"></i>BMR</div>
+            <div><i style="background:#5b6bbf"></i>TEF</div>
+            <div><i style="background:#a39e98"></i>EAT</div>
+            <div><i style="background:#dd5b00"></i>NEAT</div>
+          </div>
+          <figcaption class="caption">Illustrative example. The only thing that changes between these two bars is the person's daily steps. That's the difference NEAT makes.</figcaption>
+        </figure>
+      </div>
+
+      <div class="sub">
+        <div class="sub-head"><span class="num">01</span><h3>BMR, Basal Metabolic Rate</h3></div>
+        <p class="body">Calories burned just existing. Breathing, thinking, pumping blood. This is the biggest slice by far, and it isn't something you can move much day to day. More muscle nudges it up over time, but not overnight.</p>
+      </div>
+
+      <div class="sub">
+        <div class="sub-head"><span class="num">02</span><h3>TEF, Thermic Effect of Food</h3></div>
+        <p class="body">Calories burned digesting what you eat. It shifts slightly with more protein, since protein takes more effort to break down. Realistically, it's not worth chasing.</p>
+      </div>
+
+      <div class="sub">
+        <div class="sub-head"><span class="num">03</span><h3>NEAT, Non-Exercise Activity Thermogenesis</h3></div>
+        <p class="body">Basic movement outside of a workout. Walking, fidgeting, moving through your day. This is the piece you actually control, and it's why 10,000 steps is the target during the two week rule.</p>
+      </div>
+
+      <div class="sub">
+        <div class="sub-head"><span class="num">04</span><h3>EAT, Exercise Activity Thermogenesis</h3></div>
+        <p class="body">Time spent training. A small piece of your total burn, smaller than most people assume.</p>
+      </div>
+
+      <div class="stack" style="margin-top:18px">
+        <div class="quote">Here's the part people get backwards. A single gym session and a long walk burn a similar amount. The difference is that your daily movement happens every day, whether you train or not, and it adds up to far more over a week than three or four workouts do. That's not a reason to skip the gym. It's a reason to go there to build strength and let your steps handle the burn. Going to the gym takes extra planning and time. You can get your steps in anywhere.</div>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <div class="eyebrow"><span class="dot" style="background:var(--purple)"></span>Section 3</div>
+      <h2>Eating vs Drinking Calories</h2>
+      <div class="stack">
+        <p class="lede">A drink and a meal can cost the same calories, but only one of these makes you feel full.</p>
+        <p class="body">Liquid calories count the same as food calories, but they don't do the same job. The problem isn't only that a drink is less filling in the moment. It's that you don't eat any less later to make up for it. A 300 calorie soda gets added to your day rather than subtracted from your next meal, so your total goes up either way.</p>
+        <p class="body">Most drinks also carry no protein and no fiber, which are the two things that actually make you feel full. That's the difference.</p>
+        <p class="body">This matters more once you're in a deficit, since every calorie needs to work harder for you.</p>
+        <p class="body">The Macros page goes deeper on protein and fiber. Rule of thumb: don't drink any liquid calories. Water, diet soda, and zero sugar soda are all fine. <span class="caps">BUT DRINK YOUR WATER.</span> <a href="../macros/index.html">Macros</a></p>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <div class="eyebrow"><span class="dot" style="background:var(--green)"></span>Section 4</div>
+      <h2>How to Calculate Your Calorie Target</h2>
+      <div class="stack">
+        <p class="lede">Here's how to calculate your own numbers.</p>
+        <div class="quote">You don't have to run any of this yourself. Send me your numbers and I'll calculate your target for you. This section is here for anyone who wants to understand the math or check it themselves.</div>
+      </div>
+
+      <div class="sub">
+        <div class="sub-head"><span class="num">01</span><h3>Step 1: Find your BMR</h3></div>
+        <div class="formulas">
+          <div class="formula"><b>Men:</b> BMR = (10 x weight in kg) + (6.25 x height in cm) - (5 x age) + 5</div>
+          <div class="formula"><b>Women:</b> BMR = (10 x weight in kg) + (6.25 x height in cm) - (5 x age) - 161</div>
+        </div>
+        <p class="body">Quick conversion: pounds divided by 2.2 = kg. Inches x 2.54 = cm.</p>
+      </div>
+
+      <div class="sub">
+        <div class="sub-head"><span class="num">02</span><h3>Step 2: Find your TDEE</h3></div>
+        <p class="body">Multiply your BMR by an activity number:</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Level</th><th>Description</th><th>Multiplier</th></tr></thead>
+            <tbody>
+              <tr><td>Sedentary</td><td>little to no exercise</td><td>x 1.2</td></tr>
+              <tr><td>Lightly active</td><td>light exercise 1 to 3 days a week</td><td>x 1.375</td></tr>
+              <tr><td>Moderately active</td><td>moderate exercise 3 to 5 days a week</td><td>x 1.55</td></tr>
+              <tr><td>Very active</td><td>hard exercise 6 to 7 days a week</td><td>x 1.725</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="sub">
+        <div class="sub-head"><span class="num">03</span><h3>Step 3: Apply your deficit</h3></div>
+        <p class="body">We'll talk about where to start your deficit on the Two Week Rule page, but usually I subtract 300 to 500 calories from your TDEE. Subtract that number and that's your daily target. This is what it means when I say your target sits a few hundred calories under your maintenance. <a href="../two-week-rule/index.html">Two Week Rule</a></p>
+      </div>
+
+      <div class="sub">
+        <div class="sub-head"><span class="num">04</span><h3>Worked example</h3></div>
+        <p class="body">Weight: 165 lbs (75 kg). Height: 5'5" (165 cm). Age: 35. Activity: lightly active.</p>
+        <div class="table-wrap">
+          <table class="calc">
+            <tbody>
+              <tr><td>BMR = (10 x 75) + (6.25 x 165) - (5 x 35) - 161</td><td>1,445</td></tr>
+              <tr><td>TDEE = 1,445 x 1.375</td><td>1,987</td></tr>
+              <tr><td>Daily target with a 400 calorie deficit = 1,587, round to</td><td>1,600</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="body">Note on rounding: round to the nearest 50. The formula is an estimate, not a measurement, and three-digit precision implies an accuracy it doesn't have.</p>
+        <div class="quote" style="margin-top:6px">Worth knowing: 3,500 calories is roughly one pound of body fat. A 500 calorie daily deficit works out to about a pound a week. That math holds up early and slows down as you go, because a lighter body burns less. This is exactly why we weigh daily and adjust from your real numbers instead of trusting the formula forever.</div>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <div class="eyebrow"><span class="dot" style="background:var(--teal)"></span>Closing</div>
+      <h2>The Bottom Line</h2>
+      <div class="stack">
+        <p class="body">Think of your calories like a budget. Every day your body earns a set number of calories, your TDEE. Everything you eat is a withdrawal against that number. Spend exactly what you earned and your weight holds steady. Spend less than you earned and the shortfall gets pulled from savings, which is stored body fat. Spend more than you earned and the surplus gets deposited into savings.</p>
+        <div class="hero">
+          <div class="rule"><span style="background:#5ecfc9"></span><span style="background:#ff9a4d"></span><span style="background:#8f7bd6"></span></div>
+          <p>Normally, saving money is the goal. Here it's flipped. Progress means pulling from savings, not adding to it. Once that clicks, everything above is just the mechanics of making it happen.</p>
+        </div>
+        <p class="body">Every calorie in that budget goes somewhere. Protein, carbs, fat, and alcohol are the categories you're spending it on, and each one does something different once it lands. The Macros page picks up from here. <a href="../macros/index.html">Macros</a></p>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<section id="contact">
+  <div class="wrap">
+    <h2 style="letter-spacing:-0.7px">Contact me</h2>
+    <p class="body" style="margin-top:10px">Two ways to reach me. Questions about a lesson are welcome any time.</p>
+    <div class="contact-rows">
+      <div class="contact-row">
+        <span class="dot" style="background:#5ecfc9"></span>
+        <div style="display:flex;flex-direction:column;gap:2px">
+          <span class="k">Call or text</span>
+          <a class="v" href="tel:+15176189607">517-618-9607</a>
+        </div>
+      </div>
+      <div class="contact-row">
+        <span class="dot" style="background:#ff9a4d"></span>
+        <div style="display:flex;flex-direction:column;gap:2px">
+          <span class="k">Instagram</span>
+          <a class="v" href="https://instagram.com/base_habits_coaching" target="_blank" rel="noopener">@base_habits_coaching</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+(function(){
+  var burger=document.getElementById('burger'),
+      drawer=document.getElementById('drawer'),
+      scrim=document.getElementById('scrim'),
+      close=document.getElementById('drawer-close');
+  function open(){
+    drawer.classList.add('open');scrim.classList.add('open');
+    drawer.setAttribute('aria-hidden','false');burger.setAttribute('aria-expanded','true');
+    document.body.style.overflow='hidden';
+    close.focus();
+  }
+  function shut(){
+    drawer.classList.remove('open');scrim.classList.remove('open');
+    drawer.setAttribute('aria-hidden','true');burger.setAttribute('aria-expanded','false');
+    document.body.style.overflow='';
+    burger.focus();
+  }
+  burger.addEventListener('click',open);
+  close.addEventListener('click',shut);
+  scrim.addEventListener('click',shut);
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape'&&drawer.classList.contains('open'))shut();
+  });
+})();
+</script>
+</body>
+</html>
