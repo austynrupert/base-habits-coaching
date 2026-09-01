@@ -48,6 +48,22 @@ body{margin:0;background:var(--page);color:var(--ink);font-family:'Inter',system
 .bh-step p{font-size:17px;line-height:1.55;color:var(--ink-2);text-wrap:pretty}
 #bh-rail{position:fixed;left:0;top:0;bottom:0;width:3px;background:var(--hairline);z-index:40}
 #bh-rail-fill{width:3px;height:0;background:var(--primary)}
+.bh-head-row{max-width:none;padding-left:max(22px,calc((100% - 720px)/2 + 22px));padding-right:22px}
+#bh-client-access{display:inline-flex;align-items:center;gap:7px;padding:6px 12px;min-height:32px;border-radius:8px;background:rgba(255,255,255,0.7);border:1px solid #dbe1f0;color:var(--muted) !important;font-family:'Inter',system-ui,sans-serif;font-size:13px;font-weight:500;letter-spacing:-0.1px;white-space:nowrap;text-decoration:none;cursor:pointer;transition:background 120ms ease,transform 120ms ease}
+#bh-client-access:hover{background:#fff;color:var(--ink-2) !important}
+#bh-client-access:active{transform:scale(0.96)}
+#bh-client-access .bh-ca-dot{width:6px;height:6px;border-radius:50%;background:var(--teal);flex:none}
+@media (max-width:600px){#bh-client-access .bh-ca-label{display:none}#bh-client-access::after{content:'Client access'}}
+#bh-ca-overlay{position:fixed;inset:0;z-index:60;display:none;align-items:center;justify-content:center;padding:22px;background:rgba(0,0,0,0.32)}
+#bh-ca-overlay.open{display:flex}
+#bh-ca-modal{width:100%;max-width:360px;background:var(--card);border-radius:16px;border:1px solid var(--hairline);box-shadow:rgba(0,0,0,0.01) 0 0.175px 1.041px,rgba(0,0,0,0.02) 0 0.8px 2.925px,rgba(0,0,0,0.027) 0 2.025px 7.847px,rgba(0,0,0,0.04) 0 4px 18px,rgba(0,0,0,0.05) 0 23px 52px;padding:24px}
+#bh-ca-modal label{display:block;font-size:15px;font-weight:500;color:var(--ink-2);margin-bottom:8px}
+#bh-ca-input{width:100%;padding:6px 10px;min-height:40px;border:1px solid #dddddd;border-radius:4px;background:#fff;font-family:'Inter',system-ui,sans-serif;font-size:15px;color:var(--ink);outline:none}
+#bh-ca-input:focus{box-shadow:var(--shadow-1)}
+#bh-ca-close{width:28px;height:28px;border-radius:50%;border:none;background:rgba(0,0,0,0.05);color:var(--ink-2);font-size:15px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform 120ms ease}
+#bh-ca-close:active{transform:scale(0.9)}
+#bh-ca-error{display:none;font-size:14px;line-height:1.45;color:var(--orange-deep)}
+#bh-ca-error.show{display:block}
 </style>
 </head>
 <body>
@@ -55,13 +71,31 @@ body{margin:0;background:var(--page);color:var(--ink);font-family:'Inter',system
 
   <div id="bh-rail"><div id="bh-rail-fill"></div></div>
 
+  <div id="bh-ca-overlay" role="dialog" aria-modal="true" aria-labelledby="bh-ca-title">
+    <form id="bh-ca-modal" novalidate>
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:16px">
+        <span id="bh-ca-title" style="font-size:18px;font-weight:700;letter-spacing:-0.3px;color:var(--ink)">Client access</span>
+        <button type="button" id="bh-ca-close" aria-label="Close">&#10005;</button>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <div>
+          <label for="bh-ca-input">Enter client password</label>
+          <input id="bh-ca-input" name="password" type="password" autocomplete="current-password" aria-describedby="bh-ca-error">
+        </div>
+        <p id="bh-ca-error" role="alert">That password doesn&rsquo;t match. Try again.</p>
+        <button type="submit" class="bh-btn" style="align-self:flex-start">Continue</button>
+      </div>
+    </form>
+  </div>
+
   <header style="position:sticky;top:0;z-index:30;background:#e9edf7;border-bottom:1px solid #dbe1f0">
-    <div class="bh-wrap" style="padding-top:12px;padding-bottom:12px;display:flex;align-items:center;justify-content:space-between;gap:16px">
+    <div class="bh-wrap bh-head-row" style="padding-top:12px;padding-bottom:12px;display:flex;align-items:center;justify-content:space-between;gap:16px">
       <span style="font-size:16px;font-weight:700;letter-spacing:-0.3px;color:var(--ink)">Base Habits Coaching</span>
       <div style="display:flex;align-items:center;gap:14px">
         <a href="about-me.html" style="font-size:15px;font-weight:500;color:var(--muted)">About me</a>
         <a href="#contact" style="font-size:15px;font-weight:500;color:var(--muted)">Contact me</a>
         <a class="bh-btn sm" href="#next">Get started</a>
+        <button type="button" id="bh-client-access" aria-haspopup="dialog"><span class="bh-ca-dot"></span><span class="bh-ca-label">Current Client Access</span></button>
       </div>
     </div>
   </header>
@@ -78,8 +112,8 @@ body{margin:0;background:var(--page);color:var(--ink);font-family:'Inter',system
     <p style="font-size:clamp(20px,4.6vw,26px);font-weight:700;line-height:1.28;letter-spacing:-0.6px;color:var(--indigo);text-wrap:pretty;max-width:19em">You cannot outwork a bad diet, and every diet with a name is over-hyped.</p>
     <div style="margin-top:8px;display:flex;align-items:center;gap:16px">
       <!-- Replace src with your headshot -->
-      <img src="headshot.jpg" alt="Austyn Rupert" style="width:88px;height:88px;flex:none;border-radius:50%;object-fit:cover;background:#e6e6e6;border:1px solid var(--hairline)">
-      <span style="font-size:16px;font-weight:600;color:var(--ink)">Austyn Rupert</span>
+      <img src="headshot.jpg" alt="Austyn Rupert" style="width:112px;height:112px;flex:none;border-radius:50%;object-fit:cover;background:#e6e6e6;border:1px solid var(--hairline)">
+      <span style="font-size:19px;font-weight:600;color:var(--ink)">Austyn Rupert</span>
     </div>
   </div>
   </div>
@@ -263,6 +297,40 @@ body{margin:0;background:var(--page);color:var(--ink);font-family:'Inter',system
   window.addEventListener('scroll',update,{passive:true});
   window.addEventListener('resize',update);
   update();
+})();
+
+(function(){
+  var CLIENT_PASSWORD='CLIENT_PASSWORD';
+  var open=document.getElementById('bh-client-access'),
+      overlay=document.getElementById('bh-ca-overlay'),
+      form=document.getElementById('bh-ca-modal'),
+      input=document.getElementById('bh-ca-input'),
+      err=document.getElementById('bh-ca-error'),
+      close=document.getElementById('bh-ca-close'),
+      last=null;
+  function show(){
+    last=document.activeElement;
+    overlay.classList.add('open');
+    err.classList.remove('show');
+    input.value='';
+    input.focus();
+  }
+  function hide(){
+    overlay.classList.remove('open');
+    if(last&&last.focus)last.focus();
+  }
+  open.addEventListener('click',show);
+  close.addEventListener('click',hide);
+  overlay.addEventListener('mousedown',function(e){if(e.target===overlay)hide();});
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape'&&overlay.classList.contains('open'))hide();
+  });
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    if(input.value===CLIENT_PASSWORD){window.location.href='/clients/';}
+    else{err.classList.add('show');input.select();input.focus();}
+  });
+  input.addEventListener('input',function(){err.classList.remove('show');});
 })();
 </script>
 </body>
