@@ -31,6 +31,8 @@ header{position:sticky;top:0;z-index:30;background:#e9edf7;border-bottom:1px sol
 #burger:hover{background:#fff}
 #burger:active{transform:translateY(-50%) scale(0.96)}
 #burger span{display:block;height:2px;border-radius:2px;background:var(--ink-2)}
+.page-tag{font-size:13px;font-weight:500;letter-spacing:0;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.page-tag::before{content:"/";margin-right:7px;color:var(--faint)}
 .brand{font-size:16px;font-weight:700;letter-spacing:-0.3px;color:var(--ink)}
 .contact-btn{margin-left:auto;display:inline-flex;align-items:center;justify-content:center;min-height:36px;padding:7px 16px;border-radius:9999px;background:var(--primary);color:#fff !important;font-size:14px;font-weight:500;transition:background 120ms ease,transform 120ms ease}
 .contact-btn:active{background:var(--primary-active);transform:scale(0.96)}
@@ -159,7 +161,9 @@ table.sheet tr.gap td{border:none;height:12px;padding:0}
 @media (max-width:600px){
   #burger{left:12px;width:36px;height:36px;padding:0 8px}
   .head-row{padding-left:56px;padding-right:12px;gap:10px}
-  .brand{font-size:15px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .page-tag{font-size:13px;font-weight:500;letter-spacing:0;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.page-tag::before{content:"/";margin-right:7px;color:var(--faint)}
+.brand{font-size:15px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
   .contact-btn{flex:none;padding:7px 13px;font-size:13px}
 }
 </style>
@@ -172,6 +176,7 @@ table.sheet tr.gap td{border:none;height:12px;padding:0}
       <span></span><span></span><span></span>
     </button>
     <span class="brand">Base Habits Coaching</span>
+    <span class="page-tag">Two Week Rule</span>
     <a class="contact-btn" href="#contact">Contact me</a>
   </div>
 </header>
@@ -235,12 +240,6 @@ table.sheet tr.gap td{border:none;height:12px;padding:0}
       <a href="../base-habits/index.html">Base Habits</a>
       <span class="sep">&rsaquo;</span>
       <span>Two Week Rule</span>
-      <span class="sep">&rsaquo;</span>
-      <a href="../debunking/index.html">Debunking</a>
-      <span class="sep">&rsaquo;</span>
-      <a href="../calories/index.html">Calories</a>
-      <span class="sep">&rsaquo;</span>
-      <a href="../macros/index.html">Macros</a>
     </nav>
   </div>
 </div>
@@ -265,7 +264,7 @@ table.sheet tr.gap td{border:none;height:12px;padding:0}
         <p class="lede">We don't touch your numbers again until two full weeks have passed since the last change.</p>
         <p class="body">It takes two solid weeks of consistency to see what a change actually does to your weight.</p>
         <p class="body">If we change your calories, your steps, and your food all on the same day, and the scale moves a week later, we have no idea which one of those did it. Stack enough changes on top of each other and you lose the ability to tell what's working and what isn't.</p>
-        <p class="body">So the rule is simple. After any change, you give it two full weeks before we touch it again. That's true on day one, and it's true for every adjustment after.</p>
+        <p class="body">So the rule is simple. After any change, you give it two full weeks before we touch it again. That's true on day one, and it's true for every adjustment after. Because the changes you make this week, will not show up till next week, and will not steady out till two weeks down the road.</p>
         <div class="hero">
           <div class="rule"><span style="background:#5ecfc9"></span><span style="background:#ff9a4d"></span><span style="background:#8f7bd6"></span></div>
           <p>One change. Two weeks. Then we look at the data.</p>
@@ -275,6 +274,19 @@ table.sheet tr.gap td{border:none;height:12px;padding:0}
 
     <section class="chapter">
       <div class="eyebrow"><span class="dot" style="background:var(--purple)"></span>Section 2</div>
+      <h2>What Is Your Average</h2>
+      <div class="stack">
+        <p class="lede">Your average is only telling the truth if your days are actually consistent.</p>
+        <p class="body">Two people can hit the same weekly calorie average and still be doing completely different things. One person ate close to that number every single day. The other person swung wildly high and low and landed on the same average by accident. The math is identical. The consistency is not.</p>
+        <p class="body">Same thing happens with steps. Walk 10,000 steps every day and your average is 10,000. Bounce between 10,000, 7,000, 8,000, 6,000, and 10,000 and your average drops to about 8,200, even though you hit your number twice that week.</p>
+        <p class="body">This is the gap between an average that is real and an average that is just math bailing out a string of bad days. A good day propping up a bad day is not the same as being consistent. Telling yourself "I will do better tomorrow" or "I will make up the difference tomorrow" is a slippery slope. Do better today.</p>
+        <div class="quote">Being disciplined is not hitting your target on average. It's every day looking close to that average.</div>
+        <p class="body">The goal is not to hit your number and call it good. The goal is to drive your average upward, to build a floor under yourself that's higher than it was last week, and to keep it there. A strong average is not luck. It's the sum of every day you showed up the same way.</p>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <div class="eyebrow"><span class="dot" style="background:var(--green)"></span>Section 3</div>
       <h2>Set Up Your Tools</h2>
       <div class="stack">
         <p class="lede">Before anything else, get your tracking spreadsheet and your app set up.</p>
@@ -304,7 +316,7 @@ table.sheet tr.gap td{border:none;height:12px;padding:0}
     </section>
 
     <section class="chapter">
-      <div class="eyebrow"><span class="dot" style="background:var(--green)"></span>Section 3</div>
+      <div class="eyebrow"><span class="dot" style="background:var(--teal)"></span>Section 4</div>
       <h2>Pick a Tracking App</h2>
       <div class="stack">
         <p class="lede">You need an app that tracks calories and macros, has a real food database, and scans barcodes.</p>
@@ -330,7 +342,7 @@ table.sheet tr.gap td{border:none;height:12px;padding:0}
     </section>
 
     <section class="chapter">
-      <div class="eyebrow"><span class="dot" style="background:var(--teal)"></span>Section 4</div>
+      <div class="eyebrow"><span class="dot" style="background:var(--orange)"></span>Section 5</div>
       <h2>Plan Your Food and Build Your Grocery List</h2>
       <div class="stack">
         <p class="lede">Know what you're eating before you're standing in the kitchen hungry.</p>
@@ -341,7 +353,7 @@ table.sheet tr.gap td{border:none;height:12px;padding:0}
     </section>
 
     <section class="chapter">
-      <div class="eyebrow"><span class="dot" style="background:var(--orange)"></span>Section 5</div>
+      <div class="eyebrow"><span class="dot" style="background:var(--green)"></span>Section 6</div>
       <h2>Hit Your Steps</h2>
       <div class="stack">
         <p class="lede">10,000 steps a day is the gold standard. Log your actual daily total every day in your spreadsheet.</p>
@@ -353,7 +365,7 @@ table.sheet tr.gap td{border:none;height:12px;padding:0}
     </section>
 
     <section class="chapter">
-      <div class="eyebrow"><span class="dot" style="background:var(--purple)"></span>Section 6</div>
+      <div class="eyebrow"><span class="dot" style="background:var(--teal)"></span>Section 7</div>
       <h2>How to Log It</h2>
       <div class="stack">
         <p class="lede">There are two ways to get through a day. Both start with logging.</p>
@@ -364,7 +376,7 @@ table.sheet tr.gap td{border:none;height:12px;padding:0}
     </section>
 
     <section class="chapter">
-      <div class="eyebrow"><span class="dot" style="background:var(--green)"></span>Section 7</div>
+      <div class="eyebrow"><span class="dot" style="background:var(--purple)"></span>Section 8</div>
       <h2>Disclaimer</h2>
       <div class="stack">
         <p class="lede">I am not a doctor, so if something does not feel right I will always point you towards an expert</p>

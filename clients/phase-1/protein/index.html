@@ -5,27 +5,246 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
 <title>Protein — Base Habits Coaching</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  body{margin:0;background:#f6f5f4;font-family:'Inter',system-ui,sans-serif;color:#31302e}
-  a{color:#0075de;text-decoration:none}
-  a:hover{color:#005bab}
-  header{background:#e9edf7;border-bottom:1px solid #dbe1f0;padding:12px 22px;font-size:16px;font-weight:700;letter-spacing:-0.3px;color:#000}
-  main{max-width:720px;margin:0 auto;padding:56px 22px 80px;display:flex;flex-direction:column;gap:18px}
-  .crumbs{font-size:14px;color:#615d59;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
-  .sep{color:#a39e98}
-  h1{margin:0;font-size:clamp(30px,6vw,40px);font-weight:700;line-height:1.1;letter-spacing:-1px;color:#000}
-  p{margin:0;font-size:17px;line-height:1.55;max-width:34em;text-wrap:pretty}
-  .tag{align-self:flex-start;display:inline-flex;align-items:center;gap:7px;padding:5px 11px;border-radius:8px;background:#fff;border:1px solid #e6e6e6;font-size:13px;font-weight:500;color:#615d59}
-  .dot{width:6px;height:6px;border-radius:50%;background:#e8a33d}
-  nav.path{display:flex;flex-direction:column;gap:6px;margin-top:6px}
-  nav.path a{font-size:15px;font-weight:500}
+:root{
+  --page:#f6f5f4; --card:#ffffff; --hairline:#e6e6e6;
+  --ink:#000000; --ink-2:#31302e; --muted:#615d59; --faint:#a39e98;
+  --primary:#0075de; --primary-active:#005bab; --indigo:#213183;
+  --teal:#2a9d99; --orange:#dd5b00; --purple:#391c57; --green:#1aae39;
+  --shadow-1:rgba(0,0,0,0.01) 0 0.175px 1.041px,rgba(0,0,0,0.02) 0 0.8px 2.925px,rgba(0,0,0,0.027) 0 2.025px 7.847px,rgba(0,0,0,0.04) 0 4px 18px;
+  --shadow-2:rgba(0,0,0,0.01) 0 0.175px 1.041px,rgba(0,0,0,0.02) 0 0.8px 2.925px,rgba(0,0,0,0.027) 0 2.025px 7.847px,rgba(0,0,0,0.04) 0 4px 18px,rgba(0,0,0,0.05) 0 23px 52px;
+}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--page);color:var(--ink);font-family:'Inter',system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased}
+p,h1,h2,h3,ul{margin:0}
+ul{padding:0;list-style:none}
+a{color:var(--primary);text-decoration:none}
+a:hover{color:var(--primary-active)}
+.wrap{max-width:720px;margin:0 auto;padding-left:22px;padding-right:22px}
+.head-row{max-width:none;padding-left:max(76px,calc((100% - 720px)/2 + 22px));padding-right:22px;padding-top:12px;padding-bottom:12px;display:flex;align-items:center;gap:14px}
+
+header{position:sticky;top:0;z-index:30;background:#e9edf7;border-bottom:1px solid #dbe1f0}
+#burger{position:absolute;left:22px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;justify-content:center;gap:4px;width:40px;height:40px;padding:0 9px;border:1px solid #dbe1f0;border-radius:8px;background:rgba(255,255,255,0.7);cursor:pointer;transition:background 120ms ease,transform 120ms ease}
+#burger:hover{background:#fff}
+#burger:active{transform:translateY(-50%) scale(0.96)}
+#burger span{display:block;height:2px;border-radius:2px;background:var(--ink-2)}
+.page-tag{font-size:13px;font-weight:500;letter-spacing:0;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.page-tag::before{content:"/";margin-right:7px;color:var(--faint)}
+.brand{font-size:16px;font-weight:700;letter-spacing:-0.3px;color:var(--ink)}
+.contact-btn{margin-left:auto;display:inline-flex;align-items:center;justify-content:center;min-height:36px;padding:7px 16px;border-radius:9999px;background:var(--primary);color:#fff !important;font-size:14px;font-weight:500;transition:background 120ms ease,transform 120ms ease}
+.contact-btn:active{background:var(--primary-active);transform:scale(0.96)}
+
+#scrim{position:fixed;inset:0;z-index:50;background:rgba(0,0,0,0.32);opacity:0;pointer-events:none;transition:opacity 160ms ease}
+#scrim.open{opacity:1;pointer-events:auto}
+#drawer{position:fixed;top:0;left:0;bottom:0;z-index:60;width:min(320px,86vw);background:var(--card);border-right:1px solid var(--hairline);box-shadow:var(--shadow-2);transform:translateX(-100%);transition:transform 200ms ease;display:flex;flex-direction:column;overflow-y:auto}
+#drawer.open{transform:translateX(0)}
+.drawer-top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 16px 12px}
+#drawer-close{width:32px;height:32px;border-radius:50%;border:none;background:rgba(0,0,0,0.05);color:var(--ink-2);font-size:15px;line-height:1;cursor:pointer;transition:transform 120ms ease}
+#drawer-close:active{transform:scale(0.9)}
+.nav-group{padding:12px 16px 4px}
+.nav-label{display:flex;align-items:center;gap:9px;font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.nav-label .dot{width:7px;height:7px;border-radius:50%;flex:none}
+.nav-list{display:flex;flex-direction:column;gap:2px}
+.nav-item{display:block;padding:9px 10px;border-radius:5px;font-size:15px;font-weight:500;color:var(--ink-2);transition:background 120ms ease}
+.nav-item:hover{background:rgba(0,0,0,0.035);color:var(--ink-2)}
+.nav-item.current{background:rgba(0,117,222,0.08);color:var(--primary)}
+.nav-item.soon{color:var(--faint);cursor:default;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.nav-item.soon:hover{background:none}
+.soon-tag{font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--faint)}
+.drawer-foot{margin-top:auto;border-top:1px solid var(--hairline);padding:14px 16px 18px}
+.drawer-foot a{font-size:15px;font-weight:500}
+
+/* page */
+.title-band{background:linear-gradient(180deg,#dfe5f5 0%,#e9ecf6 46%,var(--page) 100%);padding:38px 0 34px}
+h1{font-size:clamp(32px,8.2vw,46px);font-weight:700;line-height:1.06;letter-spacing:-1.4px;text-wrap:pretty}
+.crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:14px;font-size:13px;font-weight:500;color:var(--muted)}
+.crumbs .sep{color:var(--faint)}
+.bars{display:flex;gap:6px;margin-bottom:20px}
+.bars span{width:26px;height:6px;border-radius:3px}
+
+main{padding-bottom:24px}
+.sections{display:flex;flex-direction:column}
+section.chapter{padding:34px 0}
+section.chapter + section.chapter{border-top:1px solid var(--hairline)}
+.eyebrow{display:flex;align-items:center;gap:9px;font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+.eyebrow .dot{width:7px;height:7px;border-radius:50%;flex:none}
+h2{font-size:clamp(24px,5.6vw,30px);font-weight:700;line-height:1.16;letter-spacing:-0.8px;color:var(--ink);text-wrap:pretty}
+h3{font-size:19px;font-weight:600;line-height:1.3;letter-spacing:-0.4px;color:var(--ink);text-wrap:pretty}
+.lede{font-size:19px;font-weight:500;line-height:1.45;letter-spacing:-0.2px;color:var(--indigo);max-width:26em;text-wrap:pretty}
+.body{font-size:17px;line-height:1.7;color:var(--muted);max-width:34em;text-wrap:pretty}
+.body strong{font-weight:600;color:var(--ink-2)}
+.body .caps{font-weight:600;color:var(--ink-2);letter-spacing:0.02em}
+.stack{display:flex;flex-direction:column;gap:16px;margin-top:4px}
+.sub{display:flex;flex-direction:column;gap:12px;padding:22px 0}
+.sub + .sub{border-top:1px solid var(--hairline)}
+.sub-head{display:flex;align-items:baseline;gap:12px}
+.num{flex:none;font-size:13px;font-weight:700;color:var(--faint);letter-spacing:0.04em;min-width:18px}
+
+ul.list{display:flex;flex-direction:column;gap:10px}
+ul.list li{display:flex;align-items:baseline;gap:12px;font-size:17px;line-height:1.5;color:var(--ink-2);font-weight:500}
+ul.list li::before{content:"";flex:none;width:7px;height:7px;border-radius:50%;background:var(--teal);transform:translateY(-2px)}
+ul.list.buy li::before{background:var(--orange)}
+
+.quote{background:var(--card);border:1px solid var(--hairline);border-radius:12px;padding:22px 24px;font-size:19px;line-height:1.5;font-weight:400;letter-spacing:-0.2px;color:var(--ink-2);text-wrap:pretty}
+.hero{background:var(--indigo);border-radius:16px;padding:32px 28px;box-shadow:var(--shadow-2)}
+.hero p{color:#fff;font-size:clamp(21px,4.9vw,26px);font-weight:600;line-height:1.34;letter-spacing:-0.6px;text-wrap:pretty}
+.hero .rule{display:flex;gap:6px;margin-bottom:18px}
+.hero .rule span{width:24px;height:5px;border-radius:3px}
+
+#contact{border-top:1px solid #1a2668;background:var(--indigo);padding:44px 0 56px;color:#fff}
+#contact h2{color:#fff}
+#contact .body{color:#c3cae8}
+.contact-rows{display:flex;flex-direction:column;gap:12px;margin-top:18px}
+.contact-row{display:flex;align-items:center;gap:14px;padding:16px 18px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.16);border-radius:12px}
+.contact-row .dot{width:9px;height:9px;border-radius:50%;flex:none}
+.contact-row .k{font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#a9b3dd}
+.contact-row .v{font-size:17px;font-weight:500;color:#fff}
+.contact-row .v:hover{color:#dfe5f5}
+
+/* chart + tables */
+.figure{background:var(--card);border:1px solid var(--hairline);border-radius:12px;padding:22px 18px 20px;box-shadow:var(--shadow-1)}
+.fig-title{font-size:17px;font-weight:600;letter-spacing:-0.3px;color:var(--ink);line-height:1.35;text-wrap:pretty}
+.axis-label{margin-top:14px;font-size:12px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--faint)}
+.plot{display:flex;gap:14px;margin-top:10px}
+.yaxis{flex:none;width:34px;height:280px;position:relative}
+.yaxis span{position:absolute;right:0;transform:translateY(-50%);font-size:11px;font-weight:500;color:var(--faint)}
+.bars-area{flex:1;position:relative;height:280px;border-bottom:1px solid var(--hairline)}
+.grid{position:absolute;inset:0}
+.grid i{position:absolute;left:0;right:0;height:1px;background:var(--hairline);opacity:0.7}
+.bar-row{position:absolute;inset:0;display:flex;align-items:flex-end;justify-content:space-around;gap:16px}
+.bar-col{flex:1;max-width:104px;display:flex;flex-direction:column;align-items:center}
+.bar-total{font-size:13px;font-weight:700;color:var(--ink);margin-bottom:6px}
+.bar{width:100%;display:flex;flex-direction:column-reverse;border-radius:4px;overflow:hidden}
+.bar b{display:block;font-size:0}
+.xaxis{display:flex;justify-content:space-around;gap:16px;margin-left:48px;margin-top:8px}
+.xaxis span{flex:1;max-width:104px;text-align:center;font-size:13px;font-weight:500;color:var(--ink-2)}
+.legend{display:flex;flex-wrap:wrap;gap:10px 18px;margin-top:16px;padding-top:14px;border-top:1px solid var(--hairline)}
+.legend div{display:flex;align-items:center;gap:7px;font-size:13px;font-weight:500;color:var(--muted)}
+.legend i{width:10px;height:10px;border-radius:3px;flex:none}
+.caption{margin-top:14px;font-size:14px;line-height:1.6;color:var(--muted);text-wrap:pretty}
+
+.table-wrap{background:var(--card);border:1px solid var(--hairline);border-radius:12px;overflow-x:auto;-webkit-overflow-scrolling:touch}
+table{width:100%;border-collapse:collapse}
+th{text-align:left;padding:11px 14px;font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);background:#fbfaf9;border-bottom:1px solid var(--hairline)}
+td{padding:12px 14px;font-size:15px;line-height:1.45;color:var(--muted);border-bottom:1px solid var(--hairline);vertical-align:top}
+tr:last-child td{border-bottom:none}
+td:first-child{font-weight:600;color:var(--ink-2)}
+@media(min-width:600px){td:first-child{white-space:nowrap}}
+@media(max-width:599px){th,td{padding-left:11px;padding-right:11px}td,th{font-size:14px}}
+td:last-child,th:last-child{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+td:last-child{font-weight:600;color:var(--ink-2)}
+.calc td{font-size:15px;font-family:'Inter',monospace;font-variant-numeric:tabular-nums}
+.calc td:first-child{white-space:normal;font-weight:500;color:var(--muted)}
+.calc td:last-child{white-space:normal;text-align:right}
+.formulas{display:flex;flex-direction:column;gap:10px}
+.formula{background:var(--card);border:1px solid var(--hairline);border-radius:8px;padding:13px 15px;font-size:15px;line-height:1.5;color:var(--ink-2);font-variant-numeric:tabular-nums;text-wrap:pretty}
+.formula b{font-weight:600}
+
+/* nutrition labels */
+.labels{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+@media(max-width:600px){.labels{grid-template-columns:1fr}}
+.nlabel{background:var(--card);border:2px solid var(--ink);border-radius:4px;padding:12px 14px 14px}
+.nl-title{font-size:22px;font-weight:700;letter-spacing:-0.6px;color:var(--ink);line-height:1.1}
+.nl-thick{height:8px;background:var(--ink);margin:6px 0 0}
+.nl-med{height:4px;background:var(--ink);margin:0}
+.nl-thin{height:1px;background:var(--ink);margin:0}
+.nl-row{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;padding:7px 0}
+.nl-serving{font-size:13px;font-weight:400;color:var(--ink-2);padding:7px 0}
+.nl-cal-k{font-size:15px;font-weight:700;color:var(--ink);letter-spacing:-0.2px}
+.nl-cal-v{font-size:28px;font-weight:700;color:var(--ink);line-height:1;letter-spacing:-1px;font-variant-numeric:tabular-nums}
+.nl-pro-k{font-size:15px;font-weight:400;color:var(--ink-2)}
+.nl-pro-v{font-size:15px;font-weight:700;color:var(--ink);font-variant-numeric:tabular-nums}
+.slash{position:relative;display:inline-block}
+.slash::after{content:"";position:absolute;left:-1px;right:-1px;top:50%;height:2px;background:#d92b1f;transform:rotate(-52deg);transform-origin:center}
+.nl-note{margin-top:12px;font-size:14px;line-height:1.6;color:var(--muted);text-wrap:pretty}
+.nl-note b{font-weight:600;color:var(--ink-2)}
+.prose-tbl td:last-child{text-align:left;white-space:normal;font-weight:400;color:var(--muted)}
+.macro-tbl td:nth-child(n+3){white-space:nowrap;font-variant-numeric:tabular-nums}
+.figcap{margin-top:16px;font-size:12px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--faint)}
+ul.list.plain li::before{background:var(--purple)}
+ul.list.green li::before{background:var(--green)}
+ul.list.warn li::before{background:var(--orange)}
+
+@media (max-width:600px){
+  #burger{left:12px;width:36px;height:36px;padding:0 8px}
+  .head-row{padding-left:56px;padding-right:12px;gap:10px}
+  .page-tag{font-size:13px;font-weight:500;letter-spacing:0;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.page-tag::before{content:"/";margin-right:7px;color:var(--faint)}
+.brand{font-size:15px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .contact-btn{flex:none;padding:7px 13px;font-size:13px}
+}
 </style>
 </head>
 <body>
-<header>Base Habits Coaching</header>
-<main>
-  <nav class="crumbs" aria-label="Breadcrumb">
+
+<header>
+  <div class="wrap head-row" style="position:relative">
+    <button type="button" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="drawer">
+      <span></span><span></span><span></span>
+    </button>
+    <span class="brand">Base Habits Coaching</span>
+    <span class="page-tag">Protein</span>
+    <a class="contact-btn" href="#contact">Contact me</a>
+  </div>
+</header>
+
+<div id="scrim"></div>
+
+<nav id="drawer" aria-label="Client pages" aria-hidden="true">
+  <div class="drawer-top">
+    <span style="font-size:15px;font-weight:600;color:var(--ink)">Client pages</span>
+    <button type="button" id="drawer-close" aria-label="Close menu">&#10005;</button>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-list">
+      <a class="nav-item" href="../../index.html">&lsaquo; Client home</a>
+    </div>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-label"><span class="dot" style="background:var(--teal)"></span>Phase 1</div>
+    <div class="nav-list">
+      <a class="nav-item" href="../base-habits/index.html">Base Habits</a>
+      <a class="nav-item" href="../two-week-rule/index.html">Two Week Rule</a>
+      <a class="nav-item" href="../debunking/index.html">Debunking</a>
+      <a class="nav-item" href="../calories/index.html">Calories</a>
+      <a class="nav-item" href="../macros/index.html">Macros</a>
+      <a class="nav-item current" href="index.html" aria-current="page" style="margin-left:14px">Protein</a>
+      <a class="nav-item" href="../carbs/index.html" style="margin-left:14px">Carbs</a>
+      <a class="nav-item" href="../fats/index.html" style="margin-left:14px">Fats</a>
+    </div>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-label"><span class="dot" style="background:var(--orange)"></span>Phase 2</div>
+    <div class="nav-list">
+      <span class="nav-item soon" aria-disabled="true">Placeholder page one<span class="soon-tag">Coming soon</span></span>
+      <span class="nav-item soon" aria-disabled="true">Placeholder page two<span class="soon-tag">Coming soon</span></span>
+    </div>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-label"><span class="dot" style="background:var(--purple)"></span>Phase 3</div>
+    <div class="nav-list">
+      <span class="nav-item soon" aria-disabled="true">Placeholder page one<span class="soon-tag">Coming soon</span></span>
+      <span class="nav-item soon" aria-disabled="true">Placeholder page two<span class="soon-tag">Coming soon</span></span>
+    </div>
+  </div>
+
+  <div class="drawer-foot">
+    <a href="../../../base-habits-coaching.html">Back to basehabitscoaching.com</a>
+  </div>
+</nav>
+
+<div class="title-band">
+  <div class="wrap">
+    <div class="bars"><span style="background:var(--teal)"></span><span style="background:var(--orange)"></span><span style="background:var(--purple)"></span><span style="background:var(--green)"></span></div>
+    <h1>Protein</h1>
+    <nav class="crumbs" aria-label="Breadcrumb">
       <a href="../../index.html">Client Home</a>
       <span class="sep">&rsaquo;</span>
       <a href="../base-habits/index.html">Base Habits</a>
@@ -39,20 +258,450 @@
       <a href="../macros/index.html">Macros</a>
       <span class="sep">&rsaquo;</span>
       <span>Protein</span>
-  </nav>
-  <h1>Protein</h1>
-  <span class="tag"><span class="dot"></span>Being written</span>
-  <p>This lesson is not published yet.</p>
-  <nav class="path">
-    <a href="../base-habits/index.html">Base Habits</a>
-    <a href="../two-week-rule/index.html">Two Week Rule</a>
-    <a href="../debunking/index.html">Debunking</a>
-    <a href="../calories/index.html">Calories</a>
-    <a href="../macros/index.html">Macros</a>
-    <a href="../carbs/index.html">Carbs</a>
-    <a href="../fats/index.html">Fats</a>
-    <a href="../../index.html">Client Home</a>
-  </nav>
+    </nav>
+  </div>
+</div>
+
+<main>
+  <div class="wrap sections">
+
+    <section class="chapter">
+      <div class="eyebrow"><span class="dot" style="background:var(--teal)"></span>Opening</div>
+      <h2>Protein is the one number you hit on purpose</h2>
+      <div class="stack">
+        <p class="body">Protein is the one number you hit on purpose. Everything else on your plate has room to move.</p>
+        <p class="body">The <a href="../macros/index.html">Macros</a> page covered why it matters. This page covers how you actually get it. Because actually hitting your protein goal on a Wednesday when kids are going crazy, you need to make dinner, and you don't have any meals prepped is where a lot of us would just order a pizza and say we will try again tomorrow. I will walk you through the exact steps I take to consistently hit my protein goal each day without failure.</p>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <div class="eyebrow"><span class="dot" style="background:var(--orange)"></span>Section 1</div>
+      <h2>Your Target</h2>
+      <div class="stack">
+        <p class="lede">Your protein goal gets set for you, and it does not move week to week.</p>
+        <p class="body">I set your protein target before our kickoff call using your:</p>
+        <ul class="list buy">
+          <li>Height</li>
+          <li>Weight</li>
+          <li>Age</li>
+          <li>Activity level</li>
+          <li>And what your weight goals are.</li>
+        </ul>
+        <p class="body">When making adjustments to your numbers, this is one of the last things we move.</p>
+        <p class="body">Two things people expect to be true here that are not:</p>
+        <p class="body">Your target does not drop when your calories drop. In a deficit it matters more, not less, because a deficit is exactly when your body is most willing to break down muscle for energy.</p>
+        <p class="body">Your target also does not go up because you had a hard training day. It is a daily number, not something you earn.</p>
+        <div class="quote">Hit the number every day. Don't tell yourself you will make it up the next day, that becomes a slippery slope.</div>
+        <p class="body"><a href="../two-week-rule/index.html">Two Week Rule</a></p>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <div class="eyebrow"><span class="dot" style="background:var(--purple)"></span>Section 2</div>
+      <h2>The 10x Rule</h2>
+      <div class="stack">
+        <p class="lede">Cross out the last digit of the calorie number. If what's left lines up with the grams of protein, it's a real protein source.</p>
+        <p class="body">This is the only math on this page and it works on any label, any package, any menu.</p>
+      </div>
+
+      <div class="sub">
+        <div class="sub-head"><span class="num">01</span><h3>The shortcut</h3></div>
+        <p class="body">You don't need a calculator standing in the grocery aisle. Cross out the last digit of the calorie number and look at what's left. If that number lands close to the grams of protein, it's a real protein source. If it's way off, it isn't.</p>
+
+        <div class="figure" style="margin-top:6px">
+          <div class="labels">
+            <div>
+              <div class="nlabel">
+                <div class="nl-title">Nutrition Facts</div>
+                <div class="nl-thick"></div>
+                <div class="nl-serving">Serving size 6 oz (170g)</div>
+                <div class="nl-thin"></div>
+                <div class="nl-med" style="margin-top:0"></div>
+                <div class="nl-row">
+                  <span class="nl-cal-k">Calories</span>
+                  <span class="nl-cal-v">20<span class="slash">0</span></span>
+                </div>
+                <div class="nl-med"></div>
+                <div class="nl-row">
+                  <span class="nl-pro-k">Protein</span>
+                  <span class="nl-pro-v">30g</span>
+                </div>
+                <div class="nl-thin"></div>
+              </div>
+              <p class="nl-note"><b>Label A: Chicken breast, 6 oz.</b> Cross out the last zero of 200. You're left with 20. Line that up next to the protein: 30g. Close together, and the protein is even higher. This is a real protein source.</p>
+            </div>
+            <div>
+              <div class="nlabel">
+                <div class="nl-title">Nutrition Facts</div>
+                <div class="nl-thick"></div>
+                <div class="nl-serving">Serving size 1 bar (60g)</div>
+                <div class="nl-thin"></div>
+                <div class="nl-med" style="margin-top:0"></div>
+                <div class="nl-row">
+                  <span class="nl-cal-k">Calories</span>
+                  <span class="nl-cal-v">30<span class="slash">0</span></span>
+                </div>
+                <div class="nl-med"></div>
+                <div class="nl-row">
+                  <span class="nl-pro-k">Protein</span>
+                  <span class="nl-pro-v">10g</span>
+                </div>
+                <div class="nl-thin"></div>
+              </div>
+              <p class="nl-note"><b>Label B: Protein bar, 1 bar.</b> Cross out the last zero of 300. You're left with 30. Line that up next to the protein: 10g. Not close. This is a bar with a little protein riding along, not a protein source.</p>
+            </div>
+          </div>
+          <div class="figcap">Illustrative labels</div>
+        </div>
+
+        <p class="body">Crossing out the last digit is the same thing as dividing by ten, which is the whole point of the 10x rule. It's just fast enough to actually do while you're standing in the aisle instead of pulling out your phone.</p>
+      </div>
+
+      <div class="sub">
+        <div class="sub-head"><span class="num">02</span><h3>The full math</h3></div>
+        <p class="body">If you want the exact number instead of the gut check, do the division. <strong>Calories divided by grams of protein.</strong></p>
+        <p class="body">Chicken breast is 185 calories and 35 grams of protein. 185 divided by 35 is 5. Peanut butter is 190 calories and 8 grams of protein. 190 divided by 8 is 24.</p>
+        <p class="body">Both of those are food. Only one of them is a protein source.</p>
+        <div class="table-wrap">
+          <table class="prose-tbl">
+            <thead><tr><th>Result</th><th>What it means</th></tr></thead>
+            <tbody>
+              <tr><td>10 or under</td><td>A real protein source. Build your meals out of these.</td></tr>
+              <tr><td>10 to 15</td><td>Good food that carries some protein. It will not get you to your number on its own.</td></tr>
+              <tr><td>Over 15</td><td>This is a fat or a carb with a little protein attached.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="hero" style="margin-top:6px">
+          <div class="rule"><span style="background:#5ecfc9"></span><span style="background:#ff9a4d"></span><span style="background:#c9b5e8"></span></div>
+          <p>Cross out the last digit. If it lines up with the protein, it counts. RUN THE CHECK BEFORE YOU BUY IT.</p>
+        </div>
+      </div>
+
+      <div class="sub">
+        <div class="sub-head"><span class="num">03</span><h3>What the check does not tell you</h3></div>
+        <p class="body">The check answers one question: is this an efficient way to buy protein. It does not tell you where the rest of the calories came from.</p>
+        <p class="body">Two foods can both pass and spend your day very differently.</p>
+        <div class="table-wrap">
+          <table class="macro-tbl">
+            <thead><tr><th>Food</th><th>Serving</th><th>Calories</th><th>Protein</th><th>Fat</th><th>Carbs</th><th>Check</th></tr></thead>
+            <tbody>
+              <tr><td>Chicken breast, cooked</td><td>4 oz</td><td>185</td><td>35 g</td><td>4 g</td><td>0 g</td><td>5</td></tr>
+              <tr><td>90/10 ground beef, cooked</td><td>4 oz</td><td>200</td><td>23 g</td><td>11 g</td><td>0 g</td><td>9</td></tr>
+              <tr><td>Protein bar</td><td>1 bar</td><td>200</td><td>20 g</td><td>7 g</td><td>20 g</td><td>10</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="body">All three pass. The chicken gives you 35 grams and takes almost nothing out of your fat for the day. The beef gives you 23 grams and takes 11 grams of fat with it. The bar gives you 20 grams and takes both fat and carbs.</p>
+        <p class="body">None of that makes the beef or the bar a bad choice. It means you have to know what else you just spent. So after the check passes, look at two more numbers on the same panel: the fat grams and the carb grams. If your fat is already close to where it needs to sit for the day, the chicken is the easier buy. If you have room, the beef tastes better and your family will actually eat it.</p>
+        <div class="quote">The check tells you a food is worth buying protein from. <span class="caps">THE REST OF THE PANEL TELLS YOU WHAT ELSE YOU JUST BOUGHT.</span></div>
+        <p class="body">Nothing is banned by this rule and it is not a good food and bad food list. It tells you which foods can carry your day and which ones cannot, and that is the difference between hitting your number and running out of calories at eight at night.</p>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <div class="eyebrow"><span class="dot" style="background:var(--green)"></span>Section 3</div>
+      <h2>What to Eat</h2>
+      <div class="stack">
+        <p class="lede">These are the foods that do the work.</p>
+      </div>
+
+      <div class="sub">
+        <div class="sub-head"><span class="num">01</span><h3>Chicken breast is king</h3></div>
+        <p class="body">Chicken breast is cheap, cooks in bulk, and clears the 10x rule with room to spare. It is good in the fridge for four to five days and takes on whatever seasoning you put on it, so eating it four days in a row doesn't have to taste like eating it four days in a row. This is why almost every default meal prep starts here.</p>
+        <p class="body">If you get sick of it, lean ground beef, 93/7 or leaner, is the next thing I reach for. (I even cook 80/20, drain the grease out really well and log it as 93/7 sometimes. It is close enough.) The only issue with ground beef is that it costs more per pound and it carries more fat, so it takes a bigger bite out of your fat for the day. It also cooks in bulk just as easily and your family will actually eat it.</p>
+      </div>
+
+      <div class="sub">
+        <div class="sub-head"><span class="num">02</span><h3>Build your meals around these</h3></div>
+        <ul class="list green">
+          <li>Chicken breast</li>
+          <li>Canned tuna</li>
+          <li>Shrimp</li>
+          <li>Egg whites</li>
+          <li>Whey protein</li>
+          <li>White fish, cod or tilapia</li>
+          <li>Deli turkey breast</li>
+          <li>Pork tenderloin</li>
+          <li>Nonfat Greek yogurt</li>
+          <li>Low fat cottage cheese</li>
+          <li>Lean ground beef, 93/7 or leaner</li>
+          <li>Firm tofu</li>
+          <li>Salmon</li>
+        </ul>
+      </div>
+
+      <div class="sub">
+        <div class="sub-head"><span class="num">03</span><h3>Protein pasta, protein oatmeal, and the new wave of protein products</h3></div>
+        <p class="body">Protein versions of pasta, oatmeal, bread, and cereal are everywhere now. Some of them are legitimate. A protein pasta can genuinely add real grams for close to the same calories as the regular version. Others add a scoop of whey to the ingredient list, print PROTEIN across the front in large letters, and barely add much more protein than the original "low protein" product.</p>
+        <p class="body">Treat these exactly like anything else. Cross out the last digit, check it against the protein grams, then look at the fat and carbs underneath. Don't let the front of the package make the decision for you.</p>
+      </div>
+
+      <div class="sub">
+        <div class="sub-head"><span class="num">04</span><h3>When the day got away from you</h3></div>
+        <p class="body">No cooking, no thinking, five minutes or less. I highly recommend keeping three of these in the house at all times, or picking it up on the way home on a busy night. If you can order a pizza, you can grab a rotisserie chicken from the grocery store.</p>
+        <ul class="list buy">
+          <li>Rotisserie chicken with the skin off</li>
+          <li>Tuna or salmon pouches</li>
+          <li>Nonfat Greek yogurt or cottage cheese</li>
+          <li>Deli turkey</li>
+          <li>Shrimp</li>
+          <li>Precooked chicken strips</li>
+          <li>Egg whites from a carton</li>
+          <li>A protein shake</li>
+        </ul>
+        <p class="body">The days you miss your protein are almost always the days you had nothing ready.</p>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <div class="eyebrow"><span class="dot" style="background:var(--teal)"></span>Section 4</div>
+      <h2>Foods That Look Like Protein and Are Not</h2>
+      <div class="stack">
+        <p class="lede">These get called protein foods constantly. Check the fat or carb content.</p>
+        <ul class="list warn">
+          <li>Whole eggs</li>
+          <li>Peanut butter</li>
+          <li>Cheddar cheese</li>
+          <li>Almonds and other nuts</li>
+          <li>Quinoa</li>
+          <li>Hummus</li>
+          <li>Trail mix</li>
+        </ul>
+        <p class="body">Peanut butter, nuts, and cheese trip people up the most, because all three get eaten by the handful and all three are thought of as protein sources to most people.</p>
+        <p class="body">Whole eggs are the one that surprises people. A whole egg is a great food and a good fat source, not an efficient protein source. Most of the calories live in the yolk and the yolk carries very little of the protein. Two large eggs give you 13 grams of protein for 145 calories, which puts them at 11. That is not a knock on eggs. It means they can't anchor your protein plan the way egg whites or chicken can. This is why I usually cook two whole eggs with a weighed out portion of egg whites.</p>
+        <div class="quote">Pro tip: set the carton of egg whites on your food scale, zero the scale, and pour the amount you want into the pan, then set the carton back on the scale. The negative number left over is how much you used.</div>
+        <p class="body">Quinoa is on the list for a different reason. It gets called a protein because it is a complete protein, which is true and beside the point. You would need four cups of it to reach a normal daily target, and that is 880 calories.</p>
+        <p class="body">None of this is off limits. Eat the peanut butter if it fits your day. Just think of it as a fat, because if you are relying on these foods to get you to your number, you will run out of calories before you get there.</p>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <div class="eyebrow"><span class="dot" style="background:var(--orange)"></span>Section 5</div>
+      <h2>How to Read a Label</h2>
+      <div class="stack">
+        <p class="lede">Everything that matters is on the back of the package.</p>
+        <p class="body">The front of a box is advertising. The nutrition label is regulated. Read the label.</p>
+      </div>
+
+      <div class="sub">
+        <div class="sub-head"><span class="num">01</span><h3>Serving size, then servings per container</h3></div>
+        <p class="body">Start here every single time. Every number underneath describes one serving, not the package.</p>
+        <p class="body">A common deceiving thing about nutrition labels is when the amount of food or drink in a package looks like a normal serving size, but the label lists more than one serving per package. I once drank a small bottle of chocolate milk thinking it was one serving at 220 calories, logged it in my app, and it came up as 220 calories for half the bottle. I checked the label again and it said two servings per bottle.</p>
+        <div class="quote">Everything else on the label is meaningless until you know what the serving is.</div>
+      </div>
+
+      <div class="sub">
+        <div class="sub-head"><span class="num">02</span><h3>Calories and protein, in that order</h3></div>
+        <p class="body">Find both and run the 10x rule check before you leave the aisle.</p>
+      </div>
+
+      <div class="sub">
+        <div class="sub-head"><span class="num">03</span><h3>Fat and carbs, right after</h3></div>
+        <p class="body">The 10x rule tells you the protein is worth buying. Fat and carb grams tell you what the rest of the calories are doing. Two seconds of reading, and it's the difference between a food that fits your day and a food that eats it.</p>
+      </div>
+
+      <div class="sub">
+        <div class="sub-head"><span class="num">04</span><h3>Ignore the words on the front of the package</h3></div>
+        <p class="body"><strong>High protein</strong> is a legal technicality, not a nutritional one. The technicality is thin: a serving needs 10 grams of protein to print it on the front. Nothing governing the ratio of calories to protein. Nothing governing the ratio of protein to carbs and fat. Nothing governing the type or completeness of the protein added to reach the 10 grams.</p>
+        <p class="body">A 300 calorie protein bar with 10 grams of protein meets the technicality that allows companies to label a food as "high protein." Run the 10x rule on it and it lands at 30, three times over the cutoff for a real protein source. A plain cup of cottage cheese, with no claim printed anywhere on the container, lands at 6.</p>
+        <div class="quote">Be very skeptical when you see the words "high protein" on a package. Think of it as marketing only. This is why whole foods like chicken, fish, beef, Greek yogurt, and cottage cheese are the reliable option for getting your protein in for the day.</div>
+      </div>
+
+      <div class="sub">
+        <div class="sub-head"><span class="num">05</span><h3>Check what the serving is measured in</h3></div>
+        <p class="body">Grams and ounces are honest. Scoops, bars, pieces, and cups are where it gets soft. If a scoop is 32 grams and yours is heaping, you did not eat one scoop.</p>
+        <p class="body">Go by the grams amount when weighing a serving, especially for powders. I have weighed a scoop of protein powder 8 grams short of what the scoop was supposed to be more than once.</p>
+      </div>
+
+      <div class="sub">
+        <div class="sub-head"><span class="num">06</span><h3>Read the ingredients when the panel looks too good</h3></div>
+        <p class="body">The ingredient list runs in order by weight, heaviest first. If the first two or three ingredients are sugar, oil, or flour, that's most of what's in the package no matter what the front claims. Check it any time a food that sounds high protein is cheap, sweet, or shelf stable. Those three usually mean the food is carrying a lot of sugar or oil alongside the protein.</p>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <div class="eyebrow"><span class="dot" style="background:var(--purple)"></span>Section 6</div>
+      <h2>Complete and Incomplete Protein</h2>
+      <div class="stack">
+        <p class="lede">Animal protein covers all nine amino acids on its own. Plant protein can too, but usually takes more than one food across the day. Collagen never covers all nine amino acids.</p>
+        <p class="body">Protein is not one substance. It is a chain of amino acids, and your body takes the chain apart and rebuilds it into whatever it needs. There are nine amino acids your body cannot make on its own, so they have to come in through food. A <strong>complete protein</strong> has all nine in useful amounts. An <strong>incomplete protein</strong> is short on one or more amino acids.</p>
+      </div>
+
+      <div class="sub">
+        <div class="sub-head"><span class="num">01</span><h3>What's complete</h3></div>
+        <p class="body">Every animal source is complete. Meat, chicken, fish, eggs, dairy, whey, all of it. If you eat animal protein, you are not going to have this problem, and you do not need to think about this section again.</p>
+        <p class="body">A few plant sources are complete on their own:</p>
+        <ul class="list plain">
+          <li>Soy, which covers tofu, edamame, tempeh, and soy milk</li>
+          <li>Quinoa</li>
+          <li>Buckwheat</li>
+          <li>Hemp seeds</li>
+        </ul>
+      </div>
+
+      <div class="sub">
+        <div class="sub-head"><span class="num">02</span><h3>What's incomplete, and why it usually doesn't matter</h3></div>
+        <p class="body">Most plants are missing at least one amino acid. Animal protein isn't, which is the whole reason to get nearly all your protein for the day from animal sources.</p>
+        <p class="body">If you eat mostly or entirely plants, the fix is simple: eat a variety across the day and the gaps close on their own. Beans at lunch and rice at dinner does the job just as well as pairing them in the same meal.</p>
+      </div>
+
+      <div class="sub">
+        <div class="sub-head"><span class="num">03</span><h3>The one that actually catches people</h3></div>
+        <p class="body"><strong>Collagen and gelatin do not count toward your protein target.</strong></p>
+        <p class="body">Collagen powder is protein by the label's definition, so the panel will show 10 or 20 grams and it will pass the 10x rule. But collagen is missing one of the nine entirely, and it is low in the one your body leans on hardest for muscle repair. Your body cannot use it to build or protect muscle the way it uses whey, chicken, or eggs.</p>
+        <p class="body">If you like collagen for your skin, joints, or hair, take it. Just log it as something separate and do not let those grams stand in for your target. Twenty grams of collagen is not twenty grams of protein for our purposes.</p>
+        <div class="quote">If a protein source can't build muscle, it doesn't count toward the number I set for you. <span class="caps">LOG IT, DON'T COUNT IT.</span></div>
+      </div>
+
+      <div class="sub">
+        <div class="sub-head"><span class="num">04</span><h3>If you eat mostly or entirely plants</h3></div>
+        <p class="body">You can hit your number. It takes more attention and more calories.</p>
+        <ul class="list plain">
+          <li>Lean on the complete sources first. Soy is the most useful one on the list, because tofu, tempeh, and edamame all pass the 10x rule while beans and lentils land above 10.</li>
+          <li>Vary your plant sources across the week instead of eating the same one every day.</li>
+          <li>A pea or soy protein powder works exactly like whey does. If food alone doesn't get you to your number, use it to close the difference.</li>
+          <li>Expect the calories to run higher. Plant sources cost more calories per gram of protein, and that has to come out of somewhere. Tell me if this is your situation and we'll build the numbers around it from the start.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <div class="eyebrow"><span class="dot" style="background:var(--green)"></span>Section 7</div>
+      <h2>How to Actually Hit Your Protein Goal</h2>
+      <div class="stack">
+        <p class="lede">Build the day and each meal around protein first and the goal number takes care of itself.</p>
+        <p class="body">The people who miss their target are almost never people who prepped each meal and planned out their day responsibly. It takes a choice to hit your protein goal. Make the choice the day before, and you will have no issues.</p>
+      </div>
+
+      <div class="sub">
+        <div class="sub-head"><span class="num">01</span><h3>Anchor every meal</h3></div>
+        <p class="body">Pick the protein first, then build the rest of the plate around it. If you plan the meal and then look for somewhere to add protein, you have already used up your calories elsewhere.</p>
+      </div>
+
+      <div class="sub">
+        <div class="sub-head"><span class="num">02</span><h3>Front load it</h3></div>
+        <p class="body">Making a real effort to get your protein at breakfast and lunch means dinner does not have to be a rescue mission chasing 70 grams at the end of the day.</p>
+        <div class="hero" style="margin-top:6px">
+          <div class="rule"><span style="background:#5ecfc9"></span><span style="background:#ff9a4d"></span><span style="background:#c9b5e8"></span></div>
+          <p>My rule is to start the day with 30 grams of protein. Here's why: it starts muscle repair immediately, it keeps you full for hours instead of one, and it levels your blood sugar so the crash and the cravings never show up.</p>
+        </div>
+      </div>
+
+      <div class="sub">
+        <div class="sub-head"><span class="num">03</span><h3>An example: how I do it, the Base Meal</h3></div>
+        <p class="body">Every four to five days I cook one to two six-packs of chicken breast and 5 cups of rice. I split it evenly across four meals for each day. This is what I call my Base Meal. It is what works for my schedule. It does not have to be four meals. Split it into three, five, whatever fits your day. What matters more than the number of meals is the spacing. I aim for 30 to 45 grams of protein every three to four hours, starting around 7am and finishing by 6pm.</p>
+        <div class="quote">Steady protein throughout the day keeps you full and is easier on your digestion than loading it all into one meal.</div>
+        <p class="body">I always keep a backup in the pantry. Tuna packs, canned chicken, jerky. If life hits me in the face and meal prep doesn't happen, I still have something to grab on the way out the door.</p>
+      </div>
+
+      <div class="sub">
+        <div class="sub-head"><span class="num">04</span><h3>Cooking for a family and sticking to your diet</h3></div>
+        <p class="body">You are not making yourself a separate dinner. Cook what everyone eats, keep the protein plain, and put the butter, cheese, and sauce on everyone else's plates instead of in the pan. Weigh your portion, serve theirs however they like it.</p>
+      </div>
+
+      <div class="sub">
+        <div class="sub-head"><span class="num">05</span><h3>Stick to your Base Meal</h3></div>
+        <p class="body">One breakfast and one lunch you can grab and eat without thinking about it. You are not eating them every day forever. You are removing the chance of making a bad decision.</p>
+      </div>
+
+      <div class="sub">
+        <div class="sub-head"><span class="num">06</span><h3>Weigh it, but don't chase the exact gram</h3></div>
+        <p class="body">Best practice is weighing food raw or dry, since that is the most accurate method and usually the number on the nutrition label. In real life, most people are weighing whatever's actually on the plate, which is usually cooked. Both are fine. The calorie tracking apps often have entries for most foods raw and cooked, so tracking is still fairly accurate.</p>
+        <p class="body">What actually matters is not the exact number on any one day. It's the trend. If you eat roughly the same portion of your staple foods and log it roughly the same way meal to meal, the week to week weight trend tells us everything we need to know. If that trend isn't moving the way it should, that's when we adjust your number, not because one bowl of rice was a few grams off.</p>
+        <div class="quote">Protein is the only macro where hitting the number matters more than what you eat to hit it. <span class="caps">GET THE GRAMS.</span> Optimize the sources later.</div>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <div class="eyebrow"><span class="dot" style="background:var(--teal)"></span>Section 8</div>
+      <h2>Where People Lose the Number</h2>
+      <div class="stack">
+        <p class="lede">The same handful of mistakes account for most missed targets.</p>
+        <p class="body"><strong>Leaning on nuts and cheese.</strong> Covered above. They are fat.</p>
+        <p class="body"><strong>The food you eat standing up.</strong> The last four bites of a kid's dinner, the crust off their plate, a handful of cereal at the counter, the spoon you licked. None of it feels like eating. All of it counts, and almost none of it is protein. In a house with kids this is the largest untracked source of calories there is.</p>
+        <p class="body"><strong>Counting collagen toward the target.</strong> Covered in Section 6. It passes the 10x rule but it does not do the job.</p>
+        <p class="body"><strong>Skipping breakfast and never catching up.</strong> If you would rather eat later in the day, that is fine. The protein still has to fit in a smaller window. The number does not shrink because your eating window did.</p>
+        <p class="body"><strong>Undercounting shrinkage.</strong> Meat loses roughly a quarter of its weight in cooking. Eight ounces raw is not eight ounces on the plate. This matters most if you're switching weighing methods back and forth on the same food. Weigh raw when it's easy, weigh cooked when it's not, and let the weight trend catch anything that drifts. I personally just weigh it after it is cooked because I cook in bulk.</p>
+        <p class="body"><strong>Trusting the weight on the package.</strong> A chicken breast labeled six ounces is rarely six ounces. Weigh it. One scoop of protein powder could be 36 grams, or it could be 28 grams. Weigh it.</p>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <div class="eyebrow"><span class="dot" style="background:var(--orange)"></span>Section 9</div>
+      <h2>Powders and Shakes</h2>
+      <div class="stack">
+        <p class="lede">A protein shake is a totally acceptable source of protein.</p>
+        <p class="body">Whey is dried dairy protein. It is convenient, it digests easily, and it is one of the most efficient ways to close a gap at the end of the day. It does not do anything a chicken breast does not do. It is just faster and it fits in a bag.</p>
+        <p class="body">Nothing about it is required. If you can hit your number with food, hit it with food. Most people cannot, most days, and a shake is the difference between hitting the target and missing it by twenty grams four times a week.</p>
+        <div class="quote">A shake is a tool for closing a gap. It is not the plan.</div>
+        <p class="body">If you are choosing one, cross out the last digit on the label and ignore everything else on the front. A good powder passes the 10x rule. If it comes out way off, you are buying a meal replacement, not a protein powder.</p>
+        <p class="body">If dairy does not sit well with you, an isolate or a plant blend does the same job.</p>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <div class="eyebrow"><span class="dot" style="background:var(--purple)"></span>Closing</div>
+      <h2>What to Do With This</h2>
+      <div class="stack">
+        <p class="body">Protein is the least complicated thing you will do and it carries the most value next to carbs. It protects the muscle you have while you lose fat, it keeps you full when your calories are tight, and it is linked to better bone density over the long run.</p>
+        <p class="body">You do not need a crazy strategy for it. You need your number, a short list of foods that pass the 10x rule, and something ready in the fridge for the days that go sideways.</p>
+        <p class="body">If you haven't eaten this much protein consistently before, expect some bloating or gas the first couple weeks. That's your gut adjusting, not a sign anything is wrong. A digestive enzyme supplement, specifically one with protease, can ease that adjustment while your body catches up.</p>
+        <p class="body"><a href="../carbs/index.html">Carbs</a> &middot; <a href="../fats/index.html">Fats</a></p>
+      </div>
+    </section>
+
+  </div>
 </main>
+
+<section id="contact">
+  <div class="wrap">
+    <h2 style="letter-spacing:-0.7px">Contact me</h2>
+    <p class="body" style="margin-top:10px">Two ways to reach me. Questions about a lesson are welcome any time.</p>
+    <div class="contact-rows">
+      <div class="contact-row">
+        <span class="dot" style="background:#5ecfc9"></span>
+        <div style="display:flex;flex-direction:column;gap:2px">
+          <span class="k">Call or text</span>
+          <a class="v" href="tel:+15176189607">517-618-9607</a>
+        </div>
+      </div>
+      <div class="contact-row">
+        <span class="dot" style="background:#ff9a4d"></span>
+        <div style="display:flex;flex-direction:column;gap:2px">
+          <span class="k">Instagram</span>
+          <a class="v" href="https://instagram.com/base_habits_coaching" target="_blank" rel="noopener">@base_habits_coaching</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+(function(){
+  var burger=document.getElementById('burger'),
+      drawer=document.getElementById('drawer'),
+      scrim=document.getElementById('scrim'),
+      close=document.getElementById('drawer-close');
+  function open(){
+    drawer.classList.add('open');scrim.classList.add('open');
+    drawer.setAttribute('aria-hidden','false');burger.setAttribute('aria-expanded','true');
+    document.body.style.overflow='hidden';
+    close.focus();
+  }
+  function shut(){
+    drawer.classList.remove('open');scrim.classList.remove('open');
+    drawer.setAttribute('aria-hidden','true');burger.setAttribute('aria-expanded','false');
+    document.body.style.overflow='';
+    burger.focus();
+  }
+  burger.addEventListener('click',open);
+  close.addEventListener('click',shut);
+  scrim.addEventListener('click',shut);
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape'&&drawer.classList.contains('open'))shut();
+  });
+})();
+</script>
 </body>
 </html>

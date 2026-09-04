@@ -31,6 +31,8 @@ header{position:sticky;top:0;z-index:30;background:#e9edf7;border-bottom:1px sol
 #burger:hover{background:#fff}
 #burger:active{transform:translateY(-50%) scale(0.96)}
 #burger span{display:block;height:2px;border-radius:2px;background:var(--ink-2)}
+.page-tag{font-size:13px;font-weight:500;letter-spacing:0;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.page-tag::before{content:"/";margin-right:7px;color:var(--faint)}
 .brand{font-size:16px;font-weight:700;letter-spacing:-0.3px;color:var(--ink)}
 .contact-btn{margin-left:auto;display:inline-flex;align-items:center;justify-content:center;min-height:36px;padding:7px 16px;border-radius:9999px;background:var(--primary);color:#fff !important;font-size:14px;font-weight:500;transition:background 120ms ease,transform 120ms ease}
 .contact-btn:active{background:var(--primary-active);transform:scale(0.96)}
@@ -88,7 +90,9 @@ a.card .go{margin-top:auto;padding-top:10px;font-size:15px;font-weight:500;color
 @media (max-width:600px){
   #burger{left:12px;width:36px;height:36px;padding:0 8px}
   .head-row{padding-left:56px;padding-right:12px;gap:10px}
-  .brand{font-size:15px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .page-tag{font-size:13px;font-weight:500;letter-spacing:0;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.page-tag::before{content:"/";margin-right:7px;color:var(--faint)}
+.brand{font-size:15px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
   .contact-btn{flex:none;padding:7px 13px;font-size:13px}
 }
 </style>
@@ -101,6 +105,7 @@ a.card .go{margin-top:auto;padding-top:10px;font-size:15px;font-weight:500;color
       <span></span><span></span><span></span>
     </button>
     <span class="brand">Base Habits Coaching</span>
+    <span class="page-tag">Client home</span>
     <a class="contact-btn" href="#contact">Contact me</a>
   </div>
 </header>
