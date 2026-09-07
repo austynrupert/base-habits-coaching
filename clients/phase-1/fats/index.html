@@ -5,27 +5,224 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
 <title>Fats — Base Habits Coaching</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  body{margin:0;background:#f6f5f4;font-family:'Inter',system-ui,sans-serif;color:#31302e}
-  a{color:#0075de;text-decoration:none}
-  a:hover{color:#005bab}
-  header{background:#e9edf7;border-bottom:1px solid #dbe1f0;padding:12px 22px;font-size:16px;font-weight:700;letter-spacing:-0.3px;color:#000}
-  main{max-width:720px;margin:0 auto;padding:56px 22px 80px;display:flex;flex-direction:column;gap:18px}
-  .crumbs{font-size:14px;color:#615d59;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
-  .sep{color:#a39e98}
-  h1{margin:0;font-size:clamp(30px,6vw,40px);font-weight:700;line-height:1.1;letter-spacing:-1px;color:#000}
-  p{margin:0;font-size:17px;line-height:1.55;max-width:34em;text-wrap:pretty}
-  .tag{align-self:flex-start;display:inline-flex;align-items:center;gap:7px;padding:5px 11px;border-radius:8px;background:#fff;border:1px solid #e6e6e6;font-size:13px;font-weight:500;color:#615d59}
-  .dot{width:6px;height:6px;border-radius:50%;background:#e8a33d}
-  nav.path{display:flex;flex-direction:column;gap:6px;margin-top:6px}
-  nav.path a{font-size:15px;font-weight:500}
+:root{
+  --page:#f6f5f4; --card:#ffffff; --hairline:#e6e6e6;
+  --ink:#000000; --ink-2:#31302e; --muted:#615d59; --faint:#a39e98;
+  --primary:#0075de; --primary-active:#005bab; --indigo:#213183;
+  --teal:#2a9d99; --orange:#dd5b00; --purple:#391c57; --green:#1aae39;
+  --shadow-1:rgba(0,0,0,0.01) 0 0.175px 1.041px,rgba(0,0,0,0.02) 0 0.8px 2.925px,rgba(0,0,0,0.027) 0 2.025px 7.847px,rgba(0,0,0,0.04) 0 4px 18px;
+  --shadow-2:rgba(0,0,0,0.01) 0 0.175px 1.041px,rgba(0,0,0,0.02) 0 0.8px 2.925px,rgba(0,0,0,0.027) 0 2.025px 7.847px,rgba(0,0,0,0.04) 0 4px 18px,rgba(0,0,0,0.05) 0 23px 52px;
+}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--page);color:var(--ink);font-family:'Inter',system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased}
+p,h1,h2,h3,ul{margin:0}
+ul{padding:0;list-style:none}
+a{color:var(--primary);text-decoration:none}
+a:hover{color:var(--primary-active)}
+.wrap{max-width:720px;margin:0 auto;padding-left:22px;padding-right:22px}
+.head-row{max-width:none;padding-left:max(76px,calc((100% - 720px)/2 + 22px));padding-right:22px;padding-top:12px;padding-bottom:12px;display:flex;align-items:center;gap:14px}
+
+header{position:sticky;top:0;z-index:30;background:#e9edf7;border-bottom:1px solid #dbe1f0}
+#burger{position:absolute;left:22px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;justify-content:center;gap:4px;width:40px;height:40px;padding:0 9px;border:1px solid #dbe1f0;border-radius:8px;background:rgba(255,255,255,0.7);cursor:pointer;transition:background 120ms ease,transform 120ms ease}
+#burger:hover{background:#fff}
+#burger:active{transform:translateY(-50%) scale(0.96)}
+#burger span{display:block;height:2px;border-radius:2px;background:var(--ink-2)}
+.page-tag{font-size:13px;font-weight:500;letter-spacing:0;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.page-tag::before{content:"/";margin-right:7px;color:var(--faint)}
+.brand{font-size:16px;font-weight:700;letter-spacing:-0.3px;color:var(--ink)}
+.contact-btn{margin-left:auto;display:inline-flex;align-items:center;justify-content:center;min-height:36px;padding:7px 16px;border-radius:9999px;background:var(--primary);color:#fff !important;font-size:14px;font-weight:500;transition:background 120ms ease,transform 120ms ease}
+.contact-btn:active{background:var(--primary-active);transform:scale(0.96)}
+
+#scrim{position:fixed;inset:0;z-index:50;background:rgba(0,0,0,0.32);opacity:0;pointer-events:none;transition:opacity 160ms ease}
+#scrim.open{opacity:1;pointer-events:auto}
+#drawer{position:fixed;top:0;left:0;bottom:0;z-index:60;width:min(320px,86vw);background:var(--card);border-right:1px solid var(--hairline);box-shadow:var(--shadow-2);transform:translateX(-100%);transition:transform 200ms ease;display:flex;flex-direction:column;overflow-y:auto}
+#drawer.open{transform:translateX(0)}
+.drawer-top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 16px 12px}
+#drawer-close{width:32px;height:32px;border-radius:50%;border:none;background:rgba(0,0,0,0.05);color:var(--ink-2);font-size:15px;line-height:1;cursor:pointer;transition:transform 120ms ease}
+#drawer-close:active{transform:scale(0.9)}
+.nav-group{padding:12px 16px 4px}
+.nav-label{display:flex;align-items:center;gap:9px;font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.nav-label .dot{width:7px;height:7px;border-radius:50%;flex:none}
+.nav-list{display:flex;flex-direction:column;gap:2px}
+.nav-item{display:block;padding:9px 10px;border-radius:5px;font-size:15px;font-weight:500;color:var(--ink-2);transition:background 120ms ease}
+.nav-item:hover{background:rgba(0,0,0,0.035);color:var(--ink-2)}
+.nav-item.current{background:rgba(0,117,222,0.08);color:var(--primary)}
+.nav-item.soon{color:var(--faint);cursor:default;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.nav-item.soon:hover{background:none}
+.soon-tag{font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--faint)}
+.drawer-foot{margin-top:auto;border-top:1px solid var(--hairline);padding:14px 16px 18px}
+.drawer-foot a{font-size:15px;font-weight:500}
+
+/* page */
+.title-band{background:linear-gradient(180deg,#dfe5f5 0%,#e9ecf6 46%,var(--page) 100%);padding:38px 0 34px}
+h1{font-size:clamp(32px,8.2vw,46px);font-weight:700;line-height:1.06;letter-spacing:-1.4px;text-wrap:pretty}
+.crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:14px;font-size:13px;font-weight:500;color:var(--muted)}
+.crumbs .sep{color:var(--faint)}
+.bars{display:flex;gap:6px;margin-bottom:20px}
+.bars span{width:26px;height:6px;border-radius:3px}
+
+main{padding-bottom:24px}
+.sections{display:flex;flex-direction:column}
+section.chapter{padding:34px 0}
+section.chapter + section.chapter{border-top:1px solid var(--hairline)}
+.eyebrow{display:flex;align-items:center;gap:9px;font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+.eyebrow .dot{width:7px;height:7px;border-radius:50%;flex:none}
+h2{font-size:clamp(24px,5.6vw,30px);font-weight:700;line-height:1.16;letter-spacing:-0.8px;color:var(--ink);text-wrap:pretty}
+h3{font-size:19px;font-weight:600;line-height:1.3;letter-spacing:-0.4px;color:var(--ink);text-wrap:pretty}
+.lede{font-size:19px;font-weight:500;line-height:1.45;letter-spacing:-0.2px;color:var(--indigo);max-width:26em;text-wrap:pretty}
+.body{font-size:17px;line-height:1.7;color:var(--muted);max-width:34em;text-wrap:pretty}
+.body strong{font-weight:600;color:var(--ink-2)}
+.body .caps,.quote .caps{font-weight:600;color:var(--ink-2);letter-spacing:0.02em}
+.stack{display:flex;flex-direction:column;gap:16px;margin-top:4px}
+.sub{display:flex;flex-direction:column;gap:12px;padding:22px 0}
+.sub + .sub{border-top:1px solid var(--hairline)}
+.sub-head{display:flex;align-items:baseline;gap:12px}
+.num{flex:none;font-size:13px;font-weight:700;color:var(--faint);letter-spacing:0.04em;min-width:18px}
+
+ul.list{display:flex;flex-direction:column;gap:10px}
+ul.list li{display:flex;align-items:baseline;gap:12px;font-size:17px;line-height:1.5;color:var(--ink-2);font-weight:500}
+ul.list li::before{content:"";flex:none;width:7px;height:7px;border-radius:50%;background:var(--teal);transform:translateY(-2px)}
+ul.list.buy li::before{background:var(--orange)}
+ul.list.plain li::before{background:var(--purple)}
+ul.list.green li::before{background:var(--green)}
+
+.quote{background:var(--card);border:1px solid var(--hairline);border-radius:12px;padding:22px 24px;font-size:19px;line-height:1.5;font-weight:400;letter-spacing:-0.2px;color:var(--ink-2);text-wrap:pretty}
+.hero{background:var(--indigo);border-radius:16px;padding:32px 28px;box-shadow:var(--shadow-2)}
+.hero p{color:#fff;font-size:clamp(21px,4.9vw,26px);font-weight:600;line-height:1.34;letter-spacing:-0.6px;text-wrap:pretty}
+.hero .rule{display:flex;gap:6px;margin-bottom:18px}
+.hero .rule span{width:24px;height:5px;border-radius:3px}
+
+#contact{border-top:1px solid #1a2668;background:var(--indigo);padding:44px 0 56px;color:#fff}
+#contact h2{color:#fff}
+#contact .body{color:#c3cae8}
+.contact-rows{display:flex;flex-direction:column;gap:12px;margin-top:18px}
+.contact-row{display:flex;align-items:center;gap:14px;padding:16px 18px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.16);border-radius:12px}
+.contact-row .dot{width:9px;height:9px;border-radius:50%;flex:none}
+.contact-row .k{font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#a9b3dd}
+.contact-row .v{font-size:17px;font-weight:500;color:#fff}
+.contact-row .v:hover{color:#dfe5f5}
+
+/* figures */
+.figure{background:var(--card);border:1px solid var(--hairline);border-radius:12px;padding:22px 18px 20px;box-shadow:var(--shadow-1)}
+.fig-title{font-size:17px;font-weight:600;letter-spacing:-0.3px;color:var(--ink);line-height:1.35;text-wrap:pretty}
+.chart{margin-top:14px;width:100%;height:auto;display:block;overflow:visible}
+.chart .grid{stroke:var(--hairline);stroke-width:1}
+.chart .axis{stroke:#d8d5d1;stroke-width:1}
+.chart .tick{font-size:11px;font-weight:500;fill:var(--faint)}
+.chart .solid{fill:none;stroke:var(--orange);stroke-width:2.6;stroke-linejoin:round;stroke-linecap:round}
+.chart .dash{fill:none;stroke:var(--primary);stroke-width:2.2;stroke-dasharray:7 6;stroke-linecap:round}
+.chart .band-lab{font-size:12.5px;font-weight:500;fill:var(--orange)}
+.chart-legend{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:14px}
+.chart-legend div{display:flex;align-items:center;gap:8px;font-size:13.5px;font-weight:500;color:var(--ink-2)}
+.chart-legend .ln{flex:none;width:22px;height:0;border-top-width:2.6px}
+.chart-legend .solid-ln{border-top-style:solid;border-top-color:var(--orange)}
+.chart-legend .dash-ln{border-top-style:dashed;border-top-color:var(--primary);border-top-width:2.2px}
+.chart .axtitle{font-size:11px;font-weight:600;letter-spacing:0.1em;fill:var(--faint)}
+.caption{margin-top:14px;font-size:14px;line-height:1.6;color:var(--muted);text-wrap:pretty}
+.figcap{margin-top:14px;font-size:12px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--faint)}
+
+.table-wrap{background:var(--card);border:1px solid var(--hairline);border-radius:12px;overflow-x:auto;-webkit-overflow-scrolling:touch}
+table{width:100%;border-collapse:collapse}
+th{text-align:left;padding:11px 14px;font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);background:#fbfaf9;border-bottom:1px solid var(--hairline)}
+td{padding:12px 14px;font-size:15px;line-height:1.45;color:var(--muted);border-bottom:1px solid var(--hairline);vertical-align:top}
+tr:last-child td{border-bottom:none}
+td:first-child{font-weight:600;color:var(--ink-2)}
+@media(min-width:600px){td:first-child{white-space:nowrap}}
+@media(max-width:599px){th,td{padding-left:11px;padding-right:11px}td,th{font-size:14px}}
+td:last-child,th:last-child{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+td:last-child{font-weight:600;color:var(--ink-2)}
+.fiber-tbl td:nth-child(n+3){white-space:nowrap;font-variant-numeric:tabular-nums;text-align:right}
+.fiber-tbl th:nth-child(n+3){text-align:right}
+
+/* macro nav cards */
+.macro-nav{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:6px}
+@media(max-width:600px){.macro-nav{grid-template-columns:1fr}}
+.macro-card{display:flex;flex-direction:column;gap:8px;padding:18px;background:var(--card);border:1px solid var(--hairline);border-radius:12px;transition:background 120ms ease,transform 120ms ease}
+.macro-card:hover{background:#fbfaf9}
+.macro-card:active{transform:scale(0.98)}
+.macro-card .k{font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--faint)}
+.macro-card .v{font-size:20px;font-weight:700;letter-spacing:-0.5px;color:var(--ink)}
+.macro-card .bar{width:26px;height:5px;border-radius:3px}
+
+@media (max-width:600px){
+  #burger{left:12px;width:36px;height:36px;padding:0 8px}
+  .head-row{padding-left:56px;padding-right:12px;gap:10px}
+  .brand{font-size:15px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .contact-btn{flex:none;padding:7px 13px;font-size:13px}
+}
 </style>
 </head>
 <body>
-<header><span>Base Habits Coaching</span><span style="font-size:13px;font-weight:500;color:#615d59;margin-left:7px">/ Fats</span></header>
-<main>
-  <nav class="crumbs" aria-label="Breadcrumb">
+
+<header>
+  <div class="wrap head-row" style="position:relative">
+    <button type="button" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="drawer">
+      <span></span><span></span><span></span>
+    </button>
+    <span class="brand">Base Habits Coaching</span>
+    <span class="page-tag">Fats</span>
+    <a class="contact-btn" href="#contact">Contact me</a>
+  </div>
+</header>
+
+<div id="scrim"></div>
+
+<nav id="drawer" aria-label="Client pages" aria-hidden="true">
+  <div class="drawer-top">
+    <span style="font-size:15px;font-weight:600;color:var(--ink)">Client pages</span>
+    <button type="button" id="drawer-close" aria-label="Close menu">&#10005;</button>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-list">
+      <a class="nav-item" href="../../index.html">&lsaquo; Client home</a>
+    </div>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-label"><span class="dot" style="background:var(--teal)"></span>Phase 1</div>
+    <div class="nav-list">
+      <a class="nav-item" href="../base-habits/index.html">Base Habits</a>
+      <a class="nav-item" href="../two-week-rule/index.html">Two Week Rule</a>
+      <a class="nav-item" href="../debunking/index.html">Debunking</a>
+      <a class="nav-item" href="../calories/index.html">Calories</a>
+      <a class="nav-item" href="../macros/index.html">Macros</a>
+      <a class="nav-item" href="../protein/index.html" style="margin-left:14px">Protein</a>
+      <a class="nav-item" href="../carbs/index.html" style="margin-left:14px">Carbs</a>
+      <a class="nav-item current" href="index.html" aria-current="page" style="margin-left:14px">Fats</a>
+    </div>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-label"><span class="dot" style="background:var(--orange)"></span>Phase 2</div>
+    <div class="nav-list">
+      <span class="nav-item soon" aria-disabled="true">Placeholder page one<span class="soon-tag">Coming soon</span></span>
+      <span class="nav-item soon" aria-disabled="true">Placeholder page two<span class="soon-tag">Coming soon</span></span>
+    </div>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-label"><span class="dot" style="background:var(--purple)"></span>Phase 3</div>
+    <div class="nav-list">
+      <span class="nav-item soon" aria-disabled="true">Placeholder page one<span class="soon-tag">Coming soon</span></span>
+      <span class="nav-item soon" aria-disabled="true">Placeholder page two<span class="soon-tag">Coming soon</span></span>
+    </div>
+  </div>
+
+  <div class="drawer-foot">
+    <a href="../../../base-habits-coaching.html">Back to basehabitscoaching.com</a>
+  </div>
+</nav>
+
+<div class="title-band">
+  <div class="wrap">
+    <div class="bars"><span style="background:var(--teal)"></span><span style="background:var(--orange)"></span><span style="background:var(--purple)"></span><span style="background:var(--green)"></span></div>
+    <h1>Fats</h1>
+    <nav class="crumbs" aria-label="Breadcrumb">
       <a href="../../index.html">Client Home</a>
       <span class="sep">&rsaquo;</span>
       <a href="../base-habits/index.html">Base Habits</a>
@@ -39,20 +236,263 @@
       <a href="../macros/index.html">Macros</a>
       <span class="sep">&rsaquo;</span>
       <span>Fats</span>
-  </nav>
-  <h1>Fats</h1>
-  <span class="tag"><span class="dot"></span>Being written</span>
-  <p>This lesson is not published yet.</p>
-  <nav class="path">
-    <a href="../base-habits/index.html">Base Habits</a>
-    <a href="../two-week-rule/index.html">Two Week Rule</a>
-    <a href="../debunking/index.html">Debunking</a>
-    <a href="../calories/index.html">Calories</a>
-    <a href="../macros/index.html">Macros</a>
-    <a href="../protein/index.html">Protein</a>
-    <a href="../carbs/index.html">Carbs</a>
-    <a href="../../index.html">Client Home</a>
-  </nav>
+    </nav>
+  </div>
+</div>
+
+<main>
+  <div class="wrap sections">
+
+    <section class="chapter">
+      <div class="eyebrow"><span class="dot" style="background:var(--teal)"></span>Opening</div>
+      <h2>Fat is not bad for you. It&rsquo;s just calorie dense.</h2>
+      <div class="stack">
+        <p class="body">Nine calories per gram, more than double protein or carbs. You&rsquo;re not cutting it out. You&rsquo;re watching how much of it you eat, because your calories only stretch so far, and fat is the least filling macro of the three.</p>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <div class="eyebrow"><span class="dot" style="background:var(--orange)"></span>Section 1</div>
+      <h2>What Fat Does (other than make food taste amazing)</h2>
+      <div class="stack">
+        <p class="lede">Cutting fat too low causes problems that have nothing to do with losing weight.</p>
+        <p class="body">That&rsquo;s why fat gets a number to hit, not a ceiling to stay under.</p>
+      </div>
+
+      <div class="sub">
+        <div class="sub-head"><span class="num">01</span><h3>Hormone production</h3></div>
+        <p class="body">Your body uses fat to produce hormones, including the ones tied to strength, recovery, and menstrual cycle. Go too low for too long and this is usually the first thing to break. For women that often shows up as a missed or irregular period.</p>
+      </div>
+
+      <div class="sub">
+        <div class="sub-head"><span class="num">02</span><h3>Vitamin absorption</h3></div>
+        <p class="body">Vitamins A, D, E, and K dissolve in fat, not water. No fat in the meal, and they pass straight through you. Eat them with something that has fat in it.</p>
+      </div>
+
+      <div class="sub">
+        <div class="sub-head"><span class="num">03</span><h3>Cell function</h3></div>
+        <p class="body">Every cell in your body has a membrane built partly from fat. Hitting your number covers it. More fat doesn&rsquo;t build better cells.</p>
+      </div>
+
+      <div class="sub">
+        <div class="sub-head"><span class="num">04</span><h3>The taste factor</h3></div>
+        <p class="body">Fat carries flavor. The oil, the butter, the dressing, the sauce, that&rsquo;s most of what makes a meal taste like something you&rsquo;d eat again. It also slows digestion, so food moves through you slower.</p>
+        <p class="body">It still won&rsquo;t fill you up. That&rsquo;s protein&rsquo;s job. Fat makes the meal taste good, but that&rsquo;s something to stay skeptical of.</p>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <div class="eyebrow"><span class="dot" style="background:var(--purple)"></span>Section 2</div>
+      <h2>The Number</h2>
+      <div class="stack">
+        <p class="lede">You get a fat number and you stay as close to it as you can.</p>
+        <p class="body">Fat works like protein. You get a number and you hit it.</p>
+        <p class="body">I set it with the rest of your numbers. Go above it and every extra gram is calories pulled from protein or carbs, the two macros doing more of the actual work right now. Carbs are your energy. Protein protects your muscle.</p>
+        <p class="body">You won&rsquo;t land on it exactly. Get close, within 5 grams is a goal I stick to.</p>
+        <div class="quote">There&rsquo;s no prize for going lower. Under your number you feel worse, recover worse, and gain nothing.</div>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <div class="eyebrow"><span class="dot" style="background:var(--green)"></span>Section 3</div>
+      <h2>The Types, Briefly</h2>
+      <div class="stack">
+        <p class="lede">The type of fat matters far less than most people have been told, and far less than the amount. Your goal is to eat mostly whole foods, and whole foods answer the type question for you.</p>
+        <p class="body">You&rsquo;ve heard this framed as good fats and bad fats. It&rsquo;s not that clean.</p>
+        <p class="body"><strong>Unsaturated fat.</strong> Olive oil, avocado, nuts, seeds, fatty fish. Most consistently linked to long term heart health. Make most of your fat come from here.</p>
+        <p class="body"><strong>Saturated fat.</strong> Butter, fatty cuts of meat, full fat dairy, coconut oil. It spent decades as the villain, and the evidence turned out weaker than the headlines. Not something to fear, not a free pass either. Most health organizations still recommend keeping it the smaller share. Reasonable default.</p>
+        <p class="body"><strong>Trans fat.</strong> The one real exception. Genuine harm, and it&rsquo;s mostly been regulated out of the food supply. See partially hydrogenated oil on an ingredient list, skip it.</p>
+        <p class="body">One line on the medical side. If your doctor has given you a specific plan for cholesterol, blood pressure, or heart health, follow it. That&rsquo;s their call, not mine.</p>
+        <div class="hero">
+          <div class="rule"><span style="background:#5ecfc9"></span><span style="background:#ff9a4d"></span><span style="background:#c9b5e8"></span></div>
+          <p>Every gram of fat is nine calories, no matter the source. Olive oil and butter cost you the same.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <div class="eyebrow"><span class="dot" style="background:var(--teal)"></span>Section 4</div>
+      <h2>What to Eat</h2>
+      <div class="stack">
+        <p class="lede">You are not chasing fat. You are deciding where it comes from.</p>
+        <p class="body">Fat mostly arrives attached to other food, so this decision gets made at the store, not at the table. Buy whole foods and most of it sorts itself out.</p>
+      </div>
+
+      <div class="sub">
+        <div class="sub-head"><span class="num">01</span><h3>Worth having in the house</h3></div>
+        <ul class="list green">
+          <li>Olive oil for cooking and for dressing</li>
+          <li>Whole eggs</li>
+          <li>Salmon, sardines, and mackerel</li>
+          <li>Avocado</li>
+          <li>Nuts and seeds, portioned into a bowl before you eat them, never eaten out of the bag</li>
+          <li>Nut butter with two ingredients on the list</li>
+          <li>Full fat dairy if you like it and it fits, in an amount you measured</li>
+        </ul>
+      </div>
+
+      <div class="sub">
+        <div class="sub-head"><span class="num">02</span><h3>Fat you get without choosing it</h3></div>
+        <ul class="list buy">
+          <li>What&rsquo;s already in your beef, pork, chicken thighs, eggs, and cheese</li>
+          <li>Whatever&rsquo;s in the sauce, the dressing, the marinade, and the pan</li>
+        </ul>
+        <div class="quote">Control your fat at the store, not the table. Buy protein lean and add the fat you actually want on purpose, instead of buying it already mixed in.</div>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <div class="eyebrow"><span class="dot" style="background:var(--orange)"></span>Section 5</div>
+      <h2>Where Fat Hides</h2>
+      <div class="stack">
+        <p class="lede">Fat is easy to overeat because most of it doesn&rsquo;t look like food.</p>
+        <p class="body">Nobody overdoes it on a steak. They overdo it on the things around the steak.</p>
+        <div class="table-wrap">
+          <table class="fiber-tbl">
+            <thead><tr><th>Item</th><th>Serving</th><th>Fat</th><th>Calories</th></tr></thead>
+            <tbody>
+              <tr><td>Olive oil</td><td>1 tbsp</td><td>14 g</td><td>120</td></tr>
+              <tr><td>Butter</td><td>1 tbsp</td><td>12 g</td><td>100</td></tr>
+              <tr><td>Ranch dressing</td><td>2 tbsp</td><td>14 g</td><td>140</td></tr>
+              <tr><td>Mayonnaise</td><td>1 tbsp</td><td>10 g</td><td>90</td></tr>
+              <tr><td>Peanut butter</td><td>2 tbsp</td><td>16 g</td><td>190</td></tr>
+              <tr><td>Almonds</td><td>1 oz</td><td>14 g</td><td>165</td></tr>
+              <tr><td>Avocado</td><td>1 medium</td><td>21 g</td><td>240</td></tr>
+              <tr><td>Cheddar cheese</td><td>1 oz</td><td>9 g</td><td>115</td></tr>
+              <tr><td>Heavy cream</td><td>2 tbsp</td><td>11 g</td><td>100</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="body">Two tablespoons of oil in a pan carry about the same calories as a chicken breast, and only one of them ends up on the plate where you can see it.</p>
+        <p class="body">The fix isn&rsquo;t cutting it out <span class="caps">BY THE GRAM</span>. It&rsquo;s measuring what you pour. Oil, dressing, nut butter, cream, people eyeball these and they&rsquo;re usually off by double. <span class="caps">MEASURE WHAT YOU POUR.</span></p>
+      </div>
+
+      <div class="sub">
+        <div class="sub-head"><span class="num">01</span><h3>Cooking for a table</h3></div>
+        <p class="body">You&rsquo;re cooking one dinner for the house, so the oil goes in before anyone has a plate. Measure it into the pan, then split it across however many servings the pan makes. That&rsquo;s the only honest way to log a meal you didn&rsquo;t cook just for yourself.</p>
+        <p class="body">Or skip the math. Cook the protein plain, then let everyone add their own butter, ranch, and cheese at the table. Everyone gets what they want, and you know exactly what&rsquo;s in yours.</p>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <div class="eyebrow"><span class="dot" style="background:var(--purple)"></span>Section 6</div>
+      <h2>How to Read a Label</h2>
+      <div class="stack">
+        <p class="lede">Fat is where the front of the package works hardest to distract you.</p>
+      </div>
+
+      <div class="sub">
+        <div class="sub-head"><span class="num">01</span><h3>Serving size, then servings per container</h3></div>
+        <p class="body">Nothing else on the nutrition label means anything until you know the serving size. Nut butter is the classic trap. The serving is two tablespoons, and eyeballing it usually gets you closer to three. Weigh it in grams instead of guessing with a spoon.</p>
+      </div>
+
+      <div class="sub">
+        <div class="sub-head"><span class="num">02</span><h3>Total fat, then calories</h3></div>
+        <p class="body">Total fat is what goes in your tracker. Saturated and trans are listed underneath as a breakdown of it, not on top of it.</p>
+      </div>
+
+      <div class="sub">
+        <div class="sub-head"><span class="num">03</span><h3>Run the 10x rule while you&rsquo;re there</h3></div>
+        <p class="body">Cross out the last digit of the calorie number and compare what&rsquo;s left to the grams of protein. Ten or under and the food is a real protein source. Over fifteen and it&rsquo;s a fat or a carb with a little protein attached, no matter what the front of the package says.</p>
+        <p class="body">Almonds are 165 calories and 6 grams of protein. Cross out the 5 and you have 16 against 6 grams. Not close. Peanut butter comes out the same way. Both are fats, and both get filed in the protein column in people&rsquo;s heads. <a href="../protein/index.html">Protein</a></p>
+      </div>
+
+      <div class="sub">
+        <div class="sub-head"><span class="num">04</span><h3>Zero grams of trans fat doesn&rsquo;t always mean zero</h3></div>
+        <p class="body">A product can print 0 g of trans fat when a serving has up to half a gram in it. Eat three servings and you&rsquo;ve had more than a gram of the one fat genuinely worth avoiding. The tell is the ingredient list. See partially hydrogenated oil, put it back.</p>
+      </div>
+
+      <div class="sub">
+        <div class="sub-head"><span class="num">05</span><h3>Cooking spray is not zero calories</h3></div>
+        <p class="body">The serving size is a spray of about a quarter of a second, which is how it rounds down to zero. Nobody sprays for a quarter of a second. If you use it, log a teaspoon of oil for every three or four seconds of spraying and stop thinking about it.</p>
+      </div>
+
+      <div class="sub">
+        <div class="sub-head"><span class="num">06</span><h3>Fat free and light usually means sugar</h3></div>
+        <p class="body">When fat comes out, sugar, starch, or gums go in to make it taste like food again. Check the calories. Sometimes the fat free version isn&rsquo;t actually lower in calories.</p>
+      </div>
+
+      <div class="sub">
+        <div class="sub-head"><span class="num">07</span><h3>Made with olive oil is not made of olive oil</h3></div>
+        <p class="body">It means there&rsquo;s some in there. The ingredient list runs in order by weight, and it&rsquo;ll tell you where the olive oil actually ranks, which is often behind one or two other oils.</p>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <div class="eyebrow"><span class="dot" style="background:var(--green)"></span>Section 7</div>
+      <h2>Where People Go Wrong</h2>
+      <div class="stack">
+        <p class="lede">The mistakes here run in both directions.</p>
+        <p class="body"><strong>Treating healthy fats as free.</strong> Avocado, olive oil, almonds. Great foods, same nine calories per gram as everything else. Eat them on purpose, in a portion you picked before opening the bag.</p>
+        <p class="body"><strong>Cooking without measuring.</strong> The single biggest untracked source of calories most people have. A generous pour is three tablespoons easy. That&rsquo;s 360 calories you didn&rsquo;t log.</p>
+        <p class="body"><strong>Eating off your kids&rsquo; plates.</strong> Nuggets, mac and cheese, buttered noodles, the crust with butter on it, the last few fries. Kid food is built out of fat and refined carbs, which makes it the most calorie dense food in your house, and none of it feels like a meal when you eat it standing at the counter.</p>
+        <p class="body"><strong>Cutting it to nothing.</strong> Fat free everything, dry salads, no oil at all. Works for about three weeks, then stops, because it&rsquo;s miserable and you feel worse. <a href="../two-week-rule/index.html">Two Week Rule</a></p>
+        <p class="body"><strong>Believing certain fats burn fat.</strong> Coconut oil, MCTs, whatever&rsquo;s going around this month. None of them are calorie free and none of them override your total calories in and calories out. <a href="../debunking/index.html">Debunking</a></p>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <div class="eyebrow"><span class="dot" style="background:var(--teal)"></span>Closing</div>
+      <h2>What to Do With This</h2>
+      <div class="stack">
+        <p class="body">Fat isn&rsquo;t the enemy here, and it isn&rsquo;t the lever either. It&rsquo;s just the most calorie dense thing on your plate. Eat enough of it, then stop.</p>
+        <p class="body">Hit your number. Buy your protein lean. Keep your food whole. Measure what you pour. Put what you save into the two macros doing more of the actual work.</p>
+        <p class="body"><a href="../protein/index.html">Protein</a> &middot; <a href="../carbs/index.html">Carbs</a></p>
+      </div>
+    </section>
+
+  </div>
 </main>
+
+<section id="contact">
+  <div class="wrap">
+    <h2 style="letter-spacing:-0.7px">Contact me</h2>
+    <p class="body" style="margin-top:10px">Two ways to reach me. Questions about a lesson are welcome any time.</p>
+    <div class="contact-rows">
+      <div class="contact-row">
+        <span class="dot" style="background:#5ecfc9"></span>
+        <div style="display:flex;flex-direction:column;gap:2px">
+          <span class="k">Call or text</span>
+          <a class="v" href="tel:+15176189607">517-618-9607</a>
+        </div>
+      </div>
+      <div class="contact-row">
+        <span class="dot" style="background:#ff9a4d"></span>
+        <div style="display:flex;flex-direction:column;gap:2px">
+          <span class="k">Instagram</span>
+          <a class="v" href="https://instagram.com/base_habits_coaching" target="_blank" rel="noopener">@base_habits_coaching</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+(function(){
+  var burger=document.getElementById('burger'),
+      drawer=document.getElementById('drawer'),
+      scrim=document.getElementById('scrim'),
+      close=document.getElementById('drawer-close');
+  function open(){
+    drawer.classList.add('open');scrim.classList.add('open');
+    drawer.setAttribute('aria-hidden','false');burger.setAttribute('aria-expanded','true');
+    document.body.style.overflow='hidden';
+    close.focus();
+  }
+  function shut(){
+    drawer.classList.remove('open');scrim.classList.remove('open');
+    drawer.setAttribute('aria-hidden','true');burger.setAttribute('aria-expanded','false');
+    document.body.style.overflow='';
+    burger.focus();
+  }
+  burger.addEventListener('click',open);
+  close.addEventListener('click',shut);
+  scrim.addEventListener('click',shut);
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape'&&drawer.classList.contains('open'))shut();
+  });
+})();
+</script>
 </body>
 </html>
+
