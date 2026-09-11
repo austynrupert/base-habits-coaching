@@ -1,31 +1,188 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<style data-omelette-injected>html,body{background:transparent}</style><script data-omelette-injected>(()=>{{const n=new URLSearchParams(location.search).get("theme");if(n==="light"||n==="dark"){document.documentElement.dataset.theme=n}}{if(new URLSearchParams(location.search).get("_omthumb")==="1"){const n=(f)=>{const g=f.focus;if(!g)return;f.focus=function(h){g.call(this,{...h,preventScroll:true})}};n(HTMLElement.prototype);n(SVGElement.prototype);if(typeof MathMLElement!=="undefined"){n(MathMLElement.prototype)}const d=(f)=>{f.removeAttribute("autofocus");f.inert=true;if(!(f instanceof HTMLElement))f.removeAttribute("tabindex")};const p=(f)=>{if(f.hasAttribute("autofocus"))d(f);for(const g of f.querySelectorAll("[autofocus]")){d(g)}};p(document.documentElement);new MutationObserver((f)=>{for(const g of f){for(const h of g.addedNodes){if(h.nodeType===1)p(h)}}}).observe(document,{childList:true,subtree:true})}}{const n=()=>{try{if(document.querySelector('meta[name="color-scheme"]'))return;const d=getComputedStyle(document.documentElement).getPropertyValue("color-scheme").trim();if(d&&d!=="normal")return;const p=(y)=>{if(!y)return null;const m=getComputedStyle(y).backgroundColor.match(/^rgba?\(\s*(\d+)[,\s]+(\d+)[,\s]+(\d+)(?:[,\s/]+([\d.]+%?))?\s*\)$/);if(!m)return null;const w=m[4]==null?1:parseFloat(m[4])/(m[4].endsWith("%")?100:1);if(w<0.99)return null;return[+m[1],+m[2],+m[3]]};const f=p(document.body)||p(document.documentElement);if(!f)return;const g=(y)=>{const m=y/255;return m<=0.04045?m/12.92:((m+0.055)/1.055)**2.4};const h=0.2126*g(f[0])+0.7152*g(f[1])+0.0722*g(f[2]);document.documentElement.style.setProperty("color-scheme",h<0.4?"dark":"light")}catch{}};if(document.readyState==="complete")n();else window.addEventListener("load",n)}var I=["https://claude.ai","https://preview.claude.ai","https://03860e05-b5fa-45cf-836a-6a15e6133ceb.claudeusercontent.com"];var B=true;var K=false;var C=()=>{};if(K===true){try{const n=setTimeout.bind(window);const d=1e4;const p=15;const f=1e4;const g=120000;const h=200;const y=(o)=>{try{let r;if(typeof o==="string")r=o;else if(o instanceof URL)r=o.href;else if(typeof Request!=="undefined"&&o instanceof Request)r=o.url;else return null;if(!r)return null;const l=document.baseURI;const i=new URL(r,l);if(i.protocol!=="http:"&&i.protocol!=="https:")return null;if(i.origin!==new URL(l).origin)return null;return i.origin+i.pathname}catch{return null}};const m=new Map;const w=(o)=>{let r=m.get(o);if(!r){if(m.size>=h){const l=m.keys().next().value;if(l!==undefined)m.delete(l)}r={fails:[],until:0,cooldown:f,hard:false};m.set(o,r)}return r};const R=(o)=>{const r=m.get(o);return r!==undefined&&r.until>Date.now()};const O=(o,r)=>{const l=Date.now();const i=w(o);if(r)i.hard=true;if(i.until>l)return;i.fails.push(l);while(i.fails.length>0&&i.fails[0]<=l-d)i.fails.shift();if(i.fails.length>=p){i.until=l+i.cooldown;if(i.hard)i.cooldown=Math.min(i.cooldown*2,g);i.fails.length=0;try{n(()=>{try{S(true)}catch{}},i.until-l+100)}catch{}console.warn("[omelette] asset circuit breaker: pausing requests to "+o+" for "+Math.round((i.until-l)/1000)+"s after "+p+" failures in "+d/1000+"s")}};const e=(o)=>{m.delete(o)};const t=100;const a=new WeakMap;const u=new Set;let s=null;const S=(o)=>{for(const r of Array.from(u)){try{const l=a.get(r);if(l===undefined){u.delete(r);continue}if(o){const i=y(l);if(i!==null&&R(i))continue}a.delete(r);u.delete(r);if(s!==null)s.call(r,l)}catch{}}};C=()=>{try{m.clear();S(false)}catch{}};document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible")C()});const _=window.fetch;if(typeof _==="function"){const o=function(...r){let l=null;try{l=y(r[0])}catch{}if(l!==null&&R(l)){let c;try{if(r[1]&&r[1].signal!==undefined){c=r[1].signal||undefined}else if(typeof Request!=="undefined"&&r[0]instanceof Request){c=r[0].signal||undefined}}catch{c=undefined}return new Promise((k,b)=>{const E=()=>{try{return c.reason!==undefined?c.reason:new DOMException("The operation was aborted.","AbortError")}catch{return new DOMException("The operation was aborted.","AbortError")}};try{if(c&&c.aborted){b(E());return}}catch{}let T=false;const j=()=>{if(T)return;T=true;b(E())};try{if(c)c.addEventListener("abort",j,{once:true})}catch{}n(()=>{if(T)return;T=true;try{if(c)c.removeEventListener("abort",j)}catch{}let L;try{L=new Response(null,{status:429,statusText:"Too Many Requests",headers:{"Retry-After":"10"}})}catch{L={ok:false,status:429}}k(L)},250)})}const i=_.apply(window,r);if(l!==null){const c=l;i.then((k)=>{try{if(k.ok)e(c);else if(k.status===401||k.status===403||k.status===404||k.status===429){O(c,k.status!==404)}}catch{}},()=>{})}return i};window.fetch=o}const v=Object.getOwnPropertyDescriptor(HTMLImageElement.prototype,"src");if(v!==undefined&&v.set!==undefined&&v.get!==undefined){const o=v.set;s=o;Object.defineProperty(HTMLImageElement.prototype,"src",{configurable:true,enumerable:v.enumerable,get:v.get,set(r){const l=`${r}`;try{const i=y(l);if(i!==null&&R(i)){a.set(this,l);if(u.size<t)u.add(this);return}}catch{}try{a.delete(this);u.delete(this)}catch{}o.call(this,l)}})}try{const o=HTMLImageElement.prototype.setAttribute;HTMLImageElement.prototype.setAttribute=function(r,l){if(arguments.length<2){o.apply(this,arguments);return}if(typeof r==="string"&&r.toLowerCase()==="src"){const i=`${l}`;try{const c=y(i);if(c!==null&&R(c)){a.set(this,i);if(u.size<t)u.add(this);return}a.delete(this);u.delete(this)}catch{}o.call(this,r,i);return}o.call(this,r,l)}}catch{}window.addEventListener("error",(o)=>{try{const r=o.target;if(r instanceof HTMLImageElement){const l=y(r.currentSrc||r.src||"");if(l!==null)O(l,true)}}catch{}},true);window.addEventListener("load",(o)=>{try{const r=o.target;if(r instanceof HTMLImageElement){const l=y(r.currentSrc||r.src||"");if(l!==null)e(l);const i=a.get(r);if(i!==undefined){let c=false;try{c=new URL(i,document.baseURI).href===new URL(r.currentSrc||r.src||"",document.baseURI).href}catch{c=false}if(c){a.delete(r);u.delete(r)}}}}catch{}},true)}catch{}}var J=30000;var G=3000;document.addEventListener("DOMContentLoaded",()=>{const n=window.Babel;const d="om-src-id";if(n&&n.registerPlugin&&!(n.availablePlugins&&n.availablePlugins[d])){n.registerPlugin(d,({types:h})=>({visitor:{JSXOpeningElement(y,m){const w=y.node;if(w.name&&w.name.type==="JSXMemberExpression")return;for(let t=0;t<w.attributes.length;t++){const a=w.attributes[t];if(a.type==="JSXAttribute"&&a.name&&a.name.name==="data-om-id")return}const R=m.file&&m.file.opts&&m.file.opts.filename||"?";const O=w.loc&&w.loc.start;const e=`jsx:${R}:${w.start??0}:${O?O.line:0}:${O?O.column+1:0}`;w.attributes.push(h.jsxAttribute(h.jsxIdentifier("data-om-id"),h.stringLiteral(e)))}}}))}const p="om-text-extract";let f=false;if(B&&n&&n.registerPlugin&&!(n.availablePlugins&&n.availablePlugins[p])){const h=window.React;if(h&&h.useSyncExternalStore&&h.createElement){f=true;const y={};const m=new Set;let w=0;window.__omTextO=y;window.__omTextSet=(e)=>{for(const t in e){const a=e[t];if(a==null)delete y[t];else y[t]=a}w++;m.forEach((t)=>t())};const R=(e)=>{m.add(e);return()=>m.delete(e)};const O=()=>w;window.__OmT=function e(t){h.useSyncExternalStore(R,O,O);return h.createElement("span",{"data-om-text":t.i,className:"__om-t"},t.i in y?y[t.i]:t.children)};n.registerPlugin(p,({types:e})=>{const t={style:1,script:1,noscript:1,textarea:1,title:1,option:1,text:1,tspan:1,textPath:1};const a={placeholder:1,alt:1,title:1,label:1,"aria-label":1,"aria-description":1,"aria-placeholder":1};const u=(o,r)=>e.logicalExpression("??",e.memberExpression(e.logicalExpression("||",e.memberExpression(e.identifier("window"),e.identifier("__omTextO")),e.objectExpression([])),e.stringLiteral(o),true),r);const s=(o)=>o.file&&o.file.opts&&o.file.opts.filename||"?";const S=(o)=>o.file&&o.file.code||"";const _=(o,r)=>{const l=(c)=>c&&c.start!=null&&c.end!=null&&(c.type==="StringLiteral"||c.type==="TemplateLiteral"&&c.expressions.length===0)?[c.start,c.end]:null;const i=l(r);if(i)return i;if(r&&r.type==="Identifier"){const c=o.scope.getBinding(r.name);if(c&&c.constant&&c.path.node.type==="VariableDeclarator"){return l(c.path.node.init)}}return null};const v=(o,r,l)=>{const i=o.node;let c=false;const k=(E,T)=>{c=true;return e.jsxElement(e.jsxOpeningElement(e.jsxIdentifier("__OmT"),[e.jsxAttribute(e.jsxIdentifier("i"),e.stringLiteral(E))],false),e.jsxClosingElement(e.jsxIdentifier("__OmT")),[T],false)};const b=i.children.map((E)=>{if(E.type==="JSXText"){if(E.start==null||E.end==null)return E;const T=l.slice(E.start,E.end);const j=T.length-T.trimStart().length;const L=T.length-T.trimEnd().length;if(j+L>=T.length)return E;return k(`txt:${r}:${E.start+j}:${E.end-L}`,E)}if(E.type==="JSXExpressionContainer"){const T=_(o,E.expression);if(T)return k(`str:${r}:${T[0]}:${T[1]}`,E)}return E});if(c)i.children=b};return{visitor:{JSXOpeningElement(o,r){const l=o.node;const i=s(r);const c={};for(let k=0;k<l.attributes.length;k++){const b=l.attributes[k];if(b.type!=="JSXAttribute"||!b.name)continue;const E=b.name.name;if(!a[E])continue;if(!b.value||b.value.type!=="StringLiteral")continue;if(b.value.start==null||b.value.end==null)continue;const T=`txt:${i}:${b.value.start}:${b.value.end}`;c[E]=T;b.value=e.jsxExpressionContainer(u(T,e.stringLiteral(b.value.value)))}if(Object.keys(c).length){l.attributes.push(e.jsxAttribute(e.jsxIdentifier("data-om-text-attrs"),e.stringLiteral(JSON.stringify(c))))}},JSXElement(o,r){const l=o.node.openingElement;const i=l&&l.name&&l.name.name;if(i==="__OmT")return;if(typeof i==="string"&&t[i])return;v(o,s(r),S(r))},JSXFragment(o,r){v(o,s(r),S(r))}}}})}}const g=f?["transform-react-jsx-source",d,p]:["transform-react-jsx-source",d];document.querySelectorAll('script[type="text/babel"],script[type="text/jsx"]').forEach((h,y)=>{const m=h.getAttribute("data-plugins")||"";const w=g.filter((R)=>m.indexOf(R)<0);if(w.length){h.setAttribute("data-plugins",m?`${m},${w.join(",")}`:w.join(","))}if(!h.hasAttribute("data-filename")){h.setAttribute("data-filename",h.getAttribute("src")||`inline-${y}`)}})});var A=window.parent;var U="not editable here — open the project in the Claude Design editor to save";var W=()=>Promise.resolve({persisted:false,noHost:true,reason:U});var H=W;var M="data/storage.json";var z=()=>{try{const n=new URL(document.baseURI);const d=n.pathname.match(/\/projects\/([^/]+)\/serve\//);if(d)return d[1];return n.hostname.split(".")[0]||""}catch{return location.hostname.split(".")[0]||""}};var Z=()=>{try{const n=new URL(document.baseURI);const d=n.pathname.indexOf("/serve/");if(d>=0)return n.origin+n.pathname.slice(0,d+"/serve/".length)+M}catch{}return"./"+M};var x=null;var N=()=>{if(!x){x=fetch(Z(),{cache:"no-store"}).then((n)=>{if(n.ok)return n.text();return n.status===404?"":null}).catch(()=>null).then((n)=>{if(n===null){x=null;return null}const d=new Map;if(!n)return d;let p;try{p=JSON.parse(n)}catch{console.warn("[omelette.storage] "+M+" is not valid JSON; treating the store as unreadable so a save cannot overwrite the "+"hand-edited bytes. Fix the JSON (or delete the file) to re-enable persistence.");x=null;return null}if(p===null||typeof p!=="object"||Array.isArray(p)){console.warn("[omelette.storage] "+M+" doesn't hold a JSON object; treating the store as unreadable so a save cannot "+"overwrite the hand-edited bytes. Make the top level a JSON object to re-enable persistence.");x=null;return null}const f=p;if("data"in f){const g=f.data;if(g===null||typeof g!=="object"||Array.isArray(g)){console.warn("[omelette.storage] "+M+' has a "data" field that is not a JSON object; treating the store as unreadable so a '+'save cannot overwrite the hand-edited bytes. Make "data" a JSON object to re-enable persistence.');x=null;return null}const h=f._meta;const y=h!==null&&typeof h==="object"?h.project:undefined;if(typeof y==="string"&&y!==""&&y!==z())return d;for(const m of Object.keys(g))d.set(m,g[m]);return d}for(const g of Object.keys(f)){if(g!=="_meta")d.set(g,f[g])}return d})}return x};var F=(n)=>H(M,JSON.stringify({_meta:{project:z(),version:1},data:Object.fromEntries(n)},null,2));var D=Promise.resolve();var $=(n)=>{const d=D.then(n);D=d.then(()=>{return},()=>{return});return d};var V=/sk-(?:ant-)?[A-Za-z0-9_-]{16,}|AKIA[0-9A-Z]{16}|gh[pousr]_[A-Za-z0-9]{20,}|xox[a-z]-[A-Za-z0-9][A-Za-z0-9-]{9,}|AIza[0-9A-Za-z_-]{30,}|-----BEGIN [A-Z ]*PRIVATE KEY-----/;var Y=/password|passwd|secret|api[_-]?key|access[_-]?token|auth[_-]?token|credential/i;var Q=(n,d,p)=>{if(V.test(d)||Y.test(n)&&typeof p==="string"&&p.length>=8){console.warn('[omelette.storage] the value for "'+n+'" looks like a credential. The storage file is a plaintext project file — visible to '+"everyone with project access and copied when the project is duplicated. Do not store secrets here.")}};var q={persisted:false,reason:"could not load the existing store — not overwriting it"};var X={persisted:false,reason:"stored value changed since a failed read — re-read this key before saving"};var P=new Set;var ee={get:(n)=>{if(typeof n!=="string"){return Promise.reject(new TypeError("storage.get: key must be a string"))}return $(N).then((d)=>{if(d===null){P.add(n);return null}P.delete(n);if(!d.has(n))return null;const p=d.get(n);return p==null?null:JSON.parse(JSON.stringify(p))})},set:(n,d)=>{if(typeof n!=="string"){return Promise.reject(new TypeError("storage.set: key must be a string"))}let p;try{p=JSON.stringify(d)}catch(g){return Promise.reject(new TypeError("storage.set: value must be JSON-serializable ("+String(g)+")"))}if(p===undefined){return Promise.reject(new TypeError("storage.set: value must be JSON-serializable"))}Q(n,p,d);const f=JSON.parse(p);return $(()=>N().then((g)=>{if(g===null)return q;if(P.has(n)){if(g.has(n))return X;P.delete(n)}g.set(n,f);return F(g)}))},delete:(n)=>{if(typeof n!=="string"){return Promise.reject(new TypeError("storage.delete: key must be a string"))}return $(()=>N().then((d)=>{if(d===null)return q;if(P.has(n)){if(d.has(n))return X;P.delete(n)}d.delete(n);return F(d)}))},keys:()=>$(N).then((n)=>n===null?[]:Array.from(n.keys()))};window.omelette={writeFile:(n,d)=>H(n,d).then((p)=>{if(!p.persisted&&!p.noHost){throw new Error(p.reason||"write failed")}}),storage:ee};if(A&&A!==window){const n=(e,t)=>{try{A.postMessage({__omelette_log:true,type:e,data:t},"*")}catch{}};["log","warn","error"].forEach((e)=>{const t=console[e];console[e]=(...a)=>{const u=a.map((s)=>{try{return typeof s==="object"?JSON.stringify(s):String(s)}catch{try{return String(s)}catch{return"[unstringifiable]"}}}).join(" ");n(e,u);t.apply(console,a)}});window.addEventListener("error",(e)=>{const t=e.target;if(t&&t!==window&&t.tagName){const a=t.src||t.href||"";n("resource_error",`${t.tagName} failed to load: ${a}`)}else{n("error",`${e.message||"Unknown error"} at ${e.filename||"?"}:${e.lineno||0}:${e.colno||0}`)}},true);window.addEventListener("unhandledrejection",(e)=>{const t=e.reason;const a=t instanceof Error?`${t.message} ${t.stack}`:String(t);n("error",`Unhandled rejection: ${a}`)});window.addEventListener("click",(e)=>{if(e.defaultPrevented||e.button!==0)return;if(e.metaKey||e.ctrlKey||e.shiftKey||e.altKey)return;const t=e.composedPath?e.composedPath():[];const a=["button","input","select","textarea","summary","label"];let u=null;for(const v of t){if(!(v instanceof Element))continue;if(v.localName==="a"){if(!(v instanceof HTMLAnchorElement))return;u=v;break}if(a.indexOf(v.localName)!==-1)return}if(!u)return;if(u.isContentEditable)return;const s=u.closest("[contenteditable]");if(s&&s.getAttribute("contenteditable")!=="false")return;const S=(u.getAttribute("target")||"_self").toLowerCase();if(S!=="_self"&&S!=="_top"&&S!=="_parent")return;let _;try{_=new URL(u.href)}catch{return}if(_.protocol!=="http:"&&_.protocol!=="https:")return;if(location.origin==="null")return;if(_.origin===location.origin)return;e.preventDefault();window.open(_.href,"_blank","noopener,noreferrer")});const d=()=>{try{A.postMessage({type:"omelette:height",height:document.documentElement.scrollHeight},"*")}catch{}};if(window.ResizeObserver)new ResizeObserver(d).observe(document.documentElement);const p=()=>{d();if(!document.querySelector('script[type="text/babel"],script[type="text/jsx"]'))return;const e=()=>document.getElementById("root")||document.querySelector("body > div[id]");const t=e()?.firstElementChild??null;let a=0;const u=()=>{const s=e();if(s&&s.firstElementChild!==t||++a>30){d();return}setTimeout(u,100)};setTimeout(u,100)};if(document.readyState==="complete")p();else window.addEventListener("load",p);const f={};let g=0;const h=(e)=>new Promise((t,a)=>{if(!I.length){a(new Error("claude.complete: no parent origin"));return}const u=`c${++g}`;const s=()=>setTimeout(()=>{delete f[u];a(new Error(`claude.complete: no data for ${J/1000}s`))},J);const S=s();f[u]={resolve:t,reject:a,text:"",t:S,arm:s};try{for(const _ of I){A.postMessage({__om_api:true,id:u,body:e},_)}}catch(_){clearTimeout(S);delete f[u];a(_)}});const y=8;const m=async(e,t)=>{if(!Array.isArray(e.messages)){throw new Error("claude.complete: tools require a messages array")}const a=e.messages.slice();const u={...e,tools:e.tools.map((_)=>{if(_===null||typeof _!=="object")return _;const v={};for(const o of Object.keys(_)){if(typeof _[o]!=="function")v[o]=_[o]}return v})};const s=u.tool_choice;const S=s!=null&&(s.type==="any"||s.type==="tool")?{...u,tool_choice:s.disable_parallel_tool_use!==undefined?{type:"auto",disable_parallel_tool_use:s.disable_parallel_tool_use}:{type:"auto"}}:u;for(let _=0;_<y;_++){const v=await h({..._===0?u:S,messages:a});const o=v.message;const r=o&&Array.isArray(o.content)?o.content:null;const l=r?r.filter((c)=>c?.type==="tool_use"):[];if(o?.stop_reason!=="tool_use"||l.length===0){return v.text}const i=[];for(const c of l){const k=t.get(c.name);if(!k){i.push({type:"tool_result",tool_use_id:c.id,content:`no handler for tool "${c.name}"`,is_error:true});continue}try{const b=await k(c.input);const E=typeof b==="string"?b:O(b)??"";i.push({type:"tool_result",tool_use_id:c.id,content:E})}catch(b){i.push({type:"tool_result",tool_use_id:c.id,content:String(b?.message??b??"tool handler failed"),is_error:true})}}a.push({role:"assistant",content:r},{role:"user",content:i})}throw new Error(`claude.complete: exceeded ${y} tool turns`)};window.claude={complete(e){const t=e;if(t!==null&&typeof t==="object"&&Array.isArray(t.tools)&&t.tools.some((a)=>a!==null&&typeof a==="object"&&typeof a.run==="function")){const a=new Map;for(const u of t.tools){if(u!==null&&typeof u==="object"&&typeof u.run==="function"){a.set(String(u.name),u.run)}}return m(t,a)}return h(e).then((a)=>a.text)}};const w={};let R=0;H=(e,t)=>new Promise((a)=>{if(!I.length){a({persisted:false,noHost:true,reason:U});return}const u=`f${++R}`;const s=setTimeout(()=>{delete w[u];a({persisted:false,noHost:true,reason:U})},G);w[u]={settle:a,t:s};try{for(const S of I){A.postMessage({__om_file:true,id:u,op:"write",path:e,content:t},S)}}catch{clearTimeout(s);delete w[u];a({persisted:false,noHost:true,reason:U})}});const O=(e)=>{try{return JSON.stringify(e)}catch{return JSON.stringify(String(e))}};window.addEventListener("message",(e)=>{if(I.indexOf(e.origin)<0)return;if(e.source!==A)return;const t=e.data;if(!t)return;if(t.type==="omelette-preview-refresh"){if(typeof t.token!=="string"||!/^[0-9a-f.-]+(\.(rc|pr-[0-9]+))?(\.[0-9]+\.[0-9a-f]{16})?$/.test(t.token))return;const s=Math.max(1,Math.floor((t.expiresAt||0)-Date.now()/1000));document.cookie="__Host-omelette-preview="+t.token+"; Path=/; Secure; SameSite=None; Partitioned; Max-Age="+s;C();return}if(t.__om_file_r){const s=w[t.id];if(!s)return;clearTimeout(s.t);delete w[t.id];s.settle(t.ok?{persisted:true}:{persisted:false,reason:t.error||"write failed"});return}if(t.__om_api_r){const s=f[t.id];if(!s)return;if(t.error!=null){clearTimeout(s.t);delete f[t.id];s.reject(new Error(t.error));return}if(t.chunk!=null){clearTimeout(s.t);s.t=s.arm();s.text+=t.chunk;return}if(t.done){clearTimeout(s.t);delete f[t.id];s.resolve({text:t.text!=null?t.text:s.text,message:t.message});return}return}if(!t.__om_eval)return;const a=t;const u=(s)=>{e.source.postMessage({...s,__om_eval_r:1,id:a.id},e.origin)};try{const s=(0,eval)(a.code);if(s&&typeof s.then==="function"){s.then((S)=>u({ok:1,v:O(S)}),(S)=>u({ok:0,e:String(S)}))}else{u({ok:1,v:O(s)})}}catch(s){u({ok:0,e:String(s)})}})}})();
+</script>
+
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
 <title>Debunking — Base Habits Coaching</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  body{margin:0;background:#f6f5f4;font-family:'Inter',system-ui,sans-serif;color:#31302e}
-  a{color:#0075de;text-decoration:none}
-  a:hover{color:#005bab}
-  header{background:#e9edf7;border-bottom:1px solid #dbe1f0;padding:12px 22px;font-size:16px;font-weight:700;letter-spacing:-0.3px;color:#000}
-  main{max-width:720px;margin:0 auto;padding:56px 22px 80px;display:flex;flex-direction:column;gap:18px}
-  .crumbs{font-size:14px;color:#615d59;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
-  .sep{color:#a39e98}
-  h1{margin:0;font-size:clamp(30px,6vw,40px);font-weight:700;line-height:1.1;letter-spacing:-1px;color:#000}
-  p{margin:0;font-size:17px;line-height:1.55;max-width:34em;text-wrap:pretty}
-  .tag{align-self:flex-start;display:inline-flex;align-items:center;gap:7px;padding:5px 11px;border-radius:8px;background:#fff;border:1px solid #e6e6e6;font-size:13px;font-weight:500;color:#615d59}
-  .dot{width:6px;height:6px;border-radius:50%;background:#e8a33d}
-  nav.path{display:flex;flex-direction:column;gap:6px;margin-top:6px}
-  nav.path a{font-size:15px;font-weight:500}
+:root{
+  --page:#f6f5f4; --card:#ffffff; --hairline:#e6e6e6;
+  --ink:#000000; --ink-2:#31302e; --muted:#615d59; --faint:#a39e98;
+  --primary:#0075de; --primary-active:#005bab; --indigo:#213183;
+  --teal:#2a9d99; --orange:#dd5b00; --purple:#391c57; --green:#1aae39;
+  --shadow-1:rgba(0,0,0,0.01) 0 0.175px 1.041px,rgba(0,0,0,0.02) 0 0.8px 2.925px,rgba(0,0,0,0.027) 0 2.025px 7.847px,rgba(0,0,0,0.04) 0 4px 18px;
+  --shadow-2:rgba(0,0,0,0.01) 0 0.175px 1.041px,rgba(0,0,0,0.02) 0 0.8px 2.925px,rgba(0,0,0,0.027) 0 2.025px 7.847px,rgba(0,0,0,0.04) 0 4px 18px,rgba(0,0,0,0.05) 0 23px 52px;
+}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--page);color:var(--ink);font-family:'Inter',system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased}
+p,h1,h2,h3,ul{margin:0}
+ul{padding:0;list-style:none}
+a{color:var(--primary);text-decoration:none}
+a:hover{color:var(--primary-active)}
+.wrap{max-width:720px;margin:0 auto;padding-left:22px;padding-right:22px}
+.head-row{max-width:none;padding-left:max(76px,calc((100% - 720px)/2 + 22px));padding-right:22px;padding-top:12px;padding-bottom:12px;display:flex;align-items:center;gap:14px}
+
+header{position:sticky;top:0;z-index:30;background:#e9edf7;border-bottom:1px solid #dbe1f0}
+#burger{position:absolute;left:22px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;justify-content:center;gap:4px;width:40px;height:40px;padding:0 9px;border:1px solid #dbe1f0;border-radius:8px;background:rgba(255,255,255,0.7);cursor:pointer;transition:background 120ms ease,transform 120ms ease}
+#burger:hover{background:#fff}
+#burger:active{transform:translateY(-50%) scale(0.96)}
+#burger span{display:block;height:2px;border-radius:2px;background:var(--ink-2)}
+.page-tag{font-size:13px;font-weight:500;letter-spacing:0;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.page-tag::before{content:"/";margin-right:7px;color:var(--faint)}
+.brand{font-size:16px;font-weight:700;letter-spacing:-0.3px;color:var(--ink)}
+.contact-btn{margin-left:auto;display:inline-flex;align-items:center;justify-content:center;min-height:36px;padding:7px 16px;border-radius:9999px;background:var(--primary);color:#fff !important;font-size:14px;font-weight:500;transition:background 120ms ease,transform 120ms ease}
+.contact-btn:active{background:var(--primary-active);transform:scale(0.96)}
+
+#scrim{position:fixed;inset:0;z-index:50;background:rgba(0,0,0,0.32);opacity:0;pointer-events:none;transition:opacity 160ms ease}
+#scrim.open{opacity:1;pointer-events:auto}
+#drawer{position:fixed;top:0;left:0;bottom:0;z-index:60;width:min(320px,86vw);background:var(--card);border-right:1px solid var(--hairline);box-shadow:var(--shadow-2);transform:translateX(-100%);transition:transform 200ms ease;display:flex;flex-direction:column;overflow-y:auto}
+#drawer.open{transform:translateX(0)}
+.drawer-top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 16px 12px}
+#drawer-close{width:32px;height:32px;border-radius:50%;border:none;background:rgba(0,0,0,0.05);color:var(--ink-2);font-size:15px;line-height:1;cursor:pointer;transition:transform 120ms ease}
+#drawer-close:active{transform:scale(0.9)}
+.nav-group{padding:12px 16px 4px}
+.nav-label{display:flex;align-items:center;gap:9px;font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.nav-label .dot{width:7px;height:7px;border-radius:50%;flex:none}
+.nav-list{display:flex;flex-direction:column;gap:2px}
+.nav-item{display:block;padding:9px 10px;border-radius:5px;font-size:15px;font-weight:500;color:var(--ink-2);transition:background 120ms ease}
+.nav-item:hover{background:rgba(0,0,0,0.035);color:var(--ink-2)}
+.nav-item.current{background:rgba(0,117,222,0.08);color:var(--primary)}
+.nav-item.soon{color:var(--faint);cursor:default;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.nav-item.soon:hover{background:none}
+.soon-tag{font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--faint)}
+.drawer-foot{margin-top:auto;border-top:1px solid var(--hairline);padding:14px 16px 18px}
+.drawer-foot a{font-size:15px;font-weight:500}
+
+/* page */
+.title-band{background:linear-gradient(180deg,#dfe5f5 0%,#e9ecf6 46%,var(--page) 100%);padding:38px 0 34px}
+h1{font-size:clamp(32px,8.2vw,46px);font-weight:700;line-height:1.06;letter-spacing:-1.4px;text-wrap:pretty}
+.crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:14px;font-size:13px;font-weight:500;color:var(--muted)}
+.crumbs .sep{color:var(--faint)}
+.bars{display:flex;gap:6px;margin-bottom:20px}
+.bars span{width:26px;height:6px;border-radius:3px}
+
+main{padding-bottom:24px}
+.sections{display:flex;flex-direction:column}
+section.chapter{padding:34px 0}
+section.chapter + section.chapter{border-top:1px solid var(--hairline)}
+.eyebrow{display:flex;align-items:center;gap:9px;font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+.eyebrow .dot{width:7px;height:7px;border-radius:50%;flex:none}
+h2{font-size:clamp(24px,5.6vw,30px);font-weight:700;line-height:1.16;letter-spacing:-0.8px;color:var(--ink);text-wrap:pretty}
+h3{font-size:19px;font-weight:600;line-height:1.3;letter-spacing:-0.4px;color:var(--ink);text-wrap:pretty}
+.lede{font-size:19px;font-weight:500;line-height:1.45;letter-spacing:-0.2px;color:var(--indigo);max-width:26em;text-wrap:pretty}
+.body{font-size:17px;line-height:1.7;color:var(--muted);max-width:34em;text-wrap:pretty}
+.body strong{font-weight:600;color:var(--ink-2)}
+.body .caps{font-weight:600;color:var(--ink-2);letter-spacing:0.02em}
+.stack{display:flex;flex-direction:column;gap:16px;margin-top:4px}
+.sub{display:flex;flex-direction:column;gap:8px;padding:20px 0}
+.sub + .sub{border-top:1px solid var(--hairline)}
+.sub-head{display:flex;align-items:baseline;gap:12px}
+.num{flex:none;font-size:13px;font-weight:700;color:var(--faint);letter-spacing:0.04em;min-width:18px}
+.ask{font-size:17px;font-weight:600;line-height:1.4;letter-spacing:-0.3px;color:var(--ink);text-wrap:pretty}
+
+ul.list{display:flex;flex-direction:column;gap:10px}
+ul.list li{display:flex;align-items:baseline;gap:12px;font-size:17px;line-height:1.5;color:var(--ink-2);font-weight:500}
+ul.list li::before{content:"";flex:none;width:7px;height:7px;border-radius:50%;background:var(--teal);transform:translateY(-2px)}
+ul.list li a{font-weight:500}
+
+.quote{background:var(--card);border:1px solid var(--hairline);border-radius:12px;padding:22px 24px;font-size:19px;line-height:1.5;font-weight:400;letter-spacing:-0.2px;color:var(--ink-2);text-wrap:pretty}
+.hero{background:var(--indigo);border-radius:16px;padding:32px 28px;box-shadow:var(--shadow-2)}
+.hero p{color:#fff;font-size:clamp(21px,4.9vw,26px);font-weight:600;line-height:1.34;letter-spacing:-0.6px;text-wrap:pretty}
+.hero .rule{display:flex;gap:6px;margin-bottom:18px}
+.hero .rule span{width:24px;height:5px;border-radius:3px}
+
+#contact{border-top:1px solid #1a2668;background:var(--indigo);padding:44px 0 56px;color:#fff}
+#contact h2{color:#fff}
+#contact .body{color:#c3cae8}
+.contact-rows{display:flex;flex-direction:column;gap:12px;margin-top:18px}
+.contact-row{display:flex;align-items:center;gap:14px;padding:16px 18px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.16);border-radius:12px}
+.contact-row .dot{width:9px;height:9px;border-radius:50%;flex:none}
+.contact-row .k{font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#a9b3dd}
+.contact-row .v{font-size:17px;font-weight:500;color:#fff}
+.contact-row .v:hover{color:#dfe5f5}
+
+@media (max-width:600px){
+  #burger{left:12px;width:36px;height:36px;padding:0 8px}
+  .head-row{padding-left:56px;padding-right:12px;gap:10px}
+  .brand{font-size:15px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .contact-btn{flex:none;padding:7px 13px;font-size:13px}
+}
 </style>
 </head>
 <body>
-<header><span>Base Habits Coaching</span><span style="font-size:13px;font-weight:500;color:#615d59;margin-left:7px">/ Debunking</span></header>
-<main>
-  <nav class="crumbs" aria-label="Breadcrumb">
+
+<header>
+  <div class="wrap head-row" style="position:relative">
+    <button type="button" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="drawer">
+      <span></span><span></span><span></span>
+    </button>
+    <span class="brand">Base Habits Coaching</span>
+    <span class="page-tag">Debunking</span>
+    <a class="contact-btn" href="#contact">Contact me</a>
+  </div>
+</header>
+
+<div id="scrim"></div>
+
+<nav id="drawer" aria-label="Client pages" aria-hidden="true">
+  <div class="drawer-top">
+    <span style="font-size:15px;font-weight:600;color:var(--ink)">Client pages</span>
+    <button type="button" id="drawer-close" aria-label="Close menu">&#10005;</button>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-list">
+      <a class="nav-item" href="../../index.html">&lsaquo; Client home</a>
+    </div>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-label"><span class="dot" style="background:var(--teal)"></span>Phase 1</div>
+    <div class="nav-list">
+      <a class="nav-item" href="../base-habits/index.html">Base Habits</a>
+      <a class="nav-item" href="../two-week-rule/index.html">Two Week Rule</a>
+      <a class="nav-item current" href="index.html" aria-current="page">Debunking</a>
+      <a class="nav-item" href="../calories/index.html">Calories</a>
+      <a class="nav-item" href="../macros/index.html">Macros</a>
+      <a class="nav-item" href="../protein/index.html" style="margin-left:14px">Protein</a>
+      <a class="nav-item" href="../carbs/index.html" style="margin-left:14px">Carbs</a>
+      <a class="nav-item" href="../fats/index.html" style="margin-left:14px">Fats</a>
+    </div>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-label"><span class="dot" style="background:var(--orange)"></span>Phase 2</div>
+    <div class="nav-list">
+      <span class="nav-item soon" aria-disabled="true">Placeholder page one<span class="soon-tag">Coming soon</span></span>
+      <span class="nav-item soon" aria-disabled="true">Placeholder page two<span class="soon-tag">Coming soon</span></span>
+    </div>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-label"><span class="dot" style="background:var(--purple)"></span>Phase 3</div>
+    <div class="nav-list">
+      <span class="nav-item soon" aria-disabled="true">Placeholder page one<span class="soon-tag">Coming soon</span></span>
+      <span class="nav-item soon" aria-disabled="true">Placeholder page two<span class="soon-tag">Coming soon</span></span>
+    </div>
+  </div>
+
+  <div class="drawer-foot">
+    <a href="../../../base-habits-coaching.html">Back to basehabitscoaching.com</a>
+  </div>
+</nav>
+
+<div class="title-band">
+  <div class="wrap">
+    <div class="bars"><span style="background:var(--teal)"></span><span style="background:var(--orange)"></span><span style="background:var(--purple)"></span><span style="background:var(--green)"></span></div>
+    <h1>Debunking</h1>
+    <nav class="crumbs" aria-label="Breadcrumb">
       <a href="../../index.html">Client Home</a>
       <span class="sep">&rsaquo;</span>
       <a href="../base-habits/index.html">Base Habits</a>
@@ -33,20 +190,186 @@
       <a href="../two-week-rule/index.html">Two Week Rule</a>
       <span class="sep">&rsaquo;</span>
       <span>Debunking</span>
-  </nav>
-  <h1>Debunking</h1>
-  <span class="tag"><span class="dot"></span>Being written</span>
-  <p>This lesson is not published yet.</p>
-  <nav class="path">
-    <a href="../base-habits/index.html">Base Habits</a>
-    <a href="../two-week-rule/index.html">Two Week Rule</a>
-    <a href="../calories/index.html">Calories</a>
-    <a href="../macros/index.html">Macros</a>
-    <a href="../protein/index.html">Protein</a>
-    <a href="../carbs/index.html">Carbs</a>
-    <a href="../fats/index.html">Fats</a>
-    <a href="../../index.html">Client Home</a>
-  </nav>
+    </nav>
+  </div>
+</div>
+
+<main>
+  <div class="wrap sections">
+
+    <section class="chapter">
+      <div class="eyebrow"><span class="dot" style="background:var(--teal)"></span>Opening</div>
+      <p class="lede">Fast answers for the things that social media says.</p>
+    </section>
+
+    <section class="chapter">
+      <div class="eyebrow"><span class="dot" style="background:var(--orange)"></span>Question 01</div>
+      <h2>How do I know if something is legit?</h2>
+      <div class="stack">
+        <p class="body">Ask two things. What's the actual mechanism, not just what it claims to do. And is it clinically dosed? If either answer is not clear, it's marketing. Do the research yourself. Get on google, ChatGPT, or whatever method you want.</p>
+        <p class="body">If it is a supplement; ask if it is clinically dosed, meaning the dose provided is in an amount that is actually effective to what your body needs. Ask if you can get this from your diet and if actually taking this supplement is meaningful to your goals. Also, is it something you are actually deficient in, most times a blood test is the only way to tell if you are deficient. This all leads back to having a conversation with your doctor.</p>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <div class="eyebrow"><span class="dot" style="background:var(--purple)"></span>Question 02</div>
+      <h2>Do keto, intermittent fasting, paleo, or cleanses work?</h2>
+      <div class="stack">
+        <p class="body">They work the same way every diet works: fewer calories. Keto drops water fast due to the decrease in carbs. Fasting just shrinks your eating window. Paleo cuts junk. Cleanses are laxatives. None of them beat a calorie deficit, they just hide one inside a set of rules.</p>
+        <div class="hero">
+          <div class="rule"><span style="background:#5ecfc9"></span><span style="background:#ff9a4d"></span><span style="background:#9a7cc7"></span></div>
+          <p>Every diet with a name is marketing. THE ONLY THING THEY ALL SHARE IS THE THING THEY DON'T ADVERTISE, WHICH IS FEWER CALORIES.</p>
+        </div>
+        <p class="body">If one of these is genuinely how you like to eat, keep it. I'll build your numbers around it.</p>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <div class="eyebrow"><span class="dot" style="background:var(--green)"></span>Question 03</div>
+      <h2>Can I just exercise instead of dieting?</h2>
+      <div class="stack">
+        <p class="body">No. I would rather see you track your food and not go to the gym. A hard 30 minute workout burns about 200 to 300 calories, roughly one bagel. Train for strength and health. Don't train to cancel out food.</p>
+        <p class="body">You are not in the gym for 23 hours each day. Use those hours wisely.</p>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <div class="eyebrow"><span class="dot" style="background:var(--teal)"></span>Question 04</div>
+      <h2>Does stress or cortisol stop me from losing fat?</h2>
+      <div class="stack">
+        <p class="body">No. Cortisol can cause water retention, which hides real fat loss on the scale for a few days. It does not turn off fat loss. The actual link between stress and weight gain is behavior: worse sleep, more food, fewer steps. Even in real medical cases of chronically high cortisol, the fat gain comes from more appetite and fat getting stored around the belly, not from fat burning shutting off.</p>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <div class="eyebrow"><span class="dot" style="background:var(--orange)"></span>Question 05</div>
+      <h2>Is my metabolism broken? What's starvation mode?</h2>
+      <div class="stack">
+        <p class="body">Almost never. Your metabolism does adapt as you lose weight, but only by around 5 to 15 percent below what a calculator predicts. Real, but nowhere near enough to stall you. If the scale is actually stuck, it's usually unlogged food, water weight, or a deficit that's gone stale and needs recalculating.</p>
+        <p class="body">If your weight stalls for two weeks, where your food intake is perfectly logged, you are drinking plenty of water, you are having regular bowel movements, and you are hitting your step goal, then yes your metabolism has caught up to your intake. This is when we adjust. After one week of stalled weight with perfect execution of the Base Habits, I would likely tell you to add a little more steps and drink more water. But we need to see true consistency to call it a stall. This is where you really need to be honest with yourself about how consistent and dialed in you are with your plan.</p>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <div class="eyebrow"><span class="dot" style="background:var(--purple)"></span>Question 06</div>
+      <h2>Do fat burners or supplements work?</h2>
+      <div class="stack">
+        <p class="body">Mostly no. Fat burners are just caffeine. Detox teas are laxatives. Spot reduction isn't real. Some vitamins are worth taking if you're actually deficient. Get a blood test before you buy anything.</p>
+        <p class="body">The only supplements I personally take are creatine, vitamin D, vitamin B, Magnesium before bed, and zinc in the morning. Plus a hydration supplement, such as Liquid IV. I actually make my own hydration supplement, because it is cheaper. I get my blood tested at least once or twice a year and I feel confident that I am not deficient in anything else based on my tests.</p>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <div class="eyebrow"><span class="dot" style="background:var(--green)"></span>Question 07</div>
+      <h2>What's actually true, then?</h2>
+      <div class="stack">
+        <ul class="list">
+          <li>A calorie deficit is required for fat loss. Calories in vs calories out.</li>
+          <li>Protein protects your muscles while you lose fat.</li>
+          <li>Steps move your daily burn more than a workout does.</li>
+          <li>Sleep affects your appetite and your decisions the next day.</li>
+          <li>Consistency across months beats a couple high intensity weeks here and there.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <div class="eyebrow"><span class="dot" style="background:var(--teal)"></span>Question 08</div>
+      <h2>How do I spot a bad fitness post?</h2>
+      <div class="stack">
+        <p class="body">Ask:</p>
+      </div>
+
+      <div class="sub">
+        <div class="sub-head"><span class="num">01</span><p class="ask">Is a product being sold to me?</p></div>
+        <p class="body">Marketing has taken over social media as well as regular TV programs and commercials. The whole reason I got into coaching was because I got sick and tired of all the exaggerated information out there that people decided they can market and sell to people who do not know any better.</p>
+      </div>
+
+      <div class="sub">
+        <div class="sub-head"><span class="num">02</span><p class="ask">Is it clinically dosed and am I deficient in it?</p></div>
+        <p class="body">Do a blood test and your own research.</p>
+      </div>
+
+      <div class="sub">
+        <div class="sub-head"><span class="num">03</span><p class="ask">Does it name a single enemy food or holy grail food?</p></div>
+        <p class="body">No single food or food group will make you fat or cause fat loss. It is 100% based on your calorie deficit.</p>
+      </div>
+
+      <div class="sub">
+        <div class="sub-head"><span class="num">04</span><p class="ask">Does it promise speed or give an exact timeline of when results will be seen?</p></div>
+        <p class="body">Actual fat loss rates are different for everyone and it is directly tied to how much of a calorie deficit you are in and for how long.</p>
+      </div>
+
+      <div class="sub">
+        <div class="sub-head"><span class="num">05</span><p class="ask">Are the ingredients listed or does it say "proprietary blend"</p></div>
+        <p class="body">Proprietary blend is a dead giveaway that they are hiding the exact ingredients in the product.</p>
+      </div>
+
+      <div class="stack" style="margin-top:20px">
+        <div class="quote">Send me anything new before you try it. I will gladly research it for you. I also will point you to your doctor if I am unsure or think it is worth their opinion.</div>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <div class="eyebrow"><span class="dot" style="background:var(--orange)"></span>Closing</div>
+      <div class="stack">
+        <p class="body">It is best to be skeptical when scrolling or watching anything. Looking at the nutrition label and a quick AI search is far better than whatever is on the front of the box. The moral of this page is to do your own research and talk to your doctor.</p>
+        <p class="body" style="margin-top:4px">Next page: <a href="../calories/index.html">Calories</a></p>
+      </div>
+    </section>
+
+  </div>
 </main>
+
+<section id="contact">
+  <div class="wrap">
+    <h2 style="letter-spacing:-0.7px">Contact me</h2>
+    <p class="body" style="margin-top:10px">Two ways to reach me. Questions about a lesson are welcome any time.</p>
+    <div class="contact-rows">
+      <div class="contact-row">
+        <span class="dot" style="background:#5ecfc9"></span>
+        <div style="display:flex;flex-direction:column;gap:2px">
+          <span class="k">Call or text</span>
+          <a class="v" href="tel:+15176189607">517-618-9607</a>
+        </div>
+      </div>
+      <div class="contact-row">
+        <span class="dot" style="background:#ff9a4d"></span>
+        <div style="display:flex;flex-direction:column;gap:2px">
+          <span class="k">Instagram</span>
+          <a class="v" href="https://instagram.com/base_habits_coaching" target="_blank" rel="noopener">@base_habits_coaching</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+(function(){
+  var burger=document.getElementById('burger'),
+      drawer=document.getElementById('drawer'),
+      scrim=document.getElementById('scrim'),
+      close=document.getElementById('drawer-close');
+  function open(){
+    drawer.classList.add('open');scrim.classList.add('open');
+    drawer.setAttribute('aria-hidden','false');burger.setAttribute('aria-expanded','true');
+    document.body.style.overflow='hidden';
+    close.focus();
+  }
+  function shut(){
+    drawer.classList.remove('open');scrim.classList.remove('open');
+    drawer.setAttribute('aria-hidden','true');burger.setAttribute('aria-expanded','false');
+    document.body.style.overflow='';
+    burger.focus();
+  }
+  burger.addEventListener('click',open);
+  close.addEventListener('click',shut);
+  scrim.addEventListener('click',shut);
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape'&&drawer.classList.contains('open'))shut();
+  });
+})();
+</script>
 </body>
 </html>
+
