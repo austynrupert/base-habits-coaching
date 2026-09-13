@@ -5,27 +5,204 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
 <title>Debunking — Base Habits Coaching</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  body{margin:0;background:#f6f5f4;font-family:'Inter',system-ui,sans-serif;color:#31302e}
-  a{color:#0075de;text-decoration:none}
-  a:hover{color:#005bab}
-  header{background:#e9edf7;border-bottom:1px solid #dbe1f0;padding:12px 22px;font-size:16px;font-weight:700;letter-spacing:-0.3px;color:#000}
-  main{max-width:720px;margin:0 auto;padding:56px 22px 80px;display:flex;flex-direction:column;gap:18px}
-  .crumbs{font-size:14px;color:#615d59;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
-  .sep{color:#a39e98}
-  h1{margin:0;font-size:clamp(30px,6vw,40px);font-weight:700;line-height:1.1;letter-spacing:-1px;color:#000}
-  p{margin:0;font-size:17px;line-height:1.55;max-width:34em;text-wrap:pretty}
-  .tag{align-self:flex-start;display:inline-flex;align-items:center;gap:7px;padding:5px 11px;border-radius:8px;background:#fff;border:1px solid #e6e6e6;font-size:13px;font-weight:500;color:#615d59}
-  .dot{width:6px;height:6px;border-radius:50%;background:#e8a33d}
-  nav.path{display:flex;flex-direction:column;gap:6px;margin-top:6px}
-  nav.path a{font-size:15px;font-weight:500}
+:root{
+  --page:#f6f5f4; --card:#ffffff; --hairline:#e6e6e6;
+  --ink:#000000; --ink-2:#31302e; --muted:#615d59; --faint:#a39e98;
+  --primary:#0075de; --primary-active:#005bab; --indigo:#213183;
+  --teal:#2a9d99; --orange:#dd5b00; --purple:#391c57; --green:#1aae39;
+  --shadow-1:rgba(0,0,0,0.01) 0 0.175px 1.041px,rgba(0,0,0,0.02) 0 0.8px 2.925px,rgba(0,0,0,0.027) 0 2.025px 7.847px,rgba(0,0,0,0.04) 0 4px 18px;
+  --shadow-2:rgba(0,0,0,0.01) 0 0.175px 1.041px,rgba(0,0,0,0.02) 0 0.8px 2.925px,rgba(0,0,0,0.027) 0 2.025px 7.847px,rgba(0,0,0,0.04) 0 4px 18px,rgba(0,0,0,0.05) 0 23px 52px;
+}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--page);color:var(--ink);font-family:'Inter',system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased}
+p,h1,h2,h3,ul{margin:0}
+ul{padding:0;list-style:none}
+a{color:var(--primary);text-decoration:none}
+a:hover{color:var(--primary-active)}
+.wrap{max-width:720px;margin:0 auto;padding-left:22px;padding-right:22px}
+.head-row{max-width:720px;padding:12px 22px;display:flex;align-items:center;gap:12px}
+
+header{position:sticky;top:0;z-index:30;background:#e9edf7;border-bottom:1px solid #dbe1f0}
+#burger{flex:none;display:flex;align-items:center;gap:9px;min-height:40px;padding:0 13px;border:1px solid #dbe1f0;border-radius:8px;background:rgba(255,255,255,0.7);cursor:pointer;transition:background 120ms ease,transform 120ms ease}
+#burger:hover{background:#fff}
+#burger:active{transform:scale(0.96)}
+#burger .lines{display:flex;flex-direction:column;gap:4px;width:17px}
+#burger .lines span{display:block;height:2px;border-radius:2px;background:var(--ink-2)}
+#burger .blabel{font-size:13px;font-weight:600;letter-spacing:-0.1px;color:var(--ink-2);white-space:nowrap}
+#burger.hint{animation:burger-pulse 1.7s ease-out 3}
+@keyframes burger-pulse{0%{box-shadow:0 0 0 0 rgba(0,117,222,0.45)}70%{box-shadow:0 0 0 12px rgba(0,117,222,0)}100%{box-shadow:0 0 0 0 rgba(0,117,222,0)}}
+@media (prefers-reduced-motion:reduce){#burger.hint{animation:none;background:#fff;border-color:var(--primary)}}
+.page-tag{font-size:13px;font-weight:500;letter-spacing:0;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.page-tag::before{content:"/";margin-right:7px;color:var(--faint)}
+.brand{font-size:16px;font-weight:700;letter-spacing:-0.3px;color:var(--ink)}
+.contact-btn{margin-left:auto;display:inline-flex;align-items:center;justify-content:center;min-height:36px;padding:7px 16px;border-radius:9999px;background:var(--primary);color:#fff !important;font-size:14px;font-weight:500;transition:background 120ms ease,transform 120ms ease}
+.contact-btn:active{background:var(--primary-active);transform:scale(0.96)}
+
+#scrim{position:fixed;inset:0;z-index:50;background:rgba(0,0,0,0.32);opacity:0;pointer-events:none;transition:opacity 160ms ease}
+#scrim.open{opacity:1;pointer-events:auto}
+#drawer{position:fixed;top:0;left:0;bottom:0;z-index:60;width:min(320px,86vw);background:#e9edf7;border-right:1px solid #dbe1f0;box-shadow:var(--shadow-2);transform:translateX(-100%);transition:transform 200ms ease;display:flex;flex-direction:column;overflow-y:auto}
+#drawer.open{transform:translateX(0)}
+.drawer-top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 16px 12px}
+#drawer-close{width:32px;height:32px;border-radius:50%;border:none;background:rgba(33,49,131,0.08);color:var(--indigo);font-size:15px;line-height:1;cursor:pointer;transition:transform 120ms ease}
+#drawer-close:active{transform:scale(0.9)}
+.nav-group{padding:12px 16px 4px}
+.nav-label{display:flex;align-items:center;gap:9px;font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#4d5578;margin-bottom:8px}
+.nav-label .dot{width:7px;height:7px;border-radius:50%;flex:none}
+.nav-list{display:flex;flex-direction:column;gap:2px}
+.nav-item{display:block;padding:9px 10px;border-radius:5px;font-size:15px;font-weight:500;color:var(--ink-2);transition:background 120ms ease}
+.nav-item:hover{background:rgba(33,49,131,0.07);color:var(--ink-2)}
+.nav-item.current{background:rgba(0,117,222,0.14);color:#0058a8}
+.nav-item.soon{color:#9ba2bb;cursor:default;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.nav-item.soon:hover{background:none}
+.soon-tag{font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#9ba2bb}
+.drawer-foot{margin-top:auto;border-top:1px solid #dbe1f0;padding:14px 16px 18px}
+.drawer-foot a{font-size:15px;font-weight:500}
+
+/* page */
+.title-band{background:linear-gradient(180deg,#dfe5f5 0%,#e9ecf6 46%,var(--page) 100%);padding:38px 0 34px}
+h1{font-size:clamp(32px,8.2vw,46px);font-weight:700;line-height:1.06;letter-spacing:-1.4px;text-wrap:pretty}
+.crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:14px;font-size:13px;font-weight:500;color:var(--muted)}
+.crumbs .sep{color:var(--faint)}
+.bars{display:flex;gap:6px;margin-bottom:20px}
+.bars span{width:26px;height:6px;border-radius:3px}
+
+main{padding-bottom:24px}
+.sections{display:flex;flex-direction:column}
+section.chapter{padding:34px 0}
+section.chapter + section.chapter{border-top:1px solid var(--hairline)}
+.eyebrow{display:flex;align-items:center;gap:9px;font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+.eyebrow .dot{width:7px;height:7px;border-radius:50%;flex:none}
+h2{font-size:clamp(24px,5.6vw,30px);font-weight:700;line-height:1.16;letter-spacing:-0.8px;color:var(--ink);text-wrap:pretty}
+h3{font-size:19px;font-weight:600;line-height:1.3;letter-spacing:-0.4px;color:var(--ink);text-wrap:pretty}
+.lede{font-size:19px;font-weight:500;line-height:1.45;letter-spacing:-0.2px;color:var(--indigo);max-width:26em;text-wrap:pretty}
+.body{font-size:17px;line-height:1.7;color:var(--muted);max-width:34em;text-wrap:pretty}
+.body strong{font-weight:600;color:var(--ink-2)}
+.body .caps{font-weight:600;color:var(--ink-2);letter-spacing:0.02em}
+.stack{display:flex;flex-direction:column;gap:16px;margin-top:4px}
+.sub{display:flex;flex-direction:column;gap:8px;padding:20px 0}
+.sub + .sub{border-top:1px solid var(--hairline)}
+.sub-head{display:flex;align-items:baseline;gap:12px}
+.num{flex:none;font-size:13px;font-weight:700;color:var(--faint);letter-spacing:0.04em;min-width:18px}
+.ask{font-size:17px;font-weight:600;line-height:1.4;letter-spacing:-0.3px;color:var(--ink);text-wrap:pretty}
+
+ul.list{display:flex;flex-direction:column;gap:10px}
+ul.list li{display:flex;align-items:baseline;gap:12px;font-size:17px;line-height:1.5;color:var(--ink-2);font-weight:500}
+ul.list li::before{content:"";flex:none;width:7px;height:7px;border-radius:50%;background:var(--teal);transform:translateY(-2px)}
+ul.list li a{font-weight:500}
+
+.quote{background:var(--card);border:1px solid var(--hairline);border-radius:12px;padding:22px 24px;font-size:19px;line-height:1.5;font-weight:400;letter-spacing:-0.2px;color:var(--ink-2);text-wrap:pretty}
+.hero{background:var(--indigo);border-radius:16px;padding:32px 28px;box-shadow:var(--shadow-2)}
+.hero p{color:#fff;font-size:clamp(21px,4.9vw,26px);font-weight:600;line-height:1.34;letter-spacing:-0.6px;text-wrap:pretty}
+.hero .rule{display:flex;gap:6px;margin-bottom:18px}
+.hero .rule span{width:24px;height:5px;border-radius:3px}
+
+.pill{display:inline-flex;align-items:center;justify-content:center;padding:9px 20px;min-height:40px;border-radius:9999px;background:var(--primary);color:#fff !important;font-size:15px;font-weight:500;transition:background 120ms ease,transform 120ms ease}
+.pill:hover{color:#fff !important}
+.pill:active{background:var(--primary-active);transform:scale(0.96)}
+#contact{border-top:1px solid #1a2668;background:var(--indigo);padding:44px 0 56px;color:#fff}
+#contact h2{color:#fff}
+#contact .body{color:#c3cae8}
+.contact-rows{display:flex;flex-direction:column;gap:12px;margin-top:18px}
+.contact-row{display:flex;align-items:center;gap:14px;padding:16px 18px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.16);border-radius:12px}
+.contact-row .dot{width:9px;height:9px;border-radius:50%;flex:none}
+.contact-row .k{font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#a9b3dd}
+.contact-row .v{font-size:17px;font-weight:500;color:#fff}
+.contact-row .v:hover{color:#dfe5f5}
+
+@media (max-width:600px){
+  #burger{min-height:36px;padding:0 10px}
+  .page-tag{display:none}
+  .head-row{padding-left:12px;padding-right:12px;gap:10px}
+  .brand{font-size:15px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .contact-btn{flex:none;padding:7px 13px;font-size:13px}
+}
+#c-scrim{position:fixed;inset:0;z-index:70;background:rgba(0,0,0,0.32);opacity:0;pointer-events:none;transition:opacity 160ms ease}
+#c-scrim.open{opacity:1;pointer-events:auto}
+#c-panel{position:fixed;top:0;right:0;bottom:0;z-index:80;width:min(340px,88vw);background:#e9edf7;border-left:1px solid #dbe1f0;box-shadow:var(--shadow-2);transform:translateX(100%);transition:transform 200ms ease;display:flex;flex-direction:column;overflow-y:auto}
+#c-panel.open{transform:translateX(0)}
+.c-top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 16px 12px}
+#c-close{width:32px;height:32px;border-radius:50%;border:none;background:rgba(33,49,131,0.08);color:var(--indigo);font-size:15px;line-height:1;cursor:pointer;transition:transform 120ms ease}
+#c-close:active{transform:scale(0.9)}
+.c-list{display:flex;flex-direction:column;gap:8px;padding:4px 16px 20px}
+.c-row{display:flex;align-items:center;gap:14px;padding:14px 16px;background:#fff;border:1px solid #dbe1f0;border-radius:12px;transition:transform 120ms ease}
+.c-row:active{transform:scale(0.98)}
+.c-row .dot{width:9px;height:9px;border-radius:50%;flex:none}
+.c-row .k{font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#4d5578}
+.c-row .v{font-size:16px;font-weight:600;letter-spacing:-0.2px;color:var(--ink-2);word-break:break-word}
 </style>
 </head>
 <body>
-<header>Base Habits Coaching</header>
-<main>
-  <nav class="crumbs" aria-label="Breadcrumb">
+
+<header>
+  <div class="wrap head-row" style="position:relative">
+    <button type="button" id="burger" aria-label="Open lesson menu" aria-expanded="false" aria-controls="drawer">
+      <span class="lines"><span></span><span></span><span></span></span>
+      <span class="blabel">Lesson Menu</span>
+    </button>
+    <span class="brand">Base Habits Coaching</span>
+    <span class="page-tag">Debunking</span>
+    <a class="contact-btn" href="#contact" id="contact-open" aria-controls="c-panel" aria-expanded="false">Contact me</a>
+  </div>
+</header>
+
+<div id="scrim"></div>
+
+<nav id="drawer" aria-label="Client pages" aria-hidden="true">
+  <div class="drawer-top">
+    <span style="font-size:15px;font-weight:600;color:var(--ink)">Client pages</span>
+    <button type="button" id="drawer-close" aria-label="Close menu">&#10005;</button>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-list">
+      <a class="nav-item" href="../../index.html">&lsaquo; Client home</a>
+    </div>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-label"><span class="dot" style="background:var(--teal)"></span>Phase 1</div>
+    <div class="nav-list">
+      <a class="nav-item" href="../base-habits/index.html">Base Habits</a>
+      <a class="nav-item" href="../two-week-rule/index.html">Two Week Rule</a>
+      <a class="nav-item current" href="index.html" aria-current="page">Debunking</a>
+      <a class="nav-item" href="../calories/index.html">Calories</a>
+      <a class="nav-item" href="../macros/index.html">Macros</a>
+      <a class="nav-item" href="../protein/index.html" style="margin-left:14px">Protein</a>
+      <a class="nav-item" href="../carbs/index.html" style="margin-left:14px">Carbs</a>
+      <a class="nav-item" href="../fats/index.html" style="margin-left:14px">Fats</a>
+    </div>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-label"><span class="dot" style="background:var(--orange)"></span>Phase 2</div>
+    <div class="nav-list">
+      <span class="nav-item soon" aria-disabled="true">Placeholder page one<span class="soon-tag">Coming soon</span></span>
+      <span class="nav-item soon" aria-disabled="true">Placeholder page two<span class="soon-tag">Coming soon</span></span>
+    </div>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-label"><span class="dot" style="background:var(--purple)"></span>Phase 3</div>
+    <div class="nav-list">
+      <span class="nav-item soon" aria-disabled="true">Placeholder page one<span class="soon-tag">Coming soon</span></span>
+      <span class="nav-item soon" aria-disabled="true">Placeholder page two<span class="soon-tag">Coming soon</span></span>
+    </div>
+  </div>
+
+  <div class="drawer-foot">
+    <a href="../../../index.html">Back to basehabitscoaching.com</a>
+  </div>
+</nav>
+
+<div class="title-band">
+  <div class="wrap">
+    <div class="bars"><span style="background:var(--teal)"></span><span style="background:var(--orange)"></span><span style="background:var(--purple)"></span><span style="background:var(--green)"></span></div>
+    <h1>Debunking</h1>
+    <nav class="crumbs" aria-label="Breadcrumb">
       <a href="../../index.html">Client Home</a>
       <span class="sep">&rsaquo;</span>
       <a href="../base-habits/index.html">Base Habits</a>
@@ -33,20 +210,248 @@
       <a href="../two-week-rule/index.html">Two Week Rule</a>
       <span class="sep">&rsaquo;</span>
       <span>Debunking</span>
-  </nav>
-  <h1>Debunking</h1>
-  <span class="tag"><span class="dot"></span>Being written</span>
-  <p>This lesson is not published yet.</p>
-  <nav class="path">
-    <a href="../base-habits/index.html">Base Habits</a>
-    <a href="../two-week-rule/index.html">Two Week Rule</a>
-    <a href="../calories/index.html">Calories</a>
-    <a href="../macros/index.html">Macros</a>
-    <a href="../protein/index.html">Protein</a>
-    <a href="../carbs/index.html">Carbs</a>
-    <a href="../fats/index.html">Fats</a>
-    <a href="../../index.html">Client Home</a>
-  </nav>
+    </nav>
+  </div>
+</div>
+
+<main>
+  <div class="wrap sections">
+
+    <section class="chapter">
+      <div class="eyebrow"><span class="dot" style="background:var(--teal)"></span>Opening</div>
+      <p class="lede">Fast answers for the things that social media says.</p>
+    </section>
+
+    <section class="chapter">
+      <div class="eyebrow"><span class="dot" style="background:var(--orange)"></span>Question 01</div>
+      <h2>How do I know if something is legit?</h2>
+      <div class="stack">
+        <p class="body">Ask two things. What's the actual mechanism, not just what it claims to do. And is it clinically dosed? If either answer is not clear, it's marketing. Do the research yourself. Get on google, ChatGPT, or whatever method you want.</p>
+        <p class="body">If it is a supplement; ask if it is clinically dosed, meaning the dose provided is in an amount that is actually effective to what your body needs. Ask if you can get this from your diet and if actually taking this supplement is meaningful to your goals. Also, is it something you are actually deficient in, most times a blood test is the only way to tell if you are deficient. This all leads back to having a conversation with your doctor.</p>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <div class="eyebrow"><span class="dot" style="background:var(--purple)"></span>Question 02</div>
+      <h2>Do keto, intermittent fasting, paleo, or cleanses work?</h2>
+      <div class="stack">
+        <p class="body">They work the same way every diet works: fewer calories. Keto drops water fast due to the decrease in carbs. Fasting just shrinks your eating window. Paleo cuts junk. Cleanses are laxatives. None of them beat a calorie deficit, they just hide one inside a set of rules.</p>
+        <div class="hero">
+          <div class="rule"><span style="background:#5ecfc9"></span><span style="background:#ff9a4d"></span><span style="background:#9a7cc7"></span></div>
+          <p>Every diet with a name is marketing. THE ONLY THING THEY ALL SHARE IS THE THING THEY DON'T ADVERTISE, WHICH IS FEWER CALORIES.</p>
+        </div>
+        <p class="body">If one of these is genuinely how you like to eat, keep it. I'll build your numbers around it.</p>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <div class="eyebrow"><span class="dot" style="background:var(--green)"></span>Question 03</div>
+      <h2>Can I just exercise instead of dieting?</h2>
+      <div class="stack">
+        <p class="body">No. I would rather see you track your food and not go to the gym. A hard 30 minute workout burns about 200 to 300 calories, roughly one bagel. Train for strength and health. Don't train to cancel out food.</p>
+        <p class="body">You are not in the gym for 23 hours each day. Use those hours wisely.</p>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <div class="eyebrow"><span class="dot" style="background:var(--teal)"></span>Question 04</div>
+      <h2>Does stress or cortisol stop me from losing fat?</h2>
+      <div class="stack">
+        <p class="body">No. Cortisol can cause water retention, which hides real fat loss on the scale for a few days. It does not turn off fat loss. The actual link between stress and weight gain is behavior: worse sleep, more food, fewer steps. Even in real medical cases of chronically high cortisol, the fat gain comes from more appetite and fat getting stored around the belly, not from fat burning shutting off.</p>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <div class="eyebrow"><span class="dot" style="background:var(--orange)"></span>Question 05</div>
+      <h2>Is my metabolism broken? What's starvation mode?</h2>
+      <div class="stack">
+        <p class="body">Almost never. Your metabolism does adapt as you lose weight, but only by around 5 to 15 percent below what a calculator predicts. Real, but nowhere near enough to stall you. If the scale is actually stuck, it's usually unlogged food, water weight, or a deficit that's gone stale and needs recalculating.</p>
+        <p class="body">If your weight stalls for two weeks, where your food intake is perfectly logged, you are drinking plenty of water, you are having regular bowel movements, and you are hitting your step goal, then yes your metabolism has caught up to your intake. This is when we adjust. After one week of stalled weight with perfect execution of the Base Habits, I would likely tell you to add a little more steps and drink more water. But we need to see true consistency to call it a stall. This is where you really need to be honest with yourself about how consistent and dialed in you are with your plan.</p>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <div class="eyebrow"><span class="dot" style="background:var(--purple)"></span>Question 06</div>
+      <h2>Do fat burners or supplements work?</h2>
+      <div class="stack">
+        <p class="body">Mostly no. Fat burners are just caffeine. Detox teas are laxatives. Spot reduction isn't real. Some vitamins are worth taking if you're actually deficient. Get a blood test before you buy anything.</p>
+        <p class="body">The only supplements I personally take are creatine, vitamin D, vitamin B, Magnesium before bed, and zinc in the morning. Plus a hydration supplement, such as Liquid IV. I actually make my own hydration supplement, because it is cheaper. I get my blood tested at least once or twice a year and I feel confident that I am not deficient in anything else based on my tests.</p>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <div class="eyebrow"><span class="dot" style="background:var(--green)"></span>Question 07</div>
+      <h2>What's actually true, then?</h2>
+      <div class="stack">
+        <ul class="list">
+          <li>A calorie deficit is required for fat loss. Calories in vs calories out.</li>
+          <li>Protein protects your muscles while you lose fat.</li>
+          <li>Steps move your daily burn more than a workout does.</li>
+          <li>Sleep affects your appetite and your decisions the next day.</li>
+          <li>Consistency across months beats a couple high intensity weeks here and there.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <div class="eyebrow"><span class="dot" style="background:var(--teal)"></span>Question 08</div>
+      <h2>How do I spot a bad fitness post?</h2>
+      <div class="stack">
+        <p class="body">Ask:</p>
+      </div>
+
+      <div class="sub">
+        <div class="sub-head"><span class="num">01</span><p class="ask">Is a product being sold to me?</p></div>
+        <p class="body">Marketing has taken over social media as well as regular TV programs and commercials. The whole reason I got into coaching was because I got sick and tired of all the exaggerated information out there that people decided they can market and sell to people who do not know any better.</p>
+      </div>
+
+      <div class="sub">
+        <div class="sub-head"><span class="num">02</span><p class="ask">Is it clinically dosed and am I deficient in it?</p></div>
+        <p class="body">Do a blood test and your own research.</p>
+      </div>
+
+      <div class="sub">
+        <div class="sub-head"><span class="num">03</span><p class="ask">Does it name a single enemy food or holy grail food?</p></div>
+        <p class="body">No single food or food group will make you fat or cause fat loss. It is 100% based on your calorie deficit.</p>
+      </div>
+
+      <div class="sub">
+        <div class="sub-head"><span class="num">04</span><p class="ask">Does it promise speed or give an exact timeline of when results will be seen?</p></div>
+        <p class="body">Actual fat loss rates are different for everyone and it is directly tied to how much of a calorie deficit you are in and for how long.</p>
+      </div>
+
+      <div class="sub">
+        <div class="sub-head"><span class="num">05</span><p class="ask">Are the ingredients listed or does it say "proprietary blend"</p></div>
+        <p class="body">Proprietary blend is a dead giveaway that they are hiding the exact ingredients in the product.</p>
+      </div>
+
+      <div class="stack" style="margin-top:20px">
+        <div class="quote">Send me anything new before you try it. I will gladly research it for you. I also will point you to your doctor if I am unsure or think it is worth their opinion.</div>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <div class="eyebrow"><span class="dot" style="background:var(--orange)"></span>Closing</div>
+      <div class="stack">
+        <p class="body">It is best to be skeptical when scrolling or watching anything. Looking at the nutrition label and a quick AI search is far better than whatever is on the front of the box. The moral of this page is to do your own research and talk to your doctor.</p>
+        <a href="../calories/index.html" style="display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:20px;padding:22px 24px;background:var(--orange);border:1px solid var(--orange);border-radius:14px;box-shadow:var(--shadow-1);transition:transform 120ms ease,box-shadow 120ms ease" onmouseover="this.style.boxShadow='var(--shadow-2)'" onmouseout="this.style.boxShadow='var(--shadow-1)'">
+          <span style="display:flex;flex-direction:column;gap:5px;min-width:0">
+            <span style="font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#ffd9bd">Next page</span>
+            <span style="font-size:clamp(21px,4.6vw,26px);font-weight:700;letter-spacing:-0.6px;color:#fff">Calories</span>
+          </span>
+          <span style="flex:none;font-size:26px;font-weight:600;color:#fff">&rsaquo;</span>
+        </a>
+      </div>
+    </section>
+
+  </div>
 </main>
+
+<footer style="background:#26241f">
+  <div class="wrap" style="padding-top:28px;padding-bottom:28px;display:flex;flex-wrap:wrap;align-items:center;gap:10px">
+    <span style="font-size:15px;color:#b5afa6">Base Habits Coaching LLC by Austyn Rupert</span>
+    <span style="color:#6b655c">/</span>
+    <a href="https://dot.cards/base_habits_coaching" target="_blank" rel="noopener" style="font-size:15px;font-weight:500;color:#fff !important">Virtual Business Card</a>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var burger=document.getElementById('burger'),
+      drawer=document.getElementById('drawer'),
+      scrim=document.getElementById('scrim'),
+      close=document.getElementById('drawer-close');
+  function open(){
+    drawer.classList.add('open');scrim.classList.add('open');
+    drawer.setAttribute('aria-hidden','false');burger.setAttribute('aria-expanded','true');
+    document.body.style.overflow='hidden';
+    close.focus();
+  }
+  function shut(){
+    drawer.classList.remove('open');scrim.classList.remove('open');
+    drawer.setAttribute('aria-hidden','true');burger.setAttribute('aria-expanded','false');
+    document.body.style.overflow='';
+    burger.focus();
+  }
+  burger.addEventListener('click',open);
+  close.addEventListener('click',shut);
+  scrim.addEventListener('click',shut);
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape'&&drawer.classList.contains('open'))shut();
+  });
+})();
+</script>
+
+<div id="c-scrim"></div>
+<aside id="c-panel" aria-label="Contact options" aria-hidden="true">
+  <div class="c-top">
+    <span style="font-size:15px;font-weight:600;color:var(--ink)">Contact me</span>
+    <button type="button" id="c-close" aria-label="Close contact options">&#10005;</button>
+  </div>
+  <div class="c-list">
+    <a class="c-row" href="tel:+15176189607">
+      <span class="dot" style="background:var(--teal)"></span>
+      <span style="display:flex;flex-direction:column;gap:3px"><span class="k">Call or text</span><span class="v">517-618-9607</span></span>
+    </a>
+    <a class="c-row" href="mailto:basehabitscoaching@gmail.com">
+      <span class="dot" style="background:var(--primary)"></span>
+      <span style="display:flex;flex-direction:column;gap:3px"><span class="k">Email</span><span class="v">basehabitscoaching@gmail.com</span></span>
+    </a>
+    <a class="c-row" href="https://instagram.com/base_habits_coaching" target="_blank" rel="noopener">
+      <span class="dot" style="background:var(--orange)"></span>
+      <span style="display:flex;flex-direction:column;gap:3px"><span class="k">Instagram</span><span class="v">@base_habits_coaching</span></span>
+    </a>
+    <a class="c-row" href="https://www.facebook.com/profile.php?id=61594124617514" target="_blank" rel="noopener">
+      <span class="dot" style="background:var(--indigo)"></span>
+      <span style="display:flex;flex-direction:column;gap:3px"><span class="k">Facebook</span><span class="v">Base Habits Coaching</span></span>
+    </a>
+    <a class="c-row" href="https://dot.cards/base_habits_coaching" target="_blank" rel="noopener">
+      <span class="dot" style="background:var(--green)"></span>
+      <span style="display:flex;flex-direction:column;gap:3px"><span class="k">Virtual business card</span><span class="v">dot.cards/base_habits_coaching</span></span>
+    </a>
+  </div>
+</aside>
+<script>
+(function(){
+  var btn=document.getElementById('contact-open'),
+      panel=document.getElementById('c-panel'),
+      scrim=document.getElementById('c-scrim'),
+      x=document.getElementById('c-close');
+  if(!btn)return;
+  function open(e){
+    if(e)e.preventDefault();
+    panel.classList.add('open');scrim.classList.add('open');
+    panel.setAttribute('aria-hidden','false');btn.setAttribute('aria-expanded','true');
+    document.body.style.overflow='hidden';x.focus();
+  }
+  function shut(){
+    panel.classList.remove('open');scrim.classList.remove('open');
+    panel.setAttribute('aria-hidden','true');btn.setAttribute('aria-expanded','false');
+    document.body.style.overflow='';btn.focus();
+  }
+  btn.addEventListener('click',open);
+  x.addEventListener('click',shut);
+  scrim.addEventListener('click',shut);
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&panel.classList.contains('open'))shut()});
+  Array.prototype.forEach.call(panel.querySelectorAll('.c-row'),function(a){a.addEventListener('click',function(){setTimeout(shut,150)})});
+})();
+</script>
+<script>
+(function(){
+  var b=document.getElementById('burger');
+  if(!b)return;
+  var KEY='bh-menu-hint-seen';
+  var seen;
+  try{seen=localStorage.getItem(KEY)}catch(e){seen='1'}
+  if(seen)return;
+  b.classList.add('hint');
+  function done(){
+    b.classList.remove('hint');
+    try{localStorage.setItem(KEY,'1')}catch(e){}
+  }
+  b.addEventListener('click',done,{once:true});
+  b.addEventListener('animationend',function(){setTimeout(done,400)});
+})();
+</script>
 </body>
 </html>

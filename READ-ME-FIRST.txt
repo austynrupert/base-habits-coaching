@@ -1,41 +1,23 @@
-# Deploy folder — Base Habits Coaching
+Base Habits Coaching — GitHub Pages upload
 
-Upload the **contents** of this folder to your site root. That's it.
+Upload the CONTENTS of this folder to the root of your repo
+(not the folder itself).
 
-```
-index.html                                   home page (has the password box)
-about-me.html
-headshot.jpg / before-200lbs.png / after-158lbs.png
-clients/index.html                           encrypted
-clients/phase-1/base-habits/index.html       encrypted
-clients/phase-1/calories/index.html          encrypted
-```
+What's here
+  index.html                  homepage (GitHub Pages serves this first)
+  base-habits-coaching.html   same homepage, kept for old links
+  about-me.html
+  clients/index.html          client home
+  clients/phase-1/...         the eight lesson pages
+  headshot.jpg, before-200lbs.png, after-158lbs.png
+  .nojekyll                   leave this file in place
 
-Password: **getstrong26**
+Turning Pages on
+  Repo > Settings > Pages > Build and deployment
+  Source: Deploy from a branch
+  Branch: main, folder: / (root) > Save
+  The site appears at https://<your-username>.github.io/<repo>/ in a minute or two.
 
-## How it behaves
-
-A client clicks "Current Client Access" on the home page, types the password, and lands
-on the client home. Every client page then opens with no further prompting for 30 days.
-If someone goes straight to a client page URL, they get the StatiCrypt password screen
-there instead — same password, same result.
-
-The client pages are genuinely encrypted. Without the password there is nothing to read
-in the page source.
-
-## Changing the password later
-
-Open `tools/client-password.html` (keep that file OFF the server) and follow the three
-steps it prints. It gives you the re-encrypt command and the one line to change in
-`index.html`.
-
-Two things must stay true or the single sign-in breaks:
-
-- All client pages are encrypted in **one run** with `--salt 01c8cfd2929a928a2e2c895f2d8b3fd2`.
-- The VERIFIER line in `index.html` matches that same password.
-
-## Do not upload
-
-- `clients/` at the project root — that's the unencrypted source. Keep it; it's what you
-  edit and re-encrypt from.
-- `tools/client-password.html`.
+Note
+  Client pages are unlisted, not private. Anyone with the link can open them,
+  and they carry noindex so search engines skip them.

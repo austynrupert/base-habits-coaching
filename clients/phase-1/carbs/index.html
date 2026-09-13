@@ -5,27 +5,247 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
 <title>Carbs — Base Habits Coaching</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  body{margin:0;background:#f6f5f4;font-family:'Inter',system-ui,sans-serif;color:#31302e}
-  a{color:#0075de;text-decoration:none}
-  a:hover{color:#005bab}
-  header{background:#e9edf7;border-bottom:1px solid #dbe1f0;padding:12px 22px;font-size:16px;font-weight:700;letter-spacing:-0.3px;color:#000}
-  main{max-width:720px;margin:0 auto;padding:56px 22px 80px;display:flex;flex-direction:column;gap:18px}
-  .crumbs{font-size:14px;color:#615d59;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
-  .sep{color:#a39e98}
-  h1{margin:0;font-size:clamp(30px,6vw,40px);font-weight:700;line-height:1.1;letter-spacing:-1px;color:#000}
-  p{margin:0;font-size:17px;line-height:1.55;max-width:34em;text-wrap:pretty}
-  .tag{align-self:flex-start;display:inline-flex;align-items:center;gap:7px;padding:5px 11px;border-radius:8px;background:#fff;border:1px solid #e6e6e6;font-size:13px;font-weight:500;color:#615d59}
-  .dot{width:6px;height:6px;border-radius:50%;background:#e8a33d}
-  nav.path{display:flex;flex-direction:column;gap:6px;margin-top:6px}
-  nav.path a{font-size:15px;font-weight:500}
+:root{
+  --page:#f6f5f4; --card:#ffffff; --hairline:#e6e6e6;
+  --ink:#000000; --ink-2:#31302e; --muted:#615d59; --faint:#a39e98;
+  --primary:#0075de; --primary-active:#005bab; --indigo:#213183;
+  --teal:#2a9d99; --orange:#dd5b00; --purple:#391c57; --green:#1aae39;
+  --shadow-1:rgba(0,0,0,0.01) 0 0.175px 1.041px,rgba(0,0,0,0.02) 0 0.8px 2.925px,rgba(0,0,0,0.027) 0 2.025px 7.847px,rgba(0,0,0,0.04) 0 4px 18px;
+  --shadow-2:rgba(0,0,0,0.01) 0 0.175px 1.041px,rgba(0,0,0,0.02) 0 0.8px 2.925px,rgba(0,0,0,0.027) 0 2.025px 7.847px,rgba(0,0,0,0.04) 0 4px 18px,rgba(0,0,0,0.05) 0 23px 52px;
+}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--page);color:var(--ink);font-family:'Inter',system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased}
+p,h1,h2,h3,ul{margin:0}
+ul{padding:0;list-style:none}
+a{color:var(--primary);text-decoration:none}
+a:hover{color:var(--primary-active)}
+.wrap{max-width:720px;margin:0 auto;padding-left:22px;padding-right:22px}
+.head-row{max-width:720px;padding:12px 22px;display:flex;align-items:center;gap:12px}
+
+header{position:sticky;top:0;z-index:30;background:#e9edf7;border-bottom:1px solid #dbe1f0}
+#burger{flex:none;display:flex;align-items:center;gap:9px;min-height:40px;padding:0 13px;border:1px solid #dbe1f0;border-radius:8px;background:rgba(255,255,255,0.7);cursor:pointer;transition:background 120ms ease,transform 120ms ease}
+#burger:hover{background:#fff}
+#burger:active{transform:scale(0.96)}
+#burger .lines{display:flex;flex-direction:column;gap:4px;width:17px}
+#burger .lines span{display:block;height:2px;border-radius:2px;background:var(--ink-2)}
+#burger .blabel{font-size:13px;font-weight:600;letter-spacing:-0.1px;color:var(--ink-2);white-space:nowrap}
+#burger.hint{animation:burger-pulse 1.7s ease-out 3}
+@keyframes burger-pulse{0%{box-shadow:0 0 0 0 rgba(0,117,222,0.45)}70%{box-shadow:0 0 0 12px rgba(0,117,222,0)}100%{box-shadow:0 0 0 0 rgba(0,117,222,0)}}
+@media (prefers-reduced-motion:reduce){#burger.hint{animation:none;background:#fff;border-color:var(--primary)}}
+.page-tag{font-size:13px;font-weight:500;letter-spacing:0;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.page-tag::before{content:"/";margin-right:7px;color:var(--faint)}
+.brand{font-size:16px;font-weight:700;letter-spacing:-0.3px;color:var(--ink)}
+.contact-btn{margin-left:auto;display:inline-flex;align-items:center;justify-content:center;min-height:36px;padding:7px 16px;border-radius:9999px;background:var(--primary);color:#fff !important;font-size:14px;font-weight:500;transition:background 120ms ease,transform 120ms ease}
+.contact-btn:active{background:var(--primary-active);transform:scale(0.96)}
+
+#scrim{position:fixed;inset:0;z-index:50;background:rgba(0,0,0,0.32);opacity:0;pointer-events:none;transition:opacity 160ms ease}
+#scrim.open{opacity:1;pointer-events:auto}
+#drawer{position:fixed;top:0;left:0;bottom:0;z-index:60;width:min(320px,86vw);background:#e9edf7;border-right:1px solid #dbe1f0;box-shadow:var(--shadow-2);transform:translateX(-100%);transition:transform 200ms ease;display:flex;flex-direction:column;overflow-y:auto}
+#drawer.open{transform:translateX(0)}
+.drawer-top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 16px 12px}
+#drawer-close{width:32px;height:32px;border-radius:50%;border:none;background:rgba(33,49,131,0.08);color:var(--indigo);font-size:15px;line-height:1;cursor:pointer;transition:transform 120ms ease}
+#drawer-close:active{transform:scale(0.9)}
+.nav-group{padding:12px 16px 4px}
+.nav-label{display:flex;align-items:center;gap:9px;font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#4d5578;margin-bottom:8px}
+.nav-label .dot{width:7px;height:7px;border-radius:50%;flex:none}
+.nav-list{display:flex;flex-direction:column;gap:2px}
+.nav-item{display:block;padding:9px 10px;border-radius:5px;font-size:15px;font-weight:500;color:var(--ink-2);transition:background 120ms ease}
+.nav-item:hover{background:rgba(33,49,131,0.07);color:var(--ink-2)}
+.nav-item.current{background:rgba(0,117,222,0.14);color:#0058a8}
+.nav-item.soon{color:#9ba2bb;cursor:default;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.nav-item.soon:hover{background:none}
+.soon-tag{font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#9ba2bb}
+.drawer-foot{margin-top:auto;border-top:1px solid #dbe1f0;padding:14px 16px 18px}
+.drawer-foot a{font-size:15px;font-weight:500}
+
+/* page */
+.title-band{background:linear-gradient(180deg,#dfe5f5 0%,#e9ecf6 46%,var(--page) 100%);padding:38px 0 34px}
+h1{font-size:clamp(32px,8.2vw,46px);font-weight:700;line-height:1.06;letter-spacing:-1.4px;text-wrap:pretty}
+.crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:14px;font-size:13px;font-weight:500;color:var(--muted)}
+.crumbs .sep{color:var(--faint)}
+.bars{display:flex;gap:6px;margin-bottom:20px}
+.bars span{width:26px;height:6px;border-radius:3px}
+
+main{padding-bottom:24px}
+.sections{display:flex;flex-direction:column}
+section.chapter{padding:34px 0}
+section.chapter + section.chapter{border-top:1px solid var(--hairline)}
+.eyebrow{display:flex;align-items:center;gap:9px;font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+.eyebrow .dot{width:7px;height:7px;border-radius:50%;flex:none}
+h2{font-size:clamp(24px,5.6vw,30px);font-weight:700;line-height:1.16;letter-spacing:-0.8px;color:var(--ink);text-wrap:pretty}
+h3{font-size:19px;font-weight:600;line-height:1.3;letter-spacing:-0.4px;color:var(--ink);text-wrap:pretty}
+.lede{font-size:19px;font-weight:500;line-height:1.45;letter-spacing:-0.2px;color:var(--indigo);max-width:26em;text-wrap:pretty}
+.body{font-size:17px;line-height:1.7;color:var(--muted);max-width:34em;text-wrap:pretty}
+.body strong{font-weight:600;color:var(--ink-2)}
+.body .caps,.quote .caps{font-weight:600;color:var(--ink-2);letter-spacing:0.02em}
+.stack{display:flex;flex-direction:column;gap:16px;margin-top:4px}
+.sub{display:flex;flex-direction:column;gap:12px;padding:22px 0}
+.sub + .sub{border-top:1px solid var(--hairline)}
+.sub-head{display:flex;align-items:baseline;gap:12px}
+.num{flex:none;font-size:13px;font-weight:700;color:var(--faint);letter-spacing:0.04em;min-width:18px}
+
+ul.list{display:flex;flex-direction:column;gap:10px}
+ul.list li{display:flex;align-items:baseline;gap:12px;font-size:17px;line-height:1.5;color:var(--ink-2);font-weight:500}
+ul.list li::before{content:"";flex:none;width:7px;height:7px;border-radius:50%;background:var(--teal);transform:translateY(-2px)}
+ul.list.buy li::before{background:var(--orange)}
+ul.list.plain li::before{background:var(--purple)}
+ul.list.green li::before{background:var(--green)}
+
+.quote{background:var(--card);border:1px solid var(--hairline);border-radius:12px;padding:22px 24px;font-size:19px;line-height:1.5;font-weight:400;letter-spacing:-0.2px;color:var(--ink-2);text-wrap:pretty}
+.hero{background:var(--indigo);border-radius:16px;padding:32px 28px;box-shadow:var(--shadow-2)}
+.hero p{color:#fff;font-size:clamp(21px,4.9vw,26px);font-weight:600;line-height:1.34;letter-spacing:-0.6px;text-wrap:pretty}
+.hero .rule{display:flex;gap:6px;margin-bottom:18px}
+.hero .rule span{width:24px;height:5px;border-radius:3px}
+
+.pill{display:inline-flex;align-items:center;justify-content:center;padding:9px 20px;min-height:40px;border-radius:9999px;background:var(--primary);color:#fff !important;font-size:15px;font-weight:500;transition:background 120ms ease,transform 120ms ease}
+.pill:hover{color:#fff !important}
+.pill:active{background:var(--primary-active);transform:scale(0.96)}
+#contact{border-top:1px solid #1a2668;background:var(--indigo);padding:44px 0 56px;color:#fff}
+#contact h2{color:#fff}
+#contact .body{color:#c3cae8}
+.contact-rows{display:flex;flex-direction:column;gap:12px;margin-top:18px}
+.contact-row{display:flex;align-items:center;gap:14px;padding:16px 18px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.16);border-radius:12px}
+.contact-row .dot{width:9px;height:9px;border-radius:50%;flex:none}
+.contact-row .k{font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#a9b3dd}
+.contact-row .v{font-size:17px;font-weight:500;color:#fff}
+.contact-row .v:hover{color:#dfe5f5}
+
+/* figures */
+.figure{background:var(--card);border:1px solid var(--hairline);border-radius:12px;padding:22px 18px 20px;box-shadow:var(--shadow-1)}
+.fig-title{font-size:17px;font-weight:600;letter-spacing:-0.3px;color:var(--ink);line-height:1.35;text-wrap:pretty}
+.chart{margin-top:14px;width:100%;height:auto;display:block;overflow:visible}
+.chart .grid{stroke:var(--hairline);stroke-width:1}
+.chart .axis{stroke:#d8d5d1;stroke-width:1}
+.chart .tick{font-size:11px;font-weight:500;fill:var(--faint)}
+.chart .solid{fill:none;stroke:var(--orange);stroke-width:2.6;stroke-linejoin:round;stroke-linecap:round}
+.chart .dash{fill:none;stroke:var(--primary);stroke-width:2.2;stroke-dasharray:7 6;stroke-linecap:round}
+.chart .band-lab{font-size:12.5px;font-weight:500;fill:var(--orange)}
+.chart-legend{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:14px}
+.chart-legend div{display:flex;align-items:center;gap:8px;font-size:13.5px;font-weight:500;color:var(--ink-2)}
+.chart-legend .ln{flex:none;width:22px;height:0;border-top-width:2.6px}
+.chart-legend .solid-ln{border-top-style:solid;border-top-color:var(--orange)}
+.chart-legend .dash-ln{border-top-style:dashed;border-top-color:var(--primary);border-top-width:2.2px}
+.chart .axtitle{font-size:11px;font-weight:600;letter-spacing:0.1em;fill:var(--faint)}
+.caption{margin-top:14px;font-size:14px;line-height:1.6;color:var(--muted);text-wrap:pretty}
+.figcap{margin-top:14px;font-size:12px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--faint)}
+
+.table-wrap{background:var(--card);border:1px solid var(--hairline);border-radius:12px;overflow-x:auto;-webkit-overflow-scrolling:touch}
+table{width:100%;border-collapse:collapse}
+th{text-align:left;padding:11px 14px;font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);background:#fbfaf9;border-bottom:1px solid var(--hairline)}
+td{padding:12px 14px;font-size:15px;line-height:1.45;color:var(--muted);border-bottom:1px solid var(--hairline);vertical-align:top}
+tr:last-child td{border-bottom:none}
+td:first-child{font-weight:600;color:var(--ink-2)}
+@media(min-width:600px){td:first-child{white-space:nowrap}}
+@media(max-width:599px){th,td{padding-left:11px;padding-right:11px}td,th{font-size:14px}}
+td:last-child,th:last-child{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+td:last-child{font-weight:600;color:var(--ink-2)}
+.fiber-tbl td:nth-child(n+3){white-space:nowrap;font-variant-numeric:tabular-nums;text-align:right}
+.fiber-tbl th:nth-child(n+3){text-align:right}
+
+/* macro nav cards */
+.macro-nav{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:6px}
+@media(max-width:600px){.macro-nav{grid-template-columns:1fr}}
+.macro-card{display:flex;flex-direction:column;gap:8px;padding:18px;background:var(--card);border:1px solid var(--hairline);border-radius:12px;transition:background 120ms ease,transform 120ms ease}
+.macro-card:hover{background:#fbfaf9}
+.macro-card:active{transform:scale(0.98)}
+.macro-card .k{font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--faint)}
+.macro-card .v{font-size:20px;font-weight:700;letter-spacing:-0.5px;color:var(--ink)}
+.macro-card .bar{width:26px;height:5px;border-radius:3px}
+
+@media (max-width:600px){
+  #burger{min-height:36px;padding:0 10px}
+  .page-tag{display:none}
+  .head-row{padding-left:12px;padding-right:12px;gap:10px}
+  .brand{font-size:15px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .contact-btn{flex:none;padding:7px 13px;font-size:13px}
+}
+#c-scrim{position:fixed;inset:0;z-index:70;background:rgba(0,0,0,0.32);opacity:0;pointer-events:none;transition:opacity 160ms ease}
+#c-scrim.open{opacity:1;pointer-events:auto}
+#c-panel{position:fixed;top:0;right:0;bottom:0;z-index:80;width:min(340px,88vw);background:#e9edf7;border-left:1px solid #dbe1f0;box-shadow:var(--shadow-2);transform:translateX(100%);transition:transform 200ms ease;display:flex;flex-direction:column;overflow-y:auto}
+#c-panel.open{transform:translateX(0)}
+.c-top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 16px 12px}
+#c-close{width:32px;height:32px;border-radius:50%;border:none;background:rgba(33,49,131,0.08);color:var(--indigo);font-size:15px;line-height:1;cursor:pointer;transition:transform 120ms ease}
+#c-close:active{transform:scale(0.9)}
+.c-list{display:flex;flex-direction:column;gap:8px;padding:4px 16px 20px}
+.c-row{display:flex;align-items:center;gap:14px;padding:14px 16px;background:#fff;border:1px solid #dbe1f0;border-radius:12px;transition:transform 120ms ease}
+.c-row:active{transform:scale(0.98)}
+.c-row .dot{width:9px;height:9px;border-radius:50%;flex:none}
+.c-row .k{font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#4d5578}
+.c-row .v{font-size:16px;font-weight:600;letter-spacing:-0.2px;color:var(--ink-2);word-break:break-word}
 </style>
 </head>
 <body>
-<header>Base Habits Coaching</header>
-<main>
-  <nav class="crumbs" aria-label="Breadcrumb">
+
+<header>
+  <div class="wrap head-row" style="position:relative">
+    <button type="button" id="burger" aria-label="Open lesson menu" aria-expanded="false" aria-controls="drawer">
+      <span class="lines"><span></span><span></span><span></span></span>
+      <span class="blabel">Lesson Menu</span>
+    </button>
+    <span class="brand">Base Habits Coaching</span>
+    <span class="page-tag">Carbs</span>
+    <a class="contact-btn" href="#contact" id="contact-open" aria-controls="c-panel" aria-expanded="false">Contact me</a>
+  </div>
+</header>
+
+<div id="scrim"></div>
+
+<nav id="drawer" aria-label="Client pages" aria-hidden="true">
+  <div class="drawer-top">
+    <span style="font-size:15px;font-weight:600;color:var(--ink)">Client pages</span>
+    <button type="button" id="drawer-close" aria-label="Close menu">&#10005;</button>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-list">
+      <a class="nav-item" href="../../index.html">&lsaquo; Client home</a>
+    </div>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-label"><span class="dot" style="background:var(--teal)"></span>Phase 1</div>
+    <div class="nav-list">
+      <a class="nav-item" href="../base-habits/index.html">Base Habits</a>
+      <a class="nav-item" href="../two-week-rule/index.html">Two Week Rule</a>
+      <a class="nav-item" href="../debunking/index.html">Debunking</a>
+      <a class="nav-item" href="../calories/index.html">Calories</a>
+      <a class="nav-item" href="../macros/index.html">Macros</a>
+      <a class="nav-item" href="../protein/index.html" style="margin-left:14px">Protein</a>
+      <a class="nav-item current" href="index.html" aria-current="page" style="margin-left:14px">Carbs</a>
+      <a class="nav-item" href="../fats/index.html" style="margin-left:14px">Fats</a>
+    </div>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-label"><span class="dot" style="background:var(--orange)"></span>Phase 2</div>
+    <div class="nav-list">
+      <span class="nav-item soon" aria-disabled="true">Placeholder page one<span class="soon-tag">Coming soon</span></span>
+      <span class="nav-item soon" aria-disabled="true">Placeholder page two<span class="soon-tag">Coming soon</span></span>
+    </div>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-label"><span class="dot" style="background:var(--purple)"></span>Phase 3</div>
+    <div class="nav-list">
+      <span class="nav-item soon" aria-disabled="true">Placeholder page one<span class="soon-tag">Coming soon</span></span>
+      <span class="nav-item soon" aria-disabled="true">Placeholder page two<span class="soon-tag">Coming soon</span></span>
+    </div>
+  </div>
+
+  <div class="drawer-foot">
+    <a href="../../../index.html">Back to basehabitscoaching.com</a>
+  </div>
+</nav>
+
+<div class="title-band">
+  <div class="wrap">
+    <div class="bars"><span style="background:var(--teal)"></span><span style="background:var(--orange)"></span><span style="background:var(--purple)"></span><span style="background:var(--green)"></span></div>
+    <h1>Carbs</h1>
+    <nav class="crumbs" aria-label="Breadcrumb">
       <a href="../../index.html">Client Home</a>
       <span class="sep">&rsaquo;</span>
       <a href="../base-habits/index.html">Base Habits</a>
@@ -39,20 +259,399 @@
       <a href="../macros/index.html">Macros</a>
       <span class="sep">&rsaquo;</span>
       <span>Carbs</span>
-  </nav>
-  <h1>Carbs</h1>
-  <span class="tag"><span class="dot"></span>Being written</span>
-  <p>This lesson is not published yet.</p>
-  <nav class="path">
-    <a href="../base-habits/index.html">Base Habits</a>
-    <a href="../two-week-rule/index.html">Two Week Rule</a>
-    <a href="../debunking/index.html">Debunking</a>
-    <a href="../calories/index.html">Calories</a>
-    <a href="../macros/index.html">Macros</a>
-    <a href="../protein/index.html">Protein</a>
-    <a href="../fats/index.html">Fats</a>
-    <a href="../../index.html">Client Home</a>
-  </nav>
+    </nav>
+  </div>
+</div>
+
+<main>
+  <div class="wrap sections">
+
+    <section class="chapter">
+      <div class="eyebrow"><span class="dot" style="background:var(--teal)"></span>Opening</div>
+      <h2>Don't hate on carbs</h2>
+      <div class="stack">
+        <p class="body">Carbs are the energy your body and mind run on. They are also the one macro most people have demonized the most. Don't hate on carbs.</p>
+        <p class="body">No food group has taken a beating like this one. Low carb, no carb, keto, cutting out bread, cutting out fruit, cutting out rice, cutting out potatoes because they are a &ldquo;starch&rdquo;. Every one of those diet types are rarely beneficial (except in the diabetic cases). Low or no carb diets for the average person are very difficult to maintain.</p>
+        <div class="hero">
+          <div class="rule"><span style="background:#5ecfc9"></span><span style="background:#ff9a4d"></span><span style="background:#c9b5e8"></span></div>
+          <p>The biggest thing most people do not know is that <span class="caps" style="color:#fff">CARBS</span> are your greatest performance tool you have access to.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <div class="eyebrow"><span class="dot" style="background:var(--orange)"></span>Section 1</div>
+      <h2>What Carbs Do</h2>
+      <div class="stack">
+        <p class="lede">Carbs are the fuel for your training and your daily steps.</p>
+      </div>
+
+      <div class="sub">
+        <div class="sub-head"><span class="num">01</span><h3>Working energy</h3></div>
+        <p class="body">Carbs get stored in your muscles and liver as glycogen. That store is what you pull from for steps, lifting, and everything physical you do in a day. Run it low and you weak and flat in training well before anything good shows up on the scale.</p>
+      </div>
+
+      <div class="sub">
+        <div class="sub-head"><span class="num">02</span><h3>Brain fuel</h3></div>
+        <p class="body">Your brain runs primarily on glucose. The fog, the short temper, and the trouble focusing that people report in the first week of a low carb diet are not detox symptoms. That is your brain running low on the fuel it needs to function.</p>
+      </div>
+
+      <div class="sub">
+        <div class="sub-head"><span class="num">03</span><h3>Protecting your protein</h3></div>
+        <p class="body">Your body burns carbs first. When carbs run too low for too long, it starts pulling energy from somewhere else to cover the gap, and muscle is one of the places it pulls from. This is called being catabolic. Keep carbs at a reasonable level and your body doesn't need to go there. That's the anti-catabolic effect, and it's a big part of why the protein you eat stays where you want it instead of getting burned for fuel.</p>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <div class="eyebrow"><span class="dot" style="background:var(--purple)"></span>Section 2</div>
+      <h2>Fiber Is a Huge Benefit During this Weightloss Phase</h2>
+      <div class="stack">
+        <p class="lede">Fiber is filling, and the reason you need to reach for whole foods.</p>
+        <p class="body">Two foods can carry the same carbs and the same calories and behave completely differently in your body, and that difference is mostly due to fiber.</p>
+        <p class="body">Fiber is a carb your body cannot break down. It passes through mostly intact. That slows digestion, keeps your blood sugar steady instead of spiking and crashing, and keeps you full for hours instead of forty minutes.</p>
+        <div class="table-wrap">
+          <table class="fiber-tbl">
+            <thead><tr><th>Food</th><th>Serving</th><th>Carbs</th><th>Fiber</th><th>Calories</th></tr></thead>
+            <tbody>
+              <tr><td>Black beans</td><td>1 cup cooked</td><td>41 g</td><td>15 g</td><td>227</td></tr>
+              <tr><td>Raspberries</td><td>1 cup</td><td>15 g</td><td>8 g</td><td>64</td></tr>
+              <tr><td>Oats</td><td>1 cup cooked</td><td>27 g</td><td>4 g</td><td>155</td></tr>
+              <tr><td>Sweet potato</td><td>1 medium with skin</td><td>26 g</td><td>4 g</td><td>112</td></tr>
+              <tr><td>Apple</td><td>1 medium</td><td>25 g</td><td>4 g</td><td>95</td></tr>
+              <tr><td>White rice</td><td>1 cup cooked</td><td>45 g</td><td>1 g</td><td>205</td></tr>
+              <tr><td>White bread</td><td>2 slices</td><td>26 g</td><td>1 g</td><td>145</td></tr>
+              <tr><td>Regular soda</td><td>12 oz</td><td>39 g</td><td>0 g</td><td>150</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="body">Compare the soda and the apple. Nearly the same carbs. The apple keeps you full. The soda does not.</p>
+        <div class="quote">My rule is that nothing is off the list. Soda included. Here is what it actually does: 150 calories, zero fiber, and you are hungry again in twenty minutes. If it fits your day, log it and move on. BUT if you want to be more efficient with your calories, drink zero sugar or diet soda.</div>
+        <p class="body">Aim for 25 to 35 grams of fiber a day. Most people are eating less than half that.</p>
+        <p class="body">Move up to it gradually. Going from 10 grams to 35 overnight brings bloating, gas, and cramping, and you will blame the wrong thing. <span class="caps">BUT DRINK YOUR WATER.</span> Fiber without water makes the problem worse, not better. The biggest tool you have to combat bloating is water.</p>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <div class="eyebrow"><span class="dot" style="background:var(--green)"></span>Section 3</div>
+      <h2>What to Eat</h2>
+      <div class="stack">
+        <p class="lede">Build your carbs out of food that came with fiber already in it.</p>
+        <p class="body">You do not need a special list and you do not need to shop anywhere different. These are the staples.</p>
+      </div>
+
+      <div class="sub">
+        <div class="sub-head"><span class="num">01</span><h3>The base of most meals</h3></div>
+        <ul class="list green">
+          <li>Potatoes and sweet potatoes</li>
+          <li>Rice</li>
+          <li>Oats</li>
+          <li>Beans and lentils</li>
+          <li>Pasta</li>
+          <li>Whole grain bread and tortillas</li>
+          <li>Corn, peas, and squash</li>
+        </ul>
+      </div>
+
+      <div class="sub">
+        <div class="sub-head"><span class="num">02</span><h3>Potatoes are the most filling carb on this list</h3></div>
+        <p class="body">If you are in a weight loss phase, potatoes and sweet potatoes should be doing more work than rice. Gram for gram a boiled potato is about two thirds the calories of cooked rice, and boiled potatoes rank at the top of the research on fullness per calorie. Rice is not a problem. It just does less for your hunger than a potato does.</p>
+        <p class="body">Make potatoes and sweet potatoes your default starch and keep rice and pasta as the exception. Hunger is what ends most weight loss phases early before results are even seen or sustained.</p>
+        <div class="quote">During my last weightloss phase I ate sweet potatoes with every meal and very rarely got hungry. The only issue I had was some bloating when it was time for me to increase my calories again. Eating too much sweet potatoes can definitely cause that in some people. The solution to that for me was to switch to rice for a while and drink more water. Some of this is trial and error, and you need to find out what works with your body.</div>
+      </div>
+
+      <div class="sub">
+        <div class="sub-head"><span class="num">03</span><h3>Fruit, every day</h3></div>
+        <p class="body">Berries, apples, oranges, bananas, whatever actually gets eaten in your house. Whole fruit is fiber, water, and volume, and it is one of the most filling things you can eat for the calories. Raspberries carry 8 grams of fiber for 64 calories, which nothing else on this page comes close to.</p>
+        <p class="body">Fruit is not sugar you have to earn. Nobody gets fat on fruit, unless their calories are going unchecked.</p>
+      </div>
+
+      <div class="sub">
+        <div class="sub-head"><span class="num">04</span><h3>Vegetables, as much as you want</h3></div>
+        <p class="body">Broccoli, green beans, peppers, salad greens, cauliflower, zucchini. These barely register on your total calories for the day. They fill the plate, they carry fiber, and they make a smaller portion of everything else feel like a meal. I honestly do not track some vegetables like spinach.</p>
+      </div>
+
+      <div class="sub">
+        <div class="sub-head"><span class="num">05</span><h3>Other good carb sources</h3></div>
+        <ul class="list buy">
+          <li>Air popped popcorn, about 90 calories for three cups (watch the butter!)</li>
+          <li>Rice cakes</li>
+          <li>Any fruit</li>
+          <li>Rice based cereal</li>
+          <li>Honey (amazing for pre-workout)</li>
+        </ul>
+        <div class="quote">My rule is to pick two or three of these and keep them in the house on repeat. You stop deciding what to grab, you already know the calories, and the log takes ten seconds. <span class="caps">BORING IS THE POINT.</span></div>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <div class="eyebrow"><span class="dot" style="background:var(--teal)"></span>Section 4</div>
+      <h2>Where Carbs Belong in Your Day</h2>
+      <div class="stack">
+        <p class="lede">Carbs fill most of what is left after protein and fat are set.</p>
+      </div>
+
+      <div class="sub">
+        <div class="sub-head"><span class="num">01</span><h3>Around training</h3></div>
+        <p class="body">This is the one place timing does anything. Carbs in the few hours before you train give you better workouts, and carbs after help you refill what you used.</p>
+        <p class="body">Before you train, you want carbs that digest fast and do not sit heavy. Low fiber, low fat, and not much volume. A banana, a rice cake with jam, a piece of white bread, or a small bowl of cereal all work. Save the beans and the broccoli for later in the day.</p>
+        <div class="quote">My go-to pre-workout meal is 3 rice cakes with 15 grams of honey on each and a fruit. For the fruit I usually go for raisins, dates, grapes, or a banana. I train hard, so I leave 100 to 150 grams of carbs for my pre-workout meal. This means that I spread my remaining carbs sparingly throughout the day.</div>
+        <p class="body">The whole purpose with carb timing is to help your workout and protect your muscles around your training window. Pre-workout carbs fill your muscles with glycogen, this allows for better output at the gym. The better your output is at the gym, the better your body will be at preserving muscle during a calorie deficit.</p>
+      </div>
+
+      <div class="sub">
+        <div class="sub-head"><span class="num">02</span><h3>Everywhere else</h3></div>
+        <p class="body">There is no time of day that carbs turn into fat. Eating at night does not do anything on its own. If eating most of your carbs at dinner is what makes your day work, eat them at dinner. BUT try to avoid a lot of carbs before bed so it does not affect your sleep too much.</p>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <div class="eyebrow"><span class="dot" style="background:var(--orange)"></span>Section 5</div>
+      <h2>The Carb Drop Illusion</h2>
+      <div class="stack">
+        <p class="lede">Cutting carbs drops the scale fast, and almost none of it is fat.</p>
+        <p class="body">Within a day or two of reducing your carbs, the scale will drop. This is mostly water leaving your body.</p>
+        <p class="body">Every gram of glycogen your body stores holds roughly three grams of water with it. Cut carbs hard and you burn through that glycogen in a few days, and water goes with it. Five to eight pounds is normal. It happens in under a week and it looks very encouraging to see the scale move.</p>
+        <p class="body">It is water. Eat carbs again and it comes back in about the same amount of time. People read that as carbs making them fat. It is water going back where it was.</p>
+
+        <div class="figure">
+          <div class="chart-legend">
+            <div><i class="ln solid-ln"></i>Scale weight, day to day</div>
+            <div><i class="ln dash-ln"></i>Actual fat loss trend</div>
+          </div>
+          <svg class="chart" viewBox="0 0 660 300" role="img" aria-label="Line chart. Scale weight drops sharply over the first eight days after cutting carbs as water weight leaves, then zig-zags gradually downward. A dashed line shows the actual fat loss trend, which declines smoothly and steadily.">
+            <rect x="60" y="40" width="154.7" height="210" fill="#dd5b00" opacity="0.07"/>
+            <g>
+              <line class="grid" x1="60" y1="250.0" x2="640" y2="250.0"/>
+              <line class="grid" x1="60" y1="226.7" x2="640" y2="226.7"/>
+              <line class="grid" x1="60" y1="203.3" x2="640" y2="203.3"/>
+              <line class="grid" x1="60" y1="180.0" x2="640" y2="180.0"/>
+              <line class="grid" x1="60" y1="156.7" x2="640" y2="156.7"/>
+              <line class="grid" x1="60" y1="133.3" x2="640" y2="133.3"/>
+              <line class="grid" x1="60" y1="110.0" x2="640" y2="110.0"/>
+              <line class="grid" x1="60" y1="86.7" x2="640" y2="86.7"/>
+              <line class="grid" x1="60" y1="63.3" x2="640" y2="63.3"/>
+              <line class="grid" x1="60" y1="40.0" x2="640" y2="40.0"/>
+              <line class="axis" x1="60" y1="26" x2="60" y2="250"/>
+            </g>
+            <g class="tick" text-anchor="end">
+              <text x="52" y="254.0">182</text>
+              <text x="52" y="230.7">184</text>
+              <text x="52" y="207.3">186</text>
+              <text x="52" y="184.0">188</text>
+              <text x="52" y="160.7">190</text>
+              <text x="52" y="137.3">192</text>
+              <text x="52" y="114.0">194</text>
+              <text x="52" y="90.7">196</text>
+              <text x="52" y="67.3">198</text>
+              <text x="52" y="44.0">200</text>
+            </g>
+            <g class="tick" text-anchor="middle">
+              <text x="60.0" y="270">0</text>
+              <text x="98.7" y="270">2</text>
+              <text x="137.3" y="270">4</text>
+              <text x="176.0" y="270">6</text>
+              <text x="214.7" y="270">8</text>
+              <text x="253.3" y="270">10</text>
+              <text x="292.0" y="270">12</text>
+              <text x="330.7" y="270">14</text>
+              <text x="369.3" y="270">16</text>
+              <text x="408.0" y="270">18</text>
+              <text x="446.7" y="270">20</text>
+              <text x="485.3" y="270">22</text>
+              <text x="524.0" y="270">24</text>
+              <text x="562.7" y="270">26</text>
+              <text x="601.3" y="270">28</text>
+              <text x="640.0" y="270">30</text>
+            </g>
+            <g class="band-lab" text-anchor="middle">
+              <text x="141.2" y="214">Water weight</text>
+              <text x="141.2" y="230">drops off</text>
+            </g>
+            <path class="dash" d="M60.0,40.0 C66.4,41.9 85.8,47.2 98.7,51.7 C111.6,56.1 124.4,61.6 137.3,66.8 C150.2,72.1 163.1,77.9 176.0,83.2 C188.9,88.4 201.8,93.1 214.7,98.3 C227.6,103.6 240.4,109.4 253.3,114.7 C266.2,119.9 279.1,125.2 292.0,129.8 C304.9,134.5 317.8,138.4 330.7,142.7 C343.6,146.9 356.4,151.4 369.3,155.5 C382.2,159.6 395.1,163.5 408.0,167.2 C420.9,170.9 433.8,174.2 446.7,177.7 C459.6,181.2 472.4,184.7 485.3,188.2 C498.2,191.7 511.1,195.2 524.0,198.7 C536.9,202.2 549.8,205.5 562.7,209.2 C575.6,212.9 588.4,216.9 601.3,220.8 C614.2,224.7 633.6,230.6 640.0,232.5"/>
+            <path class="solid" d="M60.0,40.0 C63.2,41.4 72.9,44.9 79.3,48.2 C85.8,51.5 92.2,55.4 98.7,59.8 C105.1,64.3 111.6,69.0 118.0,75.0 C124.4,81.0 130.9,90.2 137.3,96.0 C143.8,101.8 150.2,105.7 156.7,110.0 C163.1,114.3 169.6,118.2 176.0,121.7 C182.4,125.2 188.9,128.1 195.3,131.0 C201.8,133.9 208.2,137.6 214.7,139.2 C221.1,140.7 227.6,140.9 234.0,140.3 C240.4,139.7 246.9,135.9 253.3,135.7 C259.8,135.5 266.2,137.0 272.7,139.2 C279.1,141.3 285.6,146.2 292.0,148.5 C298.4,150.8 304.9,153.0 311.3,153.2 C317.8,153.4 324.2,149.5 330.7,149.7 C337.1,149.9 343.6,152.2 350.0,154.3 C356.4,156.5 362.9,161.1 369.3,162.5 C375.8,163.9 382.2,163.5 388.7,162.5 C395.1,161.5 401.6,156.9 408.0,156.7 C414.4,156.5 420.9,158.4 427.3,161.3 C433.8,164.3 440.2,172.2 446.7,174.2 C453.1,176.1 459.6,174.4 466.0,173.0 C472.4,171.6 478.9,166.2 485.3,166.0 C491.8,165.8 498.2,168.7 504.7,171.8 C511.1,174.9 517.6,182.7 524.0,184.7 C530.4,186.6 536.9,184.3 543.3,183.5 C549.8,182.7 556.2,179.2 562.7,180.0 C569.1,180.8 575.6,184.9 582.0,188.2 C588.4,191.5 594.9,196.5 601.3,199.8 C607.8,203.1 614.2,205.5 620.7,208.0 C627.1,210.5 636.8,213.8 640.0,215.0"/>
+            <text class="axtitle" x="350" y="292" text-anchor="middle">DAYS SINCE CUTTING CARBS</text>
+            <text class="axtitle" x="14" y="145" text-anchor="middle" transform="rotate(-90 14 145)">WEIGHT</text>
+          </svg>
+          <p class="caption">The shaded first eight days are water leaving with your glycogen. The dashed line is the fat loss actually happening underneath, and it never moves that fast.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="chapter">
+      <div class="eyebrow"><span class="dot" style="background:var(--purple)"></span>Section 6</div>
+      <h2>How to Read a Label</h2>
+      <div class="stack">
+        <p class="lede">Serving size, total carbohydrate, and fiber. Everything else on a carb label is decoration.</p>
+      </div>
+
+      <div class="sub">
+        <div class="sub-head"><span class="num">01</span><h3>Serving size, then servings per container</h3></div>
+        <p class="body">Cereal, granola, chips, and crackers are the worst offenders on the shelf. A serving of cereal is often three quarters of a cup, and nobody has ever poured three quarters of a cup of cereal.</p>
+      </div>
+
+      <div class="sub">
+        <div class="sub-head"><span class="num">02</span><h3>Total carbohydrate already includes the fiber and the sugars</h3></div>
+        <p class="body">Fiber and sugars are listed underneath total carbohydrate as a breakdown of it. Do not add them together. That is the most common mistake people make reading a panel.</p>
+      </div>
+
+      <div class="sub">
+        <div class="sub-head"><span class="num">03</span><h3>Fiber is the number worth reading</h3></div>
+        <p class="body">On bread, cereal, crackers, or anything made from grain, 3 grams or more per serving is a reasonable bar. Under 1 gram tells you the fiber was processed out.</p>
+      </div>
+
+      <div class="sub">
+        <div class="sub-head"><span class="num">04</span><h3>Added sugars versus total sugars</h3></div>
+        <p class="body">Total sugars includes what was already in the food, like the sugar in fruit or milk. Added sugars is what got put in during manufacturing. A plain yogurt with 12 grams of total sugar and 0 added is a different food than one with 12 grams of added sugar, even though the front of both containers looks about the same.</p>
+      </div>
+
+      <div class="sub">
+        <div class="sub-head"><span class="num">05</span><h3>Net carbs is not a real number</h3></div>
+        <p class="body">It does not appear on the nutrition label and the FDA does not define it. Someone subtracted the fiber and the sugar alcohols and printed the result on the front of the box. We track total carbohydrate. Log what the nutrition label says for total carbs.</p>
+      </div>
+
+      <div class="sub">
+        <div class="sub-head"><span class="num">06</span><h3>Whole grain claims live in the ingredient list</h3></div>
+        <p class="body">Made with whole grain can mean a trace of it. The ingredient list runs in order by weight, so check that a whole grain is the first thing on it. Multigrain, stone ground, and honey wheat mean nothing on their own. Think of the words you see on the front of the box as marketing. Read the nutrition label.</p>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <div class="eyebrow"><span class="dot" style="background:var(--green)"></span>Section 7</div>
+      <h2>Liquid Carbs, Sauces, and Dressed-Up Coffee</h2>
+      <div class="stack">
+        <p class="lede">The carbs you drink or pour over food are the easiest ones to lose track of.</p>
+        <p class="body"><strong>Liquid carbs.</strong> Soda, juice, sweet tea, sports drinks, energy drinks. They add real calories and return nothing on fullness. A cup of orange juice is 110 calories and no fiber. One whole orange is about 60 calories with 3 grams of fiber, and it takes you five minutes to eat. Cutting liquid carbs is the fastest change you can make and the one you will notice least.</p>
+        <p class="body"><strong>Sauces and dressings.</strong> Ketchup, barbecue sauce, teriyaki, honey mustard, sweet chili, most bottled salad dressings. These are mostly sugar and oil, and they get poured rather than measured. Two tablespoons of barbecue sauce runs close to 60 calories, and most people use more than two tablespoons without ever weighing it.</p>
+        <p class="body"><strong>Sugared up coffee drinks.</strong> A flavored latte with whole milk, syrup, and whipped cream can run 400 to 600 calories before you have eaten anything. Milk and cream add up fast, syrup pumps are straight sugar, and whipped cream is a topping, not a garnish. Black coffee, or coffee with a splash of milk, is a different drink than the one on the menu board.</p>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <div class="eyebrow"><span class="dot" style="background:var(--teal)"></span>Closing</div>
+      <h2>What to Do With This</h2>
+      <div class="stack">
+        <p class="body">Carbs are the fuel your training and your daily life run on, and they get the largest share of your calories for a reason.</p>
+        <p class="body">Fill most of that share with food that came with fiber already in it. Keep the rest to a portion you chose on purpose, such as quick digesting carbs for a pre-workout meal.</p>
+        <div class="quote">My rule is that we do not cut a food group out completely. When a low carb diet works, it works because you ate fewer calories. If a low carb approach is how you prefer to eat and you can hold it for years, it is a legitimate option. Most people cannot, and the ones who quit usually blame themselves rather than the plan that asked them to give up an entire food group for no additional benefit.</div>
+        <a href="../fats/index.html" style="display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:20px;padding:22px 24px;background:var(--orange);border:1px solid var(--orange);border-radius:14px;box-shadow:var(--shadow-1);transition:transform 120ms ease,box-shadow 120ms ease" onmouseover="this.style.boxShadow='var(--shadow-2)'" onmouseout="this.style.boxShadow='var(--shadow-1)'">
+          <span style="display:flex;flex-direction:column;gap:5px;min-width:0">
+            <span style="font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#ffd9bd">Next page</span>
+            <span style="font-size:clamp(21px,4.6vw,26px);font-weight:700;letter-spacing:-0.6px;color:#fff">Fats</span>
+          </span>
+          <span style="flex:none;font-size:26px;font-weight:600;color:#fff">&rsaquo;</span>
+        </a>
+      </div>
+    </section>
+
+  </div>
 </main>
+
+<footer style="background:#26241f">
+  <div class="wrap" style="padding-top:28px;padding-bottom:28px;display:flex;flex-wrap:wrap;align-items:center;gap:10px">
+    <span style="font-size:15px;color:#b5afa6">Base Habits Coaching LLC by Austyn Rupert</span>
+    <span style="color:#6b655c">/</span>
+    <a href="https://dot.cards/base_habits_coaching" target="_blank" rel="noopener" style="font-size:15px;font-weight:500;color:#fff !important">Virtual Business Card</a>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var burger=document.getElementById('burger'),
+      drawer=document.getElementById('drawer'),
+      scrim=document.getElementById('scrim'),
+      close=document.getElementById('drawer-close');
+  function open(){
+    drawer.classList.add('open');scrim.classList.add('open');
+    drawer.setAttribute('aria-hidden','false');burger.setAttribute('aria-expanded','true');
+    document.body.style.overflow='hidden';
+    close.focus();
+  }
+  function shut(){
+    drawer.classList.remove('open');scrim.classList.remove('open');
+    drawer.setAttribute('aria-hidden','true');burger.setAttribute('aria-expanded','false');
+    document.body.style.overflow='';
+    burger.focus();
+  }
+  burger.addEventListener('click',open);
+  close.addEventListener('click',shut);
+  scrim.addEventListener('click',shut);
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape'&&drawer.classList.contains('open'))shut();
+  });
+})();
+</script>
+
+<div id="c-scrim"></div>
+<aside id="c-panel" aria-label="Contact options" aria-hidden="true">
+  <div class="c-top">
+    <span style="font-size:15px;font-weight:600;color:var(--ink)">Contact me</span>
+    <button type="button" id="c-close" aria-label="Close contact options">&#10005;</button>
+  </div>
+  <div class="c-list">
+    <a class="c-row" href="tel:+15176189607">
+      <span class="dot" style="background:var(--teal)"></span>
+      <span style="display:flex;flex-direction:column;gap:3px"><span class="k">Call or text</span><span class="v">517-618-9607</span></span>
+    </a>
+    <a class="c-row" href="mailto:basehabitscoaching@gmail.com">
+      <span class="dot" style="background:var(--primary)"></span>
+      <span style="display:flex;flex-direction:column;gap:3px"><span class="k">Email</span><span class="v">basehabitscoaching@gmail.com</span></span>
+    </a>
+    <a class="c-row" href="https://instagram.com/base_habits_coaching" target="_blank" rel="noopener">
+      <span class="dot" style="background:var(--orange)"></span>
+      <span style="display:flex;flex-direction:column;gap:3px"><span class="k">Instagram</span><span class="v">@base_habits_coaching</span></span>
+    </a>
+    <a class="c-row" href="https://www.facebook.com/profile.php?id=61594124617514" target="_blank" rel="noopener">
+      <span class="dot" style="background:var(--indigo)"></span>
+      <span style="display:flex;flex-direction:column;gap:3px"><span class="k">Facebook</span><span class="v">Base Habits Coaching</span></span>
+    </a>
+    <a class="c-row" href="https://dot.cards/base_habits_coaching" target="_blank" rel="noopener">
+      <span class="dot" style="background:var(--green)"></span>
+      <span style="display:flex;flex-direction:column;gap:3px"><span class="k">Virtual business card</span><span class="v">dot.cards/base_habits_coaching</span></span>
+    </a>
+  </div>
+</aside>
+<script>
+(function(){
+  var btn=document.getElementById('contact-open'),
+      panel=document.getElementById('c-panel'),
+      scrim=document.getElementById('c-scrim'),
+      x=document.getElementById('c-close');
+  if(!btn)return;
+  function open(e){
+    if(e)e.preventDefault();
+    panel.classList.add('open');scrim.classList.add('open');
+    panel.setAttribute('aria-hidden','false');btn.setAttribute('aria-expanded','true');
+    document.body.style.overflow='hidden';x.focus();
+  }
+  function shut(){
+    panel.classList.remove('open');scrim.classList.remove('open');
+    panel.setAttribute('aria-hidden','true');btn.setAttribute('aria-expanded','false');
+    document.body.style.overflow='';btn.focus();
+  }
+  btn.addEventListener('click',open);
+  x.addEventListener('click',shut);
+  scrim.addEventListener('click',shut);
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&panel.classList.contains('open'))shut()});
+  Array.prototype.forEach.call(panel.querySelectorAll('.c-row'),function(a){a.addEventListener('click',function(){setTimeout(shut,150)})});
+})();
+</script>
+<script>
+(function(){
+  var b=document.getElementById('burger');
+  if(!b)return;
+  var KEY='bh-menu-hint-seen';
+  var seen;
+  try{seen=localStorage.getItem(KEY)}catch(e){seen='1'}
+  if(seen)return;
+  b.classList.add('hint');
+  function done(){
+    b.classList.remove('hint');
+    try{localStorage.setItem(KEY,'1')}catch(e){}
+  }
+  b.addEventListener('click',done,{once:true});
+  b.addEventListener('animationend',function(){setTimeout(done,400)});
+})();
+</script>
 </body>
 </html>
