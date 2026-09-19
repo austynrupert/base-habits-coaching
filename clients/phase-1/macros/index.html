@@ -24,35 +24,42 @@ ul{padding:0;list-style:none}
 a{color:var(--primary);text-decoration:none}
 a:hover{color:var(--primary-active)}
 .wrap{max-width:720px;margin:0 auto;padding-left:22px;padding-right:22px}
-.head-row{max-width:none;padding-left:max(76px,calc((100% - 720px)/2 + 22px));padding-right:22px;padding-top:12px;padding-bottom:12px;display:flex;align-items:center;gap:14px}
+.head-row{max-width:720px;padding:12px 22px;display:flex;align-items:center;gap:12px}
 
 header{position:sticky;top:0;z-index:30;background:#e9edf7;border-bottom:1px solid #dbe1f0}
-#burger{position:absolute;left:22px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;justify-content:center;gap:4px;width:40px;height:40px;padding:0 9px;border:1px solid #dbe1f0;border-radius:8px;background:rgba(255,255,255,0.7);cursor:pointer;transition:background 120ms ease,transform 120ms ease}
+#burger{flex:none;display:flex;align-items:center;gap:9px;min-height:40px;padding:0 13px;border:1px solid #dbe1f0;border-radius:8px;background:rgba(255,255,255,0.7);cursor:pointer;transition:background 120ms ease,transform 120ms ease}
 #burger:hover{background:#fff}
-#burger:active{transform:translateY(-50%) scale(0.96)}
-#burger span{display:block;height:2px;border-radius:2px;background:var(--ink-2)}
+#burger:active{transform:scale(0.96)}
+#burger .lines{display:flex;flex-direction:column;gap:4px;width:17px}
+#burger .lines span{display:block;height:2px;border-radius:2px;background:var(--ink-2)}
+#burger .blabel{font-size:13px;font-weight:600;letter-spacing:-0.1px;color:var(--ink-2);white-space:nowrap}
+#burger.hint{animation:burger-pulse 1.7s ease-out 3}
+@keyframes burger-pulse{0%{box-shadow:0 0 0 0 rgba(0,117,222,0.45)}70%{box-shadow:0 0 0 12px rgba(0,117,222,0)}100%{box-shadow:0 0 0 0 rgba(0,117,222,0)}}
+@media (prefers-reduced-motion:reduce){#burger.hint{animation:none;background:#fff;border-color:var(--primary)}}
+.page-tag{font-size:13px;font-weight:500;letter-spacing:0;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.page-tag::before{content:"/";margin-right:7px;color:var(--faint)}
 .brand{font-size:16px;font-weight:700;letter-spacing:-0.3px;color:var(--ink)}
 .contact-btn{margin-left:auto;display:inline-flex;align-items:center;justify-content:center;min-height:36px;padding:7px 16px;border-radius:9999px;background:var(--primary);color:#fff !important;font-size:14px;font-weight:500;transition:background 120ms ease,transform 120ms ease}
 .contact-btn:active{background:var(--primary-active);transform:scale(0.96)}
 
 #scrim{position:fixed;inset:0;z-index:50;background:rgba(0,0,0,0.32);opacity:0;pointer-events:none;transition:opacity 160ms ease}
 #scrim.open{opacity:1;pointer-events:auto}
-#drawer{position:fixed;top:0;left:0;bottom:0;z-index:60;width:min(320px,86vw);background:var(--card);border-right:1px solid var(--hairline);box-shadow:var(--shadow-2);transform:translateX(-100%);transition:transform 200ms ease;display:flex;flex-direction:column;overflow-y:auto}
+#drawer{position:fixed;top:0;left:0;bottom:0;z-index:60;width:min(320px,86vw);background:#e9edf7;border-right:1px solid #dbe1f0;box-shadow:var(--shadow-2);transform:translateX(-100%);transition:transform 200ms ease;display:flex;flex-direction:column;overflow-y:auto}
 #drawer.open{transform:translateX(0)}
 .drawer-top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 16px 12px}
-#drawer-close{width:32px;height:32px;border-radius:50%;border:none;background:rgba(0,0,0,0.05);color:var(--ink-2);font-size:15px;line-height:1;cursor:pointer;transition:transform 120ms ease}
+#drawer-close{width:32px;height:32px;border-radius:50%;border:none;background:rgba(33,49,131,0.08);color:var(--indigo);font-size:15px;line-height:1;cursor:pointer;transition:transform 120ms ease}
 #drawer-close:active{transform:scale(0.9)}
 .nav-group{padding:12px 16px 4px}
-.nav-label{display:flex;align-items:center;gap:9px;font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.nav-label{display:flex;align-items:center;gap:9px;font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#4d5578;margin-bottom:8px}
 .nav-label .dot{width:7px;height:7px;border-radius:50%;flex:none}
 .nav-list{display:flex;flex-direction:column;gap:2px}
 .nav-item{display:block;padding:9px 10px;border-radius:5px;font-size:15px;font-weight:500;color:var(--ink-2);transition:background 120ms ease}
-.nav-item:hover{background:rgba(0,0,0,0.035);color:var(--ink-2)}
-.nav-item.current{background:rgba(0,117,222,0.08);color:var(--primary)}
-.nav-item.soon{color:var(--faint);cursor:default;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.nav-item:hover{background:rgba(33,49,131,0.07);color:var(--ink-2)}
+.nav-item.current{background:rgba(0,117,222,0.14);color:#0058a8}
+.nav-item.soon{color:#9ba2bb;cursor:default;display:flex;align-items:center;justify-content:space-between;gap:10px}
 .nav-item.soon:hover{background:none}
-.soon-tag{font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--faint)}
-.drawer-foot{margin-top:auto;border-top:1px solid var(--hairline);padding:14px 16px 18px}
+.soon-tag{font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#9ba2bb}
+.drawer-foot{margin-top:auto;border-top:1px solid #dbe1f0;padding:14px 16px 18px}
 .drawer-foot a{font-size:15px;font-weight:500}
 
 /* page */
@@ -92,6 +99,9 @@ ul.list.buy li::before{background:var(--orange)}
 .hero .rule{display:flex;gap:6px;margin-bottom:18px}
 .hero .rule span{width:24px;height:5px;border-radius:3px}
 
+.pill{display:inline-flex;align-items:center;justify-content:center;padding:9px 20px;min-height:40px;border-radius:9999px;background:var(--primary);color:#fff !important;font-size:15px;font-weight:500;transition:background 120ms ease,transform 120ms ease}
+.pill:hover{color:#fff !important}
+.pill:active{background:var(--primary-active);transform:scale(0.96)}
 #contact{border-top:1px solid #1a2668;background:var(--indigo);padding:44px 0 56px;color:#fff}
 #contact h2{color:#fff}
 #contact .body{color:#c3cae8}
@@ -142,22 +152,44 @@ td:last-child{font-weight:600;color:var(--ink-2)}
 .formula b{font-weight:600}
 
 @media (max-width:600px){
-  #burger{left:12px;width:36px;height:36px;padding:0 8px}
-  .head-row{padding-left:56px;padding-right:12px;gap:10px}
-  .brand{font-size:15px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  #burger{min-height:36px;padding:0 10px}
+  .page-tag{display:none}
+  .head-row{padding-left:12px;padding-right:12px;gap:10px}
+  .page-tag{font-size:13px;font-weight:500;letter-spacing:0;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.page-tag::before{content:"/";margin-right:7px;color:var(--faint)}
+.brand{font-size:15px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
   .contact-btn{flex:none;padding:7px 13px;font-size:13px}
 }
+#c-scrim{position:fixed;inset:0;z-index:70;background:rgba(0,0,0,0.32);opacity:0;pointer-events:none;transition:opacity 160ms ease}
+#c-scrim.open{opacity:1;pointer-events:auto}
+#c-panel{position:fixed;top:0;right:0;bottom:0;z-index:80;width:min(340px,88vw);background:#e9edf7;border-left:1px solid #dbe1f0;box-shadow:var(--shadow-2);transform:translateX(100%);transition:transform 200ms ease;display:flex;flex-direction:column;overflow-y:auto}
+#c-panel.open{transform:translateX(0)}
+.c-top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 16px 12px}
+#c-close{width:32px;height:32px;border-radius:50%;border:none;background:rgba(33,49,131,0.08);color:var(--indigo);font-size:15px;line-height:1;cursor:pointer;transition:transform 120ms ease}
+#c-close:active{transform:scale(0.9)}
+.c-list{display:flex;flex-direction:column;gap:8px;padding:4px 16px 20px}
+.c-row{display:flex;align-items:center;gap:14px;padding:14px 16px;background:#fff;border:1px solid #dbe1f0;border-radius:12px;transition:transform 120ms ease}
+.c-row:active{transform:scale(0.98)}
+.c-row .dot{width:9px;height:9px;border-radius:50%;flex:none}
+.c-row .k{font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#4d5578}
+.c-row .v{font-size:16px;font-weight:600;letter-spacing:-0.2px;color:var(--ink-2);word-break:break-word}
+.title-band .wrap{position:relative;padding-right:170px}
+.band-logo{position:absolute;right:22px;top:0;height:132px;width:auto}
+@media (max-width:760px){.title-band .wrap{padding-right:110px}.band-logo{height:92px;right:16px}}
+@media (max-width:480px){.title-band .wrap{padding-right:86px}.band-logo{height:72px;right:14px}}
 </style>
 </head>
 <body>
 
 <header>
   <div class="wrap head-row" style="position:relative">
-    <button type="button" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="drawer">
-      <span></span><span></span><span></span>
+    <button type="button" id="burger" aria-label="Open lesson menu" aria-expanded="false" aria-controls="drawer">
+      <span class="lines"><span></span><span></span><span></span></span>
+      <span class="blabel">Lesson Menu</span>
     </button>
     <span class="brand">Base Habits Coaching</span>
-    <a class="contact-btn" href="#contact">Contact me</a>
+    <span class="page-tag">Macros</span>
+    <a class="contact-btn" href="#contact" id="contact-open" aria-controls="c-panel" aria-expanded="false">Contact me</a>
   </div>
 </header>
 
@@ -213,6 +245,7 @@ td:last-child{font-weight:600;color:var(--ink-2)}
 <div class="title-band">
   <div class="wrap">
     <div class="bars"><span style="background:var(--teal)"></span><span style="background:var(--orange)"></span><span style="background:var(--purple)"></span><span style="background:var(--green)"></span></div>
+    <img class="band-logo" src="../../../assets/logo.svg" alt="Base Habits Coaching logo">
     <h1>Macros</h1>
     <nav class="crumbs" aria-label="Breadcrumb">
       <a href="../../index.html">Client Home</a>
@@ -385,34 +418,26 @@ td:last-child{font-weight:600;color:var(--ink-2)}
       <div class="stack">
         <p class="body">Hit your protein target every day. Fill most of the rest with carbs. Keep fat modest and alcohol occasional.</p>
         <p class="body">The ratio matters less than the total. No macro split with a name on it beats hitting your protein and staying under your calorie target. What works is doing the same thing every day, including the days you do not feel like it. You will thank yourself for having meals prepped on those days.</p>
+        <a href="../protein/index.html" style="display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:20px;padding:22px 24px;background:var(--orange);border:1px solid var(--orange);border-radius:14px;box-shadow:var(--shadow-1);transition:transform 120ms ease,box-shadow 120ms ease" onmouseover="this.style.boxShadow='var(--shadow-2)'" onmouseout="this.style.boxShadow='var(--shadow-1)'">
+          <span style="display:flex;flex-direction:column;gap:5px;min-width:0">
+            <span style="font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#ffd9bd">Next page</span>
+            <span style="font-size:clamp(21px,4.6vw,26px);font-weight:700;letter-spacing:-0.6px;color:#fff">Protein</span>
+          </span>
+          <span style="flex:none;font-size:26px;font-weight:600;color:#fff">&rsaquo;</span>
+        </a>
       </div>
     </section>
 
   </div>
 </main>
 
-<section id="contact">
-  <div class="wrap">
-    <h2 style="letter-spacing:-0.7px">Contact me</h2>
-    <p class="body" style="margin-top:10px">Two ways to reach me. Questions about a lesson are welcome any time.</p>
-    <div class="contact-rows">
-      <div class="contact-row">
-        <span class="dot" style="background:#5ecfc9"></span>
-        <div style="display:flex;flex-direction:column;gap:2px">
-          <span class="k">Call or text</span>
-          <a class="v" href="tel:+15176189607">517-618-9607</a>
-        </div>
-      </div>
-      <div class="contact-row">
-        <span class="dot" style="background:#ff9a4d"></span>
-        <div style="display:flex;flex-direction:column;gap:2px">
-          <span class="k">Instagram</span>
-          <a class="v" href="https://instagram.com/base_habits_coaching" target="_blank" rel="noopener">@base_habits_coaching</a>
-        </div>
-      </div>
-    </div>
+<footer style="background:#26241f">
+  <div class="wrap" style="padding-top:28px;padding-bottom:28px;display:flex;flex-wrap:wrap;align-items:center;gap:10px">
+    <span style="font-size:15px;color:#b5afa6">Base Habits Coaching LLC by Austyn Rupert</span>
+    <span style="color:#6b655c">/</span>
+    <a href="https://dot.cards/base_habits_coaching" target="_blank" rel="noopener" style="font-size:15px;font-weight:500;color:#fff !important">Virtual Business Card</a>
   </div>
-</section>
+</footer>
 
 <script>
 (function(){
@@ -438,6 +463,78 @@ td:last-child{font-weight:600;color:var(--ink-2)}
   document.addEventListener('keydown',function(e){
     if(e.key==='Escape'&&drawer.classList.contains('open'))shut();
   });
+})();
+</script>
+
+<div id="c-scrim"></div>
+<aside id="c-panel" aria-label="Contact options" aria-hidden="true">
+  <div class="c-top">
+    <span style="font-size:15px;font-weight:600;color:var(--ink)">Contact me</span>
+    <button type="button" id="c-close" aria-label="Close contact options">&#10005;</button>
+  </div>
+  <div class="c-list">
+    <a class="c-row" href="tel:+15176189607">
+      <span class="dot" style="background:var(--teal)"></span>
+      <span style="display:flex;flex-direction:column;gap:3px"><span class="k">Call or text</span><span class="v">517-618-9607</span></span>
+    </a>
+    <a class="c-row" href="mailto:basehabitscoaching@gmail.com">
+      <span class="dot" style="background:var(--primary)"></span>
+      <span style="display:flex;flex-direction:column;gap:3px"><span class="k">Email</span><span class="v">basehabitscoaching@gmail.com</span></span>
+    </a>
+    <a class="c-row" href="https://instagram.com/base_habits_coaching" target="_blank" rel="noopener">
+      <span class="dot" style="background:var(--orange)"></span>
+      <span style="display:flex;flex-direction:column;gap:3px"><span class="k">Instagram</span><span class="v">@base_habits_coaching</span></span>
+    </a>
+    <a class="c-row" href="https://www.facebook.com/profile.php?id=61594124617514" target="_blank" rel="noopener">
+      <span class="dot" style="background:var(--indigo)"></span>
+      <span style="display:flex;flex-direction:column;gap:3px"><span class="k">Facebook</span><span class="v">Base Habits Coaching</span></span>
+    </a>
+    <a class="c-row" href="https://dot.cards/base_habits_coaching" target="_blank" rel="noopener">
+      <span class="dot" style="background:var(--green)"></span>
+      <span style="display:flex;flex-direction:column;gap:3px"><span class="k">Virtual business card</span><span class="v">dot.cards/base_habits_coaching</span></span>
+    </a>
+  </div>
+</aside>
+<script>
+(function(){
+  var btn=document.getElementById('contact-open'),
+      panel=document.getElementById('c-panel'),
+      scrim=document.getElementById('c-scrim'),
+      x=document.getElementById('c-close');
+  if(!btn)return;
+  function open(e){
+    if(e)e.preventDefault();
+    panel.classList.add('open');scrim.classList.add('open');
+    panel.setAttribute('aria-hidden','false');btn.setAttribute('aria-expanded','true');
+    document.body.style.overflow='hidden';x.focus();
+  }
+  function shut(){
+    panel.classList.remove('open');scrim.classList.remove('open');
+    panel.setAttribute('aria-hidden','true');btn.setAttribute('aria-expanded','false');
+    document.body.style.overflow='';btn.focus();
+  }
+  btn.addEventListener('click',open);
+  x.addEventListener('click',shut);
+  scrim.addEventListener('click',shut);
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&panel.classList.contains('open'))shut()});
+  Array.prototype.forEach.call(panel.querySelectorAll('.c-row'),function(a){a.addEventListener('click',function(){setTimeout(shut,150)})});
+})();
+</script>
+<script>
+(function(){
+  var b=document.getElementById('burger');
+  if(!b)return;
+  var KEY='bh-menu-hint-seen';
+  var seen;
+  try{seen=localStorage.getItem(KEY)}catch(e){seen='1'}
+  if(seen)return;
+  b.classList.add('hint');
+  function done(){
+    b.classList.remove('hint');
+    try{localStorage.setItem(KEY,'1')}catch(e){}
+  }
+  b.addEventListener('click',done,{once:true});
+  b.addEventListener('animationend',function(){setTimeout(done,400)});
 })();
 </script>
 </body>
