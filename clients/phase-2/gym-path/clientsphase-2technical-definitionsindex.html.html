@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Gym Path Overview — Base Habits Coaching</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --page:#f6f5f4; --card:#ffffff; --hairline:#e6e6e6;
+  --ink:#000000; --ink-2:#31302e; --muted:#615d59; --faint:#a39e98;
+  --primary:#0075de; --primary-active:#005bab; --indigo:#213183;
+  --teal:#2a9d99; --orange:#dd5b00; --purple:#391c57; --green:#1aae39;
+  --shadow-1:rgba(0,0,0,0.01) 0 0.175px 1.041px,rgba(0,0,0,0.02) 0 0.8px 2.925px,rgba(0,0,0,0.027) 0 2.025px 7.847px,rgba(0,0,0,0.04) 0 4px 18px;
+  --shadow-2:rgba(0,0,0,0.01) 0 0.175px 1.041px,rgba(0,0,0,0.02) 0 0.8px 2.925px,rgba(0,0,0,0.027) 0 2.025px 7.847px,rgba(0,0,0,0.04) 0 4px 18px,rgba(0,0,0,0.05) 0 23px 52px;
+}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--page);color:var(--ink);font-family:'Inter',system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased}
+p,h1,h2,h3,ul{margin:0}
+ul{padding:0;list-style:none}
+a{color:var(--primary);text-decoration:none}
+a:hover{color:var(--primary-active)}
+.wrap{max-width:720px;margin:0 auto;padding-left:22px;padding-right:22px}
+.head-row{max-width:720px;padding:12px 22px;display:flex;align-items:center;gap:12px}
+
+header{position:sticky;top:0;z-index:30;background:#e9edf7;border-bottom:1px solid #dbe1f0}
+#burger{flex:none;display:flex;align-items:center;gap:9px;min-height:40px;padding:0 13px;border:1px solid #dbe1f0;border-radius:8px;background:rgba(255,255,255,0.7);cursor:pointer;transition:background 120ms ease,transform 120ms ease}
+#burger:hover{background:#fff}
+#burger:active{transform:scale(0.96)}
+#burger .lines{display:flex;flex-direction:column;gap:4px;width:17px}
+#burger .lines span{display:block;height:2px;border-radius:2px;background:var(--ink-2)}
+#burger .blabel{font-size:13px;font-weight:600;letter-spacing:-0.1px;color:var(--ink-2);white-space:nowrap}
+.page-tag{font-size:13px;font-weight:500;letter-spacing:0;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.page-tag::before{content:"/";margin-right:7px;color:var(--faint)}
+.brand{font-size:16px;font-weight:700;letter-spacing:-0.3px;color:var(--ink)}
+.contact-btn{margin-left:auto;display:inline-flex;align-items:center;justify-content:center;min-height:36px;padding:7px 16px;border-radius:9999px;background:var(--primary);color:#fff !important;font-size:14px;font-weight:500;transition:background 120ms ease,transform 120ms ease}
+.contact-btn:active{background:var(--primary-active);transform:scale(0.96)}
+
+#scrim{position:fixed;inset:0;z-index:50;background:rgba(0,0,0,0.32);opacity:0;pointer-events:none;transition:opacity 160ms ease}
+#scrim.open{opacity:1;pointer-events:auto}
+#drawer{position:fixed;top:0;left:0;bottom:0;z-index:60;width:min(320px,86vw);background:#e9edf7;border-right:1px solid #dbe1f0;box-shadow:var(--shadow-2);transform:translateX(-100%);transition:transform 200ms ease;display:flex;flex-direction:column;overflow-y:auto}
+#drawer.open{transform:translateX(0)}
+.drawer-top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 16px 12px}
+#drawer-close{width:32px;height:32px;border-radius:50%;border:none;background:rgba(33,49,131,0.08);color:var(--indigo);font-size:15px;line-height:1;cursor:pointer;transition:transform 120ms ease}
+#drawer-close:active{transform:scale(0.9)}
+.nav-group{padding:12px 16px 4px}
+.nav-label{display:flex;align-items:center;gap:9px;font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#4d5578;margin-bottom:8px}
+.nav-label .dot{width:7px;height:7px;border-radius:50%;flex:none}
+.nav-list{display:flex;flex-direction:column;gap:2px}
+.nav-item{display:block;padding:9px 10px;border-radius:5px;font-size:15px;font-weight:500;color:var(--ink-2);transition:background 120ms ease}
+.nav-item:hover{background:rgba(33,49,131,0.07);color:var(--ink-2)}
+.nav-item.current{background:rgba(0,117,222,0.14);color:#0058a8}
+.nav-item.soon{color:#9ba2bb;cursor:default;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.nav-item.soon:hover{background:none}
+.soon-tag{font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#9ba2bb}
+.drawer-foot{margin-top:auto;border-top:1px solid #dbe1f0;padding:14px 16px 18px}
+.drawer-foot a{font-size:15px;font-weight:500}
+
+.title-band{background:linear-gradient(180deg,#dfe5f5 0%,#e9ecf6 46%,var(--page) 100%);padding:38px 0 34px}
+h1{font-size:clamp(32px,8.2vw,46px);font-weight:700;line-height:1.06;letter-spacing:-1.4px;text-wrap:pretty}
+.crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:14px;font-size:13px;font-weight:500;color:var(--muted)}
+.crumbs .sep{color:var(--faint)}
+.bars{display:flex;gap:6px;margin-bottom:20px}
+.bars span{width:26px;height:6px;border-radius:3px}
+
+main{padding-bottom:24px}
+.sections{display:flex;flex-direction:column}
+section.chapter{padding:34px 0}
+section.chapter + section.chapter{border-top:1px solid var(--hairline)}
+.eyebrow{display:flex;align-items:center;gap:9px;font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+.eyebrow .dot{width:7px;height:7px;border-radius:50%;flex:none}
+h2{font-size:clamp(24px,5.6vw,30px);font-weight:700;line-height:1.16;letter-spacing:-0.8px;color:var(--ink);text-wrap:pretty}
+h3{font-size:19px;font-weight:600;line-height:1.3;letter-spacing:-0.4px;color:var(--ink);text-wrap:pretty}
+.lede{font-size:19px;font-weight:500;line-height:1.45;letter-spacing:-0.2px;color:var(--indigo);max-width:26em;text-wrap:pretty}
+.body{font-size:17px;line-height:1.7;color:var(--muted);max-width:34em;text-wrap:pretty}
+.body strong{font-weight:600;color:var(--ink-2)}
+.stack{display:flex;flex-direction:column;gap:16px;margin-top:4px}
+
+.paths{display:grid;gap:14px;margin-top:22px}
+@media(min-width:720px){.paths{grid-template-columns:repeat(2,1fr)}}
+.path{background:var(--card);border:1px solid var(--hairline);border-radius:12px;box-shadow:var(--shadow-1);overflow:hidden;display:flex;flex-direction:column}
+.path .band{height:6px;background:var(--orange)}
+.path .inner{padding:22px 22px 24px;display:flex;flex-direction:column;gap:10px}
+.path .inner .body{max-width:none;font-size:16px}
+
+.quote{background:var(--card);border:1px solid var(--hairline);border-radius:12px;padding:22px 24px;margin-top:22px;display:flex;flex-direction:column;gap:14px}
+.quote p{font-size:19px;line-height:1.5;letter-spacing:-0.2px;color:var(--ink-2);text-wrap:pretty}
+.quote ul{display:flex;flex-direction:column;gap:10px}
+.quote li{display:flex;align-items:baseline;gap:12px;font-size:17px;line-height:1.5;color:var(--ink-2);font-weight:500}
+.quote li::before{content:"";flex:none;width:7px;height:7px;border-radius:50%;background:var(--purple);transform:translateY(-2px)}
+
+.next-links{display:grid;gap:14px;margin-top:22px}
+@media(min-width:720px){.next-links{grid-template-columns:repeat(2,1fr)}}
+a.next-link{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:22px 24px;background:var(--orange);border:1px solid var(--orange);border-radius:14px;box-shadow:var(--shadow-1);color:#fff !important;transition:box-shadow 120ms ease,transform 120ms ease}
+a.next-link:hover{box-shadow:var(--shadow-2)}
+a.next-link .k{font-size:12px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#ffd9bd}
+a.next-link .v{font-size:clamp(21px,4.6vw,26px);font-weight:700;letter-spacing:-0.6px;color:#fff}
+a.next-link .arrow{flex:none;font-size:26px;font-weight:600;color:#fff}
+
+@media (max-width:600px){
+  #burger{min-height:36px;padding:0 10px}
+  .page-tag{display:none}
+  .head-row{padding-left:12px;padding-right:12px;gap:10px}
+  .brand{font-size:15px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .contact-btn{flex:none;padding:7px 13px;font-size:13px}
+}
+#c-scrim{position:fixed;inset:0;z-index:70;background:rgba(0,0,0,0.32);opacity:0;pointer-events:none;transition:opacity 160ms ease}
+#c-scrim.open{opacity:1;pointer-events:auto}
+#c-panel{position:fixed;top:0;right:0;bottom:0;z-index:80;width:min(340px,88vw);background:#e9edf7;border-left:1px solid #dbe1f0;box-shadow:var(--shadow-2);transform:translateX(100%);transition:transform 200ms ease;display:flex;flex-direction:column;overflow-y:auto}
+#c-panel.open{transform:translateX(0)}
+.c-top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 16px 12px}
+#c-close{width:32px;height:32px;border-radius:50%;border:none;background:rgba(33,49,131,0.08);color:var(--indigo);font-size:15px;line-height:1;cursor:pointer;transition:transform 120ms ease}
+#c-close:active{transform:scale(0.9)}
+.c-list{display:flex;flex-direction:column;gap:8px;padding:4px 16px 20px}
+.c-row{display:flex;align-items:center;gap:14px;padding:14px 16px;background:#fff;border:1px solid #dbe1f0;border-radius:12px;transition:transform 120ms ease}
+.c-row:active{transform:scale(0.98)}
+.c-row .dot{width:9px;height:9px;border-radius:50%;flex:none}
+.c-row .k{font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#4d5578}
+.c-row .v{font-size:16px;font-weight:600;letter-spacing:-0.2px;color:var(--ink-2);word-break:break-word}
+.title-band .wrap{position:relative;padding-right:170px}
+.band-logo{position:absolute;right:22px;top:0;height:132px;width:auto}
+@media (max-width:760px){.title-band .wrap{padding-right:110px}.band-logo{height:92px;right:16px}}
+@media (max-width:480px){.title-band .wrap{padding-right:86px}.band-logo{height:72px;right:14px}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap head-row" style="position:relative">
+    <button type="button" id="burger" aria-label="Open lesson menu" aria-expanded="false" aria-controls="drawer">
+      <span class="lines"><span></span><span></span><span></span></span>
+      <span class="blabel">Lesson Menu</span>
+    </button>
+    <span class="brand">Base Habits Coaching</span>
+    <span class="page-tag">Technical Definitions</span>
+    <a class="contact-btn" href="#contact" id="contact-open" aria-controls="c-panel" aria-expanded="false">Contact me</a>
+  </div>
+</header>
+
+<div id="scrim"></div>
+
+<nav id="drawer" aria-label="Client pages" aria-hidden="true">
+  <div class="drawer-top">
+    <span style="font-size:15px;font-weight:600;color:var(--ink)">Client pages</span>
+    <button type="button" id="drawer-close" aria-label="Close menu">&#10005;</button>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-list">
+      <a class="nav-item" href="../../index.html">&lsaquo; Client home</a>
+    </div>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-label"><span class="dot" style="background:var(--teal)"></span>Phase 1</div>
+    <div class="nav-list">
+      <a class="nav-item" href="../../phase-1/base-habits/index.html">Base Habits</a>
+      <a class="nav-item" href="../../phase-1/two-week-rule/index.html">Two Week Rule</a>
+      <a class="nav-item" href="../../phase-1/debunking/index.html">Debunking</a>
+      <a class="nav-item" href="../../phase-1/calories/index.html">Calories</a>
+      <a class="nav-item" href="../../phase-1/macros/index.html">Macros</a>
+      <a class="nav-item" href="../../phase-1/protein/index.html" style="margin-left:14px">Protein</a>
+      <a class="nav-item" href="../../phase-1/carbs/index.html" style="margin-left:14px">Carbs</a>
+      <a class="nav-item" href="../../phase-1/fats/index.html" style="margin-left:14px">Fats</a>
+    </div>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-label"><span class="dot" style="background:var(--orange)"></span>Phase 2</div>
+    <div class="nav-list">
+      <a class="nav-item" href="../intro/index.html">Phase 2 Intro</a>
+      <a class="nav-item" href="../gym-path/index.html" style="margin-left:14px">Gym Path Overview</a>
+      <a class="nav-item current" href="index.html" aria-current="page" style="margin-left:28px">Technical Definitions</a>
+      <a class="nav-item" href="../non-gym-path/index.html" style="margin-left:14px">Non-Gym Path Overview</a>
+    </div>
+  </div>
+
+  <div class="nav-group">
+    <div class="nav-label"><span class="dot" style="background:var(--purple)"></span>Phase 3</div>
+    <div class="nav-list">
+      <span class="nav-item soon" aria-disabled="true">Placeholder page one<span class="soon-tag">Coming soon</span></span>
+      <span class="nav-item soon" aria-disabled="true">Placeholder page two<span class="soon-tag">Coming soon</span></span>
+    </div>
+  </div>
+
+  <div class="drawer-foot">
+    <a href="../../../base-habits-coaching.html">Back to basehabitscoaching.com</a>
+  </div>
+</nav>
+
+<div class="title-band">
+  <div class="wrap">
+    <div class="bars"><span style="background:var(--teal)"></span><span style="background:var(--orange)"></span><span style="background:var(--purple)"></span><span style="background:var(--green)"></span></div>
+    <img class="band-logo" src="../../../assets/logo.svg" alt="Base Habits Coaching logo">
+    <h1>Technical Definitions</h1>
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <a href="../../index.html">Client Home</a>
+      <span class="sep">&rsaquo;</span>
+      <a href="../intro/index.html">Phase 2 Intro</a>
+      <span class="sep">&rsaquo;</span>
+      <a href="../gym-path/index.html">Gym Path Overview</a>
+      <span class="sep">&rsaquo;</span>
+      <span>Technical Definitions</span>
+    </nav>
+  </div>
+</div>
+
+<main>
+  <div class="wrap sections">
+
+    <section class="chapter">
+      <div class="eyebrow"><span class="dot" style="background:var(--teal)"></span>Section 1</div>
+      <h2>Reps and Sets</h2>
+      <div class="stack">
+        <p class="lede">The two basic units every program is built from.</p>
+        <p class="body">A <strong>rep</strong> is one complete repetition of an exercise, from the starting position through the <strong>full range of motion</strong> and back. Full range of motion means moving from the <strong>lengthened position</strong>, where the muscle is fully stretched, to the <strong>contracted position</strong>, where the muscle is fully shortened, and back.</p>
+        <p class="body">A <strong>set</strong> is a group of reps performed back to back without stopping.</p>
+        <p class="body">Every program is written in reps and sets.</p>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <div class="eyebrow"><span class="dot" style="background:var(--orange)"></span>Section 2</div>
+      <h2>Warm-Up Sets vs. Working Sets</h2>
+      <div class="stack">
+        <p class="lede">Warm-up sets reduce risk of injury, the working sets are what cause growth.</p>
+        <p class="body"><strong>Warm-up sets</strong> come before your working weight. They're lighter, and their job is to prep your muscles and nervous system before lifting at your full potential.</p>
+        <p class="body">Each warm-up set gets a little heavier than the last, working you up toward your working weight. As the weight goes up through your warm-ups, the number of reps you do at each step goes down, heavier warm-up sets use fewer reps.</p>
+        <p class="body">As a rule of thumb: 10 reps at 50% of your working weight, 5 reps at 70%, and 2 to 3 reps at 85%, then move into your working weight. Lighter accessory lifts usually need fewer warm-up sets than heavy compound lifts.</p>
+        <p class="body">The <strong>working set</strong> is the one that counts towards muscle stimulation and your total for the week. It's done at the weight and rep range your program calls for, and it's what actually drives your progress.</p>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <div class="eyebrow"><span class="dot" style="background:var(--purple)"></span>Section 3</div>
+      <h2>RIR and Intensity</h2>
+      <div class="stack">
+        <p class="lede">How hard a set actually was quantified as a number relative to failure.</p>
+        <p class="body"><strong>RIR</strong> stands for reps in reserve. It's how many more reps you believe you could've done with good form before you couldn't do another one.</p>
+        <p class="body">In MacroFactor, RIR is logged on a 0 to 6+ scale. 0 means you hit technical failure on that set. 6+ means the set felt extremely easy. We want to stay in the 0 to 2 RIR range for working sets.</p>
+        <p class="body"><strong>Intensity</strong> is a related term for the same idea, how hard a set was relative to your effort, not just how much weight was on the bar. RIR is how that gets measured in your program.</p>
+      </div>
+      <div class="quote">
+        <p>To estimate your RIR after a set, ask one question: how many more reps could I have gotten, with the same weight and the same form? That number is your RIR. <strong>THE ONLY WAY TO KNOW THIS IS TO EXPERIENCE FAILURE AT SOME POINT FOR EACH EXERCISE.</strong></p>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <div class="eyebrow"><span class="dot" style="background:var(--green)"></span>Section 4</div>
+      <h2>Failure and Technical Failure</h2>
+      <div class="stack">
+        <p class="lede">There's a difference between can't move it and shouldn't move it.</p>
+        <p class="body"><strong>Failure</strong> is the point where you physically cannot complete another rep, no matter what it looks like.</p>
+        <p class="body"><strong>Technical failure</strong> is the point where you can't complete another rep with good form, even if you could grind out an ugly one. This is where you stop a set. You'll know you're there when your form starts to break down and your rep speed noticeably slows.</p>
+      </div>
+      <div class="quote">
+        <p>The biggest cue we are looking for here is that the rep speed slows.</p>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <div class="eyebrow"><span class="dot" style="background:var(--indigo)"></span>Section 5</div>
+      <h2>Concentric, Eccentric, Isometric</h2>
+      <div class="stack">
+        <p class="lede">The three phases every rep moves through.</p>
+        <p class="body"><strong>Concentric</strong> is the part of the rep where the muscle shortens and does the lifting. On a squat, that's standing back up. This is the muscle contracting.</p>
+        <p class="body"><strong>Eccentric</strong> is the part where the muscle lengthens under load. On a squat, that's lowering down. Do not let the weight fall down, control the eccentric. There is nothing wrong with going slow and taking your time lowering the weight, this is a huge factor of growth.</p>
+        <p class="body"><strong>Isometric</strong> is when the muscle holds under tension without changing length or moving at all.</p>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <div class="eyebrow"><span class="dot" style="background:var(--primary)"></span>Section 6</div>
+      <h2>Tempo</h2>
+      <div class="stack">
+        <p class="lede">How fast each part of the rep moves.</p>
+        <p class="body"><strong>Tempo</strong> controls the speed of each phase of a rep. It's written as a four-digit code, in this order: eccentric, pause at the bottom, concentric, pause at the top. Each number is seconds.</p>
+        <p class="body">A tempo of 3-1-1-0 means 3 seconds lowering the weight, 1 second paused at the bottom, 1 second lifting the weight, and no pause at the top before starting the next rep.</p>
+      </div>
+      <div class="quote">
+        <p>The most important thing to take from this is to go slow lowering the weight, short pause in the lengthened position, lift the weight at a controlled explosive pace. <strong>DO NOT RUSH THE REPS.</strong></p>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <div class="eyebrow"><span class="dot" style="background:var(--teal)"></span>Section 7</div>
+      <h2>Drop Sets and Supersets</h2>
+      <div class="stack">
+        <p class="lede">Two ways to intensify a workout, but not always necessary.</p>
+        <p class="body">A <strong>drop set</strong> means reaching failure or technical failure on a set, then immediately dropping the weight and continuing without resting. It extends a set past where you'd normally stop.</p>
+        <p class="body">A <strong>superset</strong> means performing two exercises back to back with no rest in between, then resting once both are done. This is a very effective technique to shorten your workouts. But best to use opposing muscle groups, such as doing a set of chest press and then right after a set of rear delt flies. These muscles do not directly affect the work of the other one, so they are safe to hit back to back.</p>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <div class="eyebrow"><span class="dot" style="background:var(--orange)"></span>Section 8</div>
+      <h2>Rest Periods</h2>
+      <div class="stack">
+        <p class="lede">How long you wait between sets.</p>
+        <p class="body"><strong>Rest periods</strong> are the time you take between sets. How long depends on what you're training that day, longer for heavier compound lifts, shorter for lighter accessory work. Your program will specify it.</p>
+        <p class="body">The MacroFactor app will automatically start a timer as soon as you enter the info for the last set and complete it.</p>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <div class="eyebrow"><span class="dot" style="background:var(--purple)"></span>Section 9</div>
+      <h2>Volume and Progressive Overload</h2>
+      <div class="stack">
+        <p class="lede">The two levers behind every bit of progress you make.</p>
+        <p class="body"><strong>Volume</strong> is the total amount of work done for a muscle group, usually counted as total sets and reps across a week.</p>
+        <p class="body"><strong>Progressive overload</strong> is doing a little more work over time than you did before, more weight, more reps, more volume, or better control of the same weight. Volume and load are the two main levers behind it, and it's the entire reason your weights get tracked in the first place.</p>
+        <p class="body">Progressive overload is the whole goal behind resistance training. It is about small progress each time you lift. At first, you will be progressing relatively fast. For the beginning of your fitness journey you might be adding 5lbs or even up to 10lbs to each lift each week.</p>
+        <p class="body">Once your nervous system catches up to your physical ability, you will feel like you hit a wall. But this is where the real work begins. At this point, you need to focus on tracking your reps and sets as honestly as you can. Getting one extra rep, improving your form, or adding 2.5lbs to the bar is all a win at this point.</p>
+      </div>
+    </section>
+
+    <section class="chapter">
+      <div class="eyebrow"><span class="dot" style="background:var(--teal)"></span>Section 10</div>
+      <h2>What Comes Next</h2>
+      <div class="stack">
+        <p class="lede">Next, we identify the muscles and discuss how to target them.</p>
+        <p class="body"><a href="#">Muscle Anatomy</a> is next. It shows you what's actually moving when you train, tying every term on this page to the muscle it applies to.</p>
+      </div>
+      <div class="next-links" style="grid-template-columns:1fr">
+        <a class="next-link" href="#">
+          <span style="display:flex;flex-direction:column;gap:5px;min-width:0">
+            <span class="k">Next page</span>
+            <span class="v">Muscle Anatomy</span>
+          </span>
+          <span class="arrow">&rsaquo;</span>
+        </a>
+      </div>
+    </section>
+
+  </div>
+</main>
+
+<footer style="background:#26241f">
+  <div class="wrap" style="padding-top:28px;padding-bottom:28px;display:flex;flex-wrap:wrap;align-items:center;gap:10px">
+    <span style="font-size:15px;color:#b5afa6">Base Habits Coaching LLC by Austyn Rupert</span>
+    <span style="color:#6b655c">/</span>
+    <a href="https://dot.cards/base_habits_coaching" target="_blank" rel="noopener" style="font-size:15px;font-weight:500;color:#fff !important">Virtual Business Card</a>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var burger=document.getElementById('burger'),
+      drawer=document.getElementById('drawer'),
+      scrim=document.getElementById('scrim'),
+      close=document.getElementById('drawer-close');
+  function open(){
+    drawer.classList.add('open');scrim.classList.add('open');
+    drawer.setAttribute('aria-hidden','false');burger.setAttribute('aria-expanded','true');
+    document.body.style.overflow='hidden';
+    close.focus();
+  }
+  function shut(){
+    drawer.classList.remove('open');scrim.classList.remove('open');
+    drawer.setAttribute('aria-hidden','true');burger.setAttribute('aria-expanded','false');
+    document.body.style.overflow='';
+    burger.focus();
+  }
+  burger.addEventListener('click',open);
+  close.addEventListener('click',shut);
+  scrim.addEventListener('click',shut);
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape'&&drawer.classList.contains('open'))shut();
+  });
+})();
+</script>
+
+<div id="c-scrim"></div>
+<aside id="c-panel" aria-label="Contact options" aria-hidden="true">
+  <div class="c-top">
+    <span style="font-size:15px;font-weight:600;color:var(--ink)">Contact me</span>
+    <button type="button" id="c-close" aria-label="Close contact options">&#10005;</button>
+  </div>
+  <div class="c-list">
+    <a class="c-row" href="tel:+15176189607">
+      <span class="dot" style="background:var(--teal)"></span>
+      <span style="display:flex;flex-direction:column;gap:3px"><span class="k">Call or text</span><span class="v">517-618-9607</span></span>
+    </a>
+    <a class="c-row" href="mailto:basehabitscoaching@gmail.com">
+      <span class="dot" style="background:var(--primary)"></span>
+      <span style="display:flex;flex-direction:column;gap:3px"><span class="k">Email</span><span class="v">basehabitscoaching@gmail.com</span></span>
+    </a>
+    <a class="c-row" href="https://instagram.com/base_habits_coaching" target="_blank" rel="noopener">
+      <span class="dot" style="background:var(--orange)"></span>
+      <span style="display:flex;flex-direction:column;gap:3px"><span class="k">Instagram</span><span class="v">@base_habits_coaching</span></span>
+    </a>
+    <a class="c-row" href="https://www.facebook.com/profile.php?id=61594124617514" target="_blank" rel="noopener">
+      <span class="dot" style="background:var(--indigo)"></span>
+      <span style="display:flex;flex-direction:column;gap:3px"><span class="k">Facebook</span><span class="v">Base Habits Coaching</span></span>
+    </a>
+    <a class="c-row" href="https://dot.cards/base_habits_coaching" target="_blank" rel="noopener">
+      <span class="dot" style="background:var(--green)"></span>
+      <span style="display:flex;flex-direction:column;gap:3px"><span class="k">Virtual business card</span><span class="v">dot.cards/base_habits_coaching</span></span>
+    </a>
+  </div>
+</aside>
+<script>
+(function(){
+  var btn=document.getElementById('contact-open'),
+      panel=document.getElementById('c-panel'),
+      scrim=document.getElementById('c-scrim'),
+      x=document.getElementById('c-close');
+  if(!btn)return;
+  function open(e){
+    if(e)e.preventDefault();
+    panel.classList.add('open');scrim.classList.add('open');
+    panel.setAttribute('aria-hidden','false');btn.setAttribute('aria-expanded','true');
+    document.body.style.overflow='hidden';x.focus();
+  }
+  function shut(){
+    panel.classList.remove('open');scrim.classList.remove('open');
+    panel.setAttribute('aria-hidden','true');btn.setAttribute('aria-expanded','false');
+    document.body.style.overflow='';btn.focus();
+  }
+  btn.addEventListener('click',open);
+  x.addEventListener('click',shut);
+  scrim.addEventListener('click',shut);
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&panel.classList.contains('open'))shut()});
+  Array.prototype.forEach.call(panel.querySelectorAll('.c-row'),function(a){a.addEventListener('click',function(){setTimeout(shut,150)})});
+})();
+</script>
+</body>
+</html>
