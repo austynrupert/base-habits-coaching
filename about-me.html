@@ -36,6 +36,64 @@ body{margin:0;background:var(--page);color:var(--ink);font-family:'Inter',system
 .bh-beat:last-child .bh-beat-body{padding-bottom:0}
 #bh-prog{position:fixed;left:0;top:0;bottom:0;width:3px;background:var(--hairline);z-index:40}
 #bh-prog-fill{width:3px;height:0;background:var(--primary)}
+#c-scrim{position:fixed;inset:0;z-index:70;background:rgba(0,0,0,0.32);opacity:0;pointer-events:none;transition:opacity 160ms ease}
+#c-scrim.open{opacity:1;pointer-events:auto}
+#c-panel{position:fixed;top:0;right:0;bottom:0;z-index:80;width:min(340px,88vw);background:#e9edf7;border-left:1px solid #dbe1f0;box-shadow:var(--elevation-2,rgba(0,0,0,0.05) 0 23px 52px);transform:translateX(100%);transition:transform 200ms ease;display:flex;flex-direction:column;overflow-y:auto}
+#c-panel.open{transform:translateX(0)}
+.c-top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 16px 12px}
+#c-close{width:32px;height:32px;border-radius:50%;border:none;background:rgba(33,49,131,0.08);color:var(--indigo);font-size:15px;line-height:1;cursor:pointer;transition:transform 120ms ease}
+#c-close:active{transform:scale(0.9)}
+.c-list{display:flex;flex-direction:column;gap:8px;padding:4px 16px 20px}
+.c-row{display:flex;align-items:center;gap:14px;padding:14px 16px;background:#fff;border:1px solid #dbe1f0;border-radius:12px;text-decoration:none;transition:transform 120ms ease}
+.c-row:active{transform:scale(0.98)}
+.c-row .c-dot{width:9px;height:9px;border-radius:50%;flex:none}
+.c-row .k{font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#4d5578}
+.c-row .v{font-size:16px;font-weight:600;letter-spacing:-0.2px;color:var(--ink-2);word-break:break-word}
+#bh-client-access{cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:7px;padding:6px 12px;min-height:32px;border-radius:8px;background:rgba(255,255,255,0.7);border:1px solid #dbe1f0;color:var(--muted) !important;font-family:'Inter',system-ui,sans-serif;font-size:13px;font-weight:500;letter-spacing:-0.1px;white-space:nowrap;text-decoration:none;cursor:pointer;transition:background 120ms ease,transform 120ms ease}
+#bh-client-access:hover{background:#fff;color:var(--ink-2) !important}
+#bh-client-access:active{transform:scale(0.96)}
+#bh-client-access .bh-ca-dot{width:6px;height:6px;border-radius:50%;background:var(--teal);flex:none}
+@media (max-width:600px){#bh-client-access .bh-ca-label{display:none}#bh-client-access::after{content:'Client access'}}
+
+.brand-lock{display:flex;align-items:center;gap:10px;text-decoration:none;flex:none}
+.brand-lock img{width:68px;height:68px;display:block}
+.brand-lock span{font-size:22px;font-weight:700;letter-spacing:-0.6px;color:var(--indigo) !important;text-shadow:0 1px 0 rgba(255,255,255,0.9),0 2px 4px rgba(33,49,131,0.18)}
+@media (max-width:600px){.brand-lock img{width:48px;height:48px}.brand-lock span{font-size:18px}}
+.nav-link{font-size:15px;font-weight:500;color:var(--muted)}
+.nav-pill{display:inline-flex;align-items:center;justify-content:center;min-height:36px;padding:7px 16px;border-radius:9999px;background:var(--indigo);color:#fff !important;font-size:15px;font-weight:600;text-decoration:none;transition:transform 120ms ease}
+.nav-pill:active{transform:scale(0.96)}
+header .bh-wrap{max-width:1100px;margin:0 auto;padding-left:22px;padding-right:22px}
+.brand-lock span{white-space:nowrap}
+.nav-link{white-space:nowrap}
+.nav-pill{white-space:nowrap}
+@media (max-width:860px){.brand-lock span{display:none}}
+@media (max-width:560px){.nav-link.secondary{display:none}}
+@media (max-width:860px){#bh-client-access{display:none}}
+
+</style>
+<style>
+
+#bh-client-access{cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:7px;padding:6px 12px;min-height:32px;border-radius:8px;background:rgba(255,255,255,0.7);border:1px solid #dbe1f0;color:var(--muted) !important;font-family:'Inter',system-ui,sans-serif;font-size:13px;font-weight:500;letter-spacing:-0.1px;white-space:nowrap;text-decoration:none;cursor:pointer;transition:background 120ms ease,transform 120ms ease}
+#bh-client-access:hover{background:#fff;color:var(--ink-2) !important}
+#bh-client-access:active{transform:scale(0.96)}
+#bh-client-access .bh-ca-dot{width:6px;height:6px;border-radius:50%;background:var(--teal);flex:none}
+@media (max-width:600px){#bh-client-access .bh-ca-label{display:none}#bh-client-access::after{content:'Client access'}}
+
+.brand-lock{display:flex;align-items:center;gap:10px;text-decoration:none;flex:none}
+.brand-lock img{width:68px;height:68px;display:block}
+.brand-lock span{font-size:22px;font-weight:700;letter-spacing:-0.6px;color:var(--indigo) !important;text-shadow:0 1px 0 rgba(255,255,255,0.9),0 2px 4px rgba(33,49,131,0.18)}
+@media (max-width:600px){.brand-lock img{width:48px;height:48px}.brand-lock span{font-size:18px}}
+.nav-link{font-size:15px;font-weight:500;color:var(--muted)}
+.nav-pill{display:inline-flex;align-items:center;justify-content:center;min-height:36px;padding:7px 16px;border-radius:9999px;background:var(--indigo);color:#fff !important;font-size:15px;font-weight:600;text-decoration:none;transition:transform 120ms ease}
+.nav-pill:active{transform:scale(0.96)}
+header .bh-wrap{max-width:1100px;margin:0 auto;padding-left:22px;padding-right:22px}
+.brand-lock span{white-space:nowrap}
+.nav-link{white-space:nowrap}
+.nav-pill{white-space:nowrap}
+@media (max-width:860px){.brand-lock span{display:none}}
+@media (max-width:560px){.nav-link.secondary{display:none}}
+@media (max-width:860px){#bh-client-access{display:none}}
+
 </style>
 </head>
 <body>
@@ -43,13 +101,17 @@ body{margin:0;background:var(--page);color:var(--ink);font-family:'Inter',system
 
   <div id="bh-prog"><div id="bh-prog-fill"></div></div>
 
-  <header style="position:sticky;top:0;z-index:30;background:rgba(246,245,244,0.92);backdrop-filter:saturate(180%) blur(8px);border-bottom:1px solid var(--hairline)">
-    <div class="bh-wrap" style="padding-top:12px;padding-bottom:12px;display:flex;align-items:center;justify-content:space-between;gap:16px">
-      <a href="base-habits-coaching.html" style="font-size:16px;font-weight:700;letter-spacing:-0.3px;color:var(--ink) !important">Base Habits Coaching</a>
-      <div style="display:flex;align-items:center;gap:14px">
-        <a href="base-habits-coaching.html" style="font-size:15px;font-weight:500;color:var(--muted)">Home</a>
-        <a href="base-habits-coaching.html#contact" style="font-size:15px;font-weight:500;color:var(--muted)">Contact me</a>
-        <a class="bh-btn sm" href="base-habits-coaching.html#next">Get started</a>
+  <header style="position:sticky;top:0;z-index:30;background:#e9edf7;border-bottom:1px solid #dbe1f0">
+    <div class="bh-wrap" style="padding-top:12px;padding-bottom:12px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:nowrap">
+      <a class="brand-lock" href="index.html">
+        <img src="logo.svg" alt="">
+        <span>Base Habits Coaching</span>
+      </a>
+      <div style="display:flex;align-items:center;gap:14px;flex-wrap:nowrap">
+        <a class="nav-pill" href="index.html#start">Get started</a>
+        <a class="nav-link secondary" href="about-program.html">About my program</a>
+        <a class="nav-link c-open" href="index.html#contact">Contact me</a>
+        <a id="bh-client-access" href="clients/index.html"><span class="bh-ca-dot"></span><span class="bh-ca-label">Current Client Access</span></a>
       </div>
     </div>
   </header>
@@ -162,11 +224,17 @@ body{margin:0;background:var(--page);color:var(--ink);font-family:'Inter',system
     </div>
   </main>
 
-  <div class="bh-wrap" style="padding-top:44px;padding-bottom:8px">
-    <a class="bh-btn" href="base-habits-coaching.html#next">See how coaching works</a>
-  </div>
+  <section id="contact" style="background:var(--indigo);margin-top:64px;padding:52px 22px 56px">
+    <div style="max-width:1100px;margin:0 auto;display:flex;flex-direction:column;gap:18px">
+      <h2 class="bh-h2" style="color:#fff">Ready to start? Questions before you start?</h2>
+      <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:4px">
+        <a class="bh-btn" href="index.html#start">Get started</a>
+        <a class="c-open bh-btn" href="#contact" style="background:#fff;color:var(--indigo) !important">Contact me</a>
+      </div>
+    </div>
+  </section>
 
-  <footer style="margin-top:64px;background:#26241f">
+  <footer style="background:#26241f">
     <div class="bh-wrap" style="padding-top:28px;padding-bottom:28px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px">
       <div style="display:flex;flex-wrap:wrap;align-items:center;gap:10px"><span style="font-size:15px;color:#b5afa6">Base Habits Coaching LLC by Austyn Rupert</span><span style="color:#6b655c">/</span><a href="https://dot.cards/base_habits_coaching" target="_blank" rel="noopener" style="font-size:15px;font-weight:500;color:#fff !important">Virtual Business Card</a></div>
     </div>
@@ -186,6 +254,60 @@ body{margin:0;background:var(--page);color:var(--ink);font-family:'Inter',system
   window.addEventListener('scroll',update,{passive:true});
   window.addEventListener('resize',update);
   update();
+})();
+</script>
+<div id="c-scrim"></div>
+<aside id="c-panel" aria-label="Contact options" aria-hidden="true">
+  <div class="c-top">
+    <span style="font-size:15px;font-weight:600;color:var(--ink)">Contact me</span>
+    <button type="button" id="c-close" aria-label="Close contact options">&#10005;</button>
+  </div>
+  <div class="c-list">
+    <a class="c-row" href="tel:+15176189607">
+      <span class="c-dot" style="background:var(--teal)"></span>
+      <span style="display:flex;flex-direction:column;gap:3px"><span class="k">Call or text</span><span class="v">517-618-9607</span></span>
+    </a>
+    <a class="c-row" href="mailto:basehabitscoaching@gmail.com">
+      <span class="c-dot" style="background:var(--primary)"></span>
+      <span style="display:flex;flex-direction:column;gap:3px"><span class="k">Email</span><span class="v">basehabitscoaching@gmail.com</span></span>
+    </a>
+    <a class="c-row" href="https://instagram.com/base_habits_coaching" target="_blank" rel="noopener">
+      <span class="c-dot" style="background:var(--orange)"></span>
+      <span style="display:flex;flex-direction:column;gap:3px"><span class="k">Instagram</span><span class="v">@base_habits_coaching</span></span>
+    </a>
+    <a class="c-row" href="https://www.facebook.com/profile.php?id=61594124617514" target="_blank" rel="noopener">
+      <span class="c-dot" style="background:var(--indigo)"></span>
+      <span style="display:flex;flex-direction:column;gap:3px"><span class="k">Facebook</span><span class="v">Base Habits Coaching</span></span>
+    </a>
+    <a class="c-row" href="https://dot.cards/base_habits_coaching" target="_blank" rel="noopener">
+      <span class="c-dot" style="background:var(--green)"></span>
+      <span style="display:flex;flex-direction:column;gap:3px"><span class="k">Virtual business card</span><span class="v">dot.cards/base_habits_coaching</span></span>
+    </a>
+  </div>
+</aside>
+<script>
+(function(){
+  var btns=document.querySelectorAll('.c-open'),
+      panel=document.getElementById('c-panel'),
+      scrim=document.getElementById('c-scrim'),
+      x=document.getElementById('c-close');
+  if(!btns.length)return;
+  function open(e){
+    if(e)e.preventDefault();
+    panel.classList.add('open');scrim.classList.add('open');
+    panel.setAttribute('aria-hidden','false');
+    document.body.style.overflow='hidden';x.focus();
+  }
+  function shut(){
+    panel.classList.remove('open');scrim.classList.remove('open');
+    panel.setAttribute('aria-hidden','true');
+    document.body.style.overflow='';
+  }
+  Array.prototype.forEach.call(btns,function(b){b.addEventListener('click',open)});
+  x.addEventListener('click',shut);
+  scrim.addEventListener('click',shut);
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&panel.classList.contains('open'))shut()});
+  Array.prototype.forEach.call(panel.querySelectorAll('.c-row'),function(a){a.addEventListener('click',function(){setTimeout(shut,150)})});
 })();
 </script>
 </body>

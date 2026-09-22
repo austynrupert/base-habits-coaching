@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Debunking — source</title>
+<style>
+  body{margin:0;background:#f6f5f4;font-family:Inter,system-ui,sans-serif;color:#31302e;padding:20px;display:flex;flex-direction:column;gap:12px;height:100vh;box-sizing:border-box}
+  .row{display:flex;align-items:center;gap:12px}
+  h1{margin:0;font-size:17px;font-weight:700;letter-spacing:-0.3px;color:#000}
+  button{padding:8px 16px;border:none;border-radius:8px;background:#0075de;color:#fff;font:inherit;font-size:14px;font-weight:500;cursor:pointer}
+  button:active{background:#005bab;transform:scale(0.96)}
+  #note{font-size:13px;color:#615d59}
+  textarea{flex:1;width:100%;box-sizing:border-box;padding:14px;border:1px solid #e6e6e6;border-radius:12px;background:#fff;font-family:ui-monospace,Menlo,monospace;font-size:12px;line-height:1.5;color:#31302e;white-space:pre;resize:none}
+</style>
+</head>
+<body>
+  <div class="row">
+    <h1>clients/phase-1/debunking/index.html</h1>
+    <button id="copy" type="button">Copy all</button>
+    <span id="note"></span>
+  </div>
+  <textarea id="src" spellcheck="false" readonly>Loading…</textarea>
+<script>
+var ta=document.getElementById('src'),note=document.getElementById('note');
+fetch('index.html').then(function(r){return r.text()}).then(function(t){ta.value=t});
+document.getElementById('copy').addEventListener('click',function(){
+  ta.focus();ta.select();
+  var ok=false;
+  try{ok=document.execCommand('copy')}catch(e){}
+  if(navigator.clipboard&&!ok){navigator.clipboard.writeText(ta.value).then(function(){note.textContent='Copied.'});return}
+  note.textContent=ok?'Copied.':'Press Cmd/Ctrl+C.';
+});
+</script>
+</body>
+</html>

@@ -49,14 +49,11 @@ body{margin:0;background:var(--page);color:var(--ink);font-family:'Inter',system
 #bh-rail{position:fixed;left:0;top:0;bottom:0;width:3px;background:var(--hairline);z-index:40}
 #bh-rail-fill{width:3px;height:0;background:var(--primary)}
 .bh-head-row{max-width:none;padding-left:max(22px,calc((100% - 720px)/2 + 22px));padding-right:22px}
-#bh-client-access{display:inline-flex;align-items:center;gap:7px;padding:6px 12px;min-height:32px;border-radius:8px;background:rgba(255,255,255,0.7);border:1px solid #dbe1f0;color:var(--muted) !important;font-family:'Inter',system-ui,sans-serif;font-size:13px;font-weight:500;letter-spacing:-0.1px;white-space:nowrap;text-decoration:none;cursor:pointer;transition:background 120ms ease,transform 120ms ease}
+#bh-client-access{cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:7px;padding:6px 12px;min-height:32px;border-radius:8px;background:rgba(255,255,255,0.7);border:1px solid #dbe1f0;color:var(--muted) !important;font-family:'Inter',system-ui,sans-serif;font-size:13px;font-weight:500;letter-spacing:-0.1px;white-space:nowrap;text-decoration:none;cursor:pointer;transition:background 120ms ease,transform 120ms ease}
 #bh-client-access:hover{background:#fff;color:var(--ink-2) !important}
 #bh-client-access:active{transform:scale(0.96)}
 #bh-client-access .bh-ca-dot{width:6px;height:6px;border-radius:50%;background:var(--teal);flex:none}
-@media (max-width:600px){#bh-client-access .bh-ca-label{display:none}#bh-client-access::after{content:'Client access'}
-.bh-head-row{padding-left:14px !important;padding-right:14px;flex-wrap:wrap;row-gap:10px}
-.bh-head-row > div{gap:10px;flex-wrap:wrap;justify-content:flex-start}
-.bh-head-row a{font-size:14px}}
+@media (max-width:600px){#bh-client-access .bh-ca-label{display:none}#bh-client-access::after{content:'Client access'}}
 #bh-ca-overlay{position:fixed;inset:0;z-index:60;display:none;align-items:center;justify-content:center;padding:22px;background:rgba(0,0,0,0.32)}
 #bh-ca-overlay.open{display:flex}
 #bh-ca-modal{width:100%;max-width:360px;background:var(--card);border-radius:16px;border:1px solid var(--hairline);box-shadow:rgba(0,0,0,0.01) 0 0.175px 1.041px,rgba(0,0,0,0.02) 0 0.8px 2.925px,rgba(0,0,0,0.027) 0 2.025px 7.847px,rgba(0,0,0,0.04) 0 4px 18px,rgba(0,0,0,0.05) 0 23px 52px;padding:24px}
@@ -80,231 +77,249 @@ body{margin:0;background:var(--page);color:var(--ink);font-family:'Inter',system
 .c-row .c-dot{width:9px;height:9px;border-radius:50%;flex:none}
 .c-row .k{font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:#4d5578}
 .c-row .v{font-size:16px;font-weight:600;letter-spacing:-0.2px;color:var(--ink-2);word-break:break-word}
-.bh-hero-wrap{position:relative;padding-right:170px}
-.band-logo{position:absolute;right:22px;top:60px;height:132px;width:auto}
-@media (max-width:760px){.bh-hero-wrap{padding-right:110px}.band-logo{height:92px;right:16px;top:64px}}
-@media (max-width:480px){.bh-hero-wrap{padding-right:86px}.band-logo{height:72px;right:14px;top:66px}}
+</style>
+<style>
+.hero{min-height:calc(100vh - 57px);display:grid;grid-template-columns:1fr minmax(360px,440px);gap:56px;align-items:center;padding:96px 0 72px}
+@media (max-width:860px){.hero{grid-template-columns:1fr;gap:32px;padding:56px 0 48px;min-height:0}}
+.lead-box{background:var(--card);border:1px solid var(--hairline);border-radius:16px;padding:28px;box-shadow:var(--shadow-1);display:flex;flex-direction:column;gap:16px}
+.lead-box label{display:block;font-size:14px;font-weight:500;color:var(--ink-2);margin-bottom:6px}
+.lead-box input{width:100%;padding:6px 12px;min-height:44px;border:1px solid #dddddd;border-radius:4px;background:#fff;font-family:'Inter',system-ui,sans-serif;font-size:16px;color:var(--ink);outline:none}
+.lead-box input:focus{box-shadow:var(--shadow-1)}
+.lead-btn{width:100%;min-height:52px;border-radius:9999px;background:var(--primary);color:#fff;border:none;cursor:pointer;font-family:'Inter',system-ui,sans-serif;font-size:15px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;transition:background 120ms ease,transform 120ms ease}
+.lead-btn:active{background:var(--primary-active);transform:scale(0.96)}
+.goals{display:flex;flex-wrap:wrap;gap:8px}
+.goals label{display:flex;align-items:center;white-space:nowrap;min-height:44px;padding:0 16px;border:1px solid #dddddd;border-radius:9999px;cursor:pointer;font-size:15px;color:var(--ink-2);transition:background 120ms ease,border-color 120ms ease;margin:0}
+.goals input{position:absolute;opacity:0;width:0;height:0}
+.goals label:has(input:checked){border-color:var(--primary);background:#eaf4fd;color:var(--primary);font-weight:500}
+.goals label:has(input:focus-visible){box-shadow:var(--shadow-1)}
+#lead-error{display:none;font-size:14px;line-height:1.45;color:var(--orange-deep);margin:0}
+#lead-error.show{display:block}
+
+.brand-lock{display:flex;align-items:center;gap:10px;text-decoration:none;flex:none}
+.brand-lock img{width:68px;height:68px;display:block}
+.brand-lock span{font-size:22px;font-weight:700;letter-spacing:-0.6px;color:var(--indigo) !important;text-shadow:0 1px 0 rgba(255,255,255,0.9),0 2px 4px rgba(33,49,131,0.18)}
+@media (max-width:600px){.brand-lock img{width:48px;height:48px}.brand-lock span{font-size:18px}}
+.nav-link{font-size:15px;font-weight:500;color:var(--muted)}
+.nav-pill{display:inline-flex;align-items:center;justify-content:center;min-height:36px;padding:7px 16px;border-radius:9999px;background:var(--indigo);color:#fff !important;font-size:15px;font-weight:600;text-decoration:none;transition:transform 120ms ease}
+.nav-pill:active{transform:scale(0.96)}
+.brand-lock span{white-space:nowrap}
+.nav-link{white-space:nowrap}
+.nav-pill{white-space:nowrap}
+@media (max-width:860px){.brand-lock span{display:none}}
+@media (max-width:560px){.nav-link.secondary{display:none}}
+@media (max-width:860px){#bh-client-access{display:none}}
+
+.wide{max-width:1100px;margin:0 auto;padding:0 22px}
+.wide.hero{padding:40px 22px 64px}
+@media (max-width:860px){.wide.hero{padding:32px 22px 48px}}
+.tsec{width:100%}
+.tgrid{display:grid;grid-template-columns:1fr;gap:28px}
+.tcard{background:#dde3f2;border:2px solid #97a9d4;border-radius:14px;display:flex;flex-direction:column}
+.tcard > div:last-child{order:-1;padding:20px 20px 0 !important}
+.tcard .pair{display:grid;grid-template-columns:1fr 1fr;gap:16px;padding:16px;align-items:start}
+.tcard .pair figure{margin:0;display:flex;flex-direction:column;border:2px solid #b3c0e0;border-radius:10px;overflow:hidden;background:#fff;box-shadow:0 1px 2px rgba(33,49,131,0.10),0 4px 12px rgba(33,49,131,0.12)}
+.tcard .pair figure > *{order:2}
+.tcard .pair figcaption{order:1}
+.tcard{box-shadow:0 1px 2px rgba(33,49,131,0.10),0 6px 16px rgba(33,49,131,0.14),0 22px 44px rgba(33,49,131,0.12)}
+.tcard .pair img{width:100%;height:auto;display:block;background:#fff}
+.tcard .pair figcaption{font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);padding:10px 12px;border-bottom:1px solid var(--hairline)}
+@media (max-width:640px){
+  header .wide{gap:10px !important}
+  header .wide > div:last-child{width:100%;justify-content:space-between;gap:10px}
+  .lead-box{padding:22px}
+  .goals{gap:6px}
+  .goals label{padding:0 13px;font-size:14px}
+  .tsec{padding:48px 18px 48px}
+  .tgrid{gap:20px}
+  .tcard .pair{gap:10px;padding:10px}
+  .wide.hero{padding:24px 18px 44px}
+}
+@media (max-width:400px){
+  .goals label{flex:1 1 100%;justify-content:center}
+}
 </style>
 </head>
 <body>
 <div class="bh" style="min-height:100vh;background:var(--page);position:relative">
 
-  <div id="bh-rail"><div id="bh-rail-fill"></div></div>
+
 
   <header style="position:sticky;top:0;z-index:30;background:#e9edf7;border-bottom:1px solid #dbe1f0">
-    <div class="bh-wrap bh-head-row" style="padding-top:12px;padding-bottom:12px;display:flex;align-items:center;justify-content:space-between;gap:16px">
-      <span style="font-size:16px;font-weight:700;letter-spacing:-0.3px;color:var(--ink)">Base Habits Coaching</span>
-      <div style="display:flex;align-items:center;gap:14px">
-        <a href="about-me.html" style="font-size:15px;font-weight:500;color:var(--muted)">About me</a>
-        <a class="c-open" href="#contact" style="font-size:15px;font-weight:500;color:var(--muted)">Contact me</a>
-        <a class="bh-btn sm" href="#next">Get started</a>
+    <div class="wide" style="padding-top:12px;padding-bottom:12px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:nowrap">
+      <a class="brand-lock" href="index.html">
+        <img src="logo.svg" alt="">
+        <span>Base Habits Coaching</span>
+      </a>
+      <div style="display:flex;align-items:center;gap:14px;flex-wrap:nowrap">
+        <a class="nav-pill" href="about-program.html">About my program</a>
+        <a class="nav-link secondary" href="about-me.html">About me</a>
+        <a class="nav-link c-open" href="#contact">Contact me</a>
         <a id="bh-client-access" href="clients/index.html"><span class="bh-ca-dot"></span><span class="bh-ca-label">Current Client Access</span></a>
       </div>
     </div>
   </header>
 
-  <div style="background:linear-gradient(180deg,#dfe5f5 0%,#e9ecf6 38%,#f2f2f3 72%,var(--page) 100%)">
-  <div class="bh-wrap bh-hero-wrap" style="padding-top:72px;padding-bottom:60px;display:flex;flex-direction:column;gap:24px">
-    <img class="band-logo" src="assets/logo.svg" alt="Base Habits Coaching logo">
-    <div style="display:flex;gap:6px">
-      <span style="width:26px;height:6px;border-radius:3px;background:var(--teal)"></span>
-      <span style="width:26px;height:6px;border-radius:3px;background:var(--orange)"></span>
-      <span style="width:26px;height:6px;border-radius:3px;background:var(--purple)"></span>
-      <span style="width:26px;height:6px;border-radius:3px;background:var(--green)"></span>
-    </div>
-    <h1 style="font-size:clamp(38px,9vw,54px);font-weight:700;line-height:1.04;letter-spacing:-1.6px;color:var(--ink);text-wrap:pretty">Base Habits Coaching</h1>
-    <p style="font-size:clamp(20px,4.6vw,26px);font-weight:700;line-height:1.28;letter-spacing:-0.6px;color:var(--indigo);text-wrap:pretty;max-width:19em">You cannot outwork a bad diet, and every diet with a name is over-hyped.</p>
-    <div style="margin-top:8px;display:flex;align-items:center;gap:16px">
-      <!-- Replace src with your headshot -->
-      <img src="headshot.jpg" alt="Austyn Rupert" style="width:112px;height:112px;flex:none;border-radius:50%;object-fit:cover;background:#e6e6e6;border:1px solid var(--hairline)">
-      <span style="font-size:19px;font-weight:600;color:var(--ink)">Austyn Rupert</span>
-    </div>
-  </div>
-  </div>
-
-  <main class="bh-wrap">
-
-    <section id="s1" style="padding:48px 0">
-      <div class="bh-col">
-        <h2 class="bh-h2" style="color:var(--teal)">What I Actually Believe</h2>
-        <p style="font-size:20px;font-weight:600;line-height:1.5;letter-spacing:-0.2px;color:var(--ink);max-width:32em;text-wrap:pretty">Weight change comes down to three things: how much you eat, whether you actually know how much you eat, and what your body does over time with your food intake.</p>
-        <p class="bh-body">Programs with names give you a set of rules because it fits the label of that diet. I teach you the mechanism behind weight loss, then we make changes based on your data instead of a guess. Learn the mechanism, track intake and weight, I analyze your data, then we check in to see how you are feeling and make changes as needed.</p>
-      </div>
-    </section>
-
-    <section id="s2" class="bh-sec">
-      <div class="bh-col">
-        <h2 class="bh-h2" style="color:var(--indigo)">We Start With A Call, Before Anything Changes</h2>
-        <p class="bh-lede" style="color:#454e78">Nothing starts until you understand why you're doing it.</p>
-        <p class="bh-body"><b>Before day one, we sit down for about thirty minutes.</b> I walk you through the plan and the reasoning behind it, and cover the basics of how food and training affect your body. We talk about what you actually like to eat and what your week actually looks like. A plan you hate is a plan you quit. You leave that call with a clear direction forward. I follow up afterward with a written recap of the plan, so you have something to reference beyond what you remember from the call.</p>
-      </div>
-    </section>
-
-    <section id="s3" class="bh-sec">
-      <div class="bh-col">
-        <h2 class="bh-h2" style="color:var(--orange)">The First Two Weeks: No Gym, Just the Base Habits</h2>
-        <p class="bh-lede" style="color:#a05c2d">For the first two weeks, you will not train.</p>
-        <p class="bh-body">Not a workout, not a run. Three things only:</p>
-        <div class="bh-dots">
-          <div class="bh-dot-row top"><span class="bh-dot" style="background:var(--orange)"></span><span class="bh-item">Weigh yourself every morning and log it</span></div>
-          <div class="bh-dot-row top"><span class="bh-dot" style="background:var(--teal)"></span><span class="bh-item">Hit your calorie target</span></div>
-          <div class="bh-dot-row top"><span class="bh-dot" style="background:var(--green)"></span><span class="bh-item">Hit your step goal</span></div>
+  <div style="background:linear-gradient(180deg,#dfe5f5 0%,#e9ecf6 38%,#f2f2f3 78%,var(--page) 100%)">
+    <div class="wide hero" id="start">
+      <div style="display:flex;flex-direction:column;gap:22px">
+        <div style="display:flex;align-items:center;gap:14px;padding:8px 18px 8px 8px;background:rgba(255,255,255,0.62);border:1px solid #dbe1f0;border-radius:9999px;align-self:flex-start">
+          <img src="headshot.jpg" alt="Austyn Rupert" style="width:52px;height:52px;flex:none;border-radius:50%;object-fit:cover;background:#e6e6e6">
+          <span style="display:flex;flex-direction:column;gap:2px">
+            <span style="font-size:16px;font-weight:600;letter-spacing:-0.2px;color:var(--ink)">Austyn Rupert</span>
+            <span style="font-size:13px;font-weight:500;color:var(--muted);white-space:nowrap">Coach &amp; owner, Base Habits Coaching</span>
+          </span>
         </div>
-        <p class="bh-body"><b>Those two weeks give us your real numbers instead of a formula's estimate.</b> We watch your actual rate of change and adjust from there. Building the habit is the point, and habits are easier to build when they are the only thing you are asked to do. Adding the gym on top of a diet you have not settled into is how people burn out in month one.</p>
-      </div>
-    </section>
-
-    <section id="s4" class="bh-sec">
-      <div class="bh-col">
-        <h2 class="bh-h2" style="color:var(--brown)">What This Costs You In Time</h2>
-        <p class="bh-lede" style="color:#5a4832">Less than you're expecting, and it gets faster every week.</p>
-        <div style="display:flex;flex-direction:column;gap:30px;margin-top:6px">
+        <div style="display:flex;gap:6px">
+          <span style="width:26px;height:6px;border-radius:3px;background:var(--teal)"></span>
+          <span style="width:26px;height:6px;border-radius:3px;background:var(--orange)"></span>
+          <span style="width:26px;height:6px;border-radius:3px;background:var(--purple)"></span>
+          <span style="width:26px;height:6px;border-radius:3px;background:var(--green)"></span>
+        </div>
+        <h1 style="font-size:clamp(38px,7vw,58px);font-weight:700;line-height:1.04;letter-spacing:-1.8px;color:var(--ink);text-wrap:pretty;max-width:12em;text-shadow:0 1px 0 rgba(255,255,255,0.9),0 2px 3px rgba(33,49,131,0.12),0 8px 22px rgba(33,49,131,0.10)">Consistent Habits. Consistent Results.</h1>
+        <div style="display:flex;flex-direction:column;gap:16px;max-width:26em">
+          <p style="font-size:clamp(18px,2.6vw,21px);font-weight:500;line-height:1.55;letter-spacing:-0.2px;color:var(--ink-2);text-wrap:pretty">My program starts with the fundamentals:</p>
           <div style="display:flex;flex-direction:column;gap:10px">
-            <span class="bh-tag" style="background:var(--brown)">Tracking your food</span>
-            <p class="bh-body"><b>The first few days are the slowest, because you are weighing things and looking them up for the first time.</b> After that it drops off fast. The more consistent your meals are, the faster it goes. Once you are prepping food, it becomes close to automatic. The goal is to plan the meals days in advance so the prepped meal becomes the path of least resistance.</p>
+            <div style="display:flex;align-items:flex-start;gap:14px"><span style="width:9px;height:9px;border-radius:50%;background:var(--teal);flex:none;margin-top:9px"></span><span style="font-size:18px;font-weight:500;line-height:1.5;color:var(--ink-2);text-wrap:pretty"><strong style="font-weight:600;color:var(--ink)">Daily weigh-ins</strong> to see where you are trending.</span></div>
+            <div style="display:flex;align-items:flex-start;gap:14px"><span style="width:9px;height:9px;border-radius:50%;background:var(--orange);flex:none;margin-top:9px"></span><span style="font-size:18px;font-weight:500;line-height:1.5;color:var(--ink-2);text-wrap:pretty"><strong style="font-weight:600;color:var(--ink)">Tracking your food</strong> to see what we need to adjust over time.</span></div>
+            <div style="display:flex;align-items:flex-start;gap:14px"><span style="width:9px;height:9px;border-radius:50%;background:var(--green);flex:none;margin-top:9px"></span><span style="font-size:18px;font-weight:500;line-height:1.5;color:var(--ink-2);text-wrap:pretty"><strong style="font-weight:600;color:var(--ink)">A walking goal</strong> to add activity that is not overwhelming.</span></div>
           </div>
-          <div style="display:flex;flex-direction:column;gap:10px">
-            <span class="bh-tag" style="background:var(--teal)">Getting your steps</span>
-            <p class="bh-body"><b>You are probably already closer to your step goal than you think.</b> Usually the gap is a couple of twenty minute walks a day. Most people can get 1000 steps in 10 minutes.</p>
+          <p style="font-size:clamp(18px,2.6vw,21px);font-weight:500;line-height:1.55;letter-spacing:-0.2px;color:var(--ink-2);text-wrap:pretty">No gimmicks, no named diets. Once that&rsquo;s consistent, we add the gym.</p>
+        </div>
+      </div>
+
+      <div class="lead-box">
+        <form id="lead-form" style="display:flex;flex-direction:column;gap:16px" novalidate>
+          <div>
+            <h2 style="font-size:22px;font-weight:700;letter-spacing:-0.5px;color:var(--ink)">Start with a free consultation</h2>
+            <p style="font-size:15px;line-height:1.5;color:var(--muted);margin-top:6px">About thirty minutes. Tell me where to reach you and I&rsquo;ll set it up.</p>
           </div>
-          <div style="display:flex;flex-direction:column;gap:10px">
-            <span class="bh-tag" style="background:var(--sky);color:#31302e">The gym, once you get there</span>
-            <p class="bh-body"><b>This one sits on its own because it is not part of the first two weeks and it is not required.</b> When you do add it, you are looking at a couple of hours across the whole week. You do not need to go every day, and you do not need to wreck yourself in the gym.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="s5" class="bh-sec">
-      <div class="bh-col">
-        <h2 class="bh-h2" style="color:var(--purple)">Why I Will Push You Toward Lifting</h2>
-        <p class="bh-lede" style="color:#4a3d5b">You can get real results with food and steps alone, but lifting makes the result stick.</p>
-        <p class="bh-body"><b>Here is why I still want you there eventually.</b> When you lose weight, some of what comes off is muscle. Muscle keeps you strong, keeps you functional as you get older, and decides how you actually look at a lower weight. Resistance training tells your body to hold onto it. It also makes the result far easier to keep.</p>
-        <p class="bh-body"><b>I will always steer you in that direction because it is the better outcome.</b> How far you take it is your call. It is not a condition of working with me.</p>
-      </div>
-    </section>
-
-    <section id="s6" class="bh-sec">
-      <div class="bh-col">
-        <h2 class="bh-h2" style="color:var(--teal)">Weekly Check-Ins</h2>
-        <p class="bh-lede" style="color:#487d7c">Once a week we get on a call or meet in person and go through your numbers together.</p>
-        <p class="bh-body"><b>The individual days are not what matters as much as the average of the whole week.</b> We go over your weight trend, your average calories, your average steps for the week. We also talk about how the food intake felt, whether you were hungry, stressed, or satisfied, and what that tells us. Then I will talk to you about what adjustments you can make.</p>
-      </div>
-    </section>
-
-    <section id="s7" class="bh-sec">
-      <div class="bh-col">
-        <h2 class="bh-h2" style="color:var(--orange-deep)">Between Check-Ins</h2>
-        <p class="bh-lede" style="color:#6b492c">You can reach out any time.</p>
-        <p class="bh-body"><b>A question in the grocery store, a menu you are staring at, a weekend that got away from you.</b> You do not have to wait until the next check-in.</p>
-      </div>
-    </section>
-
-    <section id="s8" class="bh-sec">
-      <div class="bh-col">
-        <h2 class="bh-h2" style="color:var(--indigo)">What You Want is Up To You</h2>
-        <p class="bh-lede" style="color:#454e78">Some people want the system explained. Some people want to be told what to do. Both work. It is up to you.</p>
-        <p class="bh-body">Here is what I can help with, and how much of it you want is up to you:</p>
-        <div class="bh-dots">
-          <div class="bh-dot-row"><span class="bh-dot" style="background:var(--teal)"></span><span class="bh-item">A meal structure with exactly what to eat</span></div>
-          <div class="bh-dot-row"><span class="bh-dot" style="background:var(--sky)"></span><span class="bh-item">A training plan with exactly what to do</span></div>
-          <div class="bh-dot-row"><span class="bh-dot" style="background:var(--orange)"></span><span class="bh-item">The reasoning behind your calories and macros</span></div>
-          <div class="bh-dot-row"><span class="bh-dot" style="background:var(--purple)"></span><span class="bh-item">The reasoning behind your training</span></div>
-          <div class="bh-dot-row"><span class="bh-dot" style="background:var(--green)"></span><span class="bh-item">In-person training help</span></div>
-          <div class="bh-dot-row"><span class="bh-dot" style="background:var(--pink)"></span><span class="bh-item">Suggested apps to track calories and manage training programs</span></div>
-          <div class="bh-dot-row top"><span class="bh-dot" style="background:var(--brown)"></span><span class="bh-item">A custom spreadsheet that tracks your calories, steps, and workouts, calculates your weekly average, and shows your progress in graphs</span></div>
-        </div>
-        <p class="bh-body">Most people land somewhere in the middle and drift toward learning the mechanism over time.</p>
-      </div>
-    </section>
-
-    <section id="s9" class="bh-sec">
-      <div class="bh-col">
-        <h2 class="bh-h2" style="color:var(--purple)">The Goal Is That You Stop Needing Me</h2>
-        <p class="bh-lede" style="color:#4a3d5b">Everything I give you is built to be learned, not just followed.</p>
-        <p class="bh-body"><b>I keep a knowledge base with videos explaining topics on my website that starts with the basics and goes as deep as you care to go.</b> You do not have to read a single page of it to get results. The plan works whether or not you understand the theory. But it is there, and the people who read it end up being the ones their friends and family start asking for advice.</p>
-      </div>
-    </section>
-
-    <section id="next" class="bh-sec" style="padding-bottom:8px">
-      <div class="bh-col">
-        <h2 class="bh-h2" style="color:var(--orange)">What Happens Next</h2>
-        <p class="bh-lede" style="color:#a05c2d">Three steps, then day one.</p>
-        <p class="bh-body">Pricing and commitment length are on this page, so you know what you're getting into before setting up an intake call or meeting. This pricing will be fixed through the end of October.</p>
-      </div>
-
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin:28px 0 40px">
-        <div style="background:var(--card);border:1px solid var(--hairline);border-radius:8px;padding:24px;display:flex;flex-direction:column;gap:8px">
-          <span style="font-size:16px;font-weight:600;color:var(--ink)">Month to month</span>
-          <span style="font-size:34px;font-weight:700;letter-spacing:-1px;line-height:1;color:var(--ink)">$60<span style="font-size:16px;font-weight:400;letter-spacing:0;color:var(--muted)">/month</span></span>
-        </div>
-        <div style="background:var(--card);border:1px solid var(--primary);border-radius:8px;padding:24px;display:flex;flex-direction:column;gap:8px;box-shadow:var(--shadow-1)">
-          <span style="font-size:16px;font-weight:600;color:var(--ink)">3-month commitment, paid upfront</span>
-          <span style="font-size:34px;font-weight:700;letter-spacing:-1px;line-height:1;color:var(--ink)">$40<span style="font-size:16px;font-weight:400;letter-spacing:0;color:var(--muted)">/month</span></span>
-          <span style="font-size:15px;color:var(--muted)">$120 total for 3 months</span>
-        </div>
-      </div>
-
-      <div style="display:flex;flex-direction:column">
-        <div class="bh-step">
-          <div class="bh-step-rail"><span class="bh-step-num">1</span><span class="bh-step-line"></span></div>
-          <div style="padding-bottom:26px;display:flex;flex-direction:column;gap:14px">
-            <p style="padding-top:6px">Fill out the two intake forms, one for nutrition and one for fitness.</p>
-            <div style="display:flex;flex-wrap:wrap;gap:10px">
-              <a class="bh-btn" target="_blank" rel="noopener" href="https://docs.google.com/forms/d/e/1FAIpQLSf3jA87NHhLuzMndb9S-fBYAk0TaPQPfU7Nc-2E_wbKvO3zXw/viewform?usp=sharing&amp;ouid=103131645370182212503">Nutrition form</a>
-              <a class="bh-btn" target="_blank" rel="noopener" href="https://docs.google.com/forms/d/e/1FAIpQLSdjyeI_kEIouvdr6DosO_yf4gNtKFhEWKSeWm-aTSXV7acl8w/viewform?usp=sharing&amp;ouid=103131645370182212503">Training form</a>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+            <div>
+              <label for="f-first">First name</label>
+              <input id="f-first" name="first" type="text" autocomplete="given-name" required>
+            </div>
+            <div>
+              <label for="f-last">Last name</label>
+              <input id="f-last" name="last" type="text" autocomplete="family-name" required>
             </div>
           </div>
-        </div>
-        <div class="bh-step">
-          <div class="bh-step-rail"><span class="bh-step-num">2</span><span class="bh-step-line"></span></div>
-          <p style="padding:6px 0 26px">Get on the kickoff call, or meet in person, and walk through your plan.</p>
-        </div>
-        <div class="bh-step">
-          <div class="bh-step-rail"><span class="bh-step-num">3</span></div>
-          <p style="padding-top:6px">Decide your coaching length and get started.</p>
+          <div>
+            <label for="f-email">Email</label>
+            <input id="f-email" name="email" type="email" autocomplete="email" required>
+          </div>
+          <div>
+            <label for="f-phone">Phone</label>
+            <input id="f-phone" name="phone" type="tel" autocomplete="tel" required>
+          </div>
+          <fieldset style="border:none;padding:0;margin:0">
+            <legend style="font-size:14px;font-weight:500;color:var(--ink-2);margin-bottom:8px;padding:0">What&rsquo;s your main goal?</legend>
+            <div class="goals">
+              <label><input type="radio" name="goal" value="Weight Loss"><span>Weight Loss</span></label>
+              <label><input type="radio" name="goal" value="Build Muscle"><span>Build Muscle</span></label>
+              <label><input type="radio" name="goal" value="Build Strength"><span>Build Strength</span></label>
+              <label><input type="radio" name="goal" value="General Health"><span>General Health</span></label>
+            </div>
+          </fieldset>
+          <p id="lead-error" role="alert">Fill in every field and pick a goal.</p>
+          <button type="submit" class="lead-btn">Get your free consultation</button>
+        </form>
+        <div id="lead-done" style="display:none;flex-direction:column;gap:12px;align-items:flex-start;padding:8px 0">
+          <span style="width:40px;height:40px;border-radius:50%;background:#e6f5ea;color:var(--green);font-size:20px;display:flex;align-items:center;justify-content:center">&#10003;</span>
+          <h2 style="font-size:22px;font-weight:700;letter-spacing:-0.5px;color:var(--ink)">Got it</h2>
+          <p style="font-size:16px;line-height:1.55;color:var(--muted)">I&rsquo;ll reach out personally to set up your free consultation. Check your email in the meantime &mdash; I&rsquo;m sending over the two intake forms to fill out before we talk.</p>
         </div>
       </div>
-    </section>
-  </main>
+      <iframe name="lead-sink" style="display:none" title="hidden"></iframe>
+    </div>
+  </div>
 
-
-  <section id="contact" style="background:var(--indigo);margin-top:56px;padding-top:52px;padding-bottom:56px">
-    <div class="bh-wrap" style="display:flex;flex-direction:column;gap:18px">
-      <h2 class="bh-h2" style="color:#fff">Contact Me</h2>
-      <p class="bh-lede" style="color:#c3cae8">Ready to start? Questions before you start?</p>
-      <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:4px">
-        <a class="bh-btn" href="tel:+15176189607">Call or text 517-618-9607</a>
-        <a class="bh-btn" href="mailto:basehabitscoaching@gmail.com">Email basehabitscoaching@gmail.com</a>
-        <span style="flex-basis:100%;height:0"></span>
-        <a class="bh-btn" href="https://instagram.com/base_habits_coaching" target="_blank" rel="noopener">Instagram</a>
-        <a class="bh-btn" href="https://www.facebook.com/profile.php?id=61594124617514" target="_blank" rel="noopener">Facebook</a>
+  <section class="tsec" style="padding:72px 22px 48px;display:flex;flex-direction:column;gap:36px;background:linear-gradient(180deg,var(--page) 0%,#eef1f8 30%,#e4e9f6 100%);border-top:none">
+    <div style="display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center">
+      <div style="display:flex;gap:6px">
+        <span style="width:26px;height:6px;border-radius:3px;background:var(--teal)"></span>
+        <span style="width:26px;height:6px;border-radius:3px;background:var(--orange)"></span>
+        <span style="width:26px;height:6px;border-radius:3px;background:var(--purple)"></span>
+        <span style="width:26px;height:6px;border-radius:3px;background:var(--green)"></span>
+      </div>
+      <h2 style="font-size:clamp(34px,5vw,54px);font-weight:700;line-height:1.05;letter-spacing:-1.8px;color:var(--indigo);text-shadow:0 1px 0 rgba(255,255,255,0.85)">Transformations</h2>
+      <p style="font-size:18px;line-height:1.55;color:var(--muted);max-width:32em">Same three habits I start every client on.</p>
+    </div>
+    <div class="tgrid">
+      <div class="tcard">
+        <div class="pair">
+          <figure><img src="before-200lbs.png" alt="Austyn at 200 lbs"><figcaption>Before &mdash; 200 lbs</figcaption></figure>
+          <figure><img src="after-158lbs.png" alt="Austyn at 158 lbs"><figcaption>After &mdash; 158 lbs</figcaption></figure>
+        </div>
+        <div style="padding:2px 20px 22px;display:flex;flex-direction:column;gap:6px">
+          <span style="font-size:17px;font-weight:600;color:var(--ink)">Austyn Rupert</span>
+        </div>
       </div>
     </div>
   </section>
 
-  <footer style="margin-top:0;background:#26241f">
-    <div class="bh-wrap" style="padding-top:28px;padding-bottom:28px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px">
+  <section id="contact" style="background:var(--indigo);margin-top:0;padding-top:52px;padding-bottom:56px">
+    <div class="wide" style="display:flex;flex-direction:column;gap:18px">
+      <h2 class="bh-h2" style="color:#fff">Ready to start? Questions before you start?</h2>
+      <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:4px">
+        <a class="bh-btn" href="#start">Get started</a>
+        <a class="c-open bh-btn" href="#contact" style="background:#fff;color:var(--indigo) !important">Contact me</a>
+      </div>
+    </div>
+  </section>
+
+  <footer style="background:#26241f">
+    <div class="wide" style="padding-top:28px;padding-bottom:28px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px">
       <div style="display:flex;flex-wrap:wrap;align-items:center;gap:10px"><span style="font-size:15px;color:#b5afa6">Base Habits Coaching LLC by Austyn Rupert</span><span style="color:#6b655c">/</span><a href="https://dot.cards/base_habits_coaching" target="_blank" rel="noopener" style="font-size:15px;font-weight:500;color:#fff !important">Virtual Business Card</a></div>
     </div>
   </footer>
 </div>
 
 <script>
-(function(){
-  var fill=document.getElementById('bh-rail-fill');
-  if(!fill)return;
-  function update(){
-    var d=document.documentElement;
-    var max=d.scrollHeight-d.clientHeight;
-    var p=max>0?Math.min(1,Math.max(0,(window.pageYOffset||d.scrollTop)/max)):0;
-    fill.style.height=(p*100).toFixed(1)+'%';
-  }
-  window.addEventListener('scroll',update,{passive:true});
-  window.addEventListener('resize',update);
-  update();
-})();
+</script>
 
+<script>
+(function(){
+  /* ── LEAD FORM CONFIG ──────────────────────────────────────────────────
+     Paste the Google Form's formResponse URL and its entry IDs here.
+     Find them via the form's "Get pre-filled link". Until ACTION is set,
+     the form just shows the confirmation without sending anywhere.
+  ────────────────────────────────────────────────────────────────────── */
+  var ACTION = 'https://docs.google.com/forms/d/e/1FAIpQLSeupzOAZ2Ge6yQaDq8__0OoLmPbLFUfjvlmmpaaF0KWif2DTg/formResponse';
+  /* Email uses Google's built-in collector, so its key is 'emailAddress',
+     not an entry ID. That only works if the form's email setting is
+     "Responder input" — "Verified" blocks off-site submissions. */
+  var ENTRY  = { first:'entry.1710317798', last:'entry.1112415091', email:'emailAddress', phone:'entry.80623988', goal:'entry.1476463936' };
+  var EXTRA  = { fvv:'1', pageHistory:'0' };
+
+  var form=document.getElementById('lead-form'),
+      done=document.getElementById('lead-done'),
+      err=document.getElementById('lead-error');
+  if(!form)return;
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    var d=new FormData(form),
+        v={first:d.get('first'),last:d.get('last'),email:d.get('email'),phone:d.get('phone'),goal:d.get('goal')};
+    if(!v.first||!v.last||!v.email||!v.phone||!v.goal||!form.querySelector('#f-email').checkValidity()){
+      err.classList.add('show');return;
+    }
+    err.classList.remove('show');
+    if(ACTION){
+      var post=document.createElement('form');
+      post.action=ACTION;post.method='POST';post.target='lead-sink';post.style.display='none';
+      Object.keys(ENTRY).forEach(function(k){
+        var i=document.createElement('input');i.name=ENTRY[k];i.value=v[k];post.appendChild(i);
+      });
+      Object.keys(EXTRA).forEach(function(k){
+        var i=document.createElement('input');i.name=k;i.value=EXTRA[k];post.appendChild(i);
+      });
+      document.body.appendChild(post);post.submit();
+    }
+    form.style.display='none';
+    done.style.display='flex';
+  });
+  form.addEventListener('input',function(){err.classList.remove('show');});
+  form.addEventListener('change',function(){err.classList.remove('show');});
+})();
 </script>
 
 <div id="c-scrim"></div>

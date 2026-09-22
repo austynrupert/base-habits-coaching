@@ -39,8 +39,15 @@ header{position:sticky;top:0;z-index:30;background:#e9edf7;border-bottom:1px sol
 .page-tag{font-size:13px;font-weight:500;letter-spacing:0;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
 .page-tag::before{content:"/";margin-right:7px;color:var(--faint)}
 .brand{font-size:16px;font-weight:700;letter-spacing:-0.3px;color:var(--ink)}
-.contact-btn{margin-left:auto;display:inline-flex;align-items:center;justify-content:center;min-height:36px;padding:7px 16px;border-radius:9999px;background:var(--primary);color:#fff !important;font-size:14px;font-weight:500;transition:background 120ms ease,transform 120ms ease}
-.contact-btn:active{background:var(--primary-active);transform:scale(0.96)}
+.brand-lock{display:flex;align-items:center;gap:10px;text-decoration:none;flex:none}
+.brand-lock img{width:68px;height:68px;display:block}
+.brand-lock span{font-size:22px;font-weight:700;letter-spacing:-0.6px;color:var(--indigo) !important;text-shadow:0 1px 0 rgba(255,255,255,0.9),0 2px 4px rgba(33,49,131,0.18);white-space:nowrap}
+@media (max-width:860px){.brand-lock span{display:none}}
+.brand-lock img{flex:none}
+.nav-link{font-size:15px;font-weight:500;color:var(--muted) !important;white-space:nowrap;text-decoration:none}
+
+.contact-btn{display:inline-flex;align-items:center;min-height:36px;color:var(--muted) !important;text-decoration:none;font-weight:500;font-size:14px;font-weight:500;transition:background 120ms ease,transform 120ms ease}
+.contact-btn:active{transform:scale(0.96)}
 
 #scrim{position:fixed;inset:0;z-index:50;background:rgba(0,0,0,0.32);opacity:0;pointer-events:none;transition:opacity 160ms ease}
 #scrim.open{opacity:1;pointer-events:auto}
@@ -147,7 +154,10 @@ ul.list li a{font-weight:500}
       <span class="lines"><span></span><span></span><span></span></span>
       <span class="blabel">Lesson Menu</span>
     </button>
-    <span class="brand">Base Habits Coaching</span>
+    <a class="brand-lock" href="../../../index.html">
+      <img src="../../../logo.svg" alt="">
+      <span>Base Habits Coaching</span>
+    </a>
     <span class="page-tag">Debunking</span>
     <a class="contact-btn" href="#contact" id="contact-open" aria-controls="c-panel" aria-expanded="false">Contact me</a>
   </div>
@@ -157,7 +167,7 @@ ul.list li a{font-weight:500}
 
 <nav id="drawer" aria-label="Client pages" aria-hidden="true">
   <div class="drawer-top">
-    <span style="font-size:15px;font-weight:600;color:var(--ink)">Client pages</span>
+    <a href="../../index.html" style="display:inline-flex;align-items:center;min-height:36px;padding:7px 16px;border-radius:9999px;background:var(--indigo);color:#fff !important;font-size:15px;font-weight:600;text-decoration:none">Client home</a>
     <button type="button" id="drawer-close" aria-label="Close menu">&#10005;</button>
   </div>
 
@@ -184,8 +194,11 @@ ul.list li a{font-weight:500}
   <div class="nav-group">
     <div class="nav-label"><span class="dot" style="background:var(--orange)"></span>Phase 2</div>
     <div class="nav-list">
-      <span class="nav-item soon" aria-disabled="true">Placeholder page one<span class="soon-tag">Coming soon</span></span>
-      <span class="nav-item soon" aria-disabled="true">Placeholder page two<span class="soon-tag">Coming soon</span></span>
+      <a class="nav-item" href="../../phase-2/intro/index.html">Phase 2 Intro</a>
+      <a class="nav-item" href="../../phase-2/gym-path/index.html" style="margin-left:14px">Gym Path Overview</a>
+      <a class="nav-item" href="../../phase-2/technical-definitions/index.html" style="margin-left:28px">Technical Definitions</a>
+      <a class="nav-item" href="../../phase-2/muscle-anatomy/index.html" style="margin-left:28px">Muscle Anatomy</a>
+      <span class="nav-item soon" aria-disabled="true" style="margin-left:14px">Non-Gym Path Overview<span class="soon-tag">Coming soon</span></span>
     </div>
   </div>
 

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Base Habits Coaching</title>
+<title>About the Program &mdash; Base Habits Coaching</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -48,6 +48,22 @@ body{margin:0;background:var(--page);color:var(--ink);font-family:'Inter',system
 .bh-step p{font-size:17px;line-height:1.55;color:var(--ink-2);text-wrap:pretty}
 #bh-rail{position:fixed;left:0;top:0;bottom:0;width:3px;background:var(--hairline);z-index:40}
 #bh-rail-fill{width:3px;height:0;background:var(--primary)}
+
+.brand-lock{display:flex;align-items:center;gap:10px;text-decoration:none;flex:none}
+.brand-lock img{width:68px;height:68px;display:block}
+.brand-lock span{font-size:22px;font-weight:700;letter-spacing:-0.6px;color:var(--indigo) !important;text-shadow:0 1px 0 rgba(255,255,255,0.9),0 2px 4px rgba(33,49,131,0.18)}
+@media (max-width:600px){.brand-lock img{width:48px;height:48px}.brand-lock span{font-size:18px}}
+.nav-link{font-size:15px;font-weight:500;color:var(--muted)}
+.nav-pill{display:inline-flex;align-items:center;justify-content:center;min-height:36px;padding:7px 16px;border-radius:9999px;background:var(--indigo);color:#fff !important;font-size:15px;font-weight:600;text-decoration:none;transition:transform 120ms ease}
+.nav-pill:active{transform:scale(0.96)}
+header .bh-wrap{max-width:1100px;margin:0 auto;padding-left:22px;padding-right:22px}
+.brand-lock span{white-space:nowrap}
+.nav-link{white-space:nowrap}
+.nav-pill{white-space:nowrap}
+@media (max-width:860px){.brand-lock span{display:none}}
+@media (max-width:560px){.nav-link.secondary{display:none}}
+@media (max-width:860px){#bh-client-access{display:none}}
+
 .bh-head-row{max-width:none;padding-left:max(22px,calc((100% - 720px)/2 + 22px));padding-right:22px}
 #bh-client-access{cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:7px;padding:6px 12px;min-height:32px;border-radius:8px;background:rgba(255,255,255,0.7);border:1px solid #dbe1f0;color:var(--muted) !important;font-family:'Inter',system-ui,sans-serif;font-size:13px;font-weight:500;letter-spacing:-0.1px;white-space:nowrap;text-decoration:none;cursor:pointer;transition:background 120ms ease,transform 120ms ease}
 #bh-client-access:hover{background:#fff;color:var(--ink-2) !important}
@@ -86,12 +102,15 @@ body{margin:0;background:var(--page);color:var(--ink);font-family:'Inter',system
 
 
   <header style="position:sticky;top:0;z-index:30;background:#e9edf7;border-bottom:1px solid #dbe1f0">
-    <div class="bh-wrap bh-head-row" style="padding-top:12px;padding-bottom:12px;display:flex;align-items:center;justify-content:space-between;gap:16px">
-      <span style="font-size:16px;font-weight:700;letter-spacing:-0.3px;color:var(--ink)">Base Habits Coaching</span>
-      <div style="display:flex;align-items:center;gap:14px">
-        <a href="about-me.html" style="font-size:15px;font-weight:500;color:var(--muted)">About me</a>
-        <a class="c-open" href="#contact" style="font-size:15px;font-weight:500;color:var(--muted)">Contact me</a>
-        <a class="bh-btn sm" href="#next">Get started</a>
+    <div class="bh-wrap bh-head-row" style="padding-top:12px;padding-bottom:12px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:nowrap">
+      <a class="brand-lock" href="index.html">
+        <img src="logo.svg" alt="">
+        <span>Base Habits Coaching</span>
+      </a>
+      <div style="display:flex;align-items:center;gap:14px;flex-wrap:nowrap">
+        <a class="nav-pill" href="index.html#start">Get started</a>
+        <a class="nav-link secondary" href="about-me.html">About me</a>
+        <a class="nav-link c-open" href="#contact">Contact me</a>
         <a id="bh-client-access" href="clients/index.html"><span class="bh-ca-dot"></span><span class="bh-ca-label">Current Client Access</span></a>
       </div>
     </div>
@@ -105,7 +124,7 @@ body{margin:0;background:var(--page);color:var(--ink);font-family:'Inter',system
       <span style="width:26px;height:6px;border-radius:3px;background:var(--purple)"></span>
       <span style="width:26px;height:6px;border-radius:3px;background:var(--green)"></span>
     </div>
-    <h1 style="font-size:clamp(38px,9vw,54px);font-weight:700;line-height:1.04;letter-spacing:-1.6px;color:var(--ink);text-wrap:pretty">Base Habits Coaching</h1>
+    <h1 style="font-size:clamp(38px,9vw,54px);font-weight:700;line-height:1.04;letter-spacing:-1.6px;color:var(--ink);text-wrap:pretty">About the Program</h1>
     <p style="font-size:clamp(20px,4.6vw,26px);font-weight:700;line-height:1.28;letter-spacing:-0.6px;color:var(--indigo);text-wrap:pretty;max-width:19em">You cannot outwork a bad diet, and every diet with a name is over-hyped.</p>
     <div style="margin-top:8px;display:flex;align-items:center;gap:16px">
       <!-- Replace src with your headshot -->
@@ -219,59 +238,14 @@ body{margin:0;background:var(--page);color:var(--ink);font-family:'Inter',system
       </div>
     </section>
 
-    <section id="next" class="bh-sec" style="padding-bottom:8px">
-      <div class="bh-col">
-        <h2 class="bh-h2" style="color:var(--orange)">What Happens Next</h2>
-        <p class="bh-lede" style="color:#a05c2d">Three steps, then day one.</p>
-        <p class="bh-body">Pricing and commitment length are on this page, so you know what you're getting into before setting up an intake call or meeting. This pricing will be fixed through the end of October.</p>
-      </div>
-
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin:28px 0 40px">
-        <div style="background:var(--card);border:1px solid var(--hairline);border-radius:8px;padding:24px;display:flex;flex-direction:column;gap:8px">
-          <span style="font-size:16px;font-weight:600;color:var(--ink)">Month to month</span>
-          <span style="font-size:34px;font-weight:700;letter-spacing:-1px;line-height:1;color:var(--ink)">$60<span style="font-size:16px;font-weight:400;letter-spacing:0;color:var(--muted)">/month</span></span>
-        </div>
-        <div style="background:var(--card);border:1px solid var(--primary);border-radius:8px;padding:24px;display:flex;flex-direction:column;gap:8px;box-shadow:var(--shadow-1)">
-          <span style="font-size:16px;font-weight:600;color:var(--ink)">3-month commitment, paid upfront</span>
-          <span style="font-size:34px;font-weight:700;letter-spacing:-1px;line-height:1;color:var(--ink)">$40<span style="font-size:16px;font-weight:400;letter-spacing:0;color:var(--muted)">/month</span></span>
-          <span style="font-size:15px;color:var(--muted)">$120 total for 3 months</span>
-        </div>
-      </div>
-
-      <div style="display:flex;flex-direction:column">
-        <div class="bh-step">
-          <div class="bh-step-rail"><span class="bh-step-num">1</span><span class="bh-step-line"></span></div>
-          <div style="padding-bottom:26px;display:flex;flex-direction:column;gap:14px">
-            <p style="padding-top:6px">Fill out the two intake forms, one for nutrition and one for fitness.</p>
-            <div style="display:flex;flex-wrap:wrap;gap:10px">
-              <a class="bh-btn" target="_blank" rel="noopener" href="https://docs.google.com/forms/d/e/1FAIpQLSf3jA87NHhLuzMndb9S-fBYAk0TaPQPfU7Nc-2E_wbKvO3zXw/viewform?usp=sharing&amp;ouid=103131645370182212503">Nutrition form</a>
-              <a class="bh-btn" target="_blank" rel="noopener" href="https://docs.google.com/forms/d/e/1FAIpQLSdjyeI_kEIouvdr6DosO_yf4gNtKFhEWKSeWm-aTSXV7acl8w/viewform?usp=sharing&amp;ouid=103131645370182212503">Training form</a>
-            </div>
-          </div>
-        </div>
-        <div class="bh-step">
-          <div class="bh-step-rail"><span class="bh-step-num">2</span><span class="bh-step-line"></span></div>
-          <p style="padding:6px 0 26px">Get on the kickoff call, or meet in person, and walk through your plan.</p>
-        </div>
-        <div class="bh-step">
-          <div class="bh-step-rail"><span class="bh-step-num">3</span></div>
-          <p style="padding-top:6px">Decide your coaching length and get started.</p>
-        </div>
-      </div>
-    </section>
   </main>
 
-
-  <section id="contact" style="background:var(--indigo);margin-top:56px;padding-top:52px;padding-bottom:56px">
+  <section id="contact" style="background:var(--indigo);margin-top:56px;padding:52px 22px 56px">
     <div class="bh-wrap" style="display:flex;flex-direction:column;gap:18px">
-      <h2 class="bh-h2" style="color:#fff">Contact Me</h2>
-      <p class="bh-lede" style="color:#c3cae8">Ready to start? Questions before you start?</p>
+      <h2 class="bh-h2" style="color:#fff">Ready to start? Questions before you start?</h2>
       <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:4px">
-        <a class="bh-btn" href="tel:+15176189607">Call or text 517-618-9607</a>
-        <a class="bh-btn" href="mailto:basehabitscoaching@gmail.com">Email basehabitscoaching@gmail.com</a>
-        <span style="flex-basis:100%;height:0"></span>
-        <a class="bh-btn" href="https://instagram.com/base_habits_coaching" target="_blank" rel="noopener">Instagram</a>
-        <a class="bh-btn" href="https://www.facebook.com/profile.php?id=61594124617514" target="_blank" rel="noopener">Facebook</a>
+        <a class="bh-btn" href="index.html#start">Get started</a>
+        <a class="c-open bh-btn" href="#contact" style="background:#fff;color:var(--indigo) !important">Contact me</a>
       </div>
     </div>
   </section>
