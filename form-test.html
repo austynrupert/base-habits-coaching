@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Form endpoint test</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#31302e;--muted:#615d59;--primary:#0075de;--hairline:#e6e6e6;--page:#f6f5f4}
+*{box-sizing:border-box}
+body{margin:0;background:var(--page);font-family:'Inter',system-ui,sans-serif;color:var(--ink)}
+.wrap{max-width:900px;margin:0 auto;padding:40px 22px 80px;display:flex;flex-direction:column;gap:24px}
+h1{font-size:30px;font-weight:700;letter-spacing:-1px;margin:0}
+p{font-size:16px;line-height:1.6;color:var(--muted);margin:0}
+.card{background:#fff;border:1px solid var(--hairline);border-radius:12px;padding:24px;display:flex;flex-direction:column;gap:14px}
+label{font-size:14px;font-weight:500;color:var(--ink)}
+input{width:100%;padding:8px 12px;min-height:44px;border:1px solid #ddd;border-radius:4px;font:inherit;font-size:16px}
+button{align-self:flex-start;min-height:48px;padding:0 24px;border:none;border-radius:9999px;background:var(--primary);color:#fff;font:inherit;font-size:15px;font-weight:600;cursor:pointer}
+iframe{width:100%;height:520px;border:1px solid var(--hairline);border-radius:12px;background:#fff}
+code{font-family:ui-monospace,monospace;font-size:13px;background:#eceae8;padding:2px 6px;border-radius:4px}
+ol{margin:0;padding-left:20px;font-size:16px;line-height:1.7;color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Form endpoint test</h1>
+  <p>This posts the exact same payload as the home page form, but into a visible frame so you can read Google's reply. Submit it, then look at the panel below.</p>
+
+  <form class="card" id="t">
+    <div><label for="a">First name</label><input id="a" value="Test"></div>
+    <div><label for="b">Last name</label><input id="b" value="Submission"></div>
+    <div><label for="c">Email</label><input id="c" value="test@example.com"></div>
+    <div><label for="d">Phone</label><input id="d" value="5555555555"></div>
+    <div><label for="e">Goal (must match the form option exactly)</label><input id="e" value="Weight Loss"></div>
+    <button type="submit">Send test submission</button>
+  </form>
+
+  <p><strong>What you should see:</strong> Google's "Your response has been recorded" page means it worked. A sign-in page, "You need permission", or the blank form reloaded means it was rejected.</p>
+
+  <iframe name="sink" title="Google response"></iframe>
+
+  <div class="card">
+    <p><strong>If it was rejected, check these in the Google Form:</strong></p>
+    <ol>
+      <li>Settings &rarr; Responses &rarr; <strong>Collect email addresses</strong> must be <code>Responder input</code>. If it's <code>Verified</code>, off-site submissions are blocked.</li>
+      <li>Settings &rarr; Responses &rarr; <strong>Limit to 1 response</strong> must be OFF (it forces sign-in).</li>
+      <li>Settings &rarr; <strong>Restrict to users in your organization</strong> must be OFF.</li>
+      <li>Every required question must be one of the five fields above. A required question we don't send will silently reject the whole submission.</li>
+    </ol>
+  </div>
+</div>
+
+<script>
+(function(){
+  var ACTION='https://docs.google.com/forms/d/e/1FAIpQLSeupzOAZ2Ge6yQaDq8__0OoLmPbLFUfjvlmmpaaF0KWif2DTg/formResponse';
+  var MAP={'entry.1710317798':'a','entry.1112415091':'b','emailAddress':'c','entry.80623988':'d','entry.1476463936':'e'};
+  document.getElementById('t').addEventListener('submit',function(ev){
+    ev.preventDefault();
+    var p=document.createElement('form');
+    p.action=ACTION;p.method='POST';p.target='sink';p.style.display='none';
+    Object.keys(MAP).forEach(function(k){
+      var i=document.createElement('input');i.name=k;i.value=document.getElementById(MAP[k]).value;p.appendChild(i);
+    });
+    ['fvv','1','pageHistory','0'].forEach(function(_,ix,arr){
+      if(ix%2)return;
+      var i=document.createElement('input');i.name=arr[ix];i.value=arr[ix+1];p.appendChild(i);
+    });
+    document.body.appendChild(p);p.submit();
+  });
+})();
+</script>
+</body>
+</html>
